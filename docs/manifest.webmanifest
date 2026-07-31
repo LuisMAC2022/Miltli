@@ -1,0 +1,11 @@
+{
+  "name": "Miltli · registro de compostaje",
+  "short_name": "Miltli",
+  "description": "Registro local y entrega semanal del piloto doméstico de compostaje.",
+  "lang": "es-MX",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#e5e7dc",
+  "theme_color": "#22241c"
+}
