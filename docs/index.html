@@ -1,0 +1,207 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#22241c">
+  <meta name="description" content="Registro local del piloto doméstico de compostaje Miltli.">
+  <title>Miltli · registro semanal</title>
+  <link rel="manifest" href="./manifest.webmanifest">
+  <link rel="stylesheet" href="./estilo.css">
+  <script src="./app.js" defer></script>
+</head>
+<body>
+  <header class="franja">
+    <div class="encabezado">
+      <p class="marca">Miltli <span>piloto de compostaje doméstico</span></p>
+      <p class="privacidad">Los datos permanecen en este dispositivo.</p>
+    </div>
+    <nav aria-label="Secciones">
+      <a href="#panel" data-nav="panel">Panel</a>
+      <a href="#registro" data-nav="registro">Registrar</a>
+      <a href="#revision" data-nav="revision">Revisión</a>
+      <a href="#entrega" data-nav="entrega">Entrega semanal</a>
+      <a href="#ajustes" data-nav="ajustes">Ajustes</a>
+      <a href="#guia" data-nav="guia">Guía</a>
+    </nav>
+  </header>
+
+  <main>
+    <div id="mensaje-global" class="mensaje" role="status" aria-live="polite" hidden></div>
+
+    <section id="panel" class="vista" data-view="panel" aria-labelledby="panel-titulo">
+      <p class="etiqueta" id="semana-etiqueta">Piloto</p>
+      <h1 id="panel-titulo">Estado de la compostera</h1>
+      <p class="entrada" id="panel-intro">Configura el hogar y registra la primera carga.</p>
+
+      <aside id="aviso-entrega" class="aviso" hidden></aside>
+
+      <div class="tarjetas" aria-label="Resumen del hogar">
+        <article class="tarjeta"><h2>Húmedos del mes</h2><output id="kpi-humedos">0.0 L</output></article>
+        <article class="tarjeta"><h2>Secos del mes</h2><output id="kpi-secos">0.0 L</output></article>
+        <article class="tarjeta"><h2>Proporción</h2><output id="kpi-razon">0.0 : 1</output></article>
+        <article class="tarjeta"><h2>Ocupación</h2><output id="kpi-ocupacion">0 %</output></article>
+      </div>
+
+      <section class="panel-capas" aria-labelledby="capas-titulo">
+        <div>
+          <p class="etiqueta">Regla común</p>
+          <h2 id="capas-titulo">Una parte de húmedos por dos de secos</h2>
+          <p id="capas-texto">Todavía no hay cargas registradas.</p>
+        </div>
+        <div class="capas" role="img" aria-label="Proporción de húmedos, secos y material seco faltante">
+          <span id="barra-humedo" class="capa-humedo" style="flex:0"></span>
+          <span id="barra-seco" class="capa-seco" style="flex:0"></span>
+          <span id="barra-faltante" class="capa-faltante" style="flex:0"></span>
+        </div>
+      </section>
+
+      <section aria-labelledby="ultimos-titulo">
+        <div class="titulo-accion">
+          <h2 id="ultimos-titulo">Últimas cargas</h2>
+          <a class="boton secundario" href="#registro">Añadir carga</a>
+        </div>
+        <div class="tabla-scroll" tabindex="0">
+          <table>
+            <thead><tr><th>Fecha</th><th>Semana</th><th>Húmedo</th><th>Seco</th><th>Tipo</th><th></th></tr></thead>
+            <tbody id="tabla-entradas"></tbody>
+          </table>
+        </div>
+        <p id="sin-entradas" class="vacio">Todavía no hay cargas.</p>
+      </section>
+    </section>
+
+    <section id="registro" class="vista" data-view="registro" aria-labelledby="registro-titulo" hidden>
+      <p class="etiqueta">Registro diario</p>
+      <h1 id="registro-titulo">Añadir una carga</h1>
+      <p class="entrada">El volumen puede medirse con una cubeta conocida. La aplicación calcula la semana a partir de la fecha de arranque.</p>
+      <form id="form-entrada">
+        <fieldset>
+          <legend>Carga</legend>
+          <div class="campos">
+            <p class="campo"><label for="entrada-fecha">Fecha</label><input type="date" id="entrada-fecha" name="fecha" required></p>
+            <p class="campo"><label for="entrada-humedo">Residuos húmedos (L)</label><input type="number" id="entrada-humedo" name="humedoL" min="0" step="0.1" value="0" required></p>
+            <p class="campo"><label for="entrada-seco">Material seco (L)</label><input type="number" id="entrada-seco" name="secoL" min="0" step="0.1" value="0" required></p>
+            <p class="campo"><label for="entrada-minutos">Tiempo dedicado (min)</label><input type="number" id="entrada-minutos" name="minutos" min="0" step="1" value="0"></p>
+          </div>
+          <p class="campo ancho"><label for="entrada-tipo">Tipo de residuo</label><input type="text" id="entrada-tipo" name="tipo" placeholder="Frutas, verduras, café, etc."></p>
+          <p class="casilla"><input type="checkbox" id="entrada-contaminantes" name="contaminantes"><label for="entrada-contaminantes">Encontré materiales no aceptados</label></p>
+          <p class="campo ancho"><label for="entrada-notas">Observaciones</label><textarea id="entrada-notas" name="notas" rows="3" placeholder="Cambios, dificultades o materiales disponibles"></textarea></p>
+        </fieldset>
+        <div id="regla-carga" class="regla nota" role="status" aria-live="polite">Anota el volumen de húmedos para calcular cuánto seco hace falta.</div>
+        <p class="acciones"><button type="submit">Guardar carga</button></p>
+      </form>
+    </section>
+
+    <section id="revision" class="vista" data-view="revision" aria-labelledby="revision-titulo" hidden>
+      <p class="etiqueta">Cierre de semana</p>
+      <h1 id="revision-titulo">Revisión semanal</h1>
+      <p class="entrada">Guarda una revisión por semana. Puedes volver a abrirla y actualizarla.</p>
+      <form id="form-revision">
+        <p class="campo compacto"><label for="revision-semana">Semana</label><select id="revision-semana" name="semana"><option value="1">Semana 1</option><option value="2">Semana 2</option><option value="3">Semana 3</option><option value="4">Semana 4</option></select></p>
+        <fieldset>
+          <legend>Diagnóstico</legend>
+          <div class="campos">
+            <p class="campo"><label for="revision-humedad">Humedad</label><select id="revision-humedad" name="humedad"><option>seca</option><option selected>adecuada</option><option>húmeda</option><option>saturada</option></select></p>
+            <p class="campo"><label for="revision-olor">Olor</label><select id="revision-olor" name="olor"><option selected>ninguno</option><option>ligero</option><option>fuerte</option><option>podrido</option><option>amoniaco</option></select></p>
+            <p class="campo"><label for="revision-plagas">Plagas</label><select id="revision-plagas" name="plagas"><option selected>ninguno</option><option>pocas moscas</option><option>muchas moscas</option><option>hormigas</option><option>cucarachas</option><option>roedores</option></select></p>
+            <p class="campo"><label for="revision-estructura">Estructura</label><select id="revision-estructura" name="estructura"><option selected>suelta y aireada</option><option>compacta</option><option>con bloques grandes</option><option>material demasiado grande</option></select></p>
+            <p class="campo"><label for="revision-ocupado">Contenedor ocupado (%)</label><input type="number" id="revision-ocupado" name="ocupadoPct" min="0" max="120" step="1" value="0"></p>
+            <p class="campo"><label for="revision-minutos">Tiempo de revisión (min)</label><input type="number" id="revision-minutos" name="minutos" min="0" step="1" value="0"></p>
+          </div>
+        </fieldset>
+        <section id="sugerencias" class="sugerencias" aria-live="polite"></section>
+        <fieldset>
+          <legend>Corrección y evidencia</legend>
+          <p class="campo ancho"><label for="revision-accion">Acción aplicada</label><input type="text" id="revision-accion" name="accion" placeholder="Aunque no sea la sugerida"></p>
+          <p class="campo ancho"><label for="revision-resultado">Resultado observado</label><input type="text" id="revision-resultado" name="resultado" placeholder="¿Funcionó?"></p>
+          <p class="casilla"><input type="checkbox" id="revision-foto" name="foto"><label for="revision-foto">Ya envié la fotografía al grupo</label></p>
+        </fieldset>
+        <p class="acciones"><button type="submit">Guardar revisión</button></p>
+      </form>
+    </section>
+
+    <section id="entrega" class="vista" data-view="entrega" aria-labelledby="entrega-titulo" hidden>
+      <p class="etiqueta">Entrega semanal</p>
+      <h1 id="entrega-titulo">Descargar y enviar al coordinador</h1>
+      <p class="entrada">GitHub Pages no recibe los registros. El archivo se genera en este dispositivo; después debes compartirlo o adjuntarlo en un correo.</p>
+      <div class="entrega-grid">
+        <section class="tarjeta-grande" aria-labelledby="archivo-titulo">
+          <p class="campo compacto"><label for="entrega-semana">Semana a entregar</label><select id="entrega-semana"><option value="1">Semana 1</option><option value="2">Semana 2</option><option value="3">Semana 3</option><option value="4">Semana 4</option></select></p>
+          <h2 id="archivo-titulo">Archivo semanal</h2>
+          <dl class="detalle-entrega">
+            <div><dt>Periodo</dt><dd id="entrega-periodo">—</dd></div>
+            <div><dt>Registros diarios</dt><dd id="entrega-registros">0</dd></div>
+            <div><dt>Revisión semanal</dt><dd id="entrega-revision">Pendiente</dd></div>
+            <div><dt>Estado de entrega</dt><dd id="entrega-estado">Pendiente</dd></div>
+          </dl>
+          <div class="acciones apilables">
+            <button type="button" id="btn-descargar">Descargar CSV</button>
+            <button type="button" id="btn-compartir" class="secundario">Compartir archivo</button>
+            <button type="button" id="btn-correo" class="secundario">Descargar y abrir correo</button>
+          </div>
+          <p class="pie">La opción «Compartir archivo» depende del navegador. En computadoras suele ser necesario descargar el CSV y adjuntarlo manualmente.</p>
+        </section>
+        <section class="tarjeta-grande" aria-labelledby="confirmar-titulo">
+          <h2 id="confirmar-titulo">Confirmación</h2>
+          <p>La aplicación no puede comprobar si el coordinador recibió el archivo. Marca la entrega después de enviarlo.</p>
+          <p class="acciones"><button type="button" id="btn-marcar">Marcar como enviado</button><button type="button" id="btn-desmarcar" class="ligero">Deshacer marca</button></p>
+          <p id="entrega-confirmacion" class="pie">Sin confirmación.</p>
+        </section>
+      </div>
+    </section>
+
+    <section id="ajustes" class="vista" data-view="ajustes" aria-labelledby="ajustes-titulo" hidden>
+      <p class="etiqueta">Configuración local</p>
+      <h1 id="ajustes-titulo">Hogar y coordinador</h1>
+      <p class="entrada">Cada dispositivo conserva un solo hogar. No uses el mismo navegador para hogares distintos sin crear antes un respaldo.</p>
+      <form id="form-config">
+        <fieldset>
+          <legend>Hogar</legend>
+          <div class="campos">
+            <p class="campo"><label for="config-clave">Clave</label><select id="config-clave" name="clave"><option>H1</option><option>H2</option><option>H3</option><option>H4</option><option>H5</option></select></p>
+            <p class="campo"><label for="config-responsable">Responsable</label><input type="text" id="config-responsable" name="responsable" autocomplete="name"></p>
+            <p class="campo"><label for="config-personas">Personas en el hogar</label><input type="number" id="config-personas" name="personas" min="1" step="1" required></p>
+            <p class="campo"><label for="config-capacidad">Capacidad del contenedor (L)</label><input type="number" id="config-capacidad" name="capacidadL" min="0" step="1"></p>
+            <p class="campo"><label for="config-inicio">Día 1 del piloto</label><input type="date" id="config-inicio" name="inicio" required></p>
+          </div>
+        </fieldset>
+        <fieldset>
+          <legend>Coordinador</legend>
+          <div class="campos">
+            <p class="campo"><label for="config-coordinador">Nombre</label><input type="text" id="config-coordinador" name="coordinadorNombre"></p>
+            <p class="campo"><label for="config-email">Correo</label><input type="email" id="config-email" name="coordinadorEmail" autocomplete="email" placeholder="coordinacion@ejemplo.org"></p>
+          </div>
+        </fieldset>
+        <p class="acciones"><button type="submit">Guardar ajustes</button></p>
+      </form>
+      <section aria-labelledby="respaldo-titulo">
+        <h2 id="respaldo-titulo">Respaldo y recuperación</h2>
+        <p>El almacenamiento del navegador puede borrarse. Descarga un respaldo completo con regularidad.</p>
+        <div class="acciones apilables">
+          <button type="button" id="btn-respaldo">Descargar respaldo JSON</button>
+          <label class="boton secundario" for="archivo-restaurar">Restaurar respaldo</label>
+          <input type="file" id="archivo-restaurar" accept="application/json,.json" hidden>
+          <button type="button" id="btn-borrar-todo" class="peligro">Borrar todos los datos</button>
+        </div>
+      </section>
+    </section>
+
+    <section id="guia" class="vista" data-view="guia" aria-labelledby="guia-titulo" hidden>
+      <p class="etiqueta">Procedimiento común</p>
+      <h1 id="guia-titulo">Guía de operación</h1>
+      <p class="entrada">Todos los hogares usan la misma proporción inicial, las mismas categorías de observación y el mismo calendario.</p>
+      <div class="tres">
+        <article class="lista-mat verde"><h2>Húmedos o verdes</h2><ul><li>Frutas y verduras</li><li>Café y filtros de papel</li><li>Té sin grapas ni plástico</li><li>Cáscara de huevo triturada</li><li>Flores marchitas</li></ul></article>
+        <article class="lista-mat cafe"><h2>Secos o cafés</h2><ul><li>Hojas secas</li><li>Cartón café sin cinta</li><li>Papel sin brillo</li><li>Ramas delgadas</li><li>Viruta sin tratar</li></ul></article>
+        <article class="lista-mat veda"><h2>No aceptados</h2><ul><li>Carne, pescado o lácteos</li><li>Aceites y grasas</li><li>Excremento de perro o gato</li><li>Plástico, vidrio o metal</li><li>Madera tratada</li></ul></article>
+      </div>
+      <section aria-labelledby="acciones-titulo">
+        <h2 id="acciones-titulo">Acciones correctivas</h2>
+        <div class="tabla-scroll" tabindex="0"><table><thead><tr><th>Problema</th><th>Acción</th></tr></thead><tbody><tr><th>Olor a podrido</th><td>Agregar material seco y mezclar.</td></tr><tr><th>Olor a amoniaco</th><td>Agregar hojas o cartón.</td></tr><tr><th>Exceso de humedad</th><td>Agregar secos y proteger de la lluvia.</td></tr><tr><th>Mezcla muy seca</th><td>Agregar agua gradualmente.</td></tr><tr><th>Muchas moscas</th><td>Enterrar residuos y cubrir con secos.</td></tr><tr><th>Compactación</th><td>Mezclar y agregar material estructurante.</td></tr></tbody></table></div>
+      </section>
+    </section>
+  </main>
+  <footer class="franja pie-pagina"><p>Miltli para GitHub Pages · almacenamiento local y exportación semanal.</p></footer>
+</body>
+</html>
