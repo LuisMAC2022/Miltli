@@ -392,11 +392,10 @@ Durante este primer mes no se espera obtener composta madura. El objetivo es est
 Cada hogar calculará:
 
 [
-\text{Promedio semanal de residuos}
+Promedio semanal de residuos
 ===================================
+volumen o peso semanal de residuos húmedos / personas participando = promedio por persona semanal 
 
-\frac{\text{volumen total mensual de residuos húmedos}}{4}
-]
 
 También registrará:
 
