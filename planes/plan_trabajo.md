@@ -443,7 +443,7 @@ El grupo comparará:
 
 | Fecha | Hogar | Residuos húmedos | Material seco | Tipo de residuo              | Observaciones |
 | ----- | ----- | ---------------: | ------------: | ---------------------------- | ------------- |
-|       |       |      L o cubetas |   L o cubetas | Frutas, verduras, café, etc. |               |
+|  DD-MM| H-N   | Peso o volumen   | Peso o volumen| Frutas, verduras, café, etc. |               |
 
 ---
 
