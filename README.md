@@ -37,4 +37,4 @@ npm test
 
 ## Publicación
 
-El flujo `.github/workflows/pages.yml` prueba la aplicación y publica el contenido de `docs/` al fusionar cambios en `main`. En **Settings → Pages**, selecciona **GitHub Actions** como fuente la primera vez.
+Después de fusionar los cambios en `main`, abre **Settings → Pages**, elige **Deploy from a branch**, selecciona la rama `main` y la carpeta `/docs`. GitHub Pages publicará la aplicación sin proceso de compilación.
