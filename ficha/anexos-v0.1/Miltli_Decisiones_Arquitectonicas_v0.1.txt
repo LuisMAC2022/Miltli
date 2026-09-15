@@ -1,0 +1,45 @@
+# Decisiones arquitectónicas v0.1 — transcripción
+
+> Transcripción en texto plano de `ficha/Miltli_Decisiones_Arquitectonicas_v0.1.docx`, generada para que el contenido de las
+> directrices sea comparable línea por línea con `git diff`. **El `.docx` sigue siendo el
+> original**; si los dos difieren, manda el `.docx`. El contenido vigente está en
+> `ficha/diccionario-de-datos-v0.2-borrador.md` y `ficha/protocolo-operativo-v0.1-borrador.md`.
+
+---
+
+Miltli — Decisiones arquitectónicas v0.1
+Criterios que deben conservarse al rediseñar la ficha y el sistema de adquisición de datos.
+1. La ficha es un instrumento de medición
+El objetivo no es sólo producir una hoja cómoda: debe ayudar a operar la composta, describir su estado y generar datos estructurados. El piloto también prueba el propio sistema de adquisición de datos.
+2. Separar observación de interpretación
+Preferir categorías descriptivas (seca, húmeda, olor a tierra, moscas, etc.) sobre juicios como bien/mal, normal/anormal o incidencia. La interpretación se realiza posteriormente.
+3. Dos niveles de medición
+Usuario: datos de alta frecuencia y bajo costo. Equipo Miltli: mediciones periódicas de mayor precisión para calibración. El voluntario no debe convertirse en técnico de laboratorio.
+4. Masa y volumen son métodos igualmente válidos
+Si hay báscula se registra masa. Si no la hay se usa un recipiente patrón y volumen. Volumen no se convierte automáticamente a masa: la conversión requiere densidad aparente, que puede estimarse mediante mediciones simultáneas de masa y volumen.
+5. Eliminar el pesaje semanal categorizado del voluntario
+Su carga operativa parece alta frente al beneficio todavía no demostrado. La caracterización detallada debe realizarla el equipo periódicamente si es necesaria.
+6. Registrar intervenciones
+Además del estado, registrar qué hizo la persona: mezclar/airear, agregar seco, agregar agua, retirar material u otra acción. Esto permite estudiar Estado_t + Acción_t → Estado_t+1.
+7. Humedad reemplaza a lixiviado como variable principal
+El líquido visible es el extremo de una escala hídrica. Registrar seca, húmeda, muy húmeda y líquido visible produce mayor información.
+8. Notas condicionales, no universales
+Una nota diaria obligatoria generaría texto de bajo valor ('todo bien'). Debe ser obligatoria ante 'otro', retiro de material o casos no representados, y opcional en los demás.
+9. Diseño híbrido y preparado para OMR
+Usar círculos/marcas para variables categóricas y escritura sólo para cantidades, fechas y excepciones. Diseñar posiciones y códigos consistentes antes que depender de iconos. Los iconos pueden ayudar a localizar variables, pero deben acompañarse de nombre y código.
+10. Mantener códigos de datos
+Arquitectura recomendada: icono → nombre humano → código. Ej.: nariz → OLOR → O; dentro de la variable, O0, O1, O2… Esto conserva usabilidad y facilita captura.
+11. No automatizar antes de estabilizar la semántica
+Secuencia: semántica → protocolo → usabilidad → diseño → digitalización. Automatizar una variable mal definida sólo acelera la producción de datos deficientes.
+12. La ficha física sigue siendo de dos hojas
+Hoja A: alta del sistema y cierre. Hoja B: registro diario de 28 días. Las mediciones técnicas del equipo pueden vivir en un registro separado, incluso digital.
+13. Evaluar el formulario como prototipo
+El éxito del piloto incluye completitud, consistencia, carga de registro, capacidad discriminante de las categorías, confiabilidad entre observadores y utilidad de las variables.
+14. Objetivo del primer piloto
+Priorizar instrumentación, estandarización y calidad de datos. Con cinco participantes y 28 días, el conjunto es adecuado para desarrollo de protocolo y análisis exploratorio, no para asumir modelos complejos robustos.
+Objetivos de aprendizaje del piloto
+A. Viabilidad: ¿los participantes registran consistentemente?
+B. Calidad: ¿las categorías se entienden y aplican de forma reproducible?
+C. Costo: ¿qué variables son molestas o difíciles de medir?
+D. Señal biológica: ¿estado, entradas e intervenciones muestran relaciones útiles?
+E. Calibración: ¿qué mediciones domésticas simples se relacionan con mediciones técnicas?

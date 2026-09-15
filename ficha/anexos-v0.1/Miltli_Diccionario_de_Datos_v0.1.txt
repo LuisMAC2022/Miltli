@@ -1,0 +1,237 @@
+# Diccionario de datos v0.1 — transcripción
+
+> Transcripción en texto plano de `ficha/Miltli_Diccionario_de_Datos_v0.1.docx`, generada para que el contenido de las
+> directrices sea comparable línea por línea con `git diff`. **El `.docx` sigue siendo el
+> original**; si los dos difieren, manda el `.docx`. El contenido vigente está en
+> `ficha/diccionario-de-datos-v0.2-borrador.md` y `ficha/protocolo-operativo-v0.1-borrador.md`.
+
+---
+
+Miltli — Diccionario de datos v0.1
+Base de trabajo para el piloto doméstico de compostaje de 28 días.
+Propósito: definir qué se mide, quién lo mide, con qué frecuencia y para qué. Clasificación: Núcleo = conservar salvo evidencia en contra; Experimental = validar durante el piloto; Técnica = medición ocasional del equipo; Eliminar/replantear = no imponer al voluntario en esta versión.
+Variable
+ | Tipo
+ | Quién / frecuencia
+ | Valores o unidad
+ | Uso
+ | Decisión
+ |
+ID sistema
+ | Identificación
+ | Equipo · una vez
+ | H001…
+ | Vincular registros sin nombres
+ | Núcleo
+ |
+Fecha inicio
+ | Contexto
+ | Equipo · una vez
+ | Fecha
+ | Temporalidad
+ | Núcleo
+ |
+Personas del hogar
+ | Contexto
+ | Equipo · una vez
+ | Entero
+ | Normalizar generación aproximada
+ | Núcleo
+ |
+Separaba orgánicos previamente
+ | Contexto
+ | Equipo · una vez
+ | Sí/No
+ | Experiencia previa
+ | Experimental
+ |
+Destino previo de orgánicos
+ | Contexto
+ | Equipo · una vez
+ | Categorías
+ | Cambio de comportamiento/desvío
+ | Experimental
+ |
+Restos dados a mascotas
+ | Contexto
+ | Equipo · una vez
+ | Sí/No + tipo
+ | Explicar material que no llega
+ | Experimental
+ |
+Contenedor
+ | Infraestructura
+ | Equipo · una vez
+ | Tipo + capacidad L
+ | Comparar sistemas
+ | Núcleo
+ |
+Ubicación
+ | Ambiente
+ | Equipo · una vez
+ | Interior/exterior; sol/sombra
+ | Variable explicativa
+ | Núcleo
+ |
+Material seco disponible
+ | Insumo
+ | Equipo · una vez
+ | Categorías
+ | Contextualizar manejo
+ | Experimental
+ |
+Método de cuantificación
+ | Medición
+ | Equipo · una vez
+ | Masa / volumen
+ | Interpretar entradas
+ | Núcleo
+ |
+Recipiente patrón
+ | Medición
+ | Equipo · una vez
+ | Dimensiones/capacidad
+ | Estandarizar volumen
+ | Núcleo sin báscula
+ |
+Masa recipiente vacío
+ | Medición
+ | Equipo · una vez
+ | g
+ | Tara
+ | Sólo con báscula
+ |
+Orgánicos agregados (ORG)
+ | Entrada
+ | Usuario · diario
+ | g o volumen
+ | Flujo de entrada
+ | Núcleo
+ |
+Material seco agregado (SEC)
+ | Entrada
+ | Usuario · diario
+ | g o volumen
+ | Manejo vs. estado
+ | Núcleo
+ |
+Temperatura percibida (TEMP_P)
+ | Estado
+ | Usuario · diario
+ | Fría/tibia/caliente/ND
+ | Actividad térmica barata
+ | Experimental
+ |
+Humedad percibida (HUM)
+ | Estado
+ | Usuario · diario
+ | Seca/húmeda/muy húmeda/líquido/ND
+ | Estado hídrico
+ | Núcleo
+ |
+Olor (OLOR)
+ | Estado
+ | Usuario · diario
+ | Casi ninguno/tierra/ácido/podrido/otro
+ | Cambios del proceso
+ | Núcleo
+ |
+Fauna visible (FAU)
+ | Estado
+ | Usuario · diario
+ | Multirrespuesta
+ | Caracterizar fauna
+ | Núcleo experimental
+ |
+Acción realizada (ACT)
+ | Intervención
+ | Usuario · diario
+ | Multirrespuesta
+ | Relacionar acción con evolución
+ | Núcleo
+ |
+Nota (NOTA)
+ | Contexto
+ | Usuario · condicional
+ | Texto corto
+ | Capturar casos no previstos
+ | Núcleo condicional
+ |
+Registro realizado
+ | Calidad
+ | Usuario · diario
+ | Sí / NR
+ | Distinguir dato ausente
+ | Núcleo
+ |
+Pesaje semanal por categorías
+ | Caracterización
+ | Usuario · semanal
+ | g
+ | Composición de residuos
+ | Eliminar del usuario
+ |
+Caracterización masa/volumen
+ | Calibración
+ | Equipo · periódica
+ | g + L
+ | Estimar densidades
+ | Técnica
+ |
+Temperatura instrumental
+ | Calibración
+ | Equipo · periódica
+ | °C
+ | Validar percepción
+ | Técnica
+ |
+Composta cosechada
+ | Resultado
+ | Equipo · final
+ | Sí/No
+ | Resultado descriptivo
+ | Experimental
+ |
+Masa/volumen final
+ | Resultado
+ | Equipo · final
+ | kg/L
+ | Balance aproximado
+ | Experimental
+ |
+Dificultad principal
+ | Usabilidad
+ | Usuario · final
+ | Categorías + texto
+ | Mejorar protocolo
+ | Núcleo del piloto
+ |
+Tiempo de registro
+ | Usabilidad
+ | Usuario · final
+ | Rangos
+ | Carga operativa
+ | Núcleo del piloto
+ |
+Convenciones de ausencia y medición
+0 = se observó o midió y la cantidad fue cero.
+NR = no se realizó el registro.
+NA = variable no aplicable.
+ND = se observó, pero no pudo determinarse.
+Celda vacía = error de captura; no es una respuesta válida.
+SB no debe ser un valor de cantidad. La ausencia de báscula se representa mediante el método de cuantificación; en ese caso se registra volumen.
+Codificación inicial de variables diarias
+ORG / SEC
+Registrar método (M = masa; V = volumen), valor y unidad. El dato primario de volumen no debe convertirse automáticamente a masa.
+TEMP_P
+T0 fría/ambiente · T1 tibia · T2 caliente · TD no determinable.
+HUM
+H0 seca · H1 húmeda · H2 muy húmeda · H3 líquido visible · HD no determinable.
+OLOR
+O0 casi ninguno · O1 tierra/vegetal · O2 ácido/fermentado · O3 podrido/desagradable · O4 otro. O4 exige nota.
+FAU
+F0 ninguna visible · F1 moscas/mosquitos pequeños · F2 larvas/gusanos · F3 lombrices · F4 hormigas · F5 cucarachas · F6 otro. F0 excluye F1–F6.
+ACT
+A0 ninguna · A1 mezclé/aireé · A2 agregué material seco · A3 agregué agua · A4 retiré material · A5 otra. Puede ser multirrespuesta.
+NOTA
+Condicionalmente obligatoria cuando se selecciona 'otro', se retira material o ocurre algo no representado por las categorías.
