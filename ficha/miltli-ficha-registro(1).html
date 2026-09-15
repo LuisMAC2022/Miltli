@@ -1,0 +1,609 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Miltli — Ficha de registro del piloto doméstico de compostaje</title>
+<style>
+  :root {
+    --linea: #303030;
+    --suave: #777;
+    --tenue: #f1f1f1;
+  }
+
+  @page {
+    size: Letter portrait;
+    margin: 12mm 12mm 10mm;
+  }
+
+  * { box-sizing: border-box; }
+
+  html, body {
+    margin: 0;
+    padding: 0;
+    font-family: "Helvetica Neue", Arial, sans-serif;
+    color: #111;
+    background: #d9d9d9;
+  }
+
+  body {
+    font-size: 9pt;
+    line-height: 1.18;
+  }
+
+  .acciones {
+    position: fixed;
+    top: 14px;
+    right: 14px;
+    z-index: 10;
+  }
+
+  .acciones button {
+    appearance: none;
+    border: 1px solid var(--linea);
+    background: #fff;
+    color: #111;
+    font: 600 10pt "Helvetica Neue", Arial, sans-serif;
+    padding: 9px 13px;
+    border-radius: 4px;
+    cursor: pointer;
+    box-shadow: 0 1px 4px rgba(0,0,0,.18);
+  }
+
+  main {
+    width: 100%;
+    padding: 12mm 0;
+  }
+
+  article.hoja {
+    width: 215.9mm;
+    min-height: 279.4mm;
+    margin: 0 auto 12mm;
+    padding: 12mm 12mm 10mm;
+    background: #fff;
+    box-shadow: 0 2mm 7mm rgba(0,0,0,.16);
+    page-break-after: always;
+    break-after: page;
+    display: flex;
+    flex-direction: column;
+  }
+
+  article.hoja:last-child {
+    page-break-after: auto;
+    break-after: auto;
+  }
+
+  header.principal {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 8mm;
+    border-bottom: 1.2pt solid var(--linea);
+    padding-bottom: 1.5mm;
+    margin-bottom: 1.5mm;
+  }
+
+  header.principal h1 {
+    margin: 0;
+    font-size: 18pt;
+    line-height: 1.05;
+    font-weight: 700;
+    letter-spacing: -.01em;
+  }
+
+  header.principal h1 small {
+    display: block;
+    margin-top: 1.6mm;
+    font-size: 8.5pt;
+    line-height: 1.15;
+    font-weight: 500;
+    color: #333;
+    letter-spacing: 0;
+  }
+
+  .clave {
+    margin: 0;
+    min-width: 31mm;
+    text-align: center;
+    line-height: 1.18;
+    font-size: 8.5pt;
+  }
+
+  .clave b {
+    display: block;
+    margin: .6mm 0;
+    font-size: 15pt;
+    letter-spacing: .06em;
+  }
+
+  .clave span {
+    display: block;
+    font-size: 7.5pt;
+    color: #444;
+  }
+
+  h2 {
+    margin: 0 0 1.5mm;
+    font-size: 11.5pt;
+    line-height: 1.1;
+  }
+
+  h3 {
+    margin: 0 0 1.2mm;
+    font-size: 9.5pt;
+    line-height: 1.1;
+  }
+
+  p { margin: 0; }
+
+  section + section {
+    margin-top: 3mm;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+    font-size: 8.2pt;
+  }
+
+  caption {
+    caption-side: top;
+    text-align: left;
+    padding: 0 0 1.6mm;
+    font-size: 8.5pt;
+    line-height: 1.15;
+    color: #222;
+  }
+
+  th, td {
+    border: .65pt solid var(--linea);
+    vertical-align: middle;
+    padding: .8mm 1mm;
+  }
+
+  thead th {
+    background: var(--tenue);
+    font-weight: 700;
+    text-align: center;
+    line-height: 1;
+    font-size: 8pt;
+    padding: .4mm .6mm;
+  }
+
+  thead th small {
+    display: block;
+    margin-top: .3mm;
+    font-size: 7.5pt;
+    line-height: 1;
+    font-weight: 500;
+    color: #333;
+  }
+
+  tbody th {
+    text-align: center;
+    font-weight: 700;
+  }
+
+  .fecha { width: 16mm; }
+  .peso { width: 20mm; }
+  .termica { width: 22mm; }
+  .incidencias { width: 34mm; }
+  .estado { width: 16mm; }
+
+  .codigos {
+    text-align: center;
+    white-space: nowrap;
+    letter-spacing: .03em;
+    font-size: 8.5pt;
+  }
+
+  .notas-col {
+    text-align: left;
+  }
+
+  /* Banda de regla crítica sobre la tabla diaria */
+  .leyenda.regla {
+    border-width: 1.2pt;
+    text-align: center;
+    font-size: 9.5pt;
+    padding: 2mm 3mm;
+    margin: 0 0 2.5mm;
+    white-space: nowrap;
+    overflow: hidden;
+  }
+
+  .leyenda.regla .regla-texto {
+    display: inline-block;
+    transform: scaleX(.83);
+    transform-origin: center center;
+  }
+
+  .leyenda {
+    border: .75pt solid var(--linea);
+    padding: 1.2mm 2mm;
+    font-size: 8pt;
+    line-height: 1.08;
+  }
+
+  .dos-columnas {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3mm;
+  }
+
+  .leyenda .estado-linea {
+    margin-top: .8mm;
+    padding-top: .8mm;
+    border-top: .5pt solid var(--suave);
+  }
+
+  /* Opciones para circular dentro de dl.alta y del cierre */
+  .opcion {
+    font-size: 10pt;
+    letter-spacing: .12em;
+    white-space: nowrap;
+  }
+
+  /* Casillas de marcado */
+  .casilla { font-size: 12pt; line-height: 1; }
+
+  /* Alturas de escritura a mano */
+  #cuerpo-diario td, #cuerpo-diario th { height: 6.5mm; }
+  .semanal td, .semanal th { height: 8mm; }
+  dl.alta dd { min-height: 6mm; }
+
+  /* Separadores semanales sólo en la tabla diaria */
+  #cuerpo-diario tr:nth-child(7n) td,
+  #cuerpo-diario tr:nth-child(7n) th {
+    border-bottom: 1.2pt solid var(--linea);
+  }
+
+  dl.alta {
+    margin: 0;
+    border-top: .65pt solid var(--linea);
+    font-size: 8.2pt;
+  }
+
+  dl.alta > div {
+    display: grid;
+    grid-template-columns: 42% 58%;
+    border-bottom: .65pt solid var(--linea);
+  }
+
+  dl.alta dt,
+  dl.alta dd {
+    margin: 0;
+    padding: 1.1mm 1.5mm;
+  }
+
+  dl.alta dt {
+    font-weight: 650;
+    border-right: .65pt solid var(--linea);
+  }
+
+  dl.alta dt small {
+    display: block;
+    margin-top: .5mm;
+    font-size: 7.5pt;
+    line-height: 1.08;
+    font-weight: 500;
+    color: #444;
+  }
+
+  dl.alta dd {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1mm 2mm;
+  }
+
+  .nota-alta {
+    margin: 0 0 1.2mm;
+    font-size: 7.5pt;
+    color: #333;
+  }
+
+  .semanal th:first-child {
+    width: 62mm;
+  }
+
+  .semanal tbody th {
+    text-align: left;
+  }
+
+  .semanal thead th small {
+    white-space: nowrap;
+  }
+
+  /* Bloque no compostable, separado del material que sí entra a la composta */
+  tr.no-compost th, tr.no-compost td {
+    border-top: 1.2pt solid var(--linea);
+    background: var(--tenue);
+  }
+
+  tr.no-compost th small {
+    display: block;
+    font-size: 7.5pt;
+    line-height: 1.05;
+    font-weight: 500;
+    color: #333;
+    margin-bottom: .5mm;
+  }
+
+  .cierre dl.alta > div {
+    grid-template-columns: 43% 57%;
+  }
+
+  .linea-escritura {
+    display: inline-block;
+    width: 100%;
+    min-height: 8mm;
+    border-bottom: .65pt solid var(--linea);
+  }
+
+  footer.pie {
+    margin-top: auto;
+    padding-top: 2mm;
+    border-top: .65pt solid var(--linea);
+    display: flex;
+    justify-content: space-between;
+    gap: 8mm;
+    align-items: flex-end;
+    font-size: 7.5pt;
+    line-height: 1.15;
+    color: #333;
+  }
+
+  footer.pie span:last-child {
+    white-space: nowrap;
+    font-weight: 650;
+  }
+
+  @media print {
+    html, body {
+      background: #fff;
+    }
+
+    .acciones {
+      display: none !important;
+    }
+
+    main {
+      padding: 0;
+    }
+
+    article.hoja {
+      width: auto;
+      min-height: 0;
+      margin: 0;
+      padding: 0;
+      box-shadow: none;
+    }
+  }
+</style>
+</head>
+<body>
+<div class="acciones" aria-label="Acciones del documento">
+  <button type="button" onclick="window.print()">Imprimir ficha</button>
+</div>
+
+<main>
+  <article class="hoja" aria-labelledby="t-diario">
+    <header class="principal">
+      <h1 id="t-diario">
+        Registro diario · Miltli
+        <small>Piloto doméstico de compostaje · 28 días · HUMAN STEM, A.C.</small>
+      </h1>
+      <p class="clave">
+        Hogar
+        <b>H___</b>
+        <span>lo asigna el equipo</span>
+        Inicio: ____ / ____ / 2026
+      </p>
+    </header>
+
+    <p class="leyenda regla"><span class="regla-texto">
+      Sin báscula → escribe <strong>SB</strong> (no calcules). &nbsp;·&nbsp; No hubo material → escribe <strong>0</strong>. &nbsp;·&nbsp; No hiciste el registro → circula <strong>NR</strong>. &nbsp;·&nbsp; Ningún renglón se queda en blanco.
+    </span></p>
+
+    <table aria-label="Registro diario de 28 días">
+      <caption>Un renglón por día, los 28 días. Escribe en las dos primeras columnas; circula o marca en las tres siguientes.</caption>
+      <colgroup>
+        <col style="width:8mm">
+        <col class="fecha">
+        <col class="peso">
+        <col class="peso">
+        <col class="termica">
+        <col class="incidencias">
+        <col class="estado">
+        <col>
+      </colgroup>
+      <thead>
+        <tr>
+          <th scope="col">Día</th>
+          <th scope="col">Fecha<small>día / mes</small></th>
+          <th scope="col">Orgánicos agregados<small>g · o SB</small></th>
+          <th scope="col">Material seco agregado<small>g · o SB</small></th>
+          <th scope="col">Sensación térmica<small>circula una</small></th>
+          <th scope="col">Incidencias<small>marca todas las que apliquen</small></th>
+          <th scope="col">Estado<small>circula uno</small></th>
+          <th scope="col" class="notas-col">Nota — sólo si hubo incidencia o algo fuera de lo normal</th>
+        </tr>
+      </thead>
+      <tbody id="cuerpo-diario"></tbody>
+    </table>
+
+    <section class="leyenda" aria-labelledby="codigos-diario">
+      <h3 id="codigos-diario">Códigos</h3>
+      <div class="dos-columnas">
+        <p><strong>Sensación térmica</strong> (al tacto, con la mano sobre la pila): <strong>F</strong> fría · <strong>T</strong> tibia · <strong>C</strong> caliente. No se necesita termómetro.</p>
+        <p><strong>Incidencias</strong> (marca todas las que apliquen): <strong>N</strong> ninguna · <strong>O</strong> olor · <strong>A</strong> animales o fauna · <strong>L</strong> lixiviado · <strong>Ot</strong> otra (descríbela en la nota). Si marcas <strong>N</strong>, no marques ninguna otra.</p>
+      </div>
+      <p class="estado-linea"><strong>Estado:</strong> ✓ hice el registro de este día · <strong>NR</strong> no lo hice. Si circulas <strong>NR</strong>, deja el renglón sin datos.</p>
+    </section>
+
+    <footer class="pie">
+      <span>Pesa siempre con el mismo recipiente y no restes nada: el equipo descuenta el peso del recipiente.</span>
+      <span>Hoja 1 de 2</span>
+    </footer>
+  </article>
+
+  <article class="hoja" aria-labelledby="t-alta">
+    <header class="principal">
+      <h1 id="t-alta">
+        Alta y seguimiento · Miltli
+        <small>Se llena una vez en la junta de arranque, más una revisión por semana</small>
+      </h1>
+      <p class="clave">
+        Hogar
+        <b>H___</b>
+        <span>lo asigna el equipo</span>
+      </p>
+    </header>
+
+    <section aria-labelledby="alta-hogar">
+      <h2 id="alta-hogar">Alta del hogar</h2>
+      <p class="nota-alta">Esta sección se llena una sola vez, en la junta de arranque, con el equipo presente.</p>
+      <dl class="alta">
+        <div>
+          <dt>Fecha de arranque</dt>
+          <dd>____ / ____ / 2026</dd>
+        </div>
+        <div>
+          <dt>Día fijo de la revisión semanal<small>circula uno</small></dt>
+          <dd><span class="opcion">L&nbsp; M&nbsp; M&nbsp; J&nbsp; V&nbsp; S&nbsp; D</span></dd>
+        </div>
+        <div>
+          <dt>¿Cuántas personas comen en esta casa la mayoría de los días?</dt>
+          <dd>______ personas</dd>
+        </div>
+        <div>
+          <dt>¿Hay mascotas que reciben restos de comida?</dt>
+          <dd><span class="opcion">No · Sí</span> <span>Si sí, ¿qué restos reciben? ______________</span></dd>
+        </div>
+        <div>
+          <dt>Antes del piloto, ¿separaban residuos orgánicos?</dt>
+          <dd><span class="opcion">No · Sí</span></dd>
+        </div>
+        <div>
+          <dt>¿Qué hacían con los orgánicos hasta hoy?<small>marca una</small></dt>
+          <dd>
+            <span><span class="casilla">□</span> Basura común</span>
+            <span><span class="casilla">□</span> Se los daban a animales</span>
+            <span><span class="casilla">□</span> Ya compostaban</span>
+            <span><span class="casilla">□</span> Otro: __________</span>
+          </dd>
+        </div>
+        <div>
+          <dt>¿Hay báscula disponible para este registro?</dt>
+          <dd><span class="opcion">No · Sí</span></dd>
+        </div>
+        <div>
+          <dt>Si hay báscula: peso del recipiente vacío<small>lo pesa y anota el equipo en la junta</small></dt>
+          <dd>________ g</dd>
+        </div>
+        <div>
+          <dt>Contenedor de composta<small>tipo y capacidad</small></dt>
+          <dd>Tipo: ______________ &nbsp; Capacidad: ______ L &nbsp; <span><span class="casilla">□</span> no indicada</span></dd>
+        </div>
+        <div>
+          <dt>Ubicación del contenedor<small>circula una de cada par</small></dt>
+          <dd><span class="opcion">Interior · Exterior</span>&nbsp;&nbsp;<span class="opcion">Sol · Sombra</span></dd>
+        </div>
+        <div>
+          <dt>Material seco disponible<small>marca todos los que haya</small></dt>
+          <dd>
+            <span><span class="casilla">□</span> Hojas secas</span>
+            <span><span class="casilla">□</span> Cartón</span>
+            <span><span class="casilla">□</span> Aserrín</span>
+            <span><span class="casilla">□</span> Otro: __________</span>
+          </dd>
+        </div>
+      </dl>
+    </section>
+
+    <section aria-labelledby="pesaje-semanal">
+      <h2 id="pesaje-semanal">Pesaje semanal</h2>
+      <table class="semanal" aria-label="Pesaje categorizado semanal">
+        <caption>Mismo día de la semana en todos los hogares. Gramos. Completa los pesos sólo si hubo báscula; si no la hubo, escribe SB. Registra cada residuo en una sola categoría: usa la primera de la lista que aplique.</caption>
+        <colgroup>
+          <col style="width:62mm">
+          <col>
+          <col>
+          <col>
+          <col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th scope="col" class="notas-col">Categoría</th>
+            <th scope="col">Sem. 1<small>fecha ____ / ____</small></th>
+            <th scope="col">Sem. 2<small>fecha ____ / ____</small></th>
+            <th scope="col">Sem. 3<small>fecha ____ / ____</small></th>
+            <th scope="col">Sem. 4<small>fecha ____ / ____</small></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><th scope="row" class="notas-col">Cáscara de huevo</th><td></td><td></td><td></td><td></td></tr>
+          <tr><th scope="row" class="notas-col">Café y té</th><td></td><td></td><td></td><td></td></tr>
+          <tr><th scope="row" class="notas-col">Frutas y verduras crudas</th><td></td><td></td><td></td><td></td></tr>
+          <tr><th scope="row" class="notas-col">Restos cocinados</th><td></td><td></td><td></td><td></td></tr>
+          <tr><th scope="row" class="notas-col">Poda o jardín</th><td></td><td></td><td></td><td></td></tr>
+          <tr class="no-compost">
+            <th scope="row" class="notas-col"><small>No entra a la composta</small>Retirados por no compostables</th>
+            <td></td><td></td><td></td><td></td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="leyenda cierre" aria-labelledby="cierre-piloto">
+      <h3 id="cierre-piloto">Cierre del piloto — día 28</h3>
+      <dl class="alta">
+        <div>
+          <dt>¿Se cosechó composta al día 28?</dt>
+          <dd><span class="opcion">No · Sí</span></dd>
+        </div>
+        <div>
+          <dt>Si sí: ¿se pudo pesar?</dt>
+          <dd>
+            <span class="opcion">No · Sí</span>
+            <span>— Peso: __________</span>
+            <span>circula la unidad: <span class="opcion">g · kg</span></span>
+            <span>— si no hubo báscula, escribe <strong>SB</strong></span>
+          </dd>
+        </div>
+        <div>
+          <dt>¿Qué fue lo más difícil de sostener?</dt>
+          <dd><span class="linea-escritura" aria-hidden="true"></span></dd>
+        </div>
+      </dl>
+    </section>
+
+    <footer class="pie">
+      <span>Miltli · HUMAN STEM, A.C. · Piloto doméstico de compostaje aerobio, agosto 2026</span>
+      <span>Hoja 2 de 2</span>
+    </footer>
+  </article>
+</main>
+
+<script>
+(function () {
+  const cuerpo = document.getElementById('cuerpo-diario');
+  for (let i = 1; i <= 28; i++) {
+    const tr = document.createElement('tr');
+    tr.innerHTML =
+      '<th scope="row">' + i + '</th>' +
+      '<td></td>' +
+      '<td></td>' +
+      '<td></td>' +
+      '<td class="codigos">F &nbsp; T &nbsp; C</td>' +
+      '<td class="codigos">N &nbsp; O &nbsp; A &nbsp; L &nbsp; Ot</td>' +
+      '<td class="codigos">✓ &nbsp; NR</td>' +
+      '<td class="notas-col"></td>';
+    cuerpo.appendChild(tr);
+  }
+})();
+</script>
+</body>
+</html>
