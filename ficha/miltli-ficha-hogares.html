@@ -1,0 +1,1002 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Miltli — Ficha de registro del piloto doméstico de compostaje</title>
+<style>
+  :root {
+    --linea: #303030;
+    --suave: #777;
+    --tenue: #f1f1f1;
+  }
+
+  @page {
+    size: Letter portrait;
+    margin: 12mm 12mm 10mm;
+  }
+
+  * { box-sizing: border-box; }
+
+  html, body {
+    margin: 0;
+    padding: 0;
+    font-family: "Helvetica Neue", Arial, sans-serif;
+    color: #111;
+    background: #d9d9d9;
+  }
+
+  body {
+    font-size: 9pt;
+    line-height: 1.18;
+  }
+
+  .acciones {
+    position: fixed;
+    top: 14px;
+    right: 14px;
+    z-index: 10;
+  }
+
+  .acciones button {
+    appearance: none;
+    border: 1px solid var(--linea);
+    background: #fff;
+    color: #111;
+    font: 600 10pt "Helvetica Neue", Arial, sans-serif;
+    padding: 9px 13px;
+    border-radius: 4px;
+    cursor: pointer;
+    box-shadow: 0 1px 4px rgba(0,0,0,.18);
+  }
+
+  main {
+    width: 100%;
+    padding: 12mm 0;
+  }
+
+  article.hoja {
+    width: 215.9mm;
+    min-height: 279.4mm;
+    margin: 0 auto 12mm;
+    padding: 12mm 12mm 10mm;
+    background: #fff;
+    box-shadow: 0 2mm 7mm rgba(0,0,0,.16);
+    page-break-after: always;
+    break-after: page;
+    display: flex;
+    flex-direction: column;
+  }
+
+  article.hoja:last-child {
+    page-break-after: auto;
+    break-after: auto;
+  }
+
+  header.principal {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 8mm;
+    border-bottom: 1.2pt solid var(--linea);
+    padding-bottom: 1.5mm;
+    margin-bottom: 1.5mm;
+  }
+
+  header.principal h1 {
+    margin: 0;
+    font-size: 17pt;
+    line-height: 1.05;
+    font-weight: 700;
+    letter-spacing: -.01em;
+  }
+
+  header.principal h1 small {
+    display: block;
+    margin-top: 1.4mm;
+    font-size: 8.5pt;
+    line-height: 1.15;
+    font-weight: 500;
+    color: #333;
+    letter-spacing: 0;
+  }
+
+  .clave {
+    margin: 0;
+    min-width: 31mm;
+    text-align: center;
+    line-height: 1.18;
+    font-size: 8.5pt;
+  }
+
+  .clave b {
+    display: block;
+    margin: .6mm 0;
+    font-size: 15pt;
+    letter-spacing: .06em;
+  }
+
+  .clave span {
+    display: block;
+    font-size: 7.5pt;
+    color: #444;
+  }
+
+  h2 {
+    margin: 0 0 .9mm;
+    font-size: 11.5pt;
+    line-height: 1.1;
+  }
+
+  h3 {
+    margin: 0 0 1.2mm;
+    font-size: 9.5pt;
+    line-height: 1.1;
+  }
+
+  p { margin: 0; }
+
+  section + section {
+    margin-top: 1.8mm;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+    font-size: 8.2pt;
+  }
+
+  caption {
+    caption-side: top;
+    text-align: left;
+    padding: 0 0 1.4mm;
+    font-size: 8.5pt;
+    line-height: 1.15;
+    color: #222;
+  }
+
+  th, td {
+    border: .65pt solid var(--linea);
+    vertical-align: middle;
+    padding: .8mm 1mm;
+  }
+
+  thead th {
+    background: var(--tenue);
+    font-weight: 700;
+    text-align: center;
+    line-height: 1;
+    font-size: 8pt;
+    padding: .5mm .6mm;
+  }
+
+  thead th small {
+    display: block;
+    margin-top: .3mm;
+    font-size: 7.3pt;
+    line-height: 1;
+    font-weight: 500;
+    color: #333;
+  }
+
+  tbody th {
+    text-align: center;
+    font-weight: 700;
+  }
+
+  .notas-col { text-align: left; }
+
+  /* ---------- Banda de instrucciones ---------- */
+
+  .leyenda {
+    border: .75pt solid var(--linea);
+    padding: 1.1mm 1.8mm;
+    font-size: 7.6pt;
+    line-height: 1.1;
+  }
+
+  .leyenda.regla {
+    border-width: 1.2pt;
+    font-size: 8.4pt;
+    padding: 1.6mm 2.4mm;
+    margin: 0 0 2.2mm;
+  }
+
+  .leyenda.regla ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: .6mm 4mm;
+  }
+
+  .leyenda.regla li::before {
+    content: "· ";
+    color: var(--suave);
+  }
+
+  .dos-columnas {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3mm;
+  }
+
+  /* ---------- Hoja diaria ---------- */
+
+  .dia    { width: 8mm; }
+  .fecha  { width: 16mm; }
+  .botes  { width: 25mm; }
+
+  #cuerpo-diario td,
+  #cuerpo-diario th { height: 6mm; }
+
+  #cuerpo-diario tr.fin-semana td,
+  #cuerpo-diario tr.fin-semana th {
+    border-bottom: 1.6pt solid var(--linea);
+  }
+
+  /* ---------- Listas de definición (alta y cierre) ---------- */
+
+  dl.alta {
+    margin: 0;
+    border-top: .65pt solid var(--linea);
+    font-size: 8pt;
+    line-height: 1.1;
+  }
+
+  dl.alta > div {
+    display: grid;
+    grid-template-columns: 44% 56%;
+    border-bottom: .65pt solid var(--linea);
+  }
+
+  dl.alta dt,
+  dl.alta dd {
+    margin: 0;
+    padding: .85mm 1.4mm;
+  }
+
+  dl.alta dt {
+    font-weight: 650;
+    border-right: .65pt solid var(--linea);
+  }
+
+  dl.alta dt small,
+  dl.alta dd small {
+    display: block;
+    margin-top: .4mm;
+    font-size: 7.3pt;
+    line-height: 1.08;
+    font-weight: 500;
+    color: #444;
+  }
+
+  dl.alta dd {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: .8mm 2mm;
+    min-height: 5.2mm;
+  }
+
+  .opcion {
+    font-size: 9.5pt;
+    letter-spacing: .1em;
+    white-space: nowrap;
+  }
+
+  .opcion.par {
+    border: .5pt solid var(--suave);
+    border-radius: 1mm;
+    padding: .3mm 1.4mm;
+  }
+
+  .casilla { font-size: 11pt; line-height: 1; }
+
+  .nota-seccion {
+    margin: 0 0 1mm;
+    font-size: 7.6pt;
+    line-height: 1.12;
+    color: #333;
+  }
+
+  .linea-escritura {
+    display: inline-block;
+    width: 100%;
+    min-height: 5.6mm;
+    border-bottom: .65pt solid var(--linea);
+  }
+
+  /* ---------- Rejilla de revisión semanal ---------- */
+
+  .rejilla {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0 5mm;
+    align-items: start;
+  }
+
+  table.semanal { font-size: 7.9pt; }
+
+  table.semanal col.sem { width: 6.2mm; }
+
+  table.semanal thead th { font-size: 7.6pt; }
+
+  table.semanal tbody th.op {
+    text-align: left;
+    font-weight: 400;
+    line-height: 1.06;
+    padding: .6mm 1.2mm;
+  }
+
+  table.semanal tbody th.op em {
+    font-style: normal;
+    color: #555;
+    font-size: 7.2pt;
+  }
+
+  table.semanal tbody th.op b { font-weight: 650; }
+
+  table.semanal td {
+    text-align: center;
+    font-size: 10.5pt;
+    line-height: 1;
+    height: 5mm;
+  }
+
+  table.semanal td.escribe { font-size: 8pt; }
+
+  tr.sec th {
+    background: var(--tenue);
+    text-align: left;
+    font-weight: 700;
+    font-size: 8.1pt;
+    line-height: 1.1;
+    padding: 1mm 1.2mm;
+    border-top: 1.2pt solid var(--linea);
+  }
+
+  tr.sec th small {
+    display: block;
+    margin-top: .4mm;
+    font-size: 7.2pt;
+    line-height: 1.08;
+    font-weight: 500;
+    color: #333;
+  }
+
+  .libre {
+    margin-top: 2.4mm;
+  }
+
+  .libre .renglones {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.4mm 5mm;
+    margin-top: 1.2mm;
+  }
+
+  .libre .renglon {
+    display: grid;
+    grid-template-columns: 18mm 1fr;
+    align-items: end;
+    font-size: 8pt;
+  }
+
+  .libre .renglon span {
+    border-bottom: .65pt solid var(--linea);
+    min-height: 6mm;
+  }
+
+  /* ---------- Fases: arranque y cierre ---------- */
+
+  .fase {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 4mm;
+    border: 1.4pt solid var(--linea);
+    background: var(--tenue);
+    padding: .8mm 2mm;
+    margin: 0 0 1.4mm;
+  }
+
+  .fase h2 {
+    margin: 0;
+    font-size: 11pt;
+    white-space: nowrap;
+  }
+
+  .fase span {
+    font-size: 7.8pt;
+    font-weight: 650;
+    line-height: 1.1;
+    text-align: right;
+  }
+
+  .fase.cierre {
+    background: #fff;
+    border-style: double;
+    border-width: 3.2pt;
+  }
+
+  .renglon-ancho {
+    display: block;
+    width: 100%;
+    min-height: 11mm;
+    border-bottom: .65pt solid var(--linea);
+  }
+
+  .bloque {
+    border-left: 1.4pt solid var(--linea);
+    padding-left: 2.2mm;
+  }
+
+  .corte {
+    margin: 3.2mm 0 2.4mm;
+    border-top: 1pt dashed var(--linea);
+    text-align: center;
+  }
+
+  .corte span {
+    display: inline-block;
+    transform: translateY(-50%);
+    background: #fff;
+    padding: 0 2.5mm;
+    font-size: 7.6pt;
+    font-weight: 650;
+    color: #333;
+  }
+
+  /* ---------- Orden del piloto ---------- */
+
+  .leyenda.orden { margin: 0 0 1.6mm; }
+
+  .leyenda.orden h3 {
+    margin: 0 0 .8mm;
+    font-size: 8.6pt;
+  }
+
+  .leyenda.orden ol {
+    margin: 0;
+    padding: 0 0 0 4mm;
+    display: grid;
+    grid-template-rows: repeat(3, auto);
+    grid-auto-flow: column;
+    gap: .5mm 5mm;
+  }
+
+  .leyenda.orden li { padding-left: .6mm; }
+
+  .leyenda.equipo {
+    margin: 1.8mm 0 0;
+    border-width: 1.2pt;
+  }
+
+  .leyenda.equipo h3 {
+    margin: 0 0 .6mm;
+    font-size: 8.6pt;
+  }
+
+  /* ---------- Orden de la carga diaria ---------- */
+
+  .regla .doble {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0 5mm;
+  }
+
+  .regla .doble h3 {
+    margin: 0 0 .7mm;
+    font-size: 8.4pt;
+  }
+
+  .regla .doble ol {
+    margin: 0;
+    padding: 0 0 0 4.2mm;
+  }
+
+  .regla .doble ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: block;
+  }
+
+  .regla .doble ul li::before {
+    content: "\00b7 ";
+    color: var(--suave);
+  }
+
+  /* ---------- Pie ---------- */
+
+  footer.pie {
+    margin-top: auto;
+    padding-top: 2mm;
+    border-top: .65pt solid var(--linea);
+    display: flex;
+    justify-content: space-between;
+    gap: 8mm;
+    align-items: flex-end;
+    font-size: 7.5pt;
+    line-height: 1.15;
+    color: #333;
+  }
+
+  footer.pie span:last-child {
+    white-space: nowrap;
+    font-weight: 650;
+  }
+
+  @media print {
+    html, body { background: #fff; }
+    .acciones { display: none !important; }
+    main { padding: 0; }
+
+    article.hoja {
+      width: auto;
+      min-height: 0;
+      margin: 0;
+      padding: 0;
+      box-shadow: none;
+    }
+  }
+</style>
+</head>
+<body>
+<div class="acciones" aria-label="Acciones del documento">
+  <button type="button" onclick="window.print()">Imprimir ficha</button>
+</div>
+
+<main>
+
+<!-- ============================ HOJA 1 ============================ -->
+<article class="hoja" aria-labelledby="t-arranque">
+  <header class="principal">
+    <h1 id="t-arranque">
+      Arranque · Miltli
+      <small>Piloto doméstico de compostaje · 28 días · HUMAN STEM, A.C.<br>Esta hoja se llena <strong>el día 1 y no se vuelve a tocar</strong>. El cierre del piloto va aparte, en la Hoja 4.</small>
+    </h1>
+    <p class="clave">
+      Hogar
+      <b>H___</b>
+      <span>lo asigna el equipo</span>
+      Inicio: ____ / ____ / 2026
+    </p>
+  </header>
+
+  <div class="leyenda orden">
+    <h3>El orden del piloto, de principio a fin</h3>
+    <ol>
+      <li><strong>Día 1 · arranque.</strong> El equipo mide tu bote. Llenas esta <strong>Hoja 1</strong>.</li>
+      <li><strong>Días 1 a 28 · diario.</strong> Dos números por día en la <strong>Hoja 2</strong>.</li>
+      <li><strong>Cada semana · revisión.</strong> Cinco minutos en la <strong>Hoja 3</strong>.</li>
+      <li><strong>Cuando el equipo avise · visita.</strong> El equipo pesa y mide temperatura.</li>
+      <li><strong>Día 28 · cierre.</strong> Llenas la <strong>Hoja 4</strong>, el mismo día que la última revisión.</li>
+    </ol>
+  </div>
+
+  <div class="fase">
+    <h2>Parte A · sólo el día 1</h2>
+    <span>Una sola vez, en la junta de arranque. Nada de esta hoja se vuelve a llenar después.</span>
+  </div>
+
+  <div class="bloque">
+
+  <section aria-labelledby="medida">
+    <h2 id="medida">La medida de esta casa</h2>
+    <p class="nota-seccion">En esta casa no se pesa nada: todo se cuenta en <strong>botes</strong>. Cada casa elige un recipiente y lo usa el mes completo. El equipo mide una sola vez cuántos litros le caben, llenándolo con una botella de 1&nbsp;L, y así los resultados de todas las casas se pueden comparar en litros. Para que todas midan igual, el bote se llena <strong>hasta el borde, sin apretar, sin acomodar y sin sacudir</strong>.</p>
+    <dl class="alta">
+      <div>
+        <dt>Mi bote de medida es<small>descríbelo: bote de yogurt, cubeta, taper, jarra…</small></dt>
+        <dd>______________________________</dd>
+      </div>
+      <div>
+        <dt>Capacidad medida por el equipo</dt>
+        <dd>________ litros &nbsp; <small>Se mide en la junta de arranque. No hace falta que la casa lo calcule.</small></dd>
+      </div>
+      <div>
+        <dt>Uso el mismo bote para el material seco</dt>
+        <dd><span class="opcion">Sí · No</span> <span>Si no: otro recipiente ______________ = ______ L</span></dd>
+      </div>
+    </dl>
+
+    <div class="leyenda equipo">
+      <h3>Lo que mide el equipo, no la casa</h3>
+      <p>· <strong>El pesaje y la temperatura los hace el equipo que coordina</strong>, en las visitas que anuncie: no necesitas báscula ni termómetro. Se apuntan en la hoja del equipo, con la misma clave <strong>H__</strong> y sin tu nombre.</p>
+    </div>
+  </section>
+
+  <section aria-labelledby="alta-hogar">
+    <h2 id="alta-hogar">Cómo es esta casa y esta composta</h2>
+    <p class="nota-seccion">Se llena una sola vez, en la junta de arranque. Sirve para entender por qué cada composta se comporta distinto. <strong>Puedes dejar en blanco cualquier pregunta que no quieras responder;</strong> la ficha sirve igual.</p>
+    <dl class="alta">
+      <div>
+        <dt>Día de la revisión semanal<small>circula uno; el mismo en todas las casas</small></dt>
+        <dd><span class="opcion">L&nbsp; M&nbsp; M&nbsp; J&nbsp; V&nbsp; S&nbsp; D</span></dd>
+      </div>
+      <div>
+        <dt>Personas que comen en casa la mayoría de los días<small>sólo el número; no anotamos nombres, edades ni parentescos</small></dt>
+        <dd>______ personas</dd>
+      </div>
+      <div>
+        <dt>Parte de los restos de comida se va a animales de la casa<small>esos restos no llegan a la composta, por eso se pregunta</small></dt>
+        <dd><span class="opcion">No · A veces · Casi siempre</span></dd>
+      </div>
+      <div>
+        <dt>Antes de este piloto, ¿qué camino seguían los restos de comida?<small>marca todos los que apliquen: pueden ser varios a la vez</small></dt>
+        <dd>
+          <span><span class="casilla">□</span> Basura común</span>
+          <span><span class="casilla">□</span> Se los daban a animales</span>
+          <span><span class="casilla">□</span> Ya se compostaban</span>
+          <span><span class="casilla">□</span> Otro: __________</span>
+        </dd>
+      </div>
+      <div>
+        <dt>Contenedor de composta<small>tipo y capacidad</small></dt>
+        <dd>Tipo: ______________ &nbsp; Capacidad: ______ L &nbsp; <span><span class="casilla">□</span> no la sé</span></dd>
+      </div>
+      <div>
+        <dt>Dónde está el contenedor<small>circula una de cada par</small></dt>
+        <dd><span class="opcion par">Interior · Exterior</span><span class="opcion par">Sol · Sombra</span><span class="opcion par">Techado · A la lluvia</span><span class="opcion par">Sobre tierra · Sobre piso firme</span></dd>
+      </div>
+      <div>
+        <dt>Material seco con el que cuento<small>marca todos los que haya</small></dt>
+        <dd>
+          <span><span class="casilla">□</span> Hojas secas</span>
+          <span><span class="casilla">□</span> Cartón</span>
+          <span><span class="casilla">□</span> Papel sin brillo</span>
+          <span><span class="casilla">□</span> Aserrín o viruta</span>
+          <span><span class="casilla">□</span> Otro: __________</span>
+        </dd>
+      </div>
+      <div>
+        <dt>Conseguir material seco me resulta<small>marca uno</small></dt>
+        <dd>
+          <span><span class="casilla">□</span> Lo tengo en casa</span>
+          <span><span class="casilla">□</span> Lo consigo cerca</span>
+          <span><span class="casilla">□</span> Tengo que salir a buscarlo</span>
+          <span><span class="casilla">□</span> No sé dónde conseguirlo</span>
+        </dd>
+      </div>
+      <div>
+        <dt>Reserva de material seco al arrancar</dt>
+        <dd>______ botes, aproximadamente</dd>
+      </div>
+    </dl>
+  </section>
+
+  </div>
+
+  <section class="leyenda" aria-labelledby="datos">
+    <h3 id="datos">Cómo se cuidan tus datos</h3>
+    <div class="dos-columnas">
+      <p>· Esta hoja no lleva nombre, dirección ni teléfono: sólo la clave <strong>H__</strong>. La lista que conecta cada clave con una casa la guarda sólo la persona coordinadora, fuera del chat y fuera de la nube.<br>
+         · <strong>Puedes dejar en blanco cualquier pregunta.</strong> La ficha sirve igual.<br>
+         · El equipo apunta el pesaje y la temperatura en su propia hoja, con la misma clave <strong>H__</strong> y sin tu nombre.</p>
+      <p>· No se registra <em>qué</em> se come aquí: el piloto sólo necesita cuánto entra a la composta y cómo va, así que no hay categorías de residuo ni listas de alimentos.<br>
+         · Al terminar, la hoja original se queda contigo; al grupo van sólo los números. El resumen final presenta a todas las casas juntas, sin identificar hogares.</p>
+    </div>
+  </section>
+
+  <footer class="pie">
+    <span>Miltli · HUMAN STEM, A.C. · Piloto doméstico de compostaje aerobio · 2026</span>
+    <span>Hoja 1 de 4</span>
+  </footer>
+</article>
+
+<!-- ============================ HOJA 2 ============================ -->
+<article class="hoja" aria-labelledby="t-diario">
+  <header class="principal">
+    <h1 id="t-diario">
+      Registro diario · Miltli
+      <small>28 días · Dos números por día y nada más. Toma menos de un minuto.</small>
+    </h1>
+    <p class="clave">
+      Hogar
+      <b>H___</b>
+      <span>lo asigna el equipo</span>
+      Mi bote: ______ L
+    </p>
+  </header>
+
+  <div class="leyenda regla">
+    <div class="doble">
+      <div>
+        <h3>El orden de cada carga</h3>
+        <ol>
+          <li>Revisa y <strong>retira</strong> lo que no va (plástico, vidrio, metal).</li>
+          <li><strong>Trocea</strong> lo grande, menos de 5&nbsp;cm.</li>
+          <li><strong>Mide</strong> en botes y apunta el número.</li>
+          <li><strong>Echa</strong> el orgánico.</li>
+          <li><strong>Cubre</strong> con 2 botes de seco por cada bote de orgánico.</li>
+          <li><strong>Tapa</strong> el contenedor.</li>
+        </ol>
+      </div>
+      <div>
+        <h3>Cómo se cuenta</h3>
+        <ul>
+          <li>Cuenta en <strong>botes</strong>, no en gramos: 1, 2, ½, 1½…</li>
+          <li>Llena el bote hasta el borde, <strong>sin apretar</strong>.</li>
+          <li><strong>0</strong> = ese día no hubo residuo. <strong>Renglón vacío</strong> = no anotaste. No son lo mismo y las dos cosas sirven.</li>
+          <li>Si el grupo acordó una primera semana de <strong>sólo medir</strong>, esos días deja el seco vacío.</li>
+          <li>Todo lo que anotes sirve. Aquí no hay respuestas correctas.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <table aria-label="Registro diario de 28 días">
+    <caption>Un renglón por día. Puedes anotar todo junto al final del día: no hace falta registrar cada cáscara.</caption>
+    <colgroup>
+      <col class="dia">
+      <col class="fecha">
+      <col class="botes">
+      <col class="botes">
+      <col>
+    </colgroup>
+    <thead>
+      <tr>
+        <th scope="col">Día</th>
+        <th scope="col">Fecha<small>día / mes</small></th>
+        <th scope="col">Orgánico que eché<small>botes</small></th>
+        <th scope="col">Seco que eché encima<small>botes</small></th>
+        <th scope="col" class="notas-col">¿Algo que quieras contar de hoy? <small>Opcional, sobre la composta. Ej.: «llovió y se mojó», «se acabó el cartón», «no cupo todo».</small></th>
+      </tr>
+    </thead>
+    <tbody id="cuerpo-diario"></tbody>
+  </table>
+
+  <section class="leyenda" style="margin-top:2mm">
+    <p>· En la columna de notas escribe sólo cosas de la composta. &nbsp;· Si mandas foto, encuadra únicamente el interior del contenedor: sin personas, sin fachadas, sin placas, y con la ubicación de la cámara desactivada.</p>
+  </section>
+
+  <footer class="pie">
+    <span>Las líneas más gruesas cierran cada semana: ese día toca la revisión de la Hoja 3, antes de echar nada.</span>
+    <span>Hoja 2 de 4</span>
+  </footer>
+</article>
+
+<!-- ============================ HOJA 3 ============================ -->
+<article class="hoja" aria-labelledby="t-semanal">
+  <header class="principal">
+    <h1 id="t-semanal">
+      Revisión semanal · Miltli
+      <small>Una vez por semana, unos cinco minutos, <strong>antes de echar nada ese día</strong>. Abre, mira, huele, toca y marca lo que encuentres.</small>
+    </h1>
+    <p class="clave">
+      Hogar
+      <b>H___</b>
+      <span>lo asigna el equipo</span>
+    </p>
+  </header>
+
+  <p class="nota-seccion" style="margin-bottom:2mm">
+    Marca las casillas de la columna de tu semana, y <strong>varias en la misma sección</strong> si hace falta: la composta cambia de una zona a otra. Ninguna casilla es buena ni mala; cada una dice hacia dónde se está moviendo. El texto en gris explica qué suele acompañar a cada señal. <strong>La temperatura no se toma aquí:</strong> la mide el equipo con termómetro.
+  </p>
+
+  <div class="rejilla">
+    <!-- ---------- columna izquierda ---------- -->
+    <table class="semanal" aria-label="Revisión semanal, primera parte">
+      <colgroup>
+        <col>
+        <col class="sem"><col class="sem"><col class="sem"><col class="sem">
+      </colgroup>
+      <thead>
+        <tr>
+          <th scope="col" class="notas-col">&nbsp;</th>
+          <th scope="col">S1</th>
+          <th scope="col">S2</th>
+          <th scope="col">S3</th>
+          <th scope="col">S4</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="sec"><th colspan="5" scope="colgroup">La semana<small>escribe el dato en la casilla</small></th></tr>
+        <tr><th scope="row" class="op">Fecha de esta revisión <em>día / mes</em></th><td class="escribe"></td><td class="escribe"></td><td class="escribe"></td><td class="escribe"></td></tr>
+        <tr><th scope="row" class="op">Personas que comieron en casa casi todos los días</th><td class="escribe"></td><td class="escribe"></td><td class="escribe"></td><td class="escribe"></td></tr>
+        <tr><th scope="row" class="op">Minutos que le dediqué a la composta en toda la semana</th><td class="escribe"></td><td class="escribe"></td><td class="escribe"></td><td class="escribe"></td></tr>
+        <tr><th scope="row" class="op">Qué tan lleno está el contenedor <em>¼ · ½ · ¾ · casi lleno</em></th><td class="escribe"></td><td class="escribe"></td><td class="escribe"></td><td class="escribe"></td></tr>
+
+        <tr class="sec"><th colspan="5" scope="colgroup">Cómo anoté esta semana<small>Sirve para saber si un renglón vacío de la Hoja 2 fue un día sin residuo o un día sin anotar. No es una calificación: las dos respuestas son válidas.</small></th></tr>
+        <tr><th scope="row" class="op">Anoté <b>todos</b> los días de esta semana</th><td>□</td><td>□</td><td>□</td><td>□</td></tr>
+        <tr><th scope="row" class="op">Me faltaron algunos días</th><td>□</td><td>□</td><td>□</td><td>□</td></tr>
+
+        <tr class="sec"><th colspan="5" scope="colgroup">Humedad<small>Primero mira la tapa al abrir; luego toma un puño de la mezcla, de preferencia con guante, y apriétalo.</small></th></tr>
+        <tr><th scope="row" class="op">Al abrir había vaho, o gotas de agua en la tapa</th><td>□</td><td>□</td><td>□</td><td>□</td></tr>
+        <tr><th scope="row" class="op">Se desmorona: se siente polvosa o crujiente <em>— la vida se frena y espera agua</em></th><td>□</td><td>□</td><td>□</td><td>□</td></tr>
+        <tr><th scope="row" class="op">Se apelmaza y mantiene la forma; no sale agua <em>— punto de esponja escurrida</em></th><td>□</td><td>□</td><td>□</td><td>□</td></tr>
+        <tr><th scope="row" class="op">Al apretar salen una o dos gotas</th><td>□</td><td>□</td><td>□</td><td>□</td></tr>
+        <tr><th scope="row" class="op">Al apretar escurre agua <em>— el aire empieza a faltar</em></th><td>□</td><td>□</td><td>□</td><td>□</td></tr>
+        <tr><th scope="row" class="op">Hay líquido acumulado en el fondo <em>— más seco y remover suele resolverlo</em></th><td>□</td><td>□</td><td>□</td><td>□</td></tr>
+
+        <tr class="sec"><th colspan="5" scope="colgroup">Olor<small>Abre, acerca la nariz una sola vez y vuelve a cerrar.</small></th></tr>
+        <tr><th scope="row" class="op">Casi no huele</th><td>□</td><td>□</td><td>□</td><td>□</td></tr>
+        <tr><th scope="row" class="op">A tierra mojada, a bosque o a hojarasca <em>— descomposición con aire</em></th><td>□</td><td>□</td><td>□</td><td>□</td></tr>
+        <tr><th scope="row" class="op">Dulce: a fruta madura, vinagre o fermento <em>— mucho húmedo junto</em></th><td>□</td><td>□</td><td>□</td><td>□</td></tr>
+        <tr><th scope="row" class="op">A amoniaco, como limpiador de piso o como orina <em>— falta material seco</em></th><td>□</td><td>□</td><td>□</td><td>□</td></tr>
+        <tr><th scope="row" class="op">A drenaje, a huevo podrido o a basura encerrada <em>— está trabajando sin aire</em></th><td>□</td><td>□</td><td>□</td><td>□</td></tr>
+        <tr><th scope="row" class="op">Otro olor <em>— descríbelo abajo</em></th><td>□</td><td>□</td><td>□</td><td>□</td></tr>
+      </tbody>
+    </table>
+
+    <!-- ---------- columna derecha ---------- -->
+    <table class="semanal" aria-label="Revisión semanal, segunda parte">
+      <colgroup>
+        <col>
+        <col class="sem"><col class="sem"><col class="sem"><col class="sem">
+      </colgroup>
+      <thead>
+        <tr>
+          <th scope="col" class="notas-col">&nbsp;</th>
+          <th scope="col">S1</th>
+          <th scope="col">S2</th>
+          <th scope="col">S3</th>
+          <th scope="col">S4</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="sec"><th colspan="5" scope="colgroup">Quién vive aquí esta semana<small>Mira la superficie y remueve un poco. En una composta siempre hay vida: eso es justamente lo que la hace funcionar. Lo que cambia con las semanas es <em>quién</em> aparece, y eso es lo que queremos saber. Marca todo lo que veas <strong>más de una vez o en más de dos individuos</strong>: una mosca suelta no se marca.</small></th></tr>
+        <tr><th scope="row" class="op">Lombrices <em>— mezcla madura, húmeda y sin calor</em></th><td>□</td><td>□</td><td>□</td><td>□</td></tr>
+        <tr><th scope="row" class="op">Cochinillas, milpiés, caracoles o babosas <em>— material fibroso y húmedo</em></th><td>□</td><td>□</td><td>□</td><td>□</td></tr>
+        <tr><th scope="row" class="op">Escarabajos, o larvas gruesas blancas en forma de C <em>— material viejo y aireado</em></th><td>□</td><td>□</td><td>□</td><td>□</td></tr>
+        <tr><th scope="row" class="op">Larvas grandes, planas y café, muy movedizas <em>— mosca soldado: mucho húmedo y restos de comida</em></th><td>□</td><td>□</td><td>□</td><td>□</td></tr>
+        <tr><th scope="row" class="op">Mosquitas que revolotean al abrir <em>— fruta a la vista; se van al cubrirla con seco</em></th><td>□</td><td>□</td><td>□</td><td>□</td></tr>
+        <tr><th scope="row" class="op">Mosquitos negros diminutos que caminan en la superficie <em>— superficie mojada</em></th><td>□</td><td>□</td><td>□</td><td>□</td></tr>
+        <tr><th scope="row" class="op">Moscas grandes, o gusanos blancos delgados <em>— algo cocinado quedó sin cubrir</em></th><td>□</td><td>□</td><td>□</td><td>□</td></tr>
+        <tr><th scope="row" class="op">Hormigas <em>— hay zonas secas dentro del montón</em></th><td>□</td><td>□</td><td>□</td><td>□</td></tr>
+        <tr><th scope="row" class="op">Cucarachas <em>— encontraron refugio seco y tibio</em></th><td>□</td><td>□</td><td>□</td><td>□</td></tr>
+        <tr><th scope="row" class="op">Hilos o polvo blanco, o manchas verdes, azules o negras <em>— hongos deshaciendo el material seco</em></th><td>□</td><td>□</td><td>□</td><td>□</td></tr>
+        <tr><th scope="row" class="op">Huellas, excavaciones o restos movidos de lugar <em>— algo quedó destapado y alguien vino</em></th><td>□</td><td>□</td><td>□</td><td>□</td></tr>
+        <tr><th scope="row" class="op">Vi algo que <b>no supe identificar</b> <em>— descríbelo abajo; no pasa nada por no saber</em></th><td>□</td><td>□</td><td>□</td><td>□</td></tr>
+        <tr><th scope="row" class="op">Esta semana no vi ninguno de los anteriores</th><td>□</td><td>□</td><td>□</td><td>□</td></tr>
+
+        <tr class="sec"><th colspan="5" scope="colgroup">Cómo se ve la mezcla<small>Las tres primeras casillas hablan del avance; las tres siguientes, de la textura.</small></th></tr>
+        <tr><th scope="row" class="op">Se distinguen casi todos los restos tal como los eché</th><td>□</td><td>□</td><td>□</td><td>□</td></tr>
+        <tr><th scope="row" class="op">Algunos restos ya no se reconocen</th><td>□</td><td>□</td><td>□</td><td>□</td></tr>
+        <tr><th scope="row" class="op">La mayor parte parece tierra oscura o migajón</th><td>□</td><td>□</td><td>□</td><td>□</td></tr>
+        <tr><th scope="row" class="op">Suelta, con huecos de aire</th><td>□</td><td>□</td><td>□</td><td>□</td></tr>
+        <tr><th scope="row" class="op">Apelmazada, pegada como una masa <em>— removerla le devuelve aire</em></th><td>□</td><td>□</td><td>□</td><td>□</td></tr>
+        <tr><th scope="row" class="op">Con bloques o pedazos grandes que no se deshacen <em>— trocear más al echarlos</em></th><td>□</td><td>□</td><td>□</td><td>□</td></tr>
+
+        <tr class="sec"><th colspan="5" scope="colgroup">¿Qué hiciste esta semana?<small>Marca todo lo que hayas hecho. Sirve para entender por qué la composta cambió de una semana a otra, así que vale la pena marcarlo aunque parezca poca cosa.</small></th></tr>
+        <tr><th scope="row" class="op">Agregué material seco de más</th><td>□</td><td>□</td><td>□</td><td>□</td></tr>
+        <tr><th scope="row" class="op">Removí o mezclé</th><td>□</td><td>□</td><td>□</td><td>□</td></tr>
+        <tr><th scope="row" class="op">Agregué agua</th><td>□</td><td>□</td><td>□</td><td>□</td></tr>
+        <tr><th scope="row" class="op">Retiré material que no iba <em>— escribe abajo qué era</em></th><td>□</td><td>□</td><td>□</td><td>□</td></tr>
+        <tr><th scope="row" class="op">Cambié otra cosa <em>— escríbelo abajo</em></th><td>□</td><td>□</td><td>□</td><td>□</td></tr>
+        <tr><th scope="row" class="op">No cambié nada</th><td>□</td><td>□</td><td>□</td><td>□</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <section class="libre" aria-labelledby="libre-t">
+    <h3 id="libre-t">Lo que quieras contar de cada semana <span style="font-weight:400;color:#444">— opcional, sobre la composta</span></h3>
+    <div class="renglones">
+      <p class="renglon"><label>Semana 1</label><span aria-hidden="true"></span></p>
+      <p class="renglon"><label>Semana 2</label><span aria-hidden="true"></span></p>
+      <p class="renglon"><label>Semana 3</label><span aria-hidden="true"></span></p>
+      <p class="renglon"><label>Semana 4</label><span aria-hidden="true"></span></p>
+    </div>
+  </section>
+
+  <footer class="pie">
+    <span>Si una semana no alcanzaste a revisar, deja la columna vacía y sigue con la siguiente. El cierre del día 28 va en la Hoja 4.</span>
+    <span>Hoja 3 de 4</span>
+  </footer>
+</article>
+
+<!-- ============================ HOJA 4 ============================ -->
+<article class="hoja" aria-labelledby="t-cierre">
+  <header class="principal">
+    <h1 id="t-cierre">
+      Cierre · Miltli
+      <small>Piloto doméstico de compostaje · 28 días · HUMAN STEM, A.C.<br>Esta hoja se llena <strong>sólo el día 28</strong>, el mismo día que la última revisión semanal. Antes de ese día se queda en blanco.</small>
+    </h1>
+    <p class="clave">
+      Hogar
+      <b>H___</b>
+      <span>lo asigna el equipo</span>
+      Fecha: ____ / ____
+    </p>
+  </header>
+
+  <div class="fase cierre">
+    <h2>Parte B · sólo el día 28</h2>
+    <span>Una sola vez, al terminar los 28 días. Nada de esta hoja se llena antes.</span>
+  </div>
+
+  <div class="bloque">
+
+  <section class="cierre" aria-labelledby="cierre">
+    <h2 id="cierre">Cómo terminó el piloto en esta casa</h2>
+    <p class="nota-seccion">No se espera composta terminada en 28 días: el lote sigue su proceso después del piloto. Lo que se cierra aquí es el registro. <strong>Puedes dejar en blanco cualquier pregunta.</strong></p>
+    <dl class="alta">
+      <div>
+        <dt>¿Qué tan lleno quedó el contenedor?<small>circula uno</small></dt>
+        <dd><span class="opcion">¼ · ½ · ¾ · casi lleno · lleno</span></dd>
+      </div>
+      <div>
+        <dt>¿Hubo semanas en que te faltara material seco?</dt>
+        <dd><span class="opcion">No</span> <span>· Sí, en ______ de las 4</span></dd>
+      </div>
+      <div>
+        <dt>Conseguir material seco durante el mes me resultó<small>marca uno</small></dt>
+        <dd>
+          <span><span class="casilla">□</span> Fácil</span>
+          <span><span class="casilla">□</span> Con esfuerzo</span>
+          <span><span class="casilla">□</span> Difícil</span>
+          <span><span class="casilla">□</span> Nunca supe dónde conseguirlo</span>
+        </dd>
+      </div>
+      <div>
+        <dt>El tamaño del contenedor me resultó<small>circula uno</small></dt>
+        <dd><span class="opcion">Chico · Adecuado · Grande</span></dd>
+      </div>
+      <div>
+        <dt>El mes que viene<small>circula uno</small></dt>
+        <dd><span class="opcion">Sigo igual · Sigo con cambios · Lo dejo por ahora</span></dd>
+      </div>
+    </dl>
+  </section>
+
+  <section aria-labelledby="cierre-abierto">
+    <h2 id="cierre-abierto">Lo que quieras dejar dicho</h2>
+    <p class="nota-seccion">Opcional, y sobre la composta. Lo que escribas aquí es lo que más sirve para cambiar el piloto del mes que viene.</p>
+    <dl class="alta">
+      <div>
+        <dt>Lo que me resultó fácil de sostener</dt>
+        <dd><span class="renglon-ancho" aria-hidden="true"></span></dd>
+      </div>
+      <div>
+        <dt>Lo que me costó más trabajo</dt>
+        <dd><span class="renglon-ancho" aria-hidden="true"></span></dd>
+      </div>
+      <div>
+        <dt>Si volviera a empezar, cambiaría</dt>
+        <dd><span class="renglon-ancho" aria-hidden="true"></span></dd>
+      </div>
+      <div>
+        <dt>Algo que el equipo debería saber y no cabe arriba</dt>
+        <dd><span class="renglon-ancho" aria-hidden="true"></span></dd>
+      </div>
+    </dl>
+  </section>
+
+  </div>
+
+  <section class="leyenda" aria-labelledby="datos-cierre">
+    <h3 id="datos-cierre">Al cerrar</h3>
+    <p>· <strong>La hoja original se queda contigo.</strong> Al grupo van sólo los números, con la clave <strong>H__</strong>. El resumen final presenta a todas las casas juntas, sin identificar hogares.<br>
+       · El pesaje y la temperatura de esta casa los tiene el equipo en su propia hoja: no hace falta que copies nada de eso aquí.</p>
+  </section>
+
+  <footer class="pie">
+    <span>Miltli · HUMAN STEM, A.C. · Piloto doméstico de compostaje aerobio · 2026</span>
+    <span>Hoja 4 de 4</span>
+  </footer>
+</article>
+
+</main>
+
+<script>
+(function () {
+  var cuerpo = document.getElementById('cuerpo-diario');
+  if (!cuerpo) return;
+  for (var i = 1; i <= 28; i++) {
+    var tr = document.createElement('tr');
+    if (i % 7 === 0) tr.className = 'fin-semana';
+    tr.innerHTML =
+      '<th scope="row">' + i + '</th>' +
+      '<td></td>' +
+      '<td></td>' +
+      '<td></td>' +
+      '<td class="notas-col"></td>';
+    cuerpo.appendChild(tr);
+  }
+})();
+</script>
+</body>
+</html>
