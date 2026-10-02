@@ -21,7 +21,7 @@ producción de datos deficientes.
 | 2 | Protocolo de observación | `protocolo-operativo-v0.1-borrador.md` | Borrador, **sin validar** |
 | 3 | Calendario de pesaje y temperatura | protocolo §6 | **Pendiente: lo fija el comité** |
 | 4 | Pruebas de usabilidad | protocolo §7 | No ejecutadas |
-| 5 | Congelar el instrumento | revisión 03 | No |
+| 5 | Congelar el instrumento | revisión 04 | No |
 | 6 | Tabla de correspondencia | — | Fuera del alcance actual |
 | 7 | Actualización de la app | `docs/` | Fuera del alcance actual |
 | 8 | Alineación de `README.md` y `planes/` | — | No iniciada |
@@ -61,6 +61,10 @@ Los pasos 6 y 7 tienen condiciones previas documentadas en
   cierre, orden de los procesos y lo que cuesta cada cambio.
 - `hallazgos-app-y-tabla-de-correspondencia.md` — **qué hay que resolver antes** de actualizar la app
   y de crear la tabla de correspondencia, con foco en redundancias y riesgos de privacidad.
+- `revision-03-funcion-de-la-ficha-y-validacion-de-integracion.md` — si el instrumento cumple la
+  función que se le atribuye —línea base, medir el éxito, detectar fallos, mejora continua— y si la
+  ficha y el diccionario están alineados para pasar a la app. **Léase antes de construir la tabla de
+  correspondencia.**
 
 ### Anexos de origen
 
