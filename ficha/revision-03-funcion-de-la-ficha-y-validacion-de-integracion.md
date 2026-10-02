@@ -378,12 +378,20 @@ evitar.
 1. **El comité decide los cuatro puntos** del §10 más el renombrado. Son decisiones de una sesión.
 2. **Diccionario v0.3** incorporando esas decisiones, `FICHA_REV`, y los defectos D-1, D-3, D-4, D-5
    como reglas de integridad y de normalización.
-3. **Revisión 04 del instrumento**, que toca el papel una sola vez: D-2 (cuatro casillas), D-3 (línea
-   divisoria), D-4 («durante el piloto»), las tres casillas de día 0 y, si procede, el renglón de fuga.
+3. **Reimpresión del instrumento, F-HOG rev. 03** *(corregido, ver nota)*, que toca el papel una sola
+   vez: D-2 (cuatro casillas), D-3 (línea divisoria), D-4 («durante el piloto»), las tres casillas de
+   día 0 y, si procede, el renglón de fuga.
 4. **Prueba de concordancia** con su hoja, y el resto de las pruebas de usabilidad.
-5. **Congelar**, subiendo a `rev. 03` el sello de la ficha.
+5. **Congelar** F-HOG rev. 03 *(corregido, ver nota)*.
 6. **Tabla de correspondencia** y después **la app**, con las condiciones ya documentadas en
    `hallazgos-app-y-tabla-de-correspondencia.md`.
+
+> **Nota de corrección — `acta-01-decisiones-piloto.md`, RE-10 (2 de octubre de 2026).** Los pasos 3 y
+> 5 numeraban la reimpresión con la serie de estos documentos de revisión (el paso 3 la llamaba con el
+> número siguiente, 04) y reservaban «rev. 03» para el sello al congelar. Desde el acta-01 **el papel
+> tiene su propia serie**: la reimpresión es **F-HOG rev. 03** y `FICHA_REV` registra sólo esa serie;
+> los documentos de decisión usan el prefijo `acta-`. Se corrigió sólo la redacción de esos dos pasos;
+> el resto de este documento se conserva como se escribió, con su fecha.
 
 Los pasos 1 y 2 son los que de verdad desbloquean la app. Los pasos 3 y 4 pueden correr en paralelo con
 el 6 si el comité acepta que la tabla de correspondencia se escriba contra el diccionario v0.3 y se

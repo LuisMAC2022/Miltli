@@ -294,7 +294,7 @@ correspondencia lo dice en `regla_conversion`. Con el estado observado una vez (
 `HUM` y `MEZ_AV` es de una sola observación por hogar; las nominales semanales (`FUGA_MOT`,
 `SECO_USO`, `ACT`) se grafican como presencia por semana.
 
-**Archivos afectados.** Diccionario v0.3 §4, §5, §8 · protocolo v0.2 §5 · tabla de correspondencia ·
+**Archivos afectados.** Diccionario v0.3 §4, §5, §6 · protocolo v0.2 §5 · tabla de correspondencia ·
 especificación de la app.
 
 **Estado.** Decidida, incluido `MEZ_TX` nominal.
@@ -351,6 +351,9 @@ una vez, y resolvía D-1 (`REG`) y D-5 (fracciones) sólo en el esquema.
 - todo lo de este acta que toca el papel: fuga, material seco usado, día de parada, observador, cuello
   de botella, leyenda del 0, regla del día de depósito, nueva frase de la Hoja 1, maquetación de las
   Hojas 3 y 4, glosas y atributos `data-codigo` (RE-14).
+- una corrección menor que este acta añade por estar en la misma hoja: el día del renglón semanal
+  (`DREV`) se imprime «Lu Ma Mi Ju Vi Sá Do» en lugar de «L M M J V S D», porque las dos «M»
+  circuladas no se distinguen al capturar (contraste §1.3.d).
 
 **Consecuencias.** `FICHA_REV` = `03`. La rev. 02 se conserva como
 `ficha/miltli-ficha-hogares-rev02.html`, sin cambios, para comparar. **La rev. 03 no se congela**
