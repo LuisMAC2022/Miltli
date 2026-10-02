@@ -1,0 +1,4 @@
+# Pre-registro (acta-01, RE-11): el contenido de la tabla de decisiones del Piloto 2 no se publica
+# antes del cierre. En el repositorio sólo vive su sello (hash SHA-256 con fecha).
+ficha/preregistro/*
+!ficha/preregistro/SELLOS.md

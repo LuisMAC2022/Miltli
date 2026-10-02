@@ -198,6 +198,11 @@ Después de la visita, el mismo día, el hogar contesta el resto de la Hoja 4 (c
 3. La **bitácora del programa** se cierra con una entrada de cierre (RE-07).
 4. Los criterios de éxito se calculan (`C1`…`C7`) **sin mirar antes** la tabla sellada de decisiones del
    Piloto 2; después se abre el sello (RE-11).
+5. La coordinación asigna a cada hogar un **escenario de sitio de disposición** (`ESC_SITIO`) para la
+   estimación de GEI, **fuera del repositorio** y junto con la lista de claves (§4, punto 11).
+6. En los siete días siguientes a la visita, el equipo hace las pruebas de la muestra `H#-C0`
+   (germinación, autocalentamiento adaptado) y, antes de cualquier aplicación, las pruebas de campo
+   lentas del suelo (`diseno-mes-2-composta-suelo-gei.md` §4.2–§4.3).
 
 ---
 
