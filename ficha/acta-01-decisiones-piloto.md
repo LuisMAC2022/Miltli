@@ -784,6 +784,7 @@ Decidida.
 | P-21 | Opción `ninguno` en `SECO_USO` | Sí | Sin opción; vacío = `NC` | Sí (Hoja 3) |
 | P-22 | `CUELLO` como pregunta de cierre | Sí | Derivar el #5 de campos existentes | Sí (Hoja 4) |
 | P-23 | Hogar sin jardín ni macetas | El programa entrega dos macetas iguales | Fuera del componente de suelo | No |
+| P-24 | Reglas de la app: `datos.js` como fuente única, `vocabulario.json` sólo por adición, lint de prohibiciones | Adoptarlas en la migración (`especificacion-cambios-app.md` §0) | Categorías dentro de `app.js`, comprobadas sólo contra el diccionario | No (app) |
 
 (P-19 y P-20 no se usan: se resolvieron como consecuencias técnicas de D3 —retiro de `HUM_REF` y
 `VIS_QUIEN` como clave— y quedan anotadas allí.)
@@ -810,6 +811,12 @@ Por la regla 5 del encargo, **manda el repositorio**; aquí se anotan y se sigue
    del repositorio. Se registra la decisión igualmente.
 7. **Artefacto «Seis decisiones del piloto».** No está en el repositorio; se trabajó con su
    descripción en el encargo (§0.1).
+8. **Reglas de la app.** El encargo pide respetar «`datos.js` es la fuente única, `vocabulario.json`
+   sólo crece por adición, y las prohibiciones se verifican con lint». Ninguno de los tres existe en
+   `docs/` ni en `tests/`. La especificación los propone como reglas nuevas (P-24).
+9. **«Semana 1: sólo se mide» también en la app.** Además del plan y de la rev. 02, `docs/app.js`
+   (`renderEntryRule`) le dice al hogar que la semana 1 es de sólo medir. La especificación lo retira
+   (D1).
 
 ---
 

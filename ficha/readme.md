@@ -21,7 +21,7 @@ producción de datos deficientes.
 
 | # | Paso | Producto | Estado |
 | --- | --- | --- | --- |
-| 0 | Decisiones del piloto | `acta-01-decisiones-piloto.md` | **D1–D6 firmes**; 22 PROPUESTAS para el comité (§6) |
+| 0 | Decisiones del piloto | `acta-01-decisiones-piloto.md` | **D1–D6 firmes**; 23 PROPUESTAS para el comité (§6) |
 | 1 | Semántica | `diccionario-de-datos-v0.3-borrador.md` | Borrador; aplica el acta-01 |
 | 2 | Protocolo de observación | `protocolo-operativo-v0.2-borrador.md` | Borrador; aplica el acta-01 |
 | 3 | Calendario: sesión del día 1 y visita de cierre | protocolo v0.2 §6 | Estructura decidida (D3); **fechas y claves `[por definir]`** |
