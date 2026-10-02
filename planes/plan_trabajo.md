@@ -2,15 +2,30 @@
 
 ## Piloto doméstico de compostaje distribuido
 
+> **Alineado con `ficha/acta-01-decisiones-piloto.md` (octubre de 2026)** y con la ficha
+> **F-HOG rev. 03**. Cambios respecto de la versión anterior: se composta desde el día 1 (sin semana de
+> sólo medir); lo que mide el registro es la **entrada a la composta**, no la generación; se añade la
+> **fuga** semanal; el estado de la composta se registra **una vez, el día 28**; los criterios de éxito
+> son **de proceso**; desaparece el «tipo de residuo»; y la regla del 80 % queda registrada. Lo que el
+> comité todavía debe decidir va marcado **PROPUESTA** con su número del acta.
+
 ### 1. Objetivo general
 
-Implementar durante cuatro semanas un sistema doméstico de separación y compostaje de residuos orgánicos en los hogares de entre tres y cinco participantes, utilizando recursos limitados y un método común de operación, registro y evaluación.
+Implementar durante cuatro semanas un sistema doméstico de separación y compostaje de residuos
+orgánicos en los hogares de entre tres y cinco participantes, utilizando recursos limitados y un método
+común de operación, registro y evaluación.
+
+**Propósito del mes 1: probar la entrada —separación, medición y rutina—, no la composta.** Al mismo
+tiempo, dejar medido lo necesario para que el mes 2 pueda evaluar la calidad de la composta, la
+calidad del suelo y una estimación de los gases de efecto invernadero evitados
+(`ficha/diseno-mes-2-composta-suelo-gei.md`).
 
 Al finalizar el mes, el grupo deberá conocer:
 
-* Cuánto residuo orgánico genera cada hogar.
-* Cuánto material seco necesita cada compostera.
-* Qué problemas aparecen con mayor frecuencia.
+* Cuánto residuo orgánico **entra a la composta** de cada hogar (litros por persona y semana) y una
+  estimación, autorreportada, de cuánto **no llegó** (fuga).
+* Cuánto material seco necesita cada compostera y cuál se usó.
+* Qué limitó la rutina con mayor frecuencia (material seco, espacio, tiempo, registro).
 * Cuánto tiempo requiere la operación.
 * Qué tamaño de contenedor resulta adecuado.
 * Qué ajustes serán necesarios para continuar durante los meses siguientes.
@@ -25,17 +40,20 @@ Cada participante realizará en su propio hogar las siguientes actividades:
 2. Reunir material seco.
 3. Preparar o instalar una compostera.
 4. Incorporar y mezclar los residuos.
-5. Revisar semanalmente humedad, olor y presencia de plagas.
-6. Registrar cantidades, incidencias y acciones correctivas.
-7. Compartir una fotografía y un resumen semanal con el grupo.
+5. Mirar su composta para operarla, con la hoja guía; **registrar su estado una sola vez, el día 28**,
+   en la visita de cierre.
+6. Registrar a diario lo que echa y, una vez por semana, un renglón corto: lo que no llegó a la
+   composta, el material seco que usó, el tiempo, el llenado y lo que hizo.
+7. Entregar al coordinador una foto semanal de las Hojas 2 y 3 (**PROPUESTA P-06**: por mensaje
+   privado, con la ubicación desactivada, **nunca** a un chat de grupo).
 
 Aunque las composteras estarán geográficamente separadas, todos utilizarán:
 
 * La misma lista de materiales aceptados.
 * La misma proporción inicial de mezcla.
 * Las mismas categorías de observación.
-* El mismo formato de registro.
-* El mismo calendario de revisión.
+* El mismo formato de registro (F-HOG rev. 03).
+* El mismo calendario.
 
 Cada compostera funcionará como un pequeño experimento independiente.
 
@@ -47,23 +65,36 @@ Cada compostera funcionará como un pequeño experimento independiente.
 
 Una persona será responsable de:
 
-* Crear y mantener el registro compartido.
-* Recordar las revisiones semanales.
-* Recopilar fotografías y resultados.
-* Dirigir una reunión breve cada semana.
+* Recibir las fotos semanales y **transcribirlas con la app de captura**: el papel es el registro y
+  la app es la herramienta de captura del coordinador.
+* Llevar la **bitácora del programa** desde el día 1 (`ficha/plantilla-bitacora-programa.md`):
+  recordatorios, consejos, reuniones, entregas de material seco, cambios de protocolo e imprevistos.
+* Guardar la **lista de claves** (la que une cada clave con un domicilio). Nunca entra al
+  repositorio, ni al chat, ni a la nube.
+* Recordar el renglón semanal.
+* Dirigir una reunión breve cada semana (ver **PROPUESTA P-11** en la semana 3).
 * Preparar el resumen final del primer mes.
 
 El coordinador no será responsable de operar las composteras de los demás.
+
+### Equipo técnico
+
+* Mide el sistema el **día 1** y hace **una visita de cierre el día 28** en cada casa
+  (`ficha/registro-tecnico-equipo.md`).
+* **Nadie del equipo visita su propia casa.** Tres de los hogares son de personas del equipo; cada
+  uno lo visita otra persona del equipo.
 
 ### Responsables por hogar
 
 Cada participante será responsable de:
 
 * Mantener limpia y funcional su compostera.
-* Registrar correctamente sus datos.
-* Informar inmediatamente si aparecen olores fuertes, animales o exceso de líquido.
+* Registrar sus datos; **puede dejar en blanco cualquier pregunta**.
+* Avisar al coordinador si algo de la composta le preocupa (olor, animales, líquido); el aviso se
+  anota en la bitácora del programa.
 * Evitar introducir materiales no autorizados.
 * Conseguir suficiente material seco.
+* El día 28, **guardar sin echar los residuos del día** hasta que llegue el equipo.
 
 ### Identificación de hogares
 
@@ -75,7 +106,8 @@ Asignar una clave sencilla a cada hogar:
 * H4
 * H5
 
-La clave debe utilizarse en registros, fotografías y reportes.
+La clave debe utilizarse en registros, fotografías, muestras y reportes. No se registran nombres,
+domicilios, teléfonos ni correos.
 
 ---
 
@@ -83,19 +115,20 @@ La clave debe utilizarse en registros, fotografías y reportes.
 
 Cada hogar deberá contar con:
 
-| Recurso                                           | Cantidad recomendada |
-| ------------------------------------------------- | -------------------: |
-| Recipiente pequeño con tapa para separar residuos |                    1 |
-| Contenedor de compostaje de 60 a 150 litros       |                    1 |
-| Reserva de hojas secas o cartón triturado         |    Al menos 2 bolsas |
-| Cubeta o recipiente de volumen conocido           |                    1 |
-| Guantes                                           |                1 par |
-| Pala pequeña o herramienta para mezclar           |                    1 |
-| Tijeras o herramienta para trocear                |                    1 |
-| Hoja de registro física o digital                 |                    1 |
-| Acceso a cámara de teléfono                       |                    1 |
+| Recurso                                                    | Cantidad recomendada |
+| ---------------------------------------------------------- | -------------------: |
+| Recipiente pequeño con tapa para separar residuos          |                    1 |
+| Contenedor de compostaje de 60 a 150 litros                |                    1 |
+| Reserva de hojas secas o cartón triturado                  |    Al menos 2 bolsas |
+| Bote de medida de ~1 litro (lo calibra el equipo el día 1) |                    1 |
+| Guantes                                                    |                1 par |
+| Pala pequeña o herramienta para mezclar                    |                    1 |
+| Tijeras o herramienta para trocear                         |                    1 |
+| Ficha F-HOG rev. 03 impresa (4 hojas) y hoja guía          |                    1 |
+| Acceso a cámara de teléfono                                |                    1 |
 
-Durante este primer mes no es indispensable comprar termómetros, trituradores ni sensores.
+El hogar **no necesita** báscula ni termómetro. El equipo lleva báscula de cocina, báscula de
+plataforma, termómetro de sonda y regla, y los verifica cada día de medición.
 
 ---
 
@@ -142,294 +175,263 @@ Durante el primer mes no se incorporarán:
 
 ---
 
-## 6. Regla común de preparación
+## 6. Reglas comunes de operación
+
+### Proporción
 
 Todos los hogares utilizarán inicialmente la misma proporción:
 
-> Por cada recipiente de residuos húmedos, agregar dos recipientes de material seco.
+> Por cada bote de residuos húmedos, agregar dos botes de material seco.
 
 Ejemplo:
 
-* 2 litros de restos de frutas y verduras.
-* 4 litros de hojas secas o cartón triturado.
+* 2 botes de restos de frutas y verduras.
+* 4 botes de hojas secas o cartón triturado.
 
-Si la mezcla permanece muy húmeda o presenta olor, se podrá aumentar a tres recipientes de material seco por cada recipiente de residuos húmedos.
+Si la mezcla permanece muy húmeda o presenta olor, se podrá aumentar a tres botes de material seco por
+cada bote de residuos húmedos.
 
 Los residuos deberán cortarse en fragmentos pequeños, preferentemente menores a cinco centímetros.
 
 Cada nueva carga deberá quedar completamente cubierta por material seco.
 
+### Cómo se anota
+
+* Se cuenta en **botes**, en enteros y medios, llenando el bote hasta el borde sin apretar.
+* Se anota **el día en que se echa** a la composta, no el día en que se generó el residuo.
+  `0` = «hoy no agregué nada a la composta».
+* **PROPUESTA P-03:** si no llega a medio bote, se guarda para el siguiente depósito.
+
+### Regla del 80 %
+
+Si el contenedor llega aproximadamente al 80 % de su altura —la línea que marca el equipo el día 1,
+**PROPUESTA P-08**—:
+
+* Dejar de incorporar nuevos residuos.
+* **Anotar el día** en la Hoja 3 («dejé de agregar el día __»).
+* Desde ese día, lo que no se deposite se anota cada semana como **lo que no llegó a la composta**,
+  con el motivo «ya no cabía».
+* Realizar una mezcla completa y corregir humedad (hoja guía).
+* Mantener el lote en descomposición.
+* **PROPUESTA P-10:** durante el mes 1 no se abre un segundo contenedor; el segundo lote se decide para
+  el mes 2.
+
+Es probable que ocurra antes del día 28: una estimación gruesa, a verificar, sitúa a una compostera de
+60 L en el 80 % hacia la semana 3 (`ficha/protocolo-operativo-v0.2-borrador.md` §3).
+
 ---
 
 # Calendario del primer mes
 
-## Semana 1: Preparación y medición inicial
+## Semana 1: Arranque y rutina
 
 ### Objetivo
 
-Conocer la generación real de residuos de cada hogar y preparar las condiciones de operación.
+Arrancar la compostera con una receta común, medir el sistema y establecer la rutina de registro.
+**Se composta desde el día 1:** no hay semana de sólo medir.
 
-### Día 1: Reunión inicial del grupo
+### Día 1: Sesión de arranque y medición en casa
 
-Duración sugerida: 30–45 minutos por videollamada.
+La sesión es **presencial**: incluye estaciones de práctica con cubetas y la calibración del bote de
+cada hogar. (La versión anterior de este plan la proponía por videollamada; ver acta-01 §7.)
 
-Actividades:
+Actividades de la sesión:
 
 * Explicar el objetivo del piloto.
 * Asignar las claves H1–H5.
 * Nombrar al coordinador.
 * Revisar la lista de residuos aceptados y rechazados.
-* Acordar el día de cierre semanal.
-* Compartir el formato de registro.
-* Acordar cómo se enviarán las fotografías.
+* Acordar el día del renglón semanal.
+* Entregar la ficha F-HOG rev. 03 y la hoja guía.
+* Acordar el canal de entrega (**PROPUESTA P-06**).
+* Practicar la prueba del puño en las estaciones de la hoja de concordancia.
+* Calibrar el bote de medida de cada hogar pesándolo lleno de agua.
 
-El grupo puede utilizar una hoja de cálculo compartida y un chat para comunicación rápida.
+En cada casa, antes de la primera carga (o según **PROPUESTA P-02** si no puede ser presencial):
 
-### Días 1–7: Medición sin compostar
+* El equipo mide las dimensiones internas del contenedor y lo pesa vacío.
+* Se verifica que el lugar sea ventilado y protegido de lluvia intensa, y que el contenedor tenga tapa,
+  ventilación y drenaje.
+* El equipo toma una fotografía del sistema vacío.
+* El hogar coloca una base de aproximadamente diez centímetros de material seco y la cuenta en botes.
+* Primera carga.
 
-Cada hogar deberá separar y medir sus residuos orgánicos durante siete días.
+### Días 1–7: Operación y registro
 
-Registrar:
-
-* Fecha.
-* Volumen aproximado de residuos húmedos.
-* Tipo principal de residuo.
-* Número de personas en el hogar.
-* Presencia de materiales no aceptados.
-
-Los residuos podrán conservarse temporalmente en refrigeración o congelación si existe riesgo de olor. Si esto no es posible, podrán comenzar a compostar antes, pero deberán registrar las cantidades.
-
-### Preparación de la compostera
-
-Cada participante deberá:
-
-* Seleccionar un lugar ventilado y protegido de lluvia intensa.
-* Preparar un contenedor con tapa.
-* Verificar que tenga ventilación y drenaje.
-* Colocar una base de aproximadamente diez centímetros de material seco.
-* Preparar una reserva suficiente de hojas o cartón.
-* Tomar una fotografía del sistema vacío.
+* Registrar a diario los botes de orgánico y de seco que se echan.
+* Al final de la semana, llenar el renglón semanal de la Hoja 3.
 
 ### Entregables de la semana 1
 
-Cada hogar compartirá:
-
-* Volumen total de residuos húmedos generado.
-* Número de personas en el hogar.
-* Fotografía de la compostera.
-* Capacidad aproximada del contenedor.
-* Tipo y cantidad de material seco disponible.
-* Principal dificultad encontrada.
+* Foto de las Hojas 2 y 3 al coordinador.
 
 ---
 
-## Semana 2: Inicio del compostaje
+## Semana 2: Rutina
 
 ### Objetivo
 
-Comenzar a operar las composteras con una receta común y establecer una rutina doméstica.
+Sostener la rutina doméstica con la receta común.
 
 ### Actividades diarias
 
-Cada vez que se generen residuos:
+Cada vez que se depositen residuos:
 
 1. Revisar y retirar contaminantes.
 2. Trocear los residuos grandes.
-3. Medir el volumen aproximado.
+3. Medir en botes.
 4. Colocar los residuos en la compostera.
-5. Agregar dos volúmenes de material seco.
+5. Agregar dos botes de material seco por cada bote de orgánico.
 6. Mezclar ligeramente la superficie.
 7. Cubrir completamente los restos.
 8. Cerrar el contenedor.
-9. Registrar la entrada.
+9. Anotar la entrada el día en que se echa.
 
 No es necesario registrar cada cáscara. Puede hacerse un solo registro al final del día.
 
-### Revisión a mitad de semana
+### Cuidado de la composta
 
-Cada participante deberá observar:
+Al echar, el hogar mira su composta y la cuida con la hoja guía. **No registra su estado cada semana:**
+el estado se registra una vez, el día 28. No deberá realizarse una mezcla profunda todos los días.
 
-* Olor.
-* Humedad.
-* Presencia de moscas.
-* Presencia de líquidos.
-* Cantidad aproximada de material acumulado.
+### Renglón semanal
 
-No deberá realizarse una mezcla profunda todos los días. Solamente se mezclará si existe olor o compactación evidente.
+Una vez por semana, el día acordado, **menos de un minuto** en la Hoja 3:
 
-### Revisión semanal
-
-Al finalizar la semana:
-
-* Mezclar la compostera completamente.
-* Revisar la humedad mediante la prueba del puño.
-* Agregar material seco si escurre agua.
-* Agregar una pequeña cantidad de agua si está completamente seca.
-* Tomar una fotografía.
-* Registrar el tiempo invertido.
+* Cómo anotó la semana.
+* Botes que **no llegaron** a la composta (`0` si todo llegó) y por qué.
+* Material seco que usó.
+* Personas que comieron en casa casi todos los días.
+* Minutos dedicados en la semana.
+* Qué tan lleno está el contenedor.
+* Qué hizo esta semana (**PROPUESTA P-04**).
 
 ### Entregables de la semana 2
 
-* Volumen total de residuos húmedos incorporados.
-* Volumen total de material seco utilizado.
-* Número de cargas realizadas.
-* Estado de humedad.
-* Intensidad del olor.
-* Presencia o ausencia de insectos.
-* Tiempo total dedicado.
-* Una fotografía de la mezcla.
+* Foto de las Hojas 2 y 3 al coordinador.
 
 ---
 
-## Semana 3: Ajuste del proceso
+## Semana 3: Ajuste
 
 ### Objetivo
 
-Identificar problemas, aplicar acciones correctivas y determinar si la receta inicial funciona en cada hogar.
+Ajustar la operación de cada hogar y comprobar si la receta inicial funciona.
 
 ### Operación habitual
 
 Continuar con el procedimiento de la semana 2.
 
-### Diagnóstico obligatorio
+### Ajustes de operación
 
-Cada hogar clasificará su compostera utilizando las siguientes categorías:
+La hoja guía reúne lo que suele ayudar según lo que se observa. Ninguna observación es un fracaso:
+cada una dice hacia dónde se está moviendo la composta.
 
-#### Humedad
+| Si se observa                              | Suele ayudar                                     |
+| ------------------------------------------ | ------------------------------------------------ |
+| Olor a drenaje o a huevo podrido           | Agregar material seco y mezclar                  |
+| Olor a amoniaco                            | Agregar hojas o cartón                           |
+| Agua que escurre o líquido en el fondo     | Más seco, remover y proteger de la lluvia        |
+| Mezcla que se desmorona                    | Agregar agua gradualmente                        |
+| Mosquitas al abrir                         | Cubrir la fruta con seco                         |
+| Moscas grandes o gusanos blancos           | Enterrar los restos y cubrirlos con seco         |
+| Hormigas                                   | Aumentar ligeramente la humedad                  |
+| Mezcla apelmazada                          | Remover y agregar material estructurante         |
+| Bloques que no se deshacen                 | Trocear más al echarlos                          |
+| Huellas o excavaciones                     | Asegurar la tapa y no dejar restos expuestos     |
 
-* Seca.
-* Adecuada.
-* Húmeda.
-* Saturada o con líquido.
+Lo que el hogar hizo se marca en el renglón semanal («¿Qué hiciste esta semana?»).
 
-#### Olor
+### Reunión semanal
 
-* Sin olor desagradable.
-* Olor ligero.
-* Olor fuerte.
-* Olor a podrido.
-* Olor a amoniaco.
-
-#### Insectos o animales
-
-* Ninguno.
-* Pocas moscas pequeñas.
-* Muchas moscas.
-* Hormigas.
-* Cucarachas.
-* Roedores u otros animales.
-
-#### Estructura
-
-* Suelta y aireada.
-* Compacta.
-* Con grandes bloques.
-* Materiales demasiado grandes.
-
-### Acciones correctivas
-
-| Problema                 | Acción                                           |
-| ------------------------ | ------------------------------------------------ |
-| Olor a podrido           | Agregar material seco y mezclar                  |
-| Olor a amoniaco          | Agregar hojas o cartón                           |
-| Exceso de humedad        | Agregar secos y proteger de lluvia               |
-| Mezcla muy seca          | Agregar agua gradualmente                        |
-| Muchas moscas            | Enterrar residuos y cubrir con secos             |
-| Hormigas                 | Aumentar ligeramente la humedad                  |
-| Compactación             | Mezclar y agregar material estructurante         |
-| Descomposición muy lenta | Trocear mejor y revisar humedad                  |
-| Presencia de roedores    | Retirar materiales problemáticos y asegurar tapa |
-
-Toda acción correctiva deberá registrarse.
-
-### Comparación grupal
-
-En la reunión semanal, cada hogar deberá responder:
-
-* ¿Qué proporción de secos utilizó?
-* ¿Qué problema apareció?
-* ¿Qué corrección aplicó?
-* ¿La corrección funcionó?
-* ¿La capacidad del contenedor parece suficiente?
-
-No se buscará que todas las composteras tengan exactamente el mismo aspecto. Las diferencias servirán para identificar la influencia del clima, los residuos y la operación.
+**PROPUESTA P-11 — decide el comité.** Recomendación: las reuniones semanales tratan el
+**procedimiento** (qué fue difícil, qué dudas hay) **sin mostrar los números de cada hogar**, porque
+ver los números de los demás produce el efecto de comparación que el diseño evita. Cada reunión se
+anota en la bitácora del programa. La comparación entre hogares se hace al final, con los datos de
+todas las casas juntas.
 
 ### Entregables de la semana 3
 
-* Registro semanal completo.
-* Fotografía antes de mezclar.
-* Fotografía después de mezclar.
-* Problema principal identificado.
-* Acción correctiva aplicada.
-* Resultado observado.
-* Estimación del porcentaje ocupado del contenedor.
+* Foto de las Hojas 2 y 3 al coordinador.
 
 ---
 
-## Semana 4: Estabilización y evaluación
+## Semana 4: Cierre
 
 ### Objetivo
 
-Completar el primer ciclo mensual de operación y decidir cómo continuará cada hogar.
+Completar el primer ciclo mensual de operación, registrar el estado de la composta y dejar la línea
+base del mes 2.
 
 ### Operación
 
-Continuar incorporando residuos si el contenedor tiene menos del 70–80 % de ocupación.
+Continuar incorporando residuos mientras el contenedor no llegue a la línea del 80 % (sección 6).
 
-Si el contenedor alcanza aproximadamente el 80 %:
+Durante este primer mes no se espera obtener composta madura. El objetivo es establecer el proceso y
+conocer su comportamiento.
 
-* Dejar de incorporar nuevos residuos.
-* Realizar una mezcla completa.
-* Corregir humedad.
-* Registrar la fecha de cierre.
-* Mantener el lote en descomposición.
-* Preparar un segundo contenedor o reducir temporalmente las entradas.
+### Visita de cierre del día 28
 
-Durante este primer mes no se espera obtener composta madura. El objetivo es establecer el proceso y conocer su comportamiento.
+Una sola visita por hogar, del equipo, en casa (ventana: **PROPUESTA P-01**). El hogar sólo prepara
+una cosa: **guardar sin echar los residuos del día** hasta que llegue el equipo. En la visita:
+
+* Hogar y equipo revisan la composta **lado a lado** —tapa, olor, temperatura, superficie, mezcla,
+  prueba del puño— y **marcan cada uno por su cuenta, sin hablar**. El hogar marca en la Hoja 4.
+* El equipo pesa la compostera completa, mide la densidad de un bote del residuo del día y de un bote
+  del material seco, mide la altura de llenado y toma una foto.
+* El equipo toma muestras de línea base de composta y de suelo para el mes 2.
+
+Ese mismo día, el hogar contesta el cierre de la Hoja 4.
 
 ### Evaluación individual
 
-Cada hogar calculará:
+Cada hogar contará con:
 
-[
-Promedio semanal de residuos
-===================================
-volumen o peso semanal de residuos húmedos / personas participando = promedio por persona semanal 
+```
+Entrada a la composta (L/persona/semana) =
+    botes de orgánico de la semana × capacidad del bote (L) / personas de esa semana
 
+Generación estimada (L/persona/semana) = entrada + fuga
+```
+
+La generación estimada es **autorreportada y aproximada**, y es una **cota inferior**: lo que nunca se
+separó no aparece. Se presenta siempre con su error.
 
 También registrará:
 
-* Cantidad aproximada de material seco consumido.
-* Porcentaje ocupado del contenedor.
-* Número de incidentes de olor.
-* Número de incidentes con insectos.
-* Número de acciones correctivas.
-* Tiempo total dedicado.
-* Costo aproximado.
-* Dificultad general del proceso.
+* Material seco consumido y cuál.
+* Llenado del contenedor, percibido y medido.
+* Día en que dejó de agregar, si ocurrió.
+* Minutos dedicados por semana.
+* Lo que más limitó el mes.
+* Costo aproximado (**PROPUESTA P-18**: la ficha no lo pregunta; el comité decide si se añade al cierre
+  o lo lleva la bitácora).
 
 ### Evaluación grupal final
 
-El grupo comparará:
+El grupo comparará, con los datos de todas las casas juntas:
 
-| Indicador     | Resultado a comparar                        |
-| ------------- | ------------------------------------------- |
-| Generación    | Litros de residuos por persona y semana     |
-| Material seco | Relación de secos respecto a húmedos        |
-| Capacidad     | Porcentaje de llenado mensual               |
-| Humedad       | Número de semanas dentro del nivel adecuado |
-| Olor          | Número e intensidad de incidentes           |
-| Plagas        | Número de incidentes                        |
-| Trabajo       | Minutos dedicados por semana                |
-| Costo         | Gasto inicial y gasto operativo             |
-| Cumplimiento  | Porcentaje de registros completados         |
+| Indicador                   | Resultado a comparar                                                         |
+| --------------------------- | ---------------------------------------------------------------------------- |
+| Entrada a la composta       | Litros por persona y semana                                                  |
+| Fuga y generación estimada  | Botes que no llegaron, por motivo; generación estimada con su error          |
+| Material seco               | Relación de seco respecto a orgánico (en volumen; en masa, exploratoria)     |
+| Capacidad                   | Día de parada o semanas hasta el 80 %; llenado medido el día 28              |
+| Estado al día 28            | Humedad, olor, fauna y mezcla, **como descripción, no como calificación**    |
+| Trabajo                     | Minutos dedicados por semana                                                 |
+| Costo                       | Gasto inicial y gasto operativo (P-18)                                       |
+| Cumplimiento                | Criterios de éxito #1 y #2                                                   |
+
+**Nota de análisis.** Medir el desperdicio de alimentos lo reduce por sí solo (Ramos et al. 2024,
+*British Food Journal* 126(2):812–833): una entrada que baja a lo largo del mes no se interpreta sin
+más como cansancio o sub-registro.
 
 ### Preguntas para la reunión final
 
-1. ¿Qué residuos fueron más frecuentes?
-2. ¿Qué material seco funcionó mejor?
-3. ¿Qué hogares necesitaron más de dos partes de material seco?
-4. ¿Qué causó los principales olores?
+1. ¿Cuánto de lo que se separó no llegó a la composta, y por qué?
+2. ¿Qué material seco se usó y cuál fue más fácil de conseguir?
+3. ¿Cuántas casas necesitaron más de dos partes de material seco?
+4. ¿Qué describieron las revisiones del día 28 y cómo se relaciona con la rutina de cada casa?
 5. ¿Qué tamaño de contenedor sería adecuado para los siguientes tres meses?
 6. ¿Qué actividades resultaron difíciles de mantener?
 7. ¿Qué cambios deben hacerse al procedimiento común?
@@ -439,44 +441,56 @@ El grupo comparará:
 
 ---
 
-# Formato de registro diario
+# Formato de registro diario (Hoja 2)
 
-| Fecha | Hogar | Residuos húmedos | Material seco | Tipo de residuo              | Observaciones |
-| ----- | ----- | ---------------: | ------------: | ---------------------------- | ------------- |
-|  DD-MM| H-N   | Peso o volumen   | Peso o volumen| Frutas, verduras, café, etc. |               |
+| Día | Fecha | Orgánico que eché (botes) | Seco que eché encima (botes) | Nota (opcional, sólo de la composta) |
+| --: | ----- | ------------------------: | ---------------------------: | ------------------------------------ |
+| 1–28 | DD-MM | Enteros y medios         | Enteros y medios             |                                      |
+
+No se registra **qué** se come en la casa: no hay tipo ni composición del residuo.
 
 ---
 
-# Formato de revisión semanal
+# Formato del renglón semanal (Hoja 3)
 
-| Variable                | Registro                            |
-| ----------------------- | ----------------------------------- |
-| Hogar                   |                                     |
-| Semana                  |                                     |
-| Volumen húmedo agregado |                                     |
-| Volumen seco agregado   |                                     |
-| Porcentaje ocupado      |                                     |
-| Humedad                 | Seca / adecuada / húmeda / saturada |
-| Olor                    | Ninguno / ligero / fuerte           |
-| Insectos o animales     |                                     |
-| Estado de la mezcla     | Suelta / compacta / bloques         |
-| Acción correctiva       |                                     |
-| Tiempo dedicado         |                                     |
-| Fotografía enviada      | Sí / no                             |
+| Variable                                         | Registro                                                       |
+| ------------------------------------------------ | -------------------------------------------------------------- |
+| Semana                                           | S1 · S2 · S3 · S4                                              |
+| Fecha                                            | día / mes                                                      |
+| Cómo anoté esta semana                           | Todos los días · me faltaron algunos (marca una)               |
+| Botes que no llegaron a la composta              | Número; `0` si todo llegó                                      |
+| Por qué no llegaron                              | Ya no cabía · no tenía material seco · a animales · a la basura · otro |
+| Material seco que usé                            | Hojas · cartón · papel · aserrín · otro · ninguno (P-21)        |
+| Personas que comieron en casa casi todos los días| Número                                                         |
+| Minutos dedicados en la semana                   | Número                                                         |
+| Qué tan lleno está el contenedor                 | ¼ · ½ · ¾ · casi lleno (marca una)                             |
+| Qué hice esta semana (P-04)                      | Removí · seco de más · agua · retiré material · otra cosa · nada |
+
+El estado de la composta (humedad, olor, fauna, mezcla) se registra **una vez, el día 28** (Hoja 4).
 
 ---
 
 # Criterios de éxito del primer mes
 
-El piloto se considerará satisfactorio si cada hogar cumple al menos cinco de los siguientes siete criterios:
+Los criterios son **de proceso**: registró, sostuvo la rutina, identificó su cuello de botella, puede
+estimar su entrada semanal y dimensionar su contenedor. **Un hogar con la composta oliendo mal y el
+registro impecable aprueba**: el estado de la composta se describe, no se califica.
 
-1. Realiza registros durante por lo menos tres de las cuatro semanas.
-2. Evita olores fuertes persistentes.
-3. No presenta lixiviados frecuentes.
-4. No atrae roedores.
-5. Mantiene suficiente reserva de material seco.
-6. Dedica menos de 30 minutos semanales al mantenimiento.
-7. Puede estimar su generación semanal y la capacidad necesaria.
+El piloto se considerará satisfactorio si cada hogar cumple **al menos cinco de los siguientes siete
+criterios** (**PROPUESTA P-07b**: con el #1 obligatorio):
+
+| # | Criterio | Datos (F-HOG rev. 03) | Cálculo | Umbral |
+| - | -------- | --------------------- | ------- | ------ |
+| 1 | Registró el diario | Hoja 2: orgánico de cada día | Una semana cuenta si al menos 5 de sus 7 renglones tienen un número (el `0` cuenta) | ≥ 3 de 4 semanas (P-07a: «5 de 7 renglones») |
+| 2 | Llenó el renglón semanal | Hoja 3: cómo anoté y lo que no llegó | Una semana cuenta si tiene una marca en «cómo anoté» y un número en «no llegaron» | ≥ 3 de 4 semanas (P-07a) |
+| 3 | Sostuvo la rutina de depósito | Hoja 2 y día de parada | Semanas con algún depósito, contadas hasta la parada | ≥ 3 de 4, o todas antes de la parada (P-07a) |
+| 4 | La rutina cupo en su semana | Minutos de la semana | Mediana de las semanas con dato (al menos dos) | ≤ 30 minutos |
+| 5 | Identificó su cuello de botella | Hoja 4: lo que más limitó el mes (P-22) | Contestada; «nada en particular» cuenta | Contestada |
+| 6 | Puede estimar su entrada semanal | Hoja 2, personas de la semana, capacidad del bote | Entrada calculable en la semana | ≥ 3 de 4 semanas (P-07a) |
+| 7 | Puede dimensionar su contenedor | Llenado semanal, día de parada, altura medida el día 28, tamaño percibido | Tasa de llenado calculable y tamaño percibido contestado | Calculable y contestado |
+
+La regla «5 de 7» se mantiene: tolera dos fallas, y los criterios #1 y #6 están acoplados (sin diario
+no hay entrada que estimar). Justificación completa en el acta-01, D2.
 
 No se utilizará la producción de composta terminada como criterio de éxito durante el primer mes.
 
@@ -487,11 +501,13 @@ No se utilizará la producción de composta terminada como criterio de éxito du
 Cada participante deberá tener:
 
 * Una compostera doméstica en funcionamiento.
-* Una estimación de su generación semanal.
+* Una estimación de su **entrada semanal a la composta** y de lo que no llegó.
 * Una proporción de mezcla ajustada a su hogar.
 * Una rutina estable de separación y mantenimiento.
-* Un registro de problemas y soluciones.
+* Un registro de su rutina y de lo que la limitó.
 * Una estimación de la capacidad requerida.
-* Un lote iniciado que continuará su descomposición durante los siguientes meses.
+* Un lote iniciado que continuará su descomposición durante los siguientes meses, con su **línea base
+  de composta y de suelo** tomada el día 28.
 
-El grupo deberá producir un resumen conjunto de una página con los resultados de todos los hogares y las modificaciones acordadas para el segundo mes.
+El grupo deberá producir un resumen conjunto de una página con los resultados de todos los hogares
+juntos, sin identificar casas, y las modificaciones acordadas para el segundo mes.

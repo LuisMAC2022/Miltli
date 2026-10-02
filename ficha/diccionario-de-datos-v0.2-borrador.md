@@ -53,6 +53,7 @@ y no se le pregunta al hogar por qué dejó algo en blanco.**
 | --- | --- | --- | --- | --- | --- |
 | `ID` | Hogar `H___` | equipo | opción | `H1`…`H5` | Vincular registros sin nombres |
 | `FINI` | Inicio ___/___/2026 | equipo | fecha | — | Alinear las cuatro semanas |
+| `FICHA_REV` | Sello del pie: `F-HOG rev. NN` | equipo | opción | `02`… | **Control de versión.** Saber con qué versión del instrumento se llenó cada registro; sin él no se pueden comparar dos ciclos del piloto |
 | `DREV` | Día de la revisión semanal | hogar | opción | `L M M J V S D` | Operativa. **No sale del equipo** (§7) |
 | `PERS0` | Personas que comen en casa la mayoría de los días | hogar | num | entero | Denominador inicial de L/persona/semana |
 | `MASC` | Parte de los restos se va a animales de la casa | hogar | opción | `no` · `a_veces` · `casi_siempre` | Fuga del flujo: lo que va al animal no llega a la composta |
