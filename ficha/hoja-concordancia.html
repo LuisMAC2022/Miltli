@@ -1,0 +1,299 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Miltli — Hoja de concordancia (RE-12)</title>
+<!--
+  Hoja de concordancia del piloto (acta-01, RE-12). Las marcas usan los códigos de la Hoja 4 de
+  F-HOG rev. 03 (diccionario v0.3 §5.1) y los propios de §7.3 (CONC_*). data-item = estación, foto u
+  hogar de la fila. Los atributos no se imprimen; tests/ficha-cobertura.test.js comprueba la
+  cobertura casilla ↔ código.
+-->
+<style>
+  :root { --linea: #303030; --suave: #777; --tenue: #f1f1f1; }
+  @page { size: Letter portrait; margin: 12mm 12mm 10mm; }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; font-family: "Helvetica Neue", Arial, sans-serif; color: #111; background: #d9d9d9; }
+  body { font-size: 8.6pt; line-height: 1.18; }
+  .acciones { position: fixed; top: 14px; right: 14px; z-index: 10; }
+  .acciones button { appearance: none; border: 1px solid var(--linea); background: #fff; color: #111; font: 600 10pt "Helvetica Neue", Arial, sans-serif; padding: 9px 13px; border-radius: 4px; cursor: pointer; box-shadow: 0 1px 4px rgba(0,0,0,.18); }
+  main { width: 100%; padding: 12mm 0; }
+  article.hoja { width: 215.9mm; min-height: 279.4mm; margin: 0 auto 12mm; padding: 12mm 12mm 10mm; background: #fff; box-shadow: 0 2mm 7mm rgba(0,0,0,.16); break-after: page; page-break-after: always; display: flex; flex-direction: column; }
+  article.hoja:last-child { break-after: auto; page-break-after: auto; }
+  header.principal { display: flex; justify-content: space-between; align-items: flex-start; gap: 6mm; border-bottom: 1.2pt solid var(--linea); padding-bottom: 1.5mm; margin-bottom: 2mm; }
+  header.principal h1 { margin: 0; font-size: 15pt; line-height: 1.05; }
+  header.principal h1 small { display: block; margin-top: 1.2mm; font-size: 8.2pt; font-weight: 500; color: #333; }
+  .clave { margin: 0; min-width: 44mm; font-size: 8.2pt; line-height: 1.5; text-align: right; }
+  .clave b { font-size: 12pt; letter-spacing: .05em; }
+  h2 { margin: 0 0 1mm; font-size: 11pt; }
+  h3 { margin: 0 0 .8mm; font-size: 9pt; }
+  p { margin: 0 0 1mm; }
+  .nota { font-size: 7.8pt; color: #333; margin-bottom: 1.6mm; }
+  .leyenda { border: .75pt solid var(--linea); padding: 1.2mm 2mm; font-size: 7.8pt; margin-bottom: 2mm; }
+  table { width: 100%; border-collapse: collapse; table-layout: fixed; font-size: 7.8pt; }
+  th, td { border: .65pt solid var(--linea); padding: .6mm .8mm; vertical-align: middle; }
+  thead th { background: var(--tenue); font-weight: 700; text-align: center; line-height: 1.05; }
+  thead th small { display: block; font-weight: 500; font-size: 6.8pt; color: #333; }
+  tbody th { text-align: left; font-weight: 600; }
+  td.m { text-align: center; font-size: 10pt; height: 5.6mm; }
+  th.v { height: 34mm; vertical-align: bottom; padding: .6mm 0; }
+  th.v span { writing-mode: vertical-rl; transform: rotate(180deg); display: inline-block; font-size: 6.9pt; font-weight: 600; line-height: 1.05; text-align: left; max-height: 33mm; }
+  tr.sec th { background: var(--tenue); font-weight: 700; border-top: 1.2pt solid var(--linea); }
+  tr.sec th small { display: block; font-weight: 500; font-size: 6.9pt; color: #333; }
+  table.lista td.m { width: 7mm; height: 4.6mm; }
+  table.lista th.op { font-weight: 400; }
+  table.lista th.op em { font-style: normal; color: #555; font-size: 6.9pt; }
+  .dos { display: grid; grid-template-columns: 1fr 1fr; gap: 0 4mm; align-items: start; }
+  .equipo { border: 1.4pt double var(--linea); }
+  footer.pie { margin-top: auto; padding-top: 1.6mm; border-top: .65pt solid var(--linea); display: flex; justify-content: space-between; gap: 6mm; font-size: 7.3pt; color: #333; }
+  footer.pie span:last-child { white-space: nowrap; font-weight: 650; }
+  @media print {
+    html, body { background: #fff; }
+    .acciones { display: none !important; }
+    main { padding: 0; }
+    article.hoja { width: auto; min-height: 255mm; margin: 0; padding: 0; box-shadow: none; }
+  }
+</style>
+</head>
+<body>
+<div class="acciones" aria-label="Acciones del documento">
+  <button type="button" onclick="window.print()">Imprimir hoja</button>
+</div>
+<main>
+<article class="hoja" aria-labelledby="t-a">
+  <header class="principal">
+    <h1 id="t-a">Hoja de concordancia · Miltli
+      <small>¿Dos personas ven lo mismo? Esta hoja lo mide. No es un examen: lo que se evalúa es la ficha, no a quien la llena.</small>
+    </h1>
+    <p class="clave">
+      Observador <b data-codigo="CONC_OBS">O___</b><br>
+      Fecha <span data-codigo="CONC_FECHA">____ / ____ / 2026</span><br>
+      Grupo: <span data-codigo="CONC_ROL" data-valor="voluntario">□ voluntario</span> <span data-codigo="CONC_ROL" data-valor="equipo">□ equipo</span> <span data-codigo="CONC_ROL" data-valor="externo">□ externo</span>
+    </p>
+  </header>
+
+  <div class="leyenda">
+    <strong>Antes de empezar.</strong> Marca <strong>por tu cuenta</strong>, sin hablar y sin mirar la hoja de otras personas. Si no puedes decidir, deja la fila vacía: eso también es un dato. No escribas tu nombre: sólo la clave de observador que te dio quien coordina. Las palabras de las casillas son las mismas de la Hoja 4 de la ficha.
+  </div>
+
+  <section>
+    <h2 data-codigo="CONC_FUENTE" data-valor="estacion">Parte A · Estaciones de humedad — sesión del día 1</h2>
+    <p class="nota">Hay cinco cubetas preparadas. En cada una, toma un puño de la mezcla, de preferencia con guante, y apriétalo, igual que harás el día 28. Marca en cada fila lo que encuentres; puedes marcar más de una casilla si la cubeta cambia de una zona a otra.</p>
+    <table aria-label="Estaciones de humedad">
+      <colgroup><col style="width:24mm"><col><col><col><col><col></colgroup>
+      <thead><tr><th scope="col">Cubeta</th><th scope="col">Se desmorona<small>polvosa o crujiente</small></th><th scope="col">Se apelmaza<small>mantiene la forma; no sale agua</small></th><th scope="col">Una o dos gotas<small>al apretar</small></th><th scope="col">Escurre agua<small>al apretar</small></th><th scope="col">Líquido en el fondo<small>de la cubeta</small></th></tr></thead>
+      <tbody>
+        <tr><th scope="row" data-codigo="CONC_ITEM" data-valor="1">Estación 1</th><td class="m" data-codigo="HUM" data-valor="H1" data-item="1">□</td><td class="m" data-codigo="HUM" data-valor="H2" data-item="1">□</td><td class="m" data-codigo="HUM" data-valor="H3" data-item="1">□</td><td class="m" data-codigo="HUM" data-valor="H4" data-item="1">□</td><td class="m" data-codigo="HUM" data-valor="H5" data-item="1">□</td></tr>
+        <tr><th scope="row" data-codigo="CONC_ITEM" data-valor="2">Estación 2</th><td class="m" data-codigo="HUM" data-valor="H1" data-item="2">□</td><td class="m" data-codigo="HUM" data-valor="H2" data-item="2">□</td><td class="m" data-codigo="HUM" data-valor="H3" data-item="2">□</td><td class="m" data-codigo="HUM" data-valor="H4" data-item="2">□</td><td class="m" data-codigo="HUM" data-valor="H5" data-item="2">□</td></tr>
+        <tr><th scope="row" data-codigo="CONC_ITEM" data-valor="3">Estación 3</th><td class="m" data-codigo="HUM" data-valor="H1" data-item="3">□</td><td class="m" data-codigo="HUM" data-valor="H2" data-item="3">□</td><td class="m" data-codigo="HUM" data-valor="H3" data-item="3">□</td><td class="m" data-codigo="HUM" data-valor="H4" data-item="3">□</td><td class="m" data-codigo="HUM" data-valor="H5" data-item="3">□</td></tr>
+        <tr><th scope="row" data-codigo="CONC_ITEM" data-valor="4">Estación 4</th><td class="m" data-codigo="HUM" data-valor="H1" data-item="4">□</td><td class="m" data-codigo="HUM" data-valor="H2" data-item="4">□</td><td class="m" data-codigo="HUM" data-valor="H3" data-item="4">□</td><td class="m" data-codigo="HUM" data-valor="H4" data-item="4">□</td><td class="m" data-codigo="HUM" data-valor="H5" data-item="4">□</td></tr>
+        <tr><th scope="row" data-codigo="CONC_ITEM" data-valor="5">Estación 5</th><td class="m" data-codigo="HUM" data-valor="H1" data-item="5">□</td><td class="m" data-codigo="HUM" data-valor="H2" data-item="5">□</td><td class="m" data-codigo="HUM" data-valor="H3" data-item="5">□</td><td class="m" data-codigo="HUM" data-valor="H4" data-item="5">□</td><td class="m" data-codigo="HUM" data-valor="H5" data-item="5">□</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="leyenda" style="margin-top:4mm">
+    <h3>Cómo se usa lo que marques</h3>
+    <p>· Se compara cada marca con el estado con el que se preparó la cubeta, que sólo conoce quien coordina.<br>
+       · Se cuenta en cuántas cubetas coincidió la marca (acuerdo bruto) y qué se confundió con qué.<br>
+       · Si una categoría se confunde mucho, se agrupa con su vecina <strong>al analizar</strong>: la ficha no se reimprime. La regla está escrita de antemano en la página 4.</p>
+  </section>
+
+  <footer class="pie">
+    <span>Miltli · Hoja de concordancia (RE-12) · Acompaña a F-HOG rev.&nbsp;03 y al diccionario v0.3. Sin nombres: sólo claves.</span>
+    <span>Página 1 de 4</span>
+  </footer>
+</article>
+<article class="hoja" aria-labelledby="t-b">
+  <header class="principal">
+    <h1 id="t-b">Concordancia · Parte B
+      <small>Panel de fotos de interior de pilas de composta. Para la fauna y para cómo se ve la mezcla.</small>
+    </h1>
+    <p class="clave">
+      Observador <b data-codigo="CONC_OBS">O___</b><br>
+      Fecha <span data-codigo="CONC_FECHA">____ / ____ / 2026</span><br>
+      Grupo: <span data-codigo="CONC_ROL" data-valor="voluntario">□ voluntario</span> <span data-codigo="CONC_ROL" data-valor="equipo">□ equipo</span> <span data-codigo="CONC_ROL" data-valor="externo">□ externo</span>
+    </p>
+  </header>
+
+  <h2 data-codigo="CONC_FUENTE" data-valor="foto">Parte B · Panel de 15 a 20 fotos</h2>
+  <p class="nota">Mira cada foto el tiempo que necesites y marca en su fila todo lo que veas: en «quién vive aquí», lo que aparece <strong>más de una vez o en más de dos individuos</strong>; en «avance» y «textura», lo que mejor describa la mezcla. Puedes marcar varias casillas. Si una foto no permite decidir, deja la fila vacía. Las filas que sobren se tachan.</p>
+  <table aria-label="Panel de fotos">
+    <colgroup><col style="width:15mm"><col><col><col><col><col><col><col><col><col><col><col><col><col><col><col><col><col><col><col></colgroup>
+    <thead>
+      <tr><th scope="col" rowspan="2">Foto</th><th scope="colgroup" colspan="13">Quién vive aquí</th><th scope="colgroup" colspan="3">Avance</th><th scope="colgroup" colspan="3">Textura</th></tr>
+      <tr><th scope="col" class="v"><span>Lombrices</span></th><th scope="col" class="v"><span>Cochinillas, milpiés, caracoles o babosas</span></th><th scope="col" class="v"><span>Escarabajos o larvas blancas en C</span></th><th scope="col" class="v"><span>Larvas grandes, planas y café</span></th><th scope="col" class="v"><span>Mosquitas que revolotean</span></th><th scope="col" class="v"><span>Mosquitos negros de superficie</span></th><th scope="col" class="v"><span>Moscas grandes o gusanos blancos</span></th><th scope="col" class="v"><span>Hormigas</span></th><th scope="col" class="v"><span>Cucarachas</span></th><th scope="col" class="v"><span>Hilos, polvo o manchas (hongos)</span></th><th scope="col" class="v"><span>Huellas o excavaciones</span></th><th scope="col" class="v"><span>No supe identificar</span></th><th scope="col" class="v"><span>Ninguno de los anteriores</span></th><th scope="col" class="v"><span>Se distinguen casi todos los restos</span></th><th scope="col" class="v"><span>Algunos ya no se reconocen</span></th><th scope="col" class="v"><span>Casi todo parece tierra oscura</span></th><th scope="col" class="v"><span>Suelta, con huecos</span></th><th scope="col" class="v"><span>Apelmazada, como masa</span></th><th scope="col" class="v"><span>Con bloques grandes</span></th></tr>
+    </thead>
+    <tbody>
+        <tr><th scope="row" data-codigo="CONC_ITEM" data-valor="1">Foto 1</th><td class="m" data-codigo="FAU" data-valor="F01" data-item="1">□</td><td class="m" data-codigo="FAU" data-valor="F02" data-item="1">□</td><td class="m" data-codigo="FAU" data-valor="F03" data-item="1">□</td><td class="m" data-codigo="FAU" data-valor="F04" data-item="1">□</td><td class="m" data-codigo="FAU" data-valor="F05" data-item="1">□</td><td class="m" data-codigo="FAU" data-valor="F06" data-item="1">□</td><td class="m" data-codigo="FAU" data-valor="F07" data-item="1">□</td><td class="m" data-codigo="FAU" data-valor="F08" data-item="1">□</td><td class="m" data-codigo="FAU" data-valor="F09" data-item="1">□</td><td class="m" data-codigo="FAU" data-valor="F10" data-item="1">□</td><td class="m" data-codigo="FAU" data-valor="F11" data-item="1">□</td><td class="m" data-codigo="FAU" data-valor="F12" data-item="1">□</td><td class="m" data-codigo="FAU" data-valor="F00" data-item="1">□</td><td class="m" data-codigo="MEZ_AV" data-valor="M1" data-item="1">□</td><td class="m" data-codigo="MEZ_AV" data-valor="M2" data-item="1">□</td><td class="m" data-codigo="MEZ_AV" data-valor="M3" data-item="1">□</td><td class="m" data-codigo="MEZ_TX" data-valor="X1" data-item="1">□</td><td class="m" data-codigo="MEZ_TX" data-valor="X2" data-item="1">□</td><td class="m" data-codigo="MEZ_TX" data-valor="X3" data-item="1">□</td></tr>
+        <tr><th scope="row" data-codigo="CONC_ITEM" data-valor="2">Foto 2</th><td class="m" data-codigo="FAU" data-valor="F01" data-item="2">□</td><td class="m" data-codigo="FAU" data-valor="F02" data-item="2">□</td><td class="m" data-codigo="FAU" data-valor="F03" data-item="2">□</td><td class="m" data-codigo="FAU" data-valor="F04" data-item="2">□</td><td class="m" data-codigo="FAU" data-valor="F05" data-item="2">□</td><td class="m" data-codigo="FAU" data-valor="F06" data-item="2">□</td><td class="m" data-codigo="FAU" data-valor="F07" data-item="2">□</td><td class="m" data-codigo="FAU" data-valor="F08" data-item="2">□</td><td class="m" data-codigo="FAU" data-valor="F09" data-item="2">□</td><td class="m" data-codigo="FAU" data-valor="F10" data-item="2">□</td><td class="m" data-codigo="FAU" data-valor="F11" data-item="2">□</td><td class="m" data-codigo="FAU" data-valor="F12" data-item="2">□</td><td class="m" data-codigo="FAU" data-valor="F00" data-item="2">□</td><td class="m" data-codigo="MEZ_AV" data-valor="M1" data-item="2">□</td><td class="m" data-codigo="MEZ_AV" data-valor="M2" data-item="2">□</td><td class="m" data-codigo="MEZ_AV" data-valor="M3" data-item="2">□</td><td class="m" data-codigo="MEZ_TX" data-valor="X1" data-item="2">□</td><td class="m" data-codigo="MEZ_TX" data-valor="X2" data-item="2">□</td><td class="m" data-codigo="MEZ_TX" data-valor="X3" data-item="2">□</td></tr>
+        <tr><th scope="row" data-codigo="CONC_ITEM" data-valor="3">Foto 3</th><td class="m" data-codigo="FAU" data-valor="F01" data-item="3">□</td><td class="m" data-codigo="FAU" data-valor="F02" data-item="3">□</td><td class="m" data-codigo="FAU" data-valor="F03" data-item="3">□</td><td class="m" data-codigo="FAU" data-valor="F04" data-item="3">□</td><td class="m" data-codigo="FAU" data-valor="F05" data-item="3">□</td><td class="m" data-codigo="FAU" data-valor="F06" data-item="3">□</td><td class="m" data-codigo="FAU" data-valor="F07" data-item="3">□</td><td class="m" data-codigo="FAU" data-valor="F08" data-item="3">□</td><td class="m" data-codigo="FAU" data-valor="F09" data-item="3">□</td><td class="m" data-codigo="FAU" data-valor="F10" data-item="3">□</td><td class="m" data-codigo="FAU" data-valor="F11" data-item="3">□</td><td class="m" data-codigo="FAU" data-valor="F12" data-item="3">□</td><td class="m" data-codigo="FAU" data-valor="F00" data-item="3">□</td><td class="m" data-codigo="MEZ_AV" data-valor="M1" data-item="3">□</td><td class="m" data-codigo="MEZ_AV" data-valor="M2" data-item="3">□</td><td class="m" data-codigo="MEZ_AV" data-valor="M3" data-item="3">□</td><td class="m" data-codigo="MEZ_TX" data-valor="X1" data-item="3">□</td><td class="m" data-codigo="MEZ_TX" data-valor="X2" data-item="3">□</td><td class="m" data-codigo="MEZ_TX" data-valor="X3" data-item="3">□</td></tr>
+        <tr><th scope="row" data-codigo="CONC_ITEM" data-valor="4">Foto 4</th><td class="m" data-codigo="FAU" data-valor="F01" data-item="4">□</td><td class="m" data-codigo="FAU" data-valor="F02" data-item="4">□</td><td class="m" data-codigo="FAU" data-valor="F03" data-item="4">□</td><td class="m" data-codigo="FAU" data-valor="F04" data-item="4">□</td><td class="m" data-codigo="FAU" data-valor="F05" data-item="4">□</td><td class="m" data-codigo="FAU" data-valor="F06" data-item="4">□</td><td class="m" data-codigo="FAU" data-valor="F07" data-item="4">□</td><td class="m" data-codigo="FAU" data-valor="F08" data-item="4">□</td><td class="m" data-codigo="FAU" data-valor="F09" data-item="4">□</td><td class="m" data-codigo="FAU" data-valor="F10" data-item="4">□</td><td class="m" data-codigo="FAU" data-valor="F11" data-item="4">□</td><td class="m" data-codigo="FAU" data-valor="F12" data-item="4">□</td><td class="m" data-codigo="FAU" data-valor="F00" data-item="4">□</td><td class="m" data-codigo="MEZ_AV" data-valor="M1" data-item="4">□</td><td class="m" data-codigo="MEZ_AV" data-valor="M2" data-item="4">□</td><td class="m" data-codigo="MEZ_AV" data-valor="M3" data-item="4">□</td><td class="m" data-codigo="MEZ_TX" data-valor="X1" data-item="4">□</td><td class="m" data-codigo="MEZ_TX" data-valor="X2" data-item="4">□</td><td class="m" data-codigo="MEZ_TX" data-valor="X3" data-item="4">□</td></tr>
+        <tr><th scope="row" data-codigo="CONC_ITEM" data-valor="5">Foto 5</th><td class="m" data-codigo="FAU" data-valor="F01" data-item="5">□</td><td class="m" data-codigo="FAU" data-valor="F02" data-item="5">□</td><td class="m" data-codigo="FAU" data-valor="F03" data-item="5">□</td><td class="m" data-codigo="FAU" data-valor="F04" data-item="5">□</td><td class="m" data-codigo="FAU" data-valor="F05" data-item="5">□</td><td class="m" data-codigo="FAU" data-valor="F06" data-item="5">□</td><td class="m" data-codigo="FAU" data-valor="F07" data-item="5">□</td><td class="m" data-codigo="FAU" data-valor="F08" data-item="5">□</td><td class="m" data-codigo="FAU" data-valor="F09" data-item="5">□</td><td class="m" data-codigo="FAU" data-valor="F10" data-item="5">□</td><td class="m" data-codigo="FAU" data-valor="F11" data-item="5">□</td><td class="m" data-codigo="FAU" data-valor="F12" data-item="5">□</td><td class="m" data-codigo="FAU" data-valor="F00" data-item="5">□</td><td class="m" data-codigo="MEZ_AV" data-valor="M1" data-item="5">□</td><td class="m" data-codigo="MEZ_AV" data-valor="M2" data-item="5">□</td><td class="m" data-codigo="MEZ_AV" data-valor="M3" data-item="5">□</td><td class="m" data-codigo="MEZ_TX" data-valor="X1" data-item="5">□</td><td class="m" data-codigo="MEZ_TX" data-valor="X2" data-item="5">□</td><td class="m" data-codigo="MEZ_TX" data-valor="X3" data-item="5">□</td></tr>
+        <tr><th scope="row" data-codigo="CONC_ITEM" data-valor="6">Foto 6</th><td class="m" data-codigo="FAU" data-valor="F01" data-item="6">□</td><td class="m" data-codigo="FAU" data-valor="F02" data-item="6">□</td><td class="m" data-codigo="FAU" data-valor="F03" data-item="6">□</td><td class="m" data-codigo="FAU" data-valor="F04" data-item="6">□</td><td class="m" data-codigo="FAU" data-valor="F05" data-item="6">□</td><td class="m" data-codigo="FAU" data-valor="F06" data-item="6">□</td><td class="m" data-codigo="FAU" data-valor="F07" data-item="6">□</td><td class="m" data-codigo="FAU" data-valor="F08" data-item="6">□</td><td class="m" data-codigo="FAU" data-valor="F09" data-item="6">□</td><td class="m" data-codigo="FAU" data-valor="F10" data-item="6">□</td><td class="m" data-codigo="FAU" data-valor="F11" data-item="6">□</td><td class="m" data-codigo="FAU" data-valor="F12" data-item="6">□</td><td class="m" data-codigo="FAU" data-valor="F00" data-item="6">□</td><td class="m" data-codigo="MEZ_AV" data-valor="M1" data-item="6">□</td><td class="m" data-codigo="MEZ_AV" data-valor="M2" data-item="6">□</td><td class="m" data-codigo="MEZ_AV" data-valor="M3" data-item="6">□</td><td class="m" data-codigo="MEZ_TX" data-valor="X1" data-item="6">□</td><td class="m" data-codigo="MEZ_TX" data-valor="X2" data-item="6">□</td><td class="m" data-codigo="MEZ_TX" data-valor="X3" data-item="6">□</td></tr>
+        <tr><th scope="row" data-codigo="CONC_ITEM" data-valor="7">Foto 7</th><td class="m" data-codigo="FAU" data-valor="F01" data-item="7">□</td><td class="m" data-codigo="FAU" data-valor="F02" data-item="7">□</td><td class="m" data-codigo="FAU" data-valor="F03" data-item="7">□</td><td class="m" data-codigo="FAU" data-valor="F04" data-item="7">□</td><td class="m" data-codigo="FAU" data-valor="F05" data-item="7">□</td><td class="m" data-codigo="FAU" data-valor="F06" data-item="7">□</td><td class="m" data-codigo="FAU" data-valor="F07" data-item="7">□</td><td class="m" data-codigo="FAU" data-valor="F08" data-item="7">□</td><td class="m" data-codigo="FAU" data-valor="F09" data-item="7">□</td><td class="m" data-codigo="FAU" data-valor="F10" data-item="7">□</td><td class="m" data-codigo="FAU" data-valor="F11" data-item="7">□</td><td class="m" data-codigo="FAU" data-valor="F12" data-item="7">□</td><td class="m" data-codigo="FAU" data-valor="F00" data-item="7">□</td><td class="m" data-codigo="MEZ_AV" data-valor="M1" data-item="7">□</td><td class="m" data-codigo="MEZ_AV" data-valor="M2" data-item="7">□</td><td class="m" data-codigo="MEZ_AV" data-valor="M3" data-item="7">□</td><td class="m" data-codigo="MEZ_TX" data-valor="X1" data-item="7">□</td><td class="m" data-codigo="MEZ_TX" data-valor="X2" data-item="7">□</td><td class="m" data-codigo="MEZ_TX" data-valor="X3" data-item="7">□</td></tr>
+        <tr><th scope="row" data-codigo="CONC_ITEM" data-valor="8">Foto 8</th><td class="m" data-codigo="FAU" data-valor="F01" data-item="8">□</td><td class="m" data-codigo="FAU" data-valor="F02" data-item="8">□</td><td class="m" data-codigo="FAU" data-valor="F03" data-item="8">□</td><td class="m" data-codigo="FAU" data-valor="F04" data-item="8">□</td><td class="m" data-codigo="FAU" data-valor="F05" data-item="8">□</td><td class="m" data-codigo="FAU" data-valor="F06" data-item="8">□</td><td class="m" data-codigo="FAU" data-valor="F07" data-item="8">□</td><td class="m" data-codigo="FAU" data-valor="F08" data-item="8">□</td><td class="m" data-codigo="FAU" data-valor="F09" data-item="8">□</td><td class="m" data-codigo="FAU" data-valor="F10" data-item="8">□</td><td class="m" data-codigo="FAU" data-valor="F11" data-item="8">□</td><td class="m" data-codigo="FAU" data-valor="F12" data-item="8">□</td><td class="m" data-codigo="FAU" data-valor="F00" data-item="8">□</td><td class="m" data-codigo="MEZ_AV" data-valor="M1" data-item="8">□</td><td class="m" data-codigo="MEZ_AV" data-valor="M2" data-item="8">□</td><td class="m" data-codigo="MEZ_AV" data-valor="M3" data-item="8">□</td><td class="m" data-codigo="MEZ_TX" data-valor="X1" data-item="8">□</td><td class="m" data-codigo="MEZ_TX" data-valor="X2" data-item="8">□</td><td class="m" data-codigo="MEZ_TX" data-valor="X3" data-item="8">□</td></tr>
+        <tr><th scope="row" data-codigo="CONC_ITEM" data-valor="9">Foto 9</th><td class="m" data-codigo="FAU" data-valor="F01" data-item="9">□</td><td class="m" data-codigo="FAU" data-valor="F02" data-item="9">□</td><td class="m" data-codigo="FAU" data-valor="F03" data-item="9">□</td><td class="m" data-codigo="FAU" data-valor="F04" data-item="9">□</td><td class="m" data-codigo="FAU" data-valor="F05" data-item="9">□</td><td class="m" data-codigo="FAU" data-valor="F06" data-item="9">□</td><td class="m" data-codigo="FAU" data-valor="F07" data-item="9">□</td><td class="m" data-codigo="FAU" data-valor="F08" data-item="9">□</td><td class="m" data-codigo="FAU" data-valor="F09" data-item="9">□</td><td class="m" data-codigo="FAU" data-valor="F10" data-item="9">□</td><td class="m" data-codigo="FAU" data-valor="F11" data-item="9">□</td><td class="m" data-codigo="FAU" data-valor="F12" data-item="9">□</td><td class="m" data-codigo="FAU" data-valor="F00" data-item="9">□</td><td class="m" data-codigo="MEZ_AV" data-valor="M1" data-item="9">□</td><td class="m" data-codigo="MEZ_AV" data-valor="M2" data-item="9">□</td><td class="m" data-codigo="MEZ_AV" data-valor="M3" data-item="9">□</td><td class="m" data-codigo="MEZ_TX" data-valor="X1" data-item="9">□</td><td class="m" data-codigo="MEZ_TX" data-valor="X2" data-item="9">□</td><td class="m" data-codigo="MEZ_TX" data-valor="X3" data-item="9">□</td></tr>
+        <tr><th scope="row" data-codigo="CONC_ITEM" data-valor="10">Foto 10</th><td class="m" data-codigo="FAU" data-valor="F01" data-item="10">□</td><td class="m" data-codigo="FAU" data-valor="F02" data-item="10">□</td><td class="m" data-codigo="FAU" data-valor="F03" data-item="10">□</td><td class="m" data-codigo="FAU" data-valor="F04" data-item="10">□</td><td class="m" data-codigo="FAU" data-valor="F05" data-item="10">□</td><td class="m" data-codigo="FAU" data-valor="F06" data-item="10">□</td><td class="m" data-codigo="FAU" data-valor="F07" data-item="10">□</td><td class="m" data-codigo="FAU" data-valor="F08" data-item="10">□</td><td class="m" data-codigo="FAU" data-valor="F09" data-item="10">□</td><td class="m" data-codigo="FAU" data-valor="F10" data-item="10">□</td><td class="m" data-codigo="FAU" data-valor="F11" data-item="10">□</td><td class="m" data-codigo="FAU" data-valor="F12" data-item="10">□</td><td class="m" data-codigo="FAU" data-valor="F00" data-item="10">□</td><td class="m" data-codigo="MEZ_AV" data-valor="M1" data-item="10">□</td><td class="m" data-codigo="MEZ_AV" data-valor="M2" data-item="10">□</td><td class="m" data-codigo="MEZ_AV" data-valor="M3" data-item="10">□</td><td class="m" data-codigo="MEZ_TX" data-valor="X1" data-item="10">□</td><td class="m" data-codigo="MEZ_TX" data-valor="X2" data-item="10">□</td><td class="m" data-codigo="MEZ_TX" data-valor="X3" data-item="10">□</td></tr>
+        <tr><th scope="row" data-codigo="CONC_ITEM" data-valor="11">Foto 11</th><td class="m" data-codigo="FAU" data-valor="F01" data-item="11">□</td><td class="m" data-codigo="FAU" data-valor="F02" data-item="11">□</td><td class="m" data-codigo="FAU" data-valor="F03" data-item="11">□</td><td class="m" data-codigo="FAU" data-valor="F04" data-item="11">□</td><td class="m" data-codigo="FAU" data-valor="F05" data-item="11">□</td><td class="m" data-codigo="FAU" data-valor="F06" data-item="11">□</td><td class="m" data-codigo="FAU" data-valor="F07" data-item="11">□</td><td class="m" data-codigo="FAU" data-valor="F08" data-item="11">□</td><td class="m" data-codigo="FAU" data-valor="F09" data-item="11">□</td><td class="m" data-codigo="FAU" data-valor="F10" data-item="11">□</td><td class="m" data-codigo="FAU" data-valor="F11" data-item="11">□</td><td class="m" data-codigo="FAU" data-valor="F12" data-item="11">□</td><td class="m" data-codigo="FAU" data-valor="F00" data-item="11">□</td><td class="m" data-codigo="MEZ_AV" data-valor="M1" data-item="11">□</td><td class="m" data-codigo="MEZ_AV" data-valor="M2" data-item="11">□</td><td class="m" data-codigo="MEZ_AV" data-valor="M3" data-item="11">□</td><td class="m" data-codigo="MEZ_TX" data-valor="X1" data-item="11">□</td><td class="m" data-codigo="MEZ_TX" data-valor="X2" data-item="11">□</td><td class="m" data-codigo="MEZ_TX" data-valor="X3" data-item="11">□</td></tr>
+        <tr><th scope="row" data-codigo="CONC_ITEM" data-valor="12">Foto 12</th><td class="m" data-codigo="FAU" data-valor="F01" data-item="12">□</td><td class="m" data-codigo="FAU" data-valor="F02" data-item="12">□</td><td class="m" data-codigo="FAU" data-valor="F03" data-item="12">□</td><td class="m" data-codigo="FAU" data-valor="F04" data-item="12">□</td><td class="m" data-codigo="FAU" data-valor="F05" data-item="12">□</td><td class="m" data-codigo="FAU" data-valor="F06" data-item="12">□</td><td class="m" data-codigo="FAU" data-valor="F07" data-item="12">□</td><td class="m" data-codigo="FAU" data-valor="F08" data-item="12">□</td><td class="m" data-codigo="FAU" data-valor="F09" data-item="12">□</td><td class="m" data-codigo="FAU" data-valor="F10" data-item="12">□</td><td class="m" data-codigo="FAU" data-valor="F11" data-item="12">□</td><td class="m" data-codigo="FAU" data-valor="F12" data-item="12">□</td><td class="m" data-codigo="FAU" data-valor="F00" data-item="12">□</td><td class="m" data-codigo="MEZ_AV" data-valor="M1" data-item="12">□</td><td class="m" data-codigo="MEZ_AV" data-valor="M2" data-item="12">□</td><td class="m" data-codigo="MEZ_AV" data-valor="M3" data-item="12">□</td><td class="m" data-codigo="MEZ_TX" data-valor="X1" data-item="12">□</td><td class="m" data-codigo="MEZ_TX" data-valor="X2" data-item="12">□</td><td class="m" data-codigo="MEZ_TX" data-valor="X3" data-item="12">□</td></tr>
+        <tr><th scope="row" data-codigo="CONC_ITEM" data-valor="13">Foto 13</th><td class="m" data-codigo="FAU" data-valor="F01" data-item="13">□</td><td class="m" data-codigo="FAU" data-valor="F02" data-item="13">□</td><td class="m" data-codigo="FAU" data-valor="F03" data-item="13">□</td><td class="m" data-codigo="FAU" data-valor="F04" data-item="13">□</td><td class="m" data-codigo="FAU" data-valor="F05" data-item="13">□</td><td class="m" data-codigo="FAU" data-valor="F06" data-item="13">□</td><td class="m" data-codigo="FAU" data-valor="F07" data-item="13">□</td><td class="m" data-codigo="FAU" data-valor="F08" data-item="13">□</td><td class="m" data-codigo="FAU" data-valor="F09" data-item="13">□</td><td class="m" data-codigo="FAU" data-valor="F10" data-item="13">□</td><td class="m" data-codigo="FAU" data-valor="F11" data-item="13">□</td><td class="m" data-codigo="FAU" data-valor="F12" data-item="13">□</td><td class="m" data-codigo="FAU" data-valor="F00" data-item="13">□</td><td class="m" data-codigo="MEZ_AV" data-valor="M1" data-item="13">□</td><td class="m" data-codigo="MEZ_AV" data-valor="M2" data-item="13">□</td><td class="m" data-codigo="MEZ_AV" data-valor="M3" data-item="13">□</td><td class="m" data-codigo="MEZ_TX" data-valor="X1" data-item="13">□</td><td class="m" data-codigo="MEZ_TX" data-valor="X2" data-item="13">□</td><td class="m" data-codigo="MEZ_TX" data-valor="X3" data-item="13">□</td></tr>
+        <tr><th scope="row" data-codigo="CONC_ITEM" data-valor="14">Foto 14</th><td class="m" data-codigo="FAU" data-valor="F01" data-item="14">□</td><td class="m" data-codigo="FAU" data-valor="F02" data-item="14">□</td><td class="m" data-codigo="FAU" data-valor="F03" data-item="14">□</td><td class="m" data-codigo="FAU" data-valor="F04" data-item="14">□</td><td class="m" data-codigo="FAU" data-valor="F05" data-item="14">□</td><td class="m" data-codigo="FAU" data-valor="F06" data-item="14">□</td><td class="m" data-codigo="FAU" data-valor="F07" data-item="14">□</td><td class="m" data-codigo="FAU" data-valor="F08" data-item="14">□</td><td class="m" data-codigo="FAU" data-valor="F09" data-item="14">□</td><td class="m" data-codigo="FAU" data-valor="F10" data-item="14">□</td><td class="m" data-codigo="FAU" data-valor="F11" data-item="14">□</td><td class="m" data-codigo="FAU" data-valor="F12" data-item="14">□</td><td class="m" data-codigo="FAU" data-valor="F00" data-item="14">□</td><td class="m" data-codigo="MEZ_AV" data-valor="M1" data-item="14">□</td><td class="m" data-codigo="MEZ_AV" data-valor="M2" data-item="14">□</td><td class="m" data-codigo="MEZ_AV" data-valor="M3" data-item="14">□</td><td class="m" data-codigo="MEZ_TX" data-valor="X1" data-item="14">□</td><td class="m" data-codigo="MEZ_TX" data-valor="X2" data-item="14">□</td><td class="m" data-codigo="MEZ_TX" data-valor="X3" data-item="14">□</td></tr>
+        <tr><th scope="row" data-codigo="CONC_ITEM" data-valor="15">Foto 15</th><td class="m" data-codigo="FAU" data-valor="F01" data-item="15">□</td><td class="m" data-codigo="FAU" data-valor="F02" data-item="15">□</td><td class="m" data-codigo="FAU" data-valor="F03" data-item="15">□</td><td class="m" data-codigo="FAU" data-valor="F04" data-item="15">□</td><td class="m" data-codigo="FAU" data-valor="F05" data-item="15">□</td><td class="m" data-codigo="FAU" data-valor="F06" data-item="15">□</td><td class="m" data-codigo="FAU" data-valor="F07" data-item="15">□</td><td class="m" data-codigo="FAU" data-valor="F08" data-item="15">□</td><td class="m" data-codigo="FAU" data-valor="F09" data-item="15">□</td><td class="m" data-codigo="FAU" data-valor="F10" data-item="15">□</td><td class="m" data-codigo="FAU" data-valor="F11" data-item="15">□</td><td class="m" data-codigo="FAU" data-valor="F12" data-item="15">□</td><td class="m" data-codigo="FAU" data-valor="F00" data-item="15">□</td><td class="m" data-codigo="MEZ_AV" data-valor="M1" data-item="15">□</td><td class="m" data-codigo="MEZ_AV" data-valor="M2" data-item="15">□</td><td class="m" data-codigo="MEZ_AV" data-valor="M3" data-item="15">□</td><td class="m" data-codigo="MEZ_TX" data-valor="X1" data-item="15">□</td><td class="m" data-codigo="MEZ_TX" data-valor="X2" data-item="15">□</td><td class="m" data-codigo="MEZ_TX" data-valor="X3" data-item="15">□</td></tr>
+        <tr><th scope="row" data-codigo="CONC_ITEM" data-valor="16">Foto 16</th><td class="m" data-codigo="FAU" data-valor="F01" data-item="16">□</td><td class="m" data-codigo="FAU" data-valor="F02" data-item="16">□</td><td class="m" data-codigo="FAU" data-valor="F03" data-item="16">□</td><td class="m" data-codigo="FAU" data-valor="F04" data-item="16">□</td><td class="m" data-codigo="FAU" data-valor="F05" data-item="16">□</td><td class="m" data-codigo="FAU" data-valor="F06" data-item="16">□</td><td class="m" data-codigo="FAU" data-valor="F07" data-item="16">□</td><td class="m" data-codigo="FAU" data-valor="F08" data-item="16">□</td><td class="m" data-codigo="FAU" data-valor="F09" data-item="16">□</td><td class="m" data-codigo="FAU" data-valor="F10" data-item="16">□</td><td class="m" data-codigo="FAU" data-valor="F11" data-item="16">□</td><td class="m" data-codigo="FAU" data-valor="F12" data-item="16">□</td><td class="m" data-codigo="FAU" data-valor="F00" data-item="16">□</td><td class="m" data-codigo="MEZ_AV" data-valor="M1" data-item="16">□</td><td class="m" data-codigo="MEZ_AV" data-valor="M2" data-item="16">□</td><td class="m" data-codigo="MEZ_AV" data-valor="M3" data-item="16">□</td><td class="m" data-codigo="MEZ_TX" data-valor="X1" data-item="16">□</td><td class="m" data-codigo="MEZ_TX" data-valor="X2" data-item="16">□</td><td class="m" data-codigo="MEZ_TX" data-valor="X3" data-item="16">□</td></tr>
+        <tr><th scope="row" data-codigo="CONC_ITEM" data-valor="17">Foto 17</th><td class="m" data-codigo="FAU" data-valor="F01" data-item="17">□</td><td class="m" data-codigo="FAU" data-valor="F02" data-item="17">□</td><td class="m" data-codigo="FAU" data-valor="F03" data-item="17">□</td><td class="m" data-codigo="FAU" data-valor="F04" data-item="17">□</td><td class="m" data-codigo="FAU" data-valor="F05" data-item="17">□</td><td class="m" data-codigo="FAU" data-valor="F06" data-item="17">□</td><td class="m" data-codigo="FAU" data-valor="F07" data-item="17">□</td><td class="m" data-codigo="FAU" data-valor="F08" data-item="17">□</td><td class="m" data-codigo="FAU" data-valor="F09" data-item="17">□</td><td class="m" data-codigo="FAU" data-valor="F10" data-item="17">□</td><td class="m" data-codigo="FAU" data-valor="F11" data-item="17">□</td><td class="m" data-codigo="FAU" data-valor="F12" data-item="17">□</td><td class="m" data-codigo="FAU" data-valor="F00" data-item="17">□</td><td class="m" data-codigo="MEZ_AV" data-valor="M1" data-item="17">□</td><td class="m" data-codigo="MEZ_AV" data-valor="M2" data-item="17">□</td><td class="m" data-codigo="MEZ_AV" data-valor="M3" data-item="17">□</td><td class="m" data-codigo="MEZ_TX" data-valor="X1" data-item="17">□</td><td class="m" data-codigo="MEZ_TX" data-valor="X2" data-item="17">□</td><td class="m" data-codigo="MEZ_TX" data-valor="X3" data-item="17">□</td></tr>
+        <tr><th scope="row" data-codigo="CONC_ITEM" data-valor="18">Foto 18</th><td class="m" data-codigo="FAU" data-valor="F01" data-item="18">□</td><td class="m" data-codigo="FAU" data-valor="F02" data-item="18">□</td><td class="m" data-codigo="FAU" data-valor="F03" data-item="18">□</td><td class="m" data-codigo="FAU" data-valor="F04" data-item="18">□</td><td class="m" data-codigo="FAU" data-valor="F05" data-item="18">□</td><td class="m" data-codigo="FAU" data-valor="F06" data-item="18">□</td><td class="m" data-codigo="FAU" data-valor="F07" data-item="18">□</td><td class="m" data-codigo="FAU" data-valor="F08" data-item="18">□</td><td class="m" data-codigo="FAU" data-valor="F09" data-item="18">□</td><td class="m" data-codigo="FAU" data-valor="F10" data-item="18">□</td><td class="m" data-codigo="FAU" data-valor="F11" data-item="18">□</td><td class="m" data-codigo="FAU" data-valor="F12" data-item="18">□</td><td class="m" data-codigo="FAU" data-valor="F00" data-item="18">□</td><td class="m" data-codigo="MEZ_AV" data-valor="M1" data-item="18">□</td><td class="m" data-codigo="MEZ_AV" data-valor="M2" data-item="18">□</td><td class="m" data-codigo="MEZ_AV" data-valor="M3" data-item="18">□</td><td class="m" data-codigo="MEZ_TX" data-valor="X1" data-item="18">□</td><td class="m" data-codigo="MEZ_TX" data-valor="X2" data-item="18">□</td><td class="m" data-codigo="MEZ_TX" data-valor="X3" data-item="18">□</td></tr>
+        <tr><th scope="row" data-codigo="CONC_ITEM" data-valor="19">Foto 19</th><td class="m" data-codigo="FAU" data-valor="F01" data-item="19">□</td><td class="m" data-codigo="FAU" data-valor="F02" data-item="19">□</td><td class="m" data-codigo="FAU" data-valor="F03" data-item="19">□</td><td class="m" data-codigo="FAU" data-valor="F04" data-item="19">□</td><td class="m" data-codigo="FAU" data-valor="F05" data-item="19">□</td><td class="m" data-codigo="FAU" data-valor="F06" data-item="19">□</td><td class="m" data-codigo="FAU" data-valor="F07" data-item="19">□</td><td class="m" data-codigo="FAU" data-valor="F08" data-item="19">□</td><td class="m" data-codigo="FAU" data-valor="F09" data-item="19">□</td><td class="m" data-codigo="FAU" data-valor="F10" data-item="19">□</td><td class="m" data-codigo="FAU" data-valor="F11" data-item="19">□</td><td class="m" data-codigo="FAU" data-valor="F12" data-item="19">□</td><td class="m" data-codigo="FAU" data-valor="F00" data-item="19">□</td><td class="m" data-codigo="MEZ_AV" data-valor="M1" data-item="19">□</td><td class="m" data-codigo="MEZ_AV" data-valor="M2" data-item="19">□</td><td class="m" data-codigo="MEZ_AV" data-valor="M3" data-item="19">□</td><td class="m" data-codigo="MEZ_TX" data-valor="X1" data-item="19">□</td><td class="m" data-codigo="MEZ_TX" data-valor="X2" data-item="19">□</td><td class="m" data-codigo="MEZ_TX" data-valor="X3" data-item="19">□</td></tr>
+        <tr><th scope="row" data-codigo="CONC_ITEM" data-valor="20">Foto 20</th><td class="m" data-codigo="FAU" data-valor="F01" data-item="20">□</td><td class="m" data-codigo="FAU" data-valor="F02" data-item="20">□</td><td class="m" data-codigo="FAU" data-valor="F03" data-item="20">□</td><td class="m" data-codigo="FAU" data-valor="F04" data-item="20">□</td><td class="m" data-codigo="FAU" data-valor="F05" data-item="20">□</td><td class="m" data-codigo="FAU" data-valor="F06" data-item="20">□</td><td class="m" data-codigo="FAU" data-valor="F07" data-item="20">□</td><td class="m" data-codigo="FAU" data-valor="F08" data-item="20">□</td><td class="m" data-codigo="FAU" data-valor="F09" data-item="20">□</td><td class="m" data-codigo="FAU" data-valor="F10" data-item="20">□</td><td class="m" data-codigo="FAU" data-valor="F11" data-item="20">□</td><td class="m" data-codigo="FAU" data-valor="F12" data-item="20">□</td><td class="m" data-codigo="FAU" data-valor="F00" data-item="20">□</td><td class="m" data-codigo="MEZ_AV" data-valor="M1" data-item="20">□</td><td class="m" data-codigo="MEZ_AV" data-valor="M2" data-item="20">□</td><td class="m" data-codigo="MEZ_AV" data-valor="M3" data-item="20">□</td><td class="m" data-codigo="MEZ_TX" data-valor="X1" data-item="20">□</td><td class="m" data-codigo="MEZ_TX" data-valor="X2" data-item="20">□</td><td class="m" data-codigo="MEZ_TX" data-valor="X3" data-item="20">□</td></tr>
+    </tbody>
+  </table>
+
+  <footer class="pie">
+    <span>Miltli · Hoja de concordancia (RE-12) · Acompaña a F-HOG rev.&nbsp;03 y al diccionario v0.3. Sin nombres: sólo claves.</span>
+    <span>Página 2 de 4</span>
+  </footer>
+</article>
+<article class="hoja" aria-labelledby="t-c">
+  <header class="principal">
+    <h1 id="t-c">Concordancia · Parte C
+      <small>Observación del equipo en la visita de cierre del día 28. La llena <strong>sólo la persona del equipo</strong>.</small>
+    </h1>
+    <p class="clave">
+      Hogar <b data-codigo="CONC_ITEM">H___</b><br>
+      Observador <b data-codigo="CONC_OBS">O___</b><br>
+      Fecha <span data-codigo="CONC_FECHA">____ / ____ / 2026</span><br>
+      <span data-codigo="CONC_ROL" data-valor="equipo">Grupo: <b>equipo</b></span>
+    </p>
+  </header>
+
+  <h2 data-codigo="CONC_FUENTE" data-valor="pila">Parte C · La pila real, lado a lado con el hogar</h2>
+  <div class="leyenda">
+    Sigue el orden de la visita (protocolo v0.2 §1.6): abrir y mirar la tapa · oler una vez · temperatura · mirar la superficie · remover un poco · apretar un puño. En el paso 8, <strong>marca esta hoja sin hablar con el hogar y sin mirar su Hoja 4</strong>; el hogar marca la suya al mismo tiempo. Nadie compara hasta que las dos hojas estén llenas. La temperatura y el pesaje van en el registro técnico, no aquí.
+  </div>
+
+  <div class="dos">
+    <table class="lista" aria-label="Observación del equipo, primera parte">
+      <colgroup><col><col style="width:7mm"></colgroup>
+      <tbody>
+        <tr class="sec"><th colspan="2" scope="colgroup">Humedad</th></tr>
+        <tr><th scope="row" class="op">Al abrir había vaho, o gotas de agua en la tapa</th><td class="m" data-codigo="VAHO" data-valor="marcada">□</td></tr>
+        <tr><th scope="row" class="op">Se desmorona: se siente polvosa o crujiente</th><td class="m" data-codigo="HUM" data-valor="H1">□</td></tr>
+        <tr><th scope="row" class="op">Se apelmaza y mantiene la forma; no sale agua</th><td class="m" data-codigo="HUM" data-valor="H2">□</td></tr>
+        <tr><th scope="row" class="op">Al apretar salen una o dos gotas</th><td class="m" data-codigo="HUM" data-valor="H3">□</td></tr>
+        <tr><th scope="row" class="op">Al apretar escurre agua</th><td class="m" data-codigo="HUM" data-valor="H4">□</td></tr>
+        <tr><th scope="row" class="op">Hay líquido acumulado en el fondo</th><td class="m" data-codigo="HUM" data-valor="H5">□</td></tr>
+        <tr class="sec"><th colspan="2" scope="colgroup">Olor<small>una sola vez, antes de remover</small></th></tr>
+        <tr><th scope="row" class="op">Casi no huele</th><td class="m" data-codigo="OLOR" data-valor="O0">□</td></tr>
+        <tr><th scope="row" class="op">A tierra mojada, a bosque o a hojarasca</th><td class="m" data-codigo="OLOR" data-valor="O1">□</td></tr>
+        <tr><th scope="row" class="op">Dulce: a fruta madura, vinagre o fermento</th><td class="m" data-codigo="OLOR" data-valor="O2">□</td></tr>
+        <tr><th scope="row" class="op">A amoniaco, como limpiador de piso o como orina</th><td class="m" data-codigo="OLOR" data-valor="O3">□</td></tr>
+        <tr><th scope="row" class="op">A drenaje, a huevo podrido o a basura encerrada</th><td class="m" data-codigo="OLOR" data-valor="O4">□</td></tr>
+        <tr><th scope="row" class="op">Otro olor <em>— descríbelo abajo</em></th><td class="m" data-codigo="OLOR" data-valor="O5">□</td></tr>
+        <tr class="sec"><th colspan="2" scope="colgroup">Avance de la mezcla</th></tr>
+        <tr><th scope="row" class="op">Se distinguen casi todos los restos</th><td class="m" data-codigo="MEZ_AV" data-valor="M1">□</td></tr>
+        <tr><th scope="row" class="op">Algunos restos ya no se reconocen</th><td class="m" data-codigo="MEZ_AV" data-valor="M2">□</td></tr>
+        <tr><th scope="row" class="op">La mayor parte parece tierra oscura o migajón</th><td class="m" data-codigo="MEZ_AV" data-valor="M3">□</td></tr>
+        <tr class="sec"><th colspan="2" scope="colgroup">Textura de la mezcla</th></tr>
+        <tr><th scope="row" class="op">Suelta, con huecos de aire</th><td class="m" data-codigo="MEZ_TX" data-valor="X1">□</td></tr>
+        <tr><th scope="row" class="op">Apelmazada, pegada como una masa</th><td class="m" data-codigo="MEZ_TX" data-valor="X2">□</td></tr>
+        <tr><th scope="row" class="op">Con bloques o pedazos grandes que no se deshacen</th><td class="m" data-codigo="MEZ_TX" data-valor="X3">□</td></tr>
+      </tbody>
+    </table>
+    <table class="lista" aria-label="Observación del equipo, segunda parte">
+      <colgroup><col><col style="width:7mm"></colgroup>
+      <tbody>
+        <tr class="sec"><th colspan="2" scope="colgroup">Quién vive aquí<small>más de una vez o más de dos individuos</small></th></tr>
+        <tr><th scope="row" class="op">Lombrices</th><td class="m" data-codigo="FAU" data-valor="F01">□</td></tr>
+        <tr><th scope="row" class="op">Cochinillas, milpiés, caracoles o babosas</th><td class="m" data-codigo="FAU" data-valor="F02">□</td></tr>
+        <tr><th scope="row" class="op">Escarabajos, o larvas gruesas blancas en forma de C</th><td class="m" data-codigo="FAU" data-valor="F03">□</td></tr>
+        <tr><th scope="row" class="op">Larvas grandes, planas y café, muy movedizas</th><td class="m" data-codigo="FAU" data-valor="F04">□</td></tr>
+        <tr><th scope="row" class="op">Mosquitas que revolotean al abrir</th><td class="m" data-codigo="FAU" data-valor="F05">□</td></tr>
+        <tr><th scope="row" class="op">Mosquitos negros diminutos que caminan en la superficie</th><td class="m" data-codigo="FAU" data-valor="F06">□</td></tr>
+        <tr><th scope="row" class="op">Moscas grandes, o gusanos blancos delgados</th><td class="m" data-codigo="FAU" data-valor="F07">□</td></tr>
+        <tr><th scope="row" class="op">Hormigas</th><td class="m" data-codigo="FAU" data-valor="F08">□</td></tr>
+        <tr><th scope="row" class="op">Cucarachas</th><td class="m" data-codigo="FAU" data-valor="F09">□</td></tr>
+        <tr><th scope="row" class="op">Hilos o polvo blanco, o manchas verdes, azules o negras</th><td class="m" data-codigo="FAU" data-valor="F10">□</td></tr>
+        <tr><th scope="row" class="op">Huellas, excavaciones o restos movidos de lugar</th><td class="m" data-codigo="FAU" data-valor="F11">□</td></tr>
+        <tr><th scope="row" class="op">Vi algo que no supe identificar <em>— descríbelo abajo</em></th><td class="m" data-codigo="FAU" data-valor="F12">□</td></tr>
+        <tr><th scope="row" class="op">No vi ninguno de los anteriores</th><td class="m" data-codigo="FAU" data-valor="F00">□</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p style="margin-top:2mm"><b>Nota</b> (si marcaste «otro olor» o «no supe identificar»): <span style="display:inline-block;width:150mm;border-bottom:.65pt solid #303030">&nbsp;</span></p>
+
+  <section class="leyenda" style="margin-top:2mm">
+    <p>· Esta hoja forma par con la Hoja 4 del mismo hogar. Con cinco hogares son cinco pares; los de hogares de personas del equipo se analizan aparte, porque quien diseñó o discutió las categorías no es un observador ingenuo (RE-08). El repositorio no dice qué hogares son.<br>
+       · Se reportan acuerdo bruto y tablas de confusión; con tan pocos pares, esta parte es descriptiva.</p>
+  </section>
+
+  <footer class="pie">
+    <span>Miltli · Hoja de concordancia (RE-12) · Acompaña a F-HOG rev.&nbsp;03 y al diccionario v0.3. Sin nombres: sólo claves.</span>
+    <span>Página 3 de 4</span>
+  </footer>
+</article>
+<article class="hoja equipo-hoja" aria-labelledby="t-d">
+  <header class="principal">
+    <h1 id="t-d">Concordancia · Clave y reglas
+      <small><strong>Sólo para el equipo.</strong> Se llena antes de la sesión del día 1 y no se muestra a quienes observan.</small>
+    </h1>
+    <p class="clave">Fecha <span>____ / ____ / 2026</span></p>
+  </header>
+
+  <section>
+    <h2>Clave de las estaciones — estado con el que se preparó cada cubeta</h2>
+    <p class="nota">Misma mezcla base en las cinco cubetas (composta con hojas, o tierra con hojas picadas); sólo cambia el agua. Preparar la víspera, tapar, y comprobar el estado antes de la sesión. El orden de las cubetas en la mesa se sortea: no va de seca a mojada.</p>
+    <table aria-label="Clave de las estaciones">
+      <colgroup><col style="width:24mm"><col><col><col><col><col><col style="width:52mm"></colgroup>
+      <thead><tr><th scope="col">Cubeta</th><th scope="col">Se desmorona<small>polvosa o crujiente</small></th><th scope="col">Se apelmaza<small>mantiene la forma; no sale agua</small></th><th scope="col">Una o dos gotas<small>al apretar</small></th><th scope="col">Escurre agua<small>al apretar</small></th><th scope="col">Líquido en el fondo<small>de la cubeta</small></th><th scope="col">Cómo se preparó</th></tr></thead>
+      <tbody>
+        <tr><th scope="row">Estación 1</th><td class="m" data-codigo="CONC_REF" data-valor="H1" data-item="1">□</td><td class="m" data-codigo="CONC_REF" data-valor="H2" data-item="1">□</td><td class="m" data-codigo="CONC_REF" data-valor="H3" data-item="1">□</td><td class="m" data-codigo="CONC_REF" data-valor="H4" data-item="1">□</td><td class="m" data-codigo="CONC_REF" data-valor="H5" data-item="1">□</td><td></td></tr>
+        <tr><th scope="row">Estación 2</th><td class="m" data-codigo="CONC_REF" data-valor="H1" data-item="2">□</td><td class="m" data-codigo="CONC_REF" data-valor="H2" data-item="2">□</td><td class="m" data-codigo="CONC_REF" data-valor="H3" data-item="2">□</td><td class="m" data-codigo="CONC_REF" data-valor="H4" data-item="2">□</td><td class="m" data-codigo="CONC_REF" data-valor="H5" data-item="2">□</td><td></td></tr>
+        <tr><th scope="row">Estación 3</th><td class="m" data-codigo="CONC_REF" data-valor="H1" data-item="3">□</td><td class="m" data-codigo="CONC_REF" data-valor="H2" data-item="3">□</td><td class="m" data-codigo="CONC_REF" data-valor="H3" data-item="3">□</td><td class="m" data-codigo="CONC_REF" data-valor="H4" data-item="3">□</td><td class="m" data-codigo="CONC_REF" data-valor="H5" data-item="3">□</td><td></td></tr>
+        <tr><th scope="row">Estación 4</th><td class="m" data-codigo="CONC_REF" data-valor="H1" data-item="4">□</td><td class="m" data-codigo="CONC_REF" data-valor="H2" data-item="4">□</td><td class="m" data-codigo="CONC_REF" data-valor="H3" data-item="4">□</td><td class="m" data-codigo="CONC_REF" data-valor="H4" data-item="4">□</td><td class="m" data-codigo="CONC_REF" data-valor="H5" data-item="4">□</td><td></td></tr>
+        <tr><th scope="row">Estación 5</th><td class="m" data-codigo="CONC_REF" data-valor="H1" data-item="5">□</td><td class="m" data-codigo="CONC_REF" data-valor="H2" data-item="5">□</td><td class="m" data-codigo="CONC_REF" data-valor="H3" data-item="5">□</td><td class="m" data-codigo="CONC_REF" data-valor="H4" data-item="5">□</td><td class="m" data-codigo="CONC_REF" data-valor="H5" data-item="5">□</td><td></td></tr>
+      </tbody>
+    </table>
+    <p class="nota" style="margin-top:1.2mm">Guía de preparación: <b>H1</b> mezcla secada al aire; <b>H2</b> humedecida hasta que el puño mantiene la forma sin gotear; <b>H3</b> un poco más, hasta que al apretar salgan una o dos gotas; <b>H4</b> hasta que al apretar escurra; <b>H5</b> como H4 y con unos 2&nbsp;cm de agua libre en el fondo.</p>
+  </section>
+
+  <section class="leyenda equipo" style="margin-top:2mm">
+    <h3>Qué se reporta</h3>
+    <p>· <strong>Acuerdo bruto</strong>: proporción de marcas que coinciden con la clave (Parte A) o entre observadores ingenuos (Partes B y C).<br>
+       · <strong>Tablas de confusión</strong> por variable: qué se marcó cuando la referencia era cada categoría.<br>
+       · <strong>Kappa sólo como dato secundario</strong>: se comporta mal cuando domina una categoría (Feinstein &amp; Cicchetti 1990, <em>J Clin Epidemiol</em> 43:543–549).<br>
+       · Observadores del equipo (<em>equipo</em>) y externos (<em>externo</em>) se reportan aparte de los voluntarios. Los hogares del equipo no cuentan como observadores ingenuos (RE-08).</p>
+  </section>
+
+  <section style="margin-top:2mm">
+    <h3>Reglas preespecificadas — PROPUESTA P-12, decide el comité antes del día 1</h3>
+    <p class="nota">Se escriben antes de ver datos y se aplican <strong>al analizar</strong>, sin reimprimir la ficha, para que la prueba no retrase el arranque.</p>
+    <table aria-label="Reglas preespecificadas">
+      <colgroup><col style="width:18mm"><col style="width:18mm"><col style="width:30mm"><col></colgroup>
+      <thead><tr><th>Variable</th><th>Fuente</th><th>Se mantiene si</th><th>Si falla, se aplica</th></tr></thead>
+      <tbody>
+        <tr><th>Humedad</th><td>A</td><td>acuerdo con la clave ≥ 70&nbsp;%</td><td>Tres niveles: seca (H1) · húmeda sin agua libre (H2) · con agua (H3 + H4 + H5)</td></tr>
+        <tr><th>Fauna</th><td>B</td><td>acuerdo ≥ 70&nbsp;% en el grupo</td><td>Ese grupo se fusiona según: lombrices (F01) · descomponedores visibles (F02 + F03) · larvas grandes y moscas (F04 + F07) · insectos pequeños de superficie (F05 + F06) · hormigas y cucarachas (F08 + F09); F10, F11, F12 y F00 no cambian</td></tr>
+        <tr><th>Avance</th><td>B</td><td>acuerdo ≥ 70&nbsp;%</td><td>M2 + M3 se fusionan</td></tr>
+        <tr><th>Textura</th><td>B</td><td>acuerdo ≥ 70&nbsp;%</td><td>Se reporta sólo «apelmazada sí / no» (X2)</td></tr>
+        <tr><th>Olor y vaho</th><td>C</td><td>—</td><td>Sólo descriptivo: dos o cinco pares no sostienen un umbral</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="leyenda" style="margin-top:2mm">
+    <h3>Fotos del panel</h3>
+    <p>· Interior de pilas aerobias de cualquier origen, con fauna y mezclas variadas. <strong>Sólo fotos propias del equipo o con licencia Creative Commons</strong>, con autor, licencia y enlace anotados en el registro del panel; no se copian imágenes con derechos.<br>
+       · Las fotos no muestran personas, fachadas ni placas, y se guardan sin ubicación.<br>
+       · <strong>PROPUESTA P-13:</strong> mostrar el panel también a personas externas que no hayan visto la ficha (grupo «externo»), para tener más observadores ingenuos.</p>
+  </section>
+
+  <footer class="pie">
+    <span>Miltli · Hoja de concordancia (RE-12) · Acompaña a F-HOG rev.&nbsp;03 y al diccionario v0.3. Sin nombres: sólo claves.</span>
+    <span>Página 4 de 4</span>
+  </footer>
+</article>
+</main>
+</body>
+</html>

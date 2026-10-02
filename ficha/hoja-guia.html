@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Miltli — Hoja guía del piloto doméstico de compostaje</title>
+<!--
+  Hoja guía (acta-01: A-4, E-2, RE-02, RE-06). Se consulta; no se llena, así que no lleva
+  data-codigo. Acompaña a F-HOG rev. 03. Las fotos de la ayuda visual sólo pueden ser propias del
+  equipo o con licencia Creative Commons atribuida; mientras no las haya, los recuadros quedan vacíos.
+-->
+<style>
+  :root { --linea: #303030; --suave: #777; --tenue: #f1f1f1; }
+  @page { size: Letter portrait; margin: 11mm 11mm 9mm; }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; font-family: "Helvetica Neue", Arial, sans-serif; color: #111; background: #d9d9d9; }
+  body { font-size: 7.6pt; line-height: 1.16; }
+  .acciones { position: fixed; top: 14px; right: 14px; z-index: 10; }
+  .acciones button { appearance: none; border: 1px solid var(--linea); background: #fff; color: #111; font: 600 10pt "Helvetica Neue", Arial, sans-serif; padding: 9px 13px; border-radius: 4px; cursor: pointer; box-shadow: 0 1px 4px rgba(0,0,0,.18); }
+  main { width: 100%; padding: 12mm 0; }
+  article.hoja { width: 215.9mm; min-height: 279.4mm; margin: 0 auto 12mm; padding: 11mm 11mm 9mm; background: #fff; box-shadow: 0 2mm 7mm rgba(0,0,0,.16); display: flex; flex-direction: column; }
+  header.principal { display: flex; justify-content: space-between; align-items: flex-end; gap: 6mm; border-bottom: 1.2pt solid var(--linea); padding-bottom: 1.2mm; margin-bottom: 1.6mm; }
+  header.principal h1 { margin: 0; font-size: 15pt; line-height: 1.05; }
+  header.principal h1 small { display: block; margin-top: .8mm; font-size: 8pt; font-weight: 500; color: #333; }
+  header.principal p { margin: 0; font-size: 8pt; font-weight: 700; text-align: right; }
+  h2 { margin: 0 0 .8mm; font-size: 10pt; }
+  h3 { margin: 0 0 .5mm; font-size: 8.2pt; }
+  p { margin: 0; }
+  ol, ul { margin: 0; padding-left: 3.8mm; }
+  li { margin: 0 0 .25mm; }
+  .reglas { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 0 3.5mm; border: 1.2pt solid var(--linea); padding: 1.4mm 2mm; margin-bottom: 1.8mm; }
+  .reglas > div + div { border-left: .5pt solid var(--suave); padding-left: 3mm; }
+  .reglas section + section { margin-top: 1.2mm; }
+  .destacado { background: var(--tenue); padding: .8mm 1.2mm; margin-top: .6mm; }
+  table { width: 100%; border-collapse: collapse; table-layout: fixed; }
+  th, td { border: .6pt solid var(--linea); padding: .55mm 1mm; vertical-align: top; text-align: left; }
+  thead th { background: var(--tenue); font-weight: 700; font-size: 7.4pt; }
+  table.ayuda td:first-child { font-weight: 600; }
+  .ayudas { display: grid; grid-template-columns: 1fr 1fr; gap: 0 3.5mm; margin-bottom: 1.8mm; }
+  table.ayuda td, table.ayuda th { font-size: 7.3pt; }
+  .fauna { display: grid; grid-template-columns: 1fr 1fr; gap: 1.1mm 3.5mm; }
+  .bicho { display: grid; grid-template-columns: 1fr 17mm; gap: 0 1.6mm; border: .6pt solid var(--linea); padding: .8mm 1.2mm; min-height: 15.5mm; }
+  .bicho h3 { font-size: 7.8pt; }
+  .bicho p { font-size: 7.1pt; line-height: 1.12; }
+  .bicho p em { font-style: normal; color: #444; }
+  .foto { border: .6pt dashed var(--suave); display: flex; align-items: center; justify-content: center; text-align: center; font-size: 5.6pt; color: #777; line-height: 1.05; padding: .4mm; }
+  .nota { font-size: 7pt; color: #333; margin: 0 0 1mm; }
+  footer.pie { margin-top: auto; padding-top: 1.4mm; border-top: .6pt solid var(--linea); display: flex; justify-content: space-between; gap: 6mm; font-size: 7pt; color: #333; }
+  footer.pie span:last-child { white-space: nowrap; font-weight: 650; }
+  @media print {
+    html, body { background: #fff; }
+    .acciones { display: none !important; }
+    main { padding: 0; }
+    article.hoja { width: auto; min-height: 257mm; margin: 0; padding: 0; box-shadow: none; }
+  }
+</style>
+</head>
+<body>
+<div class="acciones" aria-label="Acciones del documento">
+  <button type="button" onclick="window.print()">Imprimir hoja guía</button>
+</div>
+
+<main>
+<article class="hoja" aria-labelledby="t-guia">
+  <header class="principal">
+    <h1 id="t-guia">Hoja guía · Miltli
+      <small>Para consultar mientras cuidas tu composta. <strong>Esta hoja no se llena ni se entrega.</strong></small>
+    </h1>
+    <p>Acompaña a la ficha F-HOG rev.&nbsp;03</p>
+  </header>
+
+  <div class="reglas">
+    <div>
+      <section>
+        <h3>Cada vez que echas</h3>
+        <ol>
+          <li><strong>Retira</strong> lo que no va: plástico, vidrio, metal.</li>
+          <li><strong>Trocea</strong> lo grande, a menos de 5&nbsp;cm.</li>
+          <li><strong>Mide</strong> en botes y apúntalo en la Hoja 2.</li>
+          <li><strong>Echa</strong> el orgánico.</li>
+          <li><strong>Cubre</strong> con material seco.</li>
+          <li><strong>Tapa</strong> el contenedor.</li>
+        </ol>
+      </section>
+      <section>
+        <h3>La regla 1:2</h3>
+        <p>Por cada bote de orgánico, <strong>2 botes de material seco</strong> encima. Si la mezcla sigue muy húmeda o con olor, sube a 3.</p>
+      </section>
+    </div>
+    <div>
+      <section>
+        <h3>Cómo se cuenta</h3>
+        <ul>
+          <li>En <strong>botes</strong>, hasta el borde, sin apretar, sin acomodar y sin sacudir.</li>
+          <li>Sólo <strong>enteros y medios</strong>: 0, ½, 1, 1½…</li>
+          <li>Se anota <strong>el día en que lo echas</strong> a la composta, no el día en que salió de la cocina.</li>
+          <li><strong>0</strong> = hoy no agregué nada a la composta. Renglón vacío = no anoté.</li>
+          <li>Si no llega a medio bote, guárdalo para la siguiente vez.</li>
+          <li>Lo que separaste y no echaste —porque no cupo, no había seco, se fue a animales o a la basura— va cada semana en «lo que no llegó» de la Hoja 3.</li>
+        </ul>
+      </section>
+    </div>
+    <div>
+      <section>
+        <h3>La regla del 80&nbsp;%</h3>
+        <p>Cuando la composta llegue a la <strong>línea del 80&nbsp;%</strong> que marcó el equipo por dentro del contenedor:</p>
+        <ul>
+          <li><strong>deja de echar</strong> residuos;</li>
+          <li>anota el día en la Hoja 3: «dejé de agregar el día __»;</li>
+          <li>desde ese día, lo que ya no entre va en «lo que no llegó», con <strong>«ya no cabía»</strong>;</li>
+          <li>mezcla todo una vez y corrige la humedad;</li>
+          <li>este mes no se abre un segundo contenedor.</li>
+        </ul>
+      </section>
+      <section class="destacado">
+        <h3>El día 28</h3>
+        <p><strong>Guarda los residuos del día sin echarlos</strong> hasta que llegue el equipo. Es lo único que te pedimos preparar.</p>
+      </section>
+    </div>
+  </div>
+
+  <h2>Si observas esto, suele ayudar</h2>
+  <p class="nota">Ninguna observación es un fracaso: cada una dice hacia dónde se está moviendo la composta. Si hiciste algo, márcalo en «¿Qué hiciste esta semana?» de la Hoja 3.</p>
+  <div class="ayudas">
+    <table class="ayuda" aria-label="Ajustes de operación, primera parte">
+      <colgroup><col style="width:46%"><col></colgroup>
+      <thead><tr><th scope="col">Si observas</th><th scope="col">Suele ayudar</th></tr></thead>
+      <tbody>
+        <tr><td>Líquido acumulado en el fondo</td><td>Más seco y remover suele resolverlo</td></tr>
+        <tr><td>Agua que escurre al apretar</td><td>Más seco, remover, y proteger de la lluvia</td></tr>
+        <tr><td>Mezcla que se desmorona, polvosa</td><td>Agregar agua poco a poco</td></tr>
+        <tr><td>Olor a amoniaco</td><td>Agregar hojas o cartón</td></tr>
+        <tr><td>Olor a drenaje o a huevo podrido</td><td>Agregar material seco y mezclar</td></tr>
+      </tbody>
+    </table>
+    <table class="ayuda" aria-label="Ajustes de operación, segunda parte">
+      <colgroup><col style="width:46%"><col></colgroup>
+      <thead><tr><th scope="col">Si observas</th><th scope="col">Suele ayudar</th></tr></thead>
+      <tbody>
+        <tr><td>Mosquitas que revolotean al abrir</td><td>Se van al cubrir la fruta con seco</td></tr>
+        <tr><td>Moscas grandes o gusanos blancos</td><td>Enterrar los restos y cubrirlos con seco</td></tr>
+        <tr><td>Mezcla apelmazada, como masa</td><td>Removerla le devuelve aire</td></tr>
+        <tr><td>Bloques que no se deshacen</td><td>Trocear más al echarlos</td></tr>
+        <tr><td>Hormigas · huellas o excavaciones</td><td>Un poco más de humedad · asegurar la tapa</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2>¿Quién vive aquí? Ayuda para reconocer la fauna</h2>
+  <p class="nota">Rasgos para distinguir cada grupo de la Hoja 4: tamaño, color, forma y cómo se mueve. Se marca lo que se ve <strong>más de una vez o en más de dos individuos</strong>. Los recuadros punteados son para fotos <strong>propias del equipo o con licencia Creative Commons</strong>, con autor y licencia anotados; no se usan imágenes con derechos.</p>
+  <div class="fauna">
+    <div class="bicho"><div><h3>Lombrices</h3><p>Cuerpo blando, liso y en anillos, sin patas; rojizas o moradas, de 3 a 12&nbsp;cm. Se mueven ondulando y se esconden de la luz. <em>Mucho más largas y oscuras que los gusanos blancos de mosca.</em></p></div><div class="foto">foto propia o CC<br>autor · licencia</div></div>
+    <div class="bicho"><div><h3>Cochinillas, milpiés, caracoles o babosas</h3><p>Cochinillas: grises, ovaladas, con placas, ~1&nbsp;cm; algunas se hacen bolita. Milpiés: largos y cilíndricos, con muchas patas cortas; se enroscan en espiral. Caracoles y babosas: blandos, dejan rastro brillante.</p></div><div class="foto">foto propia o CC<br>autor · licencia</div></div>
+    <div class="bicho"><div><h3>Escarabajos o larvas blancas en C</h3><p>Escarabajos: adultos con caparazón duro y brillante y seis patas. Larvas: gruesas, blancas, curvadas en forma de C, con cabeza café y seis patitas junto a la cabeza; lentas.</p></div><div class="foto">foto propia o CC<br>autor · licencia</div></div>
+    <div class="bicho"><div><h3>Larvas de mosca soldado</h3><p>Hasta unos 2&nbsp;cm, <strong>planas</strong> y segmentadas, de color crema a café oscuro, piel dura como cuero, sin patas. Muy movedizas; suelen ir en grupo y se esconden rápido. <em>No son los gusanos blancos y blandos de mosca.</em></p></div><div class="foto">foto propia o CC<br>autor · licencia</div></div>
+    <div class="bicho"><div><h3>Mosquitas que revolotean al abrir</h3><p>Unos 3&nbsp;mm, color café claro, a menudo con ojos rojos. Vuelan lento y en nube cuando se levanta la tapa; se posan en la fruta.</p></div><div class="foto">foto propia o CC<br>autor · licencia</div></div>
+    <div class="bicho"><div><h3>Mosquitos negros de superficie</h3><p>Diminutos (2–3&nbsp;mm), negros y delgados, de patas y antenas largas. <strong>Caminan o corren</strong> sobre la superficie húmeda y vuelan poco. <em>Las mosquitas de la fruta, en cambio, vuelan al abrir.</em></p></div><div class="foto">foto propia o CC<br>autor · licencia</div></div>
+    <div class="bicho"><div><h3>Moscas grandes o gusanos blancos</h3><p>Moscas de casa o verdes metálicas, de 6 a 10&nbsp;mm. Gusanos: blancos o crema, blandos, de 0.5 a 1.5&nbsp;cm, <strong>en forma de cono</strong> (punta delgada adelante) y sin patas.</p></div><div class="foto">foto propia o CC<br>autor · licencia</div></div>
+    <div class="bicho"><div><h3>Hormigas</h3><p>Cintura muy delgada entre el tórax y el abdomen, antenas dobladas en codo. Caminan en fila o en caminos que van y vienen.</p></div><div class="foto">foto propia o CC<br>autor · licencia</div></div>
+    <div class="bicho"><div><h3>Cucarachas</h3><p>Cuerpo aplanado y ovalado, café brillante, antenas muy largas. Muy rápidas; huyen de la luz y se meten en las rendijas.</p></div><div class="foto">foto propia o CC<br>autor · licencia</div></div>
+    <div class="bicho"><div><h3>Hongos</h3><p>Hilos blancos como algodón o telaraña, polvo blanco, o manchas verdes, azules o negras, casi siempre sobre el material seco. No se mueven.</p></div><div class="foto">foto propia o CC<br>autor · licencia</div></div>
+    <div class="bicho"><div><h3>Huellas o excavaciones</h3><p>Marcas de patas en el material, túneles u hoyos en la orilla, restos sacados del contenedor o la tapa movida.</p></div><div class="foto">foto propia o CC<br>autor · licencia</div></div>
+    <div class="bicho"><div><h3>Algo que no supiste identificar</h3><p>Márcalo como «no supe identificar» y describe en la nota del día 28 su tamaño, color, forma y cómo se movía. No pasa nada por no saber: ese dato también sirve.</p></div><div class="foto">foto propia o CC<br>autor · licencia</div></div>
+  </div>
+
+  <footer class="pie">
+    <span>Miltli · HUMAN STEM, A.C. · Hoja guía del piloto doméstico de compostaje · 2026 · Se consulta; no se llena.</span>
+    <span>Acompaña a F-HOG rev.&nbsp;03</span>
+  </footer>
+</article>
+</main>
+</body>
+</html>

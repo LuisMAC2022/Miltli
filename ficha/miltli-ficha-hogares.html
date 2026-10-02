@@ -3,7 +3,14 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Miltli — Ficha de registro del piloto doméstico de compostaje</title>
+<title>Miltli — Ficha de registro del piloto doméstico de compostaje (F-HOG rev. 03)</title>
+<!--
+  F-HOG rev. 03. Cada casilla lleva data-codigo (y data-valor donde aplica) con el código de
+  ficha/diccionario-de-datos-v0.3-borrador.md. Los atributos no se imprimen; sirven para que la
+  captura no dependa de la posición y para que tests/ficha-cobertura.test.js compruebe la cobertura
+  casilla ↔ código (RE-14). data-sem = semana (Hoja 3), data-dia = día (Hoja 2), data-copia = copia
+  de consulta que no se captura. La rev. 02 se conserva en miltli-ficha-hogares-rev02.html.
+-->
 <style>
   :root {
     --linea: #303030;
@@ -137,7 +144,7 @@
   p { margin: 0; }
 
   section + section {
-    margin-top: 1.8mm;
+    margin-top: 1.6mm;
   }
 
   table {
@@ -198,23 +205,9 @@
 
   .leyenda.regla {
     border-width: 1.2pt;
-    font-size: 8.4pt;
-    padding: 1.6mm 2.4mm;
-    margin: 0 0 2.2mm;
-  }
-
-  .leyenda.regla ul {
-    margin: 0;
-    padding: 0;
-    list-style: none;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: .6mm 4mm;
-  }
-
-  .leyenda.regla li::before {
-    content: "· ";
-    color: var(--suave);
+    font-size: 8.2pt;
+    padding: 1.4mm 2.4mm;
+    margin: 0 0 2mm;
   }
 
   .dos-columnas {
@@ -225,16 +218,23 @@
 
   /* ---------- Hoja diaria ---------- */
 
-  .dia    { width: 8mm; }
+  .dia    { width: 9mm; }
   .fecha  { width: 16mm; }
   .botes  { width: 25mm; }
 
   #cuerpo-diario td,
-  #cuerpo-diario th { height: 6mm; }
+  #cuerpo-diario th { height: 5.55mm; padding-top: .4mm; padding-bottom: .4mm; }
 
   #cuerpo-diario tr.fin-semana td,
   #cuerpo-diario tr.fin-semana th {
     border-bottom: 1.6pt solid var(--linea);
+  }
+
+  #cuerpo-diario th small {
+    display: block;
+    font-size: 5.8pt;
+    font-weight: 500;
+    line-height: 1;
   }
 
   /* ---------- Listas de definición (alta y cierre) ---------- */
@@ -255,7 +255,7 @@
   dl.alta dt,
   dl.alta dd {
     margin: 0;
-    padding: .85mm 1.4mm;
+    padding: .6mm 1.4mm;
   }
 
   dl.alta dt {
@@ -266,9 +266,9 @@
   dl.alta dt small,
   dl.alta dd small {
     display: block;
-    margin-top: .4mm;
-    font-size: 7.3pt;
-    line-height: 1.08;
+    margin-top: .3mm;
+    font-size: 7.2pt;
+    line-height: 1.06;
     font-weight: 500;
     color: #444;
   }
@@ -277,13 +277,13 @@
     display: flex;
     align-items: center;
     flex-wrap: wrap;
-    gap: .8mm 2mm;
-    min-height: 5.2mm;
+    gap: .4mm 2mm;
+    min-height: 4.6mm;
   }
 
   .opcion {
     font-size: 9.5pt;
-    letter-spacing: .1em;
+    letter-spacing: .06em;
     white-space: nowrap;
   }
 
@@ -302,14 +302,7 @@
     color: #333;
   }
 
-  .linea-escritura {
-    display: inline-block;
-    width: 100%;
-    min-height: 5.6mm;
-    border-bottom: .65pt solid var(--linea);
-  }
-
-  /* ---------- Rejilla de revisión semanal ---------- */
+  /* ---------- Rejillas: renglón semanal y revisión del día 28 ---------- */
 
   .rejilla {
     display: grid;
@@ -320,33 +313,54 @@
 
   table.semanal { font-size: 7.9pt; }
 
-  table.semanal col.sem { width: 6.2mm; }
+  table.semanal col.sem { width: 6.4mm; }
 
   table.semanal thead th { font-size: 7.6pt; }
 
-  table.semanal tbody th.op {
+  table.semanal tbody th.op,
+  table.unica tbody th.op {
     text-align: left;
     font-weight: 400;
     line-height: 1.06;
-    padding: .6mm 1.2mm;
+    padding: .55mm 1.2mm;
   }
 
-  table.semanal tbody th.op em {
+  table.semanal tbody th.op em,
+  table.unica tbody th.op em {
     font-style: normal;
     color: #555;
-    font-size: 7.2pt;
+    font-size: 7.1pt;
   }
 
-  table.semanal tbody th.op b { font-weight: 650; }
+  table.semanal tbody th.op b,
+  table.unica tbody th.op b { font-weight: 650; }
 
-  table.semanal td {
+  table.semanal td,
+  table.unica td {
     text-align: center;
     font-size: 10.5pt;
     line-height: 1;
-    height: 5mm;
+    height: 4.9mm;
   }
 
-  table.semanal td.escribe { font-size: 8pt; }
+  table.semanal td.escribe { font-size: 8pt; height: 6.2mm; }
+
+  table.unica { font-size: 7.3pt; }
+  .rejilla.cuatro { gap: 0 3.5mm; }
+  table.unica col.marca { width: 6mm; }
+  table.unica td { height: 3.9mm; font-size: 9.6pt; padding-top: .3mm; padding-bottom: .3mm; }
+  table.unica tbody th.op { padding: .4mm 1.1mm; line-height: 1.03; }
+  table.unica tbody th.op em { font-size: 6.4pt; }
+  table.unica tr.sec th { padding: .6mm 1.1mm; font-size: 7.9pt; }
+  table.unica tr.sec th small { font-size: 6.8pt; }
+  table.unica td.escribe-nota { height: 11mm; }
+
+  .dos-dl {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0 4mm;
+    align-items: start;
+  }
 
   tr.sec th {
     background: var(--tenue);
@@ -354,28 +368,41 @@
     font-weight: 700;
     font-size: 8.1pt;
     line-height: 1.1;
-    padding: 1mm 1.2mm;
+    padding: .8mm 1.2mm;
     border-top: 1.2pt solid var(--linea);
   }
 
   tr.sec th small {
     display: block;
-    margin-top: .4mm;
-    font-size: 7.2pt;
-    line-height: 1.08;
+    margin-top: .3mm;
+    font-size: 7.1pt;
+    line-height: 1.06;
     font-weight: 500;
     color: #333;
   }
 
+  tr.subsec th {
+    text-align: left;
+    font-weight: 700;
+    font-size: 7.6pt;
+    padding: .5mm 1.2mm;
+    border-top: 1.6pt solid var(--linea);
+  }
+
+  tr.subsec th small {
+    font-weight: 500;
+    color: #444;
+  }
+
   .libre {
-    margin-top: 2.4mm;
+    margin-top: 2mm;
   }
 
   .libre .renglones {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 1.4mm 5mm;
-    margin-top: 1.2mm;
+    gap: 1.2mm 5mm;
+    margin-top: 1mm;
   }
 
   .libre .renglon {
@@ -387,7 +414,21 @@
 
   .libre .renglon span {
     border-bottom: .65pt solid var(--linea);
-    min-height: 6mm;
+    min-height: 6.4mm;
+  }
+
+  .parada {
+    margin-top: 2.2mm;
+    border: 1pt solid var(--linea);
+    padding: 1.2mm 2mm;
+    font-size: 8.2pt;
+    line-height: 1.2;
+  }
+
+  .parada small {
+    display: block;
+    font-size: 7.2pt;
+    color: #444;
   }
 
   /* ---------- Fases: arranque y cierre ---------- */
@@ -399,8 +440,8 @@
     gap: 4mm;
     border: 1.4pt solid var(--linea);
     background: var(--tenue);
-    padding: .8mm 2mm;
-    margin: 0 0 1.4mm;
+    padding: .7mm 2mm;
+    margin: 0 0 1.2mm;
   }
 
   .fase h2 {
@@ -425,7 +466,7 @@
   .renglon-ancho {
     display: block;
     width: 100%;
-    min-height: 11mm;
+    min-height: 6.5mm;
     border-bottom: .65pt solid var(--linea);
   }
 
@@ -434,28 +475,22 @@
     padding-left: 2.2mm;
   }
 
-  .corte {
-    margin: 3.2mm 0 2.4mm;
-    border-top: 1pt dashed var(--linea);
-    text-align: center;
+  .abiertas4 {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0 3mm;
+    font-size: 7.8pt;
   }
 
-  .corte span {
-    display: inline-block;
-    transform: translateY(-50%);
-    background: #fff;
-    padding: 0 2.5mm;
-    font-size: 7.6pt;
-    font-weight: 650;
-    color: #333;
-  }
+  .abiertas4 b { font-weight: 650; }
+  .abiertas4 .renglon-ancho { min-height: 7.5mm; }
 
   /* ---------- Orden del piloto ---------- */
 
-  .leyenda.orden { margin: 0 0 1.6mm; }
+  .leyenda.orden { margin: 0 0 1.4mm; }
 
   .leyenda.orden h3 {
-    margin: 0 0 .8mm;
+    margin: 0 0 .7mm;
     font-size: 8.6pt;
   }
 
@@ -463,7 +498,8 @@
     margin: 0;
     padding: 0 0 0 4mm;
     display: grid;
-    grid-template-rows: repeat(3, auto);
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto auto;
     grid-auto-flow: column;
     gap: .5mm 5mm;
   }
@@ -471,7 +507,7 @@
   .leyenda.orden li { padding-left: .6mm; }
 
   .leyenda.equipo {
-    margin: 1.8mm 0 0;
+    margin: 1.4mm 0 0;
     border-width: 1.2pt;
   }
 
@@ -484,12 +520,12 @@
 
   .regla .doble {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr 1.25fr;
     gap: 0 5mm;
   }
 
   .regla .doble h3 {
-    margin: 0 0 .7mm;
+    margin: 0 0 .6mm;
     font-size: 8.4pt;
   }
 
@@ -502,7 +538,6 @@
     margin: 0;
     padding: 0;
     list-style: none;
-    display: block;
   }
 
   .regla .doble ul li::before {
@@ -514,7 +549,7 @@
 
   footer.pie {
     margin-top: auto;
-    padding-top: 2mm;
+    padding-top: 1.8mm;
     border-top: .65pt solid var(--linea);
     display: flex;
     justify-content: space-between;
@@ -537,7 +572,7 @@
 
     article.hoja {
       width: auto;
-      min-height: 0;
+      min-height: 255mm;
       margin: 0;
       padding: 0;
       box-shadow: none;
@@ -561,109 +596,128 @@
     </h1>
     <p class="clave">
       Hogar
-      <b>H___</b>
+      <b data-codigo="ID">H___</b>
       <span>lo asigna el equipo</span>
-      Inicio: ____ / ____ / 2026
+      Inicio: <span data-codigo="FINI">____ / ____ / 2026</span>
     </p>
   </header>
 
   <div class="leyenda orden">
     <h3>El orden del piloto, de principio a fin</h3>
     <ol>
-      <li><strong>Día 1 · arranque.</strong> El equipo mide tu bote. Llenas esta <strong>Hoja 1</strong>.</li>
+      <li><strong>Día 1 · arranque.</strong> El equipo mide tu bote y tu contenedor. Llenas esta <strong>Hoja 1</strong>.</li>
       <li><strong>Días 1 a 28 · diario.</strong> Dos números por día en la <strong>Hoja 2</strong>.</li>
-      <li><strong>Cada semana · revisión.</strong> Cinco minutos en la <strong>Hoja 3</strong>.</li>
-      <li><strong>Cuando el equipo avise · visita.</strong> El equipo pesa y mide temperatura.</li>
-      <li><strong>Día 28 · cierre.</strong> Llenas la <strong>Hoja 4</strong>, el mismo día que la última revisión.</li>
+      <li><strong>Cada semana · un renglón.</strong> Menos de un minuto en la <strong>Hoja 3</strong>.</li>
+      <li><strong>Día 28 · visita de cierre.</strong> Revisamos la composta juntos y llenas la <strong>Hoja 4</strong>.</li>
     </ol>
   </div>
 
   <div class="fase">
     <h2>Parte A · sólo el día 1</h2>
-    <span>Una sola vez, en la junta de arranque. Nada de esta hoja se vuelve a llenar después.</span>
+    <span>Una sola vez, en el arranque. Nada de esta hoja se vuelve a llenar después.</span>
   </div>
 
   <div class="bloque">
 
   <section aria-labelledby="medida">
     <h2 id="medida">La medida de esta casa</h2>
-    <p class="nota-seccion">En esta casa no se pesa nada: todo se cuenta en <strong>botes</strong>. Cada casa elige un recipiente y lo usa el mes completo. El equipo mide una sola vez cuántos litros le caben, llenándolo con una botella de 1&nbsp;L, y así los resultados de todas las casas se pueden comparar en litros. Para que todas midan igual, el bote se llena <strong>hasta el borde, sin apretar, sin acomodar y sin sacudir</strong>.</p>
+    <p class="nota-seccion">En esta casa no se pesa nada: todo se cuenta en <strong>botes</strong>. Cada casa usa un bote de <strong>más o menos 1&nbsp;litro</strong> el mes completo; el equipo mide una vez cuántos litros le caben, y así todas las casas se comparan en litros. El bote se llena <strong>hasta el borde, sin apretar, sin acomodar y sin sacudir</strong>.</p>
     <dl class="alta">
       <div>
-        <dt>Mi bote de medida es<small>descríbelo: bote de yogurt, cubeta, taper, jarra…</small></dt>
-        <dd>______________________________</dd>
+        <dt>Mi bote de medida es<small>descríbelo: bote de yogurt, jarra, taper…</small></dt>
+        <dd><span data-codigo="BOTE_DESC">______________________________</span></dd>
       </div>
       <div>
         <dt>Capacidad medida por el equipo</dt>
-        <dd>________ litros &nbsp; <small>Se mide en la junta de arranque. No hace falta que la casa lo calcule.</small></dd>
+        <dd><span data-codigo="BOTE_CAP">________</span> litros &nbsp; <small>La mide el equipo el día 1. No hace falta que la casa lo calcule.</small></dd>
       </div>
       <div>
         <dt>Uso el mismo bote para el material seco</dt>
-        <dd><span class="opcion">Sí · No</span> <span>Si no: otro recipiente ______________ = ______ L</span></dd>
+        <dd><span class="opcion"><span data-codigo="BOTE_SEC_MISMO" data-valor="si">Sí</span> · <span data-codigo="BOTE_SEC_MISMO" data-valor="no">No</span></span> <span>Si no: otro recipiente <span data-codigo="BOTE_SEC_DESC">____________</span> = <span data-codigo="BOTE_SEC_CAP">_____</span> L</span></dd>
       </div>
     </dl>
 
     <div class="leyenda equipo">
       <h3>Lo que mide el equipo, no la casa</h3>
-      <p>· <strong>El pesaje y la temperatura los hace el equipo que coordina</strong>, en las visitas que anuncie: no necesitas báscula ni termómetro. Se apuntan en la hoja del equipo, con la misma clave <strong>H__</strong> y sin tu nombre.</p>
+      <p>· <strong>El día 1</strong>, el equipo mide tu bote pesándolo lleno de agua, y mide y pesa tu contenedor vacío.<br>
+         · <strong>El día 28</strong>, en una visita en tu casa, el equipo pesa la compostera, toma su temperatura, mide qué tan llena está, pesa un bote de residuo y uno de seco, y toma muestras de composta y de suelo para el mes que viene. Ese día revisamos la composta juntos.<br>
+         · <strong>Te pedimos una sola cosa:</strong> el día 28, guarda los residuos del día sin echarlos hasta que llegue el equipo. No necesitas báscula ni termómetro; el equipo apunta todo en su hoja, con la clave <strong>H__</strong> y sin tu nombre.</p>
     </div>
+  </section>
+
+  <section aria-labelledby="dia0">
+    <h2 id="dia0">Cómo arrancó tu composta</h2>
+    <dl class="alta">
+      <div>
+        <dt>Fecha de la primera carga</dt>
+        <dd><span data-codigo="D0_FECHA">____ / ____</span></dd>
+      </div>
+      <div>
+        <dt>Material seco de la base, antes de la primera carga<small>unos diez centímetros en el fondo</small></dt>
+        <dd><span data-codigo="D0_BASE">______</span> botes</dd>
+      </div>
+      <div>
+        <dt>El contenedor arrancó<small>marca uno</small></dt>
+        <dd><span data-codigo="D0_VACIO" data-valor="vacio"><span class="casilla">□</span> Vacío</span> <span data-codigo="D0_VACIO" data-valor="con_material"><span class="casilla">□</span> Con composta o material de antes</span></dd>
+      </div>
+    </dl>
   </section>
 
   <section aria-labelledby="alta-hogar">
     <h2 id="alta-hogar">Cómo es esta casa y esta composta</h2>
-    <p class="nota-seccion">Se llena una sola vez, en la junta de arranque. Sirve para entender por qué cada composta se comporta distinto. <strong>Puedes dejar en blanco cualquier pregunta que no quieras responder;</strong> la ficha sirve igual.</p>
+    <p class="nota-seccion">Sirve para entender por qué cada composta se comporta distinto. <strong>Puedes dejar en blanco cualquier pregunta que no quieras responder;</strong> la ficha sirve igual.</p>
     <dl class="alta">
       <div>
-        <dt>Día de la revisión semanal<small>circula uno; el mismo en todas las casas</small></dt>
-        <dd><span class="opcion">L&nbsp; M&nbsp; M&nbsp; J&nbsp; V&nbsp; S&nbsp; D</span></dd>
+        <dt>Día del renglón semanal<small>circula uno; el mismo en todas las casas</small></dt>
+        <dd><span class="opcion"><span data-codigo="DREV" data-valor="lu">Lu</span>&nbsp; <span data-codigo="DREV" data-valor="ma">Ma</span>&nbsp; <span data-codigo="DREV" data-valor="mi">Mi</span>&nbsp; <span data-codigo="DREV" data-valor="ju">Ju</span>&nbsp; <span data-codigo="DREV" data-valor="vi">Vi</span>&nbsp; <span data-codigo="DREV" data-valor="sa">Sá</span>&nbsp; <span data-codigo="DREV" data-valor="do">Do</span></span></dd>
       </div>
       <div>
         <dt>Personas que comen en casa la mayoría de los días<small>sólo el número; no anotamos nombres, edades ni parentescos</small></dt>
-        <dd>______ personas</dd>
+        <dd><span data-codigo="PERS0">______</span> personas</dd>
       </div>
       <div>
-        <dt>Parte de los restos de comida se va a animales de la casa<small>esos restos no llegan a la composta, por eso se pregunta</small></dt>
-        <dd><span class="opcion">No · A veces · Casi siempre</span></dd>
+        <dt>Durante el piloto, parte de los restos de comida se va a animales de la casa<small>esos restos no llegan a la composta, por eso se pregunta</small></dt>
+        <dd><span class="opcion"><span data-codigo="MASC" data-valor="no">No</span> · <span data-codigo="MASC" data-valor="a_veces">A veces</span> · <span data-codigo="MASC" data-valor="casi_siempre">Casi siempre</span></span></dd>
       </div>
       <div>
         <dt>Antes de este piloto, ¿qué camino seguían los restos de comida?<small>marca todos los que apliquen: pueden ser varios a la vez</small></dt>
         <dd>
-          <span><span class="casilla">□</span> Basura común</span>
-          <span><span class="casilla">□</span> Se los daban a animales</span>
-          <span><span class="casilla">□</span> Ya se compostaban</span>
-          <span><span class="casilla">□</span> Otro: __________</span>
+          <span data-codigo="DPRE" data-valor="basura"><span class="casilla">□</span> Basura común</span>
+          <span data-codigo="DPRE" data-valor="animales"><span class="casilla">□</span> Se los daban a animales</span>
+          <span data-codigo="DPRE" data-valor="compost"><span class="casilla">□</span> Ya se compostaban</span>
+          <span data-codigo="DPRE" data-valor="otro"><span class="casilla">□</span> Otro:</span> <span data-codigo="DPRE_OTRO">__________</span>
         </dd>
       </div>
       <div>
         <dt>Contenedor de composta<small>tipo y capacidad</small></dt>
-        <dd>Tipo: ______________ &nbsp; Capacidad: ______ L &nbsp; <span><span class="casilla">□</span> no la sé</span></dd>
+        <dd>Tipo: <span data-codigo="CONT_TIPO">______________</span> &nbsp; Capacidad: <span data-codigo="CONT_CAP">______</span> L &nbsp; <span data-codigo="CONT_CAP_ND" data-valor="marcada"><span class="casilla">□</span> no la sé</span></dd>
       </div>
       <div>
         <dt>Dónde está el contenedor<small>circula una de cada par</small></dt>
-        <dd><span class="opcion par">Interior · Exterior</span><span class="opcion par">Sol · Sombra</span><span class="opcion par">Techado · A la lluvia</span><span class="opcion par">Sobre tierra · Sobre piso firme</span></dd>
+        <dd><span class="opcion par"><span data-codigo="UBIC_IE" data-valor="interior">Interior</span> · <span data-codigo="UBIC_IE" data-valor="exterior">Exterior</span></span><span class="opcion par"><span data-codigo="UBIC_SS" data-valor="sol">Sol</span> · <span data-codigo="UBIC_SS" data-valor="sombra">Sombra</span></span><span class="opcion par"><span data-codigo="UBIC_TL" data-valor="techado">Techado</span> · <span data-codigo="UBIC_TL" data-valor="lluvia">A la lluvia</span></span><span class="opcion par"><span data-codigo="UBIC_TP" data-valor="tierra">Sobre tierra</span> · <span data-codigo="UBIC_TP" data-valor="piso">Sobre piso firme</span></span></dd>
       </div>
       <div>
         <dt>Material seco con el que cuento<small>marca todos los que haya</small></dt>
         <dd>
-          <span><span class="casilla">□</span> Hojas secas</span>
-          <span><span class="casilla">□</span> Cartón</span>
-          <span><span class="casilla">□</span> Papel sin brillo</span>
-          <span><span class="casilla">□</span> Aserrín o viruta</span>
-          <span><span class="casilla">□</span> Otro: __________</span>
+          <span data-codigo="SECO_DISP" data-valor="hojas"><span class="casilla">□</span> Hojas secas</span>
+          <span data-codigo="SECO_DISP" data-valor="carton"><span class="casilla">□</span> Cartón</span>
+          <span data-codigo="SECO_DISP" data-valor="papel"><span class="casilla">□</span> Papel sin brillo</span>
+          <span data-codigo="SECO_DISP" data-valor="aserrin"><span class="casilla">□</span> Aserrín o viruta</span>
+          <span data-codigo="SECO_DISP" data-valor="otro"><span class="casilla">□</span> Otro:</span> <span data-codigo="SECO_DISP_OTRO">__________</span>
         </dd>
       </div>
       <div>
         <dt>Conseguir material seco me resulta<small>marca uno</small></dt>
         <dd>
-          <span><span class="casilla">□</span> Lo tengo en casa</span>
-          <span><span class="casilla">□</span> Lo consigo cerca</span>
-          <span><span class="casilla">□</span> Tengo que salir a buscarlo</span>
-          <span><span class="casilla">□</span> No sé dónde conseguirlo</span>
+          <span data-codigo="SECO_ACC" data-valor="en_casa"><span class="casilla">□</span> Lo tengo en casa</span>
+          <span data-codigo="SECO_ACC" data-valor="cerca"><span class="casilla">□</span> Lo consigo cerca</span>
+          <span data-codigo="SECO_ACC" data-valor="salir"><span class="casilla">□</span> Tengo que salir a buscarlo</span>
+          <span data-codigo="SECO_ACC" data-valor="no_se_donde"><span class="casilla">□</span> No sé dónde conseguirlo</span>
         </dd>
       </div>
       <div>
         <dt>Reserva de material seco al arrancar</dt>
-        <dd>______ botes, aproximadamente</dd>
+        <dd><span data-codigo="SECO_RES">______</span> botes, aproximadamente</dd>
       </div>
     </dl>
   </section>
@@ -675,15 +729,15 @@
     <div class="dos-columnas">
       <p>· Esta hoja no lleva nombre, dirección ni teléfono: sólo la clave <strong>H__</strong>. La lista que conecta cada clave con una casa la guarda sólo la persona coordinadora, fuera del chat y fuera de la nube.<br>
          · <strong>Puedes dejar en blanco cualquier pregunta.</strong> La ficha sirve igual.<br>
-         · El equipo apunta el pesaje y la temperatura en su propia hoja, con la misma clave <strong>H__</strong> y sin tu nombre.</p>
-      <p>· No se registra <em>qué</em> se come aquí: el piloto sólo necesita cuánto entra a la composta y cómo va, así que no hay categorías de residuo ni listas de alimentos.<br>
-         · Al terminar, la hoja original se queda contigo; al grupo van sólo los números. El resumen final presenta a todas las casas juntas, sin identificar hogares.</p>
+         · No se registra <em>qué</em> se come aquí: el piloto sólo necesita cuánto entra a la composta y cómo va.</p>
+      <p>· Cada semana mandas una foto de las Hojas 2 y 3 <strong>sólo a la persona coordinadora</strong>, por mensaje privado y con la ubicación del teléfono desactivada; nunca a un chat de grupo.<br>
+         · La hoja original se queda contigo. El resumen final presenta a todas las casas juntas, sin identificar hogares.</p>
     </div>
   </section>
 
   <footer class="pie">
     <span>Miltli · HUMAN STEM, A.C. · Piloto doméstico de compostaje aerobio · 2026</span>
-    <span>F-HOG rev.&nbsp;02 · Hoja 1 de 4</span>
+    <span data-codigo="FICHA_REV" data-valor="03">F-HOG rev.&nbsp;03 · Hoja 1 de 4</span>
   </footer>
 </article>
 
@@ -696,9 +750,9 @@
     </h1>
     <p class="clave">
       Hogar
-      <b>H___</b>
+      <b data-codigo="ID">H___</b>
       <span>lo asigna el equipo</span>
-      Mi bote: ______ L
+      Mi bote: <span data-codigo="BOTE_CAP" data-copia="si">______</span> L
     </p>
   </header>
 
@@ -718,11 +772,13 @@
       <div>
         <h3>Cómo se cuenta</h3>
         <ul>
-          <li>Cuenta en <strong>botes</strong>, no en gramos: 1, 2, ½, 1½…</li>
+          <li>Cuenta en <strong>botes</strong>, sólo <strong>enteros y medios</strong>: 0, ½, 1, 1½, 2…</li>
           <li>Llena el bote hasta el borde, <strong>sin apretar</strong>.</li>
-          <li><strong>0</strong> = ese día no hubo residuo. <strong>Renglón vacío</strong> = no anotaste. No son lo mismo y las dos cosas sirven.</li>
-          <li>Si el grupo acordó una primera semana de <strong>sólo medir</strong>, esos días deja el seco vacío.</li>
-          <li>Todo lo que anotes sirve. Aquí no hay respuestas correctas.</li>
+          <li>Anota el día en que lo <strong>echas a la composta</strong>, no el día en que salió de la cocina.</li>
+          <li><strong>0</strong> = hoy no agregué nada a la composta. <strong>Renglón vacío</strong> = no anotaste. No son lo mismo.</li>
+          <li>Si no llega a medio bote, guárdalo para la siguiente vez.</li>
+          <li>Al llegar a la línea del 80&nbsp;%, deja de echar y anótalo en la Hoja 3.</li>
+          <li>Día 28: guarda los residuos del día hasta que llegue el equipo.</li>
         </ul>
       </div>
     </div>
@@ -741,21 +797,46 @@
       <tr>
         <th scope="col">Día</th>
         <th scope="col">Fecha<small>día / mes</small></th>
-        <th scope="col">Orgánico que eché<small>botes</small></th>
+        <th scope="col">Orgánico que eché a la composta<small>botes</small></th>
         <th scope="col">Seco que eché encima<small>botes</small></th>
         <th scope="col" class="notas-col">¿Algo que quieras contar de hoy? <small>Opcional, sobre la composta. Ej.: «llovió y se mojó», «se acabó el cartón», «no cupo todo».</small></th>
       </tr>
     </thead>
-    <tbody id="cuerpo-diario"></tbody>
+    <tbody id="cuerpo-diario">
+      <tr><th scope="row" data-codigo="DIA" data-valor="1">1</th><td data-codigo="FECHA" data-dia="1"></td><td data-codigo="ORG" data-dia="1"></td><td data-codigo="SEC" data-dia="1"></td><td class="notas-col" data-codigo="NOTA_D" data-dia="1"></td></tr>
+      <tr><th scope="row" data-codigo="DIA" data-valor="2">2</th><td data-codigo="FECHA" data-dia="2"></td><td data-codigo="ORG" data-dia="2"></td><td data-codigo="SEC" data-dia="2"></td><td class="notas-col" data-codigo="NOTA_D" data-dia="2"></td></tr>
+      <tr><th scope="row" data-codigo="DIA" data-valor="3">3</th><td data-codigo="FECHA" data-dia="3"></td><td data-codigo="ORG" data-dia="3"></td><td data-codigo="SEC" data-dia="3"></td><td class="notas-col" data-codigo="NOTA_D" data-dia="3"></td></tr>
+      <tr><th scope="row" data-codigo="DIA" data-valor="4">4</th><td data-codigo="FECHA" data-dia="4"></td><td data-codigo="ORG" data-dia="4"></td><td data-codigo="SEC" data-dia="4"></td><td class="notas-col" data-codigo="NOTA_D" data-dia="4"></td></tr>
+      <tr><th scope="row" data-codigo="DIA" data-valor="5">5</th><td data-codigo="FECHA" data-dia="5"></td><td data-codigo="ORG" data-dia="5"></td><td data-codigo="SEC" data-dia="5"></td><td class="notas-col" data-codigo="NOTA_D" data-dia="5"></td></tr>
+      <tr><th scope="row" data-codigo="DIA" data-valor="6">6</th><td data-codigo="FECHA" data-dia="6"></td><td data-codigo="ORG" data-dia="6"></td><td data-codigo="SEC" data-dia="6"></td><td class="notas-col" data-codigo="NOTA_D" data-dia="6"></td></tr>
+      <tr class="fin-semana"><th scope="row" data-codigo="DIA" data-valor="7">7</th><td data-codigo="FECHA" data-dia="7"></td><td data-codigo="ORG" data-dia="7"></td><td data-codigo="SEC" data-dia="7"></td><td class="notas-col" data-codigo="NOTA_D" data-dia="7"></td></tr>
+      <tr><th scope="row" data-codigo="DIA" data-valor="8">8</th><td data-codigo="FECHA" data-dia="8"></td><td data-codigo="ORG" data-dia="8"></td><td data-codigo="SEC" data-dia="8"></td><td class="notas-col" data-codigo="NOTA_D" data-dia="8"></td></tr>
+      <tr><th scope="row" data-codigo="DIA" data-valor="9">9</th><td data-codigo="FECHA" data-dia="9"></td><td data-codigo="ORG" data-dia="9"></td><td data-codigo="SEC" data-dia="9"></td><td class="notas-col" data-codigo="NOTA_D" data-dia="9"></td></tr>
+      <tr><th scope="row" data-codigo="DIA" data-valor="10">10</th><td data-codigo="FECHA" data-dia="10"></td><td data-codigo="ORG" data-dia="10"></td><td data-codigo="SEC" data-dia="10"></td><td class="notas-col" data-codigo="NOTA_D" data-dia="10"></td></tr>
+      <tr><th scope="row" data-codigo="DIA" data-valor="11">11</th><td data-codigo="FECHA" data-dia="11"></td><td data-codigo="ORG" data-dia="11"></td><td data-codigo="SEC" data-dia="11"></td><td class="notas-col" data-codigo="NOTA_D" data-dia="11"></td></tr>
+      <tr><th scope="row" data-codigo="DIA" data-valor="12">12</th><td data-codigo="FECHA" data-dia="12"></td><td data-codigo="ORG" data-dia="12"></td><td data-codigo="SEC" data-dia="12"></td><td class="notas-col" data-codigo="NOTA_D" data-dia="12"></td></tr>
+      <tr><th scope="row" data-codigo="DIA" data-valor="13">13</th><td data-codigo="FECHA" data-dia="13"></td><td data-codigo="ORG" data-dia="13"></td><td data-codigo="SEC" data-dia="13"></td><td class="notas-col" data-codigo="NOTA_D" data-dia="13"></td></tr>
+      <tr class="fin-semana"><th scope="row" data-codigo="DIA" data-valor="14">14</th><td data-codigo="FECHA" data-dia="14"></td><td data-codigo="ORG" data-dia="14"></td><td data-codigo="SEC" data-dia="14"></td><td class="notas-col" data-codigo="NOTA_D" data-dia="14"></td></tr>
+      <tr><th scope="row" data-codigo="DIA" data-valor="15">15</th><td data-codigo="FECHA" data-dia="15"></td><td data-codigo="ORG" data-dia="15"></td><td data-codigo="SEC" data-dia="15"></td><td class="notas-col" data-codigo="NOTA_D" data-dia="15"></td></tr>
+      <tr><th scope="row" data-codigo="DIA" data-valor="16">16</th><td data-codigo="FECHA" data-dia="16"></td><td data-codigo="ORG" data-dia="16"></td><td data-codigo="SEC" data-dia="16"></td><td class="notas-col" data-codigo="NOTA_D" data-dia="16"></td></tr>
+      <tr><th scope="row" data-codigo="DIA" data-valor="17">17</th><td data-codigo="FECHA" data-dia="17"></td><td data-codigo="ORG" data-dia="17"></td><td data-codigo="SEC" data-dia="17"></td><td class="notas-col" data-codigo="NOTA_D" data-dia="17"></td></tr>
+      <tr><th scope="row" data-codigo="DIA" data-valor="18">18</th><td data-codigo="FECHA" data-dia="18"></td><td data-codigo="ORG" data-dia="18"></td><td data-codigo="SEC" data-dia="18"></td><td class="notas-col" data-codigo="NOTA_D" data-dia="18"></td></tr>
+      <tr><th scope="row" data-codigo="DIA" data-valor="19">19</th><td data-codigo="FECHA" data-dia="19"></td><td data-codigo="ORG" data-dia="19"></td><td data-codigo="SEC" data-dia="19"></td><td class="notas-col" data-codigo="NOTA_D" data-dia="19"></td></tr>
+      <tr><th scope="row" data-codigo="DIA" data-valor="20">20</th><td data-codigo="FECHA" data-dia="20"></td><td data-codigo="ORG" data-dia="20"></td><td data-codigo="SEC" data-dia="20"></td><td class="notas-col" data-codigo="NOTA_D" data-dia="20"></td></tr>
+      <tr class="fin-semana"><th scope="row" data-codigo="DIA" data-valor="21">21</th><td data-codigo="FECHA" data-dia="21"></td><td data-codigo="ORG" data-dia="21"></td><td data-codigo="SEC" data-dia="21"></td><td class="notas-col" data-codigo="NOTA_D" data-dia="21"></td></tr>
+      <tr><th scope="row" data-codigo="DIA" data-valor="22">22</th><td data-codigo="FECHA" data-dia="22"></td><td data-codigo="ORG" data-dia="22"></td><td data-codigo="SEC" data-dia="22"></td><td class="notas-col" data-codigo="NOTA_D" data-dia="22"></td></tr>
+      <tr><th scope="row" data-codigo="DIA" data-valor="23">23</th><td data-codigo="FECHA" data-dia="23"></td><td data-codigo="ORG" data-dia="23"></td><td data-codigo="SEC" data-dia="23"></td><td class="notas-col" data-codigo="NOTA_D" data-dia="23"></td></tr>
+      <tr><th scope="row" data-codigo="DIA" data-valor="24">24</th><td data-codigo="FECHA" data-dia="24"></td><td data-codigo="ORG" data-dia="24"></td><td data-codigo="SEC" data-dia="24"></td><td class="notas-col" data-codigo="NOTA_D" data-dia="24"></td></tr>
+      <tr><th scope="row" data-codigo="DIA" data-valor="25">25</th><td data-codigo="FECHA" data-dia="25"></td><td data-codigo="ORG" data-dia="25"></td><td data-codigo="SEC" data-dia="25"></td><td class="notas-col" data-codigo="NOTA_D" data-dia="25"></td></tr>
+      <tr><th scope="row" data-codigo="DIA" data-valor="26">26</th><td data-codigo="FECHA" data-dia="26"></td><td data-codigo="ORG" data-dia="26"></td><td data-codigo="SEC" data-dia="26"></td><td class="notas-col" data-codigo="NOTA_D" data-dia="26"></td></tr>
+      <tr><th scope="row" data-codigo="DIA" data-valor="27">27</th><td data-codigo="FECHA" data-dia="27"></td><td data-codigo="ORG" data-dia="27"></td><td data-codigo="SEC" data-dia="27"></td><td class="notas-col" data-codigo="NOTA_D" data-dia="27"></td></tr>
+      <tr class="fin-semana"><th scope="row" data-codigo="DIA" data-valor="28">28<small>visita</small></th><td data-codigo="FECHA" data-dia="28"></td><td data-codigo="ORG" data-dia="28"></td><td data-codigo="SEC" data-dia="28"></td><td class="notas-col" data-codigo="NOTA_D" data-dia="28"></td></tr>
+    </tbody>
   </table>
 
-  <section class="leyenda" style="margin-top:2mm">
-    <p>· En la columna de notas escribe sólo cosas de la composta. &nbsp;· Si mandas foto, encuadra únicamente el interior del contenedor: sin personas, sin fachadas, sin placas, y con la ubicación de la cámara desactivada.</p>
-  </section>
-
   <footer class="pie">
-    <span>Las líneas más gruesas cierran cada semana: ese día toca la revisión de la Hoja 3, antes de echar nada.</span>
-    <span>F-HOG rev.&nbsp;02 · Hoja 2 de 4</span>
+    <span>Las líneas más gruesas cierran cada semana: ese día toca el renglón de la Hoja 3. En las notas, sólo cosas de la composta. Si mandas foto, sólo la hoja y sin ubicación.</span>
+    <span data-codigo="FICHA_REV" data-valor="03">F-HOG rev.&nbsp;03 · Hoja 2 de 4</span>
   </footer>
 </article>
 
@@ -763,23 +844,22 @@
 <article class="hoja" aria-labelledby="t-semanal">
   <header class="principal">
     <h1 id="t-semanal">
-      Revisión semanal · Miltli
-      <small>Una vez por semana, unos cinco minutos, <strong>antes de echar nada ese día</strong>. Abre, mira, huele, toca y marca lo que encuentres.</small>
+      Renglón semanal · Miltli
+      <small>Una vez por semana, el día acordado. <strong>Menos de un minuto.</strong> Cuenta cómo fue la semana: lo que no llegó a la composta, el material seco y el trabajo. El estado de la composta se revisa el día 28, con el equipo.</small>
     </h1>
     <p class="clave">
       Hogar
-      <b>H___</b>
+      <b data-codigo="ID">H___</b>
       <span>lo asigna el equipo</span>
     </p>
   </header>
 
-  <p class="nota-seccion" style="margin-bottom:2mm">
-    Marca las casillas de la columna de tu semana, y <strong>varias en la misma sección</strong> si hace falta: la composta cambia de una zona a otra. Ninguna casilla es buena ni mala; cada una dice hacia dónde se está moviendo. El texto en gris explica qué suele acompañar a cada señal. <strong>La temperatura no se toma aquí:</strong> la mide el equipo con termómetro.
+  <p class="nota-seccion" style="margin-bottom:1.6mm">
+    Escribe o marca en la columna de tu semana. Si una casilla no te aplica o no quieres contestarla, déjala en blanco. Ninguna respuesta es buena ni mala: lo que buscamos es saber cómo se vive la rutina en cada casa.
   </p>
 
   <div class="rejilla">
-    <!-- ---------- columna izquierda ---------- -->
-    <table class="semanal" aria-label="Revisión semanal, primera parte">
+    <table class="semanal" aria-label="Renglón semanal, primera parte">
       <colgroup>
         <col>
         <col class="sem"><col class="sem"><col class="sem"><col class="sem">
@@ -787,43 +867,29 @@
       <thead>
         <tr>
           <th scope="col" class="notas-col">&nbsp;</th>
-          <th scope="col">S1</th>
-          <th scope="col">S2</th>
-          <th scope="col">S3</th>
-          <th scope="col">S4</th>
+          <th scope="col" data-codigo="SEM" data-valor="1">S1</th><th scope="col" data-codigo="SEM" data-valor="2">S2</th><th scope="col" data-codigo="SEM" data-valor="3">S3</th><th scope="col" data-codigo="SEM" data-valor="4">S4</th>
         </tr>
       </thead>
       <tbody>
         <tr class="sec"><th colspan="5" scope="colgroup">La semana<small>escribe el dato en la casilla</small></th></tr>
-        <tr><th scope="row" class="op">Fecha de esta revisión <em>día / mes</em></th><td class="escribe"></td><td class="escribe"></td><td class="escribe"></td><td class="escribe"></td></tr>
-        <tr><th scope="row" class="op">Personas que comieron en casa casi todos los días</th><td class="escribe"></td><td class="escribe"></td><td class="escribe"></td><td class="escribe"></td></tr>
-        <tr><th scope="row" class="op">Minutos que le dediqué a la composta en toda la semana</th><td class="escribe"></td><td class="escribe"></td><td class="escribe"></td><td class="escribe"></td></tr>
-        <tr><th scope="row" class="op">Qué tan lleno está el contenedor <em>¼ · ½ · ¾ · casi lleno</em></th><td class="escribe"></td><td class="escribe"></td><td class="escribe"></td><td class="escribe"></td></tr>
-
-        <tr class="sec"><th colspan="5" scope="colgroup">Cómo anoté esta semana<small>Sirve para saber si un renglón vacío de la Hoja 2 fue un día sin residuo o un día sin anotar. No es una calificación: las dos respuestas son válidas.</small></th></tr>
-        <tr><th scope="row" class="op">Anoté <b>todos</b> los días de esta semana</th><td>□</td><td>□</td><td>□</td><td>□</td></tr>
-        <tr><th scope="row" class="op">Me faltaron algunos días</th><td>□</td><td>□</td><td>□</td><td>□</td></tr>
-
-        <tr class="sec"><th colspan="5" scope="colgroup">Humedad<small>Primero mira la tapa al abrir; luego toma un puño de la mezcla, de preferencia con guante, y apriétalo.</small></th></tr>
-        <tr><th scope="row" class="op">Al abrir había vaho, o gotas de agua en la tapa</th><td>□</td><td>□</td><td>□</td><td>□</td></tr>
-        <tr><th scope="row" class="op">Se desmorona: se siente polvosa o crujiente <em>— la vida se frena y espera agua</em></th><td>□</td><td>□</td><td>□</td><td>□</td></tr>
-        <tr><th scope="row" class="op">Se apelmaza y mantiene la forma; no sale agua <em>— punto de esponja escurrida</em></th><td>□</td><td>□</td><td>□</td><td>□</td></tr>
-        <tr><th scope="row" class="op">Al apretar salen una o dos gotas</th><td>□</td><td>□</td><td>□</td><td>□</td></tr>
-        <tr><th scope="row" class="op">Al apretar escurre agua <em>— el aire empieza a faltar</em></th><td>□</td><td>□</td><td>□</td><td>□</td></tr>
-        <tr><th scope="row" class="op">Hay líquido acumulado en el fondo <em>— más seco y remover suele resolverlo</em></th><td>□</td><td>□</td><td>□</td><td>□</td></tr>
-
-        <tr class="sec"><th colspan="5" scope="colgroup">Olor<small>Abre, acerca la nariz una sola vez y vuelve a cerrar.</small></th></tr>
-        <tr><th scope="row" class="op">Casi no huele</th><td>□</td><td>□</td><td>□</td><td>□</td></tr>
-        <tr><th scope="row" class="op">A tierra mojada, a bosque o a hojarasca <em>— descomposición con aire</em></th><td>□</td><td>□</td><td>□</td><td>□</td></tr>
-        <tr><th scope="row" class="op">Dulce: a fruta madura, vinagre o fermento <em>— mucho húmedo junto</em></th><td>□</td><td>□</td><td>□</td><td>□</td></tr>
-        <tr><th scope="row" class="op">A amoniaco, como limpiador de piso o como orina <em>— falta material seco</em></th><td>□</td><td>□</td><td>□</td><td>□</td></tr>
-        <tr><th scope="row" class="op">A drenaje, a huevo podrido o a basura encerrada <em>— está trabajando sin aire</em></th><td>□</td><td>□</td><td>□</td><td>□</td></tr>
-        <tr><th scope="row" class="op">Otro olor <em>— descríbelo abajo</em></th><td>□</td><td>□</td><td>□</td><td>□</td></tr>
+        <tr><th scope="row" class="op">Fecha de este renglón <em>día / mes</em></th><td class="escribe" data-codigo="SFECHA" data-sem="1"></td><td class="escribe" data-codigo="SFECHA" data-sem="2"></td><td class="escribe" data-codigo="SFECHA" data-sem="3"></td><td class="escribe" data-codigo="SFECHA" data-sem="4"></td></tr>
+        <tr><th scope="row" class="op">Personas que comieron en casa casi todos los días</th><td class="escribe" data-codigo="PERS_S" data-sem="1"></td><td class="escribe" data-codigo="PERS_S" data-sem="2"></td><td class="escribe" data-codigo="PERS_S" data-sem="3"></td><td class="escribe" data-codigo="PERS_S" data-sem="4"></td></tr>
+        <tr><th scope="row" class="op">Minutos que le dediqué a la composta en toda la semana</th><td class="escribe" data-codigo="MIN_S" data-sem="1"></td><td class="escribe" data-codigo="MIN_S" data-sem="2"></td><td class="escribe" data-codigo="MIN_S" data-sem="3"></td><td class="escribe" data-codigo="MIN_S" data-sem="4"></td></tr>
+        <tr class="sec"><th colspan="5" scope="colgroup">Cómo anoté esta semana · marca sólo una<small>Sirve para saber si un renglón vacío de la Hoja 2 fue un día sin depósito o un día sin anotar. No es una calificación.</small></th></tr>
+        <tr><th scope="row" class="op">Anoté <b>todos</b> los días</th><td data-codigo="REG" data-valor="REG1" data-sem="1">□</td><td data-codigo="REG" data-valor="REG1" data-sem="2">□</td><td data-codigo="REG" data-valor="REG1" data-sem="3">□</td><td data-codigo="REG" data-valor="REG1" data-sem="4">□</td></tr>
+        <tr><th scope="row" class="op">Me faltaron algunos días</th><td data-codigo="REG" data-valor="REG2" data-sem="1">□</td><td data-codigo="REG" data-valor="REG2" data-sem="2">□</td><td data-codigo="REG" data-valor="REG2" data-sem="3">□</td><td data-codigo="REG" data-valor="REG2" data-sem="4">□</td></tr>
+        <tr class="sec"><th colspan="5" scope="colgroup">Lo que no llegó a la composta<small>Restos de comida que separaste, o pudiste separar, y que esta semana no echaste. Lo que guardaste para otro día no cuenta: sí va a llegar.</small></th></tr>
+        <tr><th scope="row" class="op">Botes que <b>no llegaron</b> <em>— escribe 0 si todo llegó</em></th><td class="escribe" data-codigo="FUGA" data-sem="1"></td><td class="escribe" data-codigo="FUGA" data-sem="2"></td><td class="escribe" data-codigo="FUGA" data-sem="3"></td><td class="escribe" data-codigo="FUGA" data-sem="4"></td></tr>
+        <tr class="subsec"><th colspan="5" scope="colgroup">Si no llegaron, ¿por qué? <small>marca todas las que apliquen</small></th></tr>
+        <tr><th scope="row" class="op">Ya no cabía</th><td data-codigo="FUGA_MOT" data-valor="FG1" data-sem="1">□</td><td data-codigo="FUGA_MOT" data-valor="FG1" data-sem="2">□</td><td data-codigo="FUGA_MOT" data-valor="FG1" data-sem="3">□</td><td data-codigo="FUGA_MOT" data-valor="FG1" data-sem="4">□</td></tr>
+        <tr><th scope="row" class="op">No tenía material seco</th><td data-codigo="FUGA_MOT" data-valor="FG2" data-sem="1">□</td><td data-codigo="FUGA_MOT" data-valor="FG2" data-sem="2">□</td><td data-codigo="FUGA_MOT" data-valor="FG2" data-sem="3">□</td><td data-codigo="FUGA_MOT" data-valor="FG2" data-sem="4">□</td></tr>
+        <tr><th scope="row" class="op">Se fueron a animales</th><td data-codigo="FUGA_MOT" data-valor="FG3" data-sem="1">□</td><td data-codigo="FUGA_MOT" data-valor="FG3" data-sem="2">□</td><td data-codigo="FUGA_MOT" data-valor="FG3" data-sem="3">□</td><td data-codigo="FUGA_MOT" data-valor="FG3" data-sem="4">□</td></tr>
+        <tr><th scope="row" class="op">Se fueron a la basura</th><td data-codigo="FUGA_MOT" data-valor="FG4" data-sem="1">□</td><td data-codigo="FUGA_MOT" data-valor="FG4" data-sem="2">□</td><td data-codigo="FUGA_MOT" data-valor="FG4" data-sem="3">□</td><td data-codigo="FUGA_MOT" data-valor="FG4" data-sem="4">□</td></tr>
+        <tr><th scope="row" class="op">Otro motivo <em>— escríbelo abajo</em></th><td data-codigo="FUGA_MOT" data-valor="FG5" data-sem="1">□</td><td data-codigo="FUGA_MOT" data-valor="FG5" data-sem="2">□</td><td data-codigo="FUGA_MOT" data-valor="FG5" data-sem="3">□</td><td data-codigo="FUGA_MOT" data-valor="FG5" data-sem="4">□</td></tr>
       </tbody>
     </table>
 
-    <!-- ---------- columna derecha ---------- -->
-    <table class="semanal" aria-label="Revisión semanal, segunda parte">
+    <table class="semanal" aria-label="Renglón semanal, segunda parte">
       <colgroup>
         <col>
         <col class="sem"><col class="sem"><col class="sem"><col class="sem">
@@ -831,60 +897,51 @@
       <thead>
         <tr>
           <th scope="col" class="notas-col">&nbsp;</th>
-          <th scope="col">S1</th>
-          <th scope="col">S2</th>
-          <th scope="col">S3</th>
-          <th scope="col">S4</th>
+          <th scope="col" data-codigo="SEM" data-valor="1">S1</th><th scope="col" data-codigo="SEM" data-valor="2">S2</th><th scope="col" data-codigo="SEM" data-valor="3">S3</th><th scope="col" data-codigo="SEM" data-valor="4">S4</th>
         </tr>
       </thead>
       <tbody>
-        <tr class="sec"><th colspan="5" scope="colgroup">Quién vive aquí esta semana<small>Mira la superficie y remueve un poco. En una composta siempre hay vida: eso es justamente lo que la hace funcionar. Lo que cambia con las semanas es <em>quién</em> aparece, y eso es lo que queremos saber. Marca todo lo que veas <strong>más de una vez o en más de dos individuos</strong>: una mosca suelta no se marca.</small></th></tr>
-        <tr><th scope="row" class="op">Lombrices <em>— mezcla madura, húmeda y sin calor</em></th><td>□</td><td>□</td><td>□</td><td>□</td></tr>
-        <tr><th scope="row" class="op">Cochinillas, milpiés, caracoles o babosas <em>— material fibroso y húmedo</em></th><td>□</td><td>□</td><td>□</td><td>□</td></tr>
-        <tr><th scope="row" class="op">Escarabajos, o larvas gruesas blancas en forma de C <em>— material viejo y aireado</em></th><td>□</td><td>□</td><td>□</td><td>□</td></tr>
-        <tr><th scope="row" class="op">Larvas grandes, planas y café, muy movedizas <em>— mosca soldado: mucho húmedo y restos de comida</em></th><td>□</td><td>□</td><td>□</td><td>□</td></tr>
-        <tr><th scope="row" class="op">Mosquitas que revolotean al abrir <em>— fruta a la vista; se van al cubrirla con seco</em></th><td>□</td><td>□</td><td>□</td><td>□</td></tr>
-        <tr><th scope="row" class="op">Mosquitos negros diminutos que caminan en la superficie <em>— superficie mojada</em></th><td>□</td><td>□</td><td>□</td><td>□</td></tr>
-        <tr><th scope="row" class="op">Moscas grandes, o gusanos blancos delgados <em>— algo cocinado quedó sin cubrir</em></th><td>□</td><td>□</td><td>□</td><td>□</td></tr>
-        <tr><th scope="row" class="op">Hormigas <em>— hay zonas secas dentro del montón</em></th><td>□</td><td>□</td><td>□</td><td>□</td></tr>
-        <tr><th scope="row" class="op">Cucarachas <em>— encontraron refugio seco y tibio</em></th><td>□</td><td>□</td><td>□</td><td>□</td></tr>
-        <tr><th scope="row" class="op">Hilos o polvo blanco, o manchas verdes, azules o negras <em>— hongos deshaciendo el material seco</em></th><td>□</td><td>□</td><td>□</td><td>□</td></tr>
-        <tr><th scope="row" class="op">Huellas, excavaciones o restos movidos de lugar <em>— algo quedó destapado y alguien vino</em></th><td>□</td><td>□</td><td>□</td><td>□</td></tr>
-        <tr><th scope="row" class="op">Vi algo que <b>no supe identificar</b> <em>— descríbelo abajo; no pasa nada por no saber</em></th><td>□</td><td>□</td><td>□</td><td>□</td></tr>
-        <tr><th scope="row" class="op">Esta semana no vi ninguno de los anteriores</th><td>□</td><td>□</td><td>□</td><td>□</td></tr>
-
-        <tr class="sec"><th colspan="5" scope="colgroup">Cómo se ve la mezcla<small>Las tres primeras casillas hablan del avance; las tres siguientes, de la textura.</small></th></tr>
-        <tr><th scope="row" class="op">Se distinguen casi todos los restos tal como los eché</th><td>□</td><td>□</td><td>□</td><td>□</td></tr>
-        <tr><th scope="row" class="op">Algunos restos ya no se reconocen</th><td>□</td><td>□</td><td>□</td><td>□</td></tr>
-        <tr><th scope="row" class="op">La mayor parte parece tierra oscura o migajón</th><td>□</td><td>□</td><td>□</td><td>□</td></tr>
-        <tr><th scope="row" class="op">Suelta, con huecos de aire</th><td>□</td><td>□</td><td>□</td><td>□</td></tr>
-        <tr><th scope="row" class="op">Apelmazada, pegada como una masa <em>— removerla le devuelve aire</em></th><td>□</td><td>□</td><td>□</td><td>□</td></tr>
-        <tr><th scope="row" class="op">Con bloques o pedazos grandes que no se deshacen <em>— trocear más al echarlos</em></th><td>□</td><td>□</td><td>□</td><td>□</td></tr>
-
-        <tr class="sec"><th colspan="5" scope="colgroup">¿Qué hiciste esta semana?<small>Marca todo lo que hayas hecho. Sirve para entender por qué la composta cambió de una semana a otra, así que vale la pena marcarlo aunque parezca poca cosa.</small></th></tr>
-        <tr><th scope="row" class="op">Agregué material seco de más</th><td>□</td><td>□</td><td>□</td><td>□</td></tr>
-        <tr><th scope="row" class="op">Removí o mezclé</th><td>□</td><td>□</td><td>□</td><td>□</td></tr>
-        <tr><th scope="row" class="op">Agregué agua</th><td>□</td><td>□</td><td>□</td><td>□</td></tr>
-        <tr><th scope="row" class="op">Retiré material que no iba <em>— escribe abajo qué era</em></th><td>□</td><td>□</td><td>□</td><td>□</td></tr>
-        <tr><th scope="row" class="op">Cambié otra cosa <em>— escríbelo abajo</em></th><td>□</td><td>□</td><td>□</td><td>□</td></tr>
-        <tr><th scope="row" class="op">No cambié nada</th><td>□</td><td>□</td><td>□</td><td>□</td></tr>
+        <tr class="sec"><th colspan="5" scope="colgroup">Material seco que usé esta semana · marca todos</th></tr>
+        <tr><th scope="row" class="op">Hojas secas</th><td data-codigo="SECO_USO" data-valor="hojas" data-sem="1">□</td><td data-codigo="SECO_USO" data-valor="hojas" data-sem="2">□</td><td data-codigo="SECO_USO" data-valor="hojas" data-sem="3">□</td><td data-codigo="SECO_USO" data-valor="hojas" data-sem="4">□</td></tr>
+        <tr><th scope="row" class="op">Cartón</th><td data-codigo="SECO_USO" data-valor="carton" data-sem="1">□</td><td data-codigo="SECO_USO" data-valor="carton" data-sem="2">□</td><td data-codigo="SECO_USO" data-valor="carton" data-sem="3">□</td><td data-codigo="SECO_USO" data-valor="carton" data-sem="4">□</td></tr>
+        <tr><th scope="row" class="op">Papel sin brillo</th><td data-codigo="SECO_USO" data-valor="papel" data-sem="1">□</td><td data-codigo="SECO_USO" data-valor="papel" data-sem="2">□</td><td data-codigo="SECO_USO" data-valor="papel" data-sem="3">□</td><td data-codigo="SECO_USO" data-valor="papel" data-sem="4">□</td></tr>
+        <tr><th scope="row" class="op">Aserrín o viruta</th><td data-codigo="SECO_USO" data-valor="aserrin" data-sem="1">□</td><td data-codigo="SECO_USO" data-valor="aserrin" data-sem="2">□</td><td data-codigo="SECO_USO" data-valor="aserrin" data-sem="3">□</td><td data-codigo="SECO_USO" data-valor="aserrin" data-sem="4">□</td></tr>
+        <tr><th scope="row" class="op">Otro <em>— escríbelo abajo</em></th><td data-codigo="SECO_USO" data-valor="otro" data-sem="1">□</td><td data-codigo="SECO_USO" data-valor="otro" data-sem="2">□</td><td data-codigo="SECO_USO" data-valor="otro" data-sem="3">□</td><td data-codigo="SECO_USO" data-valor="otro" data-sem="4">□</td></tr>
+        <tr><th scope="row" class="op">No usé material seco esta semana</th><td data-codigo="SECO_USO" data-valor="ninguno" data-sem="1">□</td><td data-codigo="SECO_USO" data-valor="ninguno" data-sem="2">□</td><td data-codigo="SECO_USO" data-valor="ninguno" data-sem="3">□</td><td data-codigo="SECO_USO" data-valor="ninguno" data-sem="4">□</td></tr>
+        <tr class="sec"><th colspan="5" scope="colgroup">Qué tan lleno está el contenedor · marca una<small>Mírala desde arriba, sin remover. Si el equipo marcó una línea por dentro, es la del 80&nbsp;%.</small></th></tr>
+        <tr><th scope="row" class="op">Una cuarta parte, ¼</th><td data-codigo="LLEN_S" data-valor="1/4" data-sem="1">□</td><td data-codigo="LLEN_S" data-valor="1/4" data-sem="2">□</td><td data-codigo="LLEN_S" data-valor="1/4" data-sem="3">□</td><td data-codigo="LLEN_S" data-valor="1/4" data-sem="4">□</td></tr>
+        <tr><th scope="row" class="op">La mitad, ½</th><td data-codigo="LLEN_S" data-valor="1/2" data-sem="1">□</td><td data-codigo="LLEN_S" data-valor="1/2" data-sem="2">□</td><td data-codigo="LLEN_S" data-valor="1/2" data-sem="3">□</td><td data-codigo="LLEN_S" data-valor="1/2" data-sem="4">□</td></tr>
+        <tr><th scope="row" class="op">Tres cuartas partes, ¾</th><td data-codigo="LLEN_S" data-valor="3/4" data-sem="1">□</td><td data-codigo="LLEN_S" data-valor="3/4" data-sem="2">□</td><td data-codigo="LLEN_S" data-valor="3/4" data-sem="3">□</td><td data-codigo="LLEN_S" data-valor="3/4" data-sem="4">□</td></tr>
+        <tr><th scope="row" class="op">Casi lleno, o en la línea del 80&nbsp;%</th><td data-codigo="LLEN_S" data-valor="casi_lleno" data-sem="1">□</td><td data-codigo="LLEN_S" data-valor="casi_lleno" data-sem="2">□</td><td data-codigo="LLEN_S" data-valor="casi_lleno" data-sem="3">□</td><td data-codigo="LLEN_S" data-valor="casi_lleno" data-sem="4">□</td></tr>
+        <tr class="sec"><th colspan="5" scope="colgroup">¿Qué hiciste esta semana? · marca todo<small>Sirve para entender cómo fue tu rutina, así que vale la pena marcarlo aunque parezca poca cosa.</small></th></tr>
+        <tr><th scope="row" class="op">Agregué material seco de más</th><td data-codigo="ACT" data-valor="A2" data-sem="1">□</td><td data-codigo="ACT" data-valor="A2" data-sem="2">□</td><td data-codigo="ACT" data-valor="A2" data-sem="3">□</td><td data-codigo="ACT" data-valor="A2" data-sem="4">□</td></tr>
+        <tr><th scope="row" class="op">Removí o mezclé</th><td data-codigo="ACT" data-valor="A1" data-sem="1">□</td><td data-codigo="ACT" data-valor="A1" data-sem="2">□</td><td data-codigo="ACT" data-valor="A1" data-sem="3">□</td><td data-codigo="ACT" data-valor="A1" data-sem="4">□</td></tr>
+        <tr><th scope="row" class="op">Agregué agua</th><td data-codigo="ACT" data-valor="A3" data-sem="1">□</td><td data-codigo="ACT" data-valor="A3" data-sem="2">□</td><td data-codigo="ACT" data-valor="A3" data-sem="3">□</td><td data-codigo="ACT" data-valor="A3" data-sem="4">□</td></tr>
+        <tr><th scope="row" class="op">Retiré material que no iba <em>— escribe abajo qué era</em></th><td data-codigo="ACT" data-valor="A4" data-sem="1">□</td><td data-codigo="ACT" data-valor="A4" data-sem="2">□</td><td data-codigo="ACT" data-valor="A4" data-sem="3">□</td><td data-codigo="ACT" data-valor="A4" data-sem="4">□</td></tr>
+        <tr><th scope="row" class="op">Cambié otra cosa <em>— escríbelo abajo</em></th><td data-codigo="ACT" data-valor="A5" data-sem="1">□</td><td data-codigo="ACT" data-valor="A5" data-sem="2">□</td><td data-codigo="ACT" data-valor="A5" data-sem="3">□</td><td data-codigo="ACT" data-valor="A5" data-sem="4">□</td></tr>
+        <tr><th scope="row" class="op">No cambié nada</th><td data-codigo="ACT" data-valor="A0" data-sem="1">□</td><td data-codigo="ACT" data-valor="A0" data-sem="2">□</td><td data-codigo="ACT" data-valor="A0" data-sem="3">□</td><td data-codigo="ACT" data-valor="A0" data-sem="4">□</td></tr>
       </tbody>
     </table>
+  </div>
+
+  <div class="parada">
+    <strong>Regla del 80&nbsp;%.</strong> Dejé de agregar residuos el día <span data-codigo="PARADA_DIA">______</span> porque el contenedor llegó a la línea del 80&nbsp;%. &nbsp; <span data-codigo="PARADA_DIA" data-valor="no_paro"><span class="casilla">□</span> No hizo falta parar</span>
+    <small>Desde ese día, lo que ya no entre se anota cada semana en «lo que no llegó», con «ya no cabía». La regla completa está en la hoja guía.</small>
   </div>
 
   <section class="libre" aria-labelledby="libre-t">
     <h3 id="libre-t">Lo que quieras contar de cada semana <span style="font-weight:400;color:#444">— opcional, sobre la composta</span></h3>
     <div class="renglones">
-      <p class="renglon"><label>Semana 1</label><span aria-hidden="true"></span></p>
-      <p class="renglon"><label>Semana 2</label><span aria-hidden="true"></span></p>
-      <p class="renglon"><label>Semana 3</label><span aria-hidden="true"></span></p>
-      <p class="renglon"><label>Semana 4</label><span aria-hidden="true"></span></p>
+      <p class="renglon"><label>Semana 1</label><span data-codigo="NOTA_S" data-sem="1" aria-hidden="true"></span></p>
+      <p class="renglon"><label>Semana 2</label><span data-codigo="NOTA_S" data-sem="2" aria-hidden="true"></span></p>
+      <p class="renglon"><label>Semana 3</label><span data-codigo="NOTA_S" data-sem="3" aria-hidden="true"></span></p>
+      <p class="renglon"><label>Semana 4</label><span data-codigo="NOTA_S" data-sem="4" aria-hidden="true"></span></p>
     </div>
   </section>
 
   <footer class="pie">
-    <span>Si una semana no alcanzaste a revisar, deja la columna vacía y sigue con la siguiente. El cierre del día 28 va en la Hoja 4.</span>
-    <span>F-HOG rev.&nbsp;02 · Hoja 3 de 4</span>
+    <span>Si una semana no alcanzaste, deja la columna vacía y sigue. Al terminar el renglón, manda una foto de las Hojas 2 y 3 a la persona coordinadora.</span>
+    <span data-codigo="FICHA_REV" data-valor="03">F-HOG rev.&nbsp;03 · Hoja 3 de 4</span>
   </footer>
 </article>
 
@@ -893,110 +950,160 @@
   <header class="principal">
     <h1 id="t-cierre">
       Cierre · Miltli
-      <small>Piloto doméstico de compostaje · 28 días · HUMAN STEM, A.C.<br>Esta hoja se llena <strong>sólo el día 28</strong>, el mismo día que la última revisión semanal. Antes de ese día se queda en blanco.</small>
     </h1>
     <p class="clave">
       Hogar
-      <b>H___</b>
+      <b data-codigo="ID">H___</b>
       <span>lo asigna el equipo</span>
-      Fecha: ____ / ____
+      Fecha: <span data-codigo="FCIE">____ / ____</span>
     </p>
   </header>
 
   <div class="fase cierre">
     <h2>Parte B · sólo el día 28</h2>
-    <span>Una sola vez, al terminar los 28 días. Nada de esta hoja se llena antes.</span>
+    <span>Durante y después de la visita del equipo. Antes de ese día, esta hoja se queda en blanco.</span>
   </div>
 
-  <div class="bloque">
+  <section aria-labelledby="revision">
+    <h2 id="revision">Revisión de la composta, junto con el equipo</h2>
+    <p class="nota-seccion">Juntos, en este orden: abrir y mirar la tapa · oler una vez · el equipo toma la temperatura · mirar la superficie · remover un poco · apretar un puño. <strong>Después cada quien marca su hoja sin hablar</strong>: queremos saber si dos personas ven lo mismo. Puedes marcar varias casillas por sección; ninguna es buena ni mala.</p>
+    <div class="dos-dl" style="margin-bottom:1.2mm">
+      <dl class="alta">
+        <div>
+          <dt>La hace quien suele cuidar la composta<small>no hace falta decir quién</small></dt>
+          <dd><span class="opcion"><span data-codigo="OBS_MISMA" data-valor="si">Sí</span> · <span data-codigo="OBS_MISMA" data-valor="no">No</span></span></dd>
+        </div>
+      </dl>
+      <dl class="alta">
+        <div>
+          <dt>¿Qué tan lleno está?<small>marca uno, antes de que el equipo mida</small></dt>
+          <dd><span data-codigo="LLEN_F" data-valor="1/4"><span class="casilla">□</span> ¼</span> <span data-codigo="LLEN_F" data-valor="1/2"><span class="casilla">□</span> ½</span> <span data-codigo="LLEN_F" data-valor="3/4"><span class="casilla">□</span> ¾</span> <span data-codigo="LLEN_F" data-valor="casi_lleno"><span class="casilla">□</span> Casi</span> <span data-codigo="LLEN_F" data-valor="lleno"><span class="casilla">□</span> Lleno</span></dd>
+        </div>
+      </dl>
+    </div>
 
-  <section class="cierre" aria-labelledby="cierre">
+    <div class="rejilla cuatro">
+      <table class="unica" aria-label="Revisión del día 28, primera parte">
+      <colgroup>
+        <col>
+        <col class="marca">
+      </colgroup>
+        <tbody>
+        <tr class="sec"><th colspan="2" scope="colgroup">Humedad<small>La tapa, al abrir; el puño, al final, de preferencia con guante.</small></th></tr>
+        <tr><th scope="row" class="op">Al abrir había vaho, o gotas de agua en la tapa</th><td data-codigo="VAHO" data-valor="marcada">□</td></tr>
+        <tr><th scope="row" class="op">Se desmorona: se siente polvosa o crujiente <em>— la vida se frena y espera agua</em></th><td data-codigo="HUM" data-valor="H1">□</td></tr>
+        <tr><th scope="row" class="op">Se apelmaza y mantiene la forma; no sale agua <em>— punto de esponja escurrida</em></th><td data-codigo="HUM" data-valor="H2">□</td></tr>
+        <tr><th scope="row" class="op">Al apretar salen una o dos gotas</th><td data-codigo="HUM" data-valor="H3">□</td></tr>
+        <tr><th scope="row" class="op">Al apretar escurre agua <em>— el aire empieza a faltar</em></th><td data-codigo="HUM" data-valor="H4">□</td></tr>
+        <tr><th scope="row" class="op">Hay líquido acumulado en el fondo</th><td data-codigo="HUM" data-valor="H5">□</td></tr>
+        <tr class="sec"><th colspan="2" scope="colgroup">Olor<small>Acerca la nariz una sola vez, antes de remover.</small></th></tr>
+        <tr><th scope="row" class="op">Casi no huele</th><td data-codigo="OLOR" data-valor="O0">□</td></tr>
+        <tr><th scope="row" class="op">A tierra mojada, a bosque o a hojarasca <em>— descomposición con aire</em></th><td data-codigo="OLOR" data-valor="O1">□</td></tr>
+        <tr><th scope="row" class="op">Dulce: a fruta madura, vinagre o fermento <em>— mucho húmedo junto</em></th><td data-codigo="OLOR" data-valor="O2">□</td></tr>
+        <tr><th scope="row" class="op">A amoniaco, como limpiador de piso o como orina <em>— falta material seco</em></th><td data-codigo="OLOR" data-valor="O3">□</td></tr>
+        <tr><th scope="row" class="op">A drenaje, a huevo podrido o a basura encerrada <em>— está trabajando sin aire</em></th><td data-codigo="OLOR" data-valor="O4">□</td></tr>
+        <tr><th scope="row" class="op">Otro olor <em>— descríbelo abajo</em></th><td data-codigo="OLOR" data-valor="O5">□</td></tr>
+        <tr class="sec"><th colspan="2" scope="colgroup">Avance de la mezcla<small>Después de remover un poco: qué tanto se ha deshecho. La textura va aparte, a la derecha.</small></th></tr>
+        <tr><th scope="row" class="op">Se distinguen casi todos los restos tal como los eché</th><td data-codigo="MEZ_AV" data-valor="M1">□</td></tr>
+        <tr><th scope="row" class="op">Algunos restos ya no se reconocen</th><td data-codigo="MEZ_AV" data-valor="M2">□</td></tr>
+        <tr><th scope="row" class="op">La mayor parte parece tierra oscura o migajón</th><td data-codigo="MEZ_AV" data-valor="M3">□</td></tr>
+        <tr class="sec"><th colspan="2" scope="colgroup">Lo que quieras contar de esta revisión<small>Opcional; obligatorio sólo si marcaste «otro olor» o «no supe identificar».</small></th></tr>
+        <tr><td colspan="2" class="escribe-nota" data-codigo="NOTA_E"></td></tr>
+        </tbody>
+      </table>
+      <table class="unica" aria-label="Revisión del día 28, segunda parte">
+      <colgroup>
+        <col>
+        <col class="marca">
+      </colgroup>
+        <tbody>
+        <tr class="sec"><th colspan="2" scope="colgroup">Quién vive aquí<small>En una composta siempre hay vida: eso la hace funcionar. Marca lo que veas <strong>más de una vez o en más de dos individuos</strong>; una mosca suelta no se marca. La hoja guía describe cada grupo.</small></th></tr>
+        <tr><th scope="row" class="op">Lombrices <em>— mezcla madura, húmeda y sin calor</em></th><td data-codigo="FAU" data-valor="F01">□</td></tr>
+        <tr><th scope="row" class="op">Cochinillas, milpiés, caracoles o babosas <em>— material fibroso y húmedo</em></th><td data-codigo="FAU" data-valor="F02">□</td></tr>
+        <tr><th scope="row" class="op">Escarabajos, o larvas gruesas blancas en forma de C <em>— material viejo y aireado</em></th><td data-codigo="FAU" data-valor="F03">□</td></tr>
+        <tr><th scope="row" class="op">Larvas grandes, planas y café, muy movedizas <em>— mosca soldado: mucho húmedo y restos de comida</em></th><td data-codigo="FAU" data-valor="F04">□</td></tr>
+        <tr><th scope="row" class="op">Mosquitas que revolotean al abrir <em>— fruta a la vista</em></th><td data-codigo="FAU" data-valor="F05">□</td></tr>
+        <tr><th scope="row" class="op">Mosquitos negros diminutos que caminan en la superficie <em>— superficie mojada</em></th><td data-codigo="FAU" data-valor="F06">□</td></tr>
+        <tr><th scope="row" class="op">Moscas grandes, o gusanos blancos delgados <em>— hay restos cocinados expuestos en la superficie</em></th><td data-codigo="FAU" data-valor="F07">□</td></tr>
+        <tr><th scope="row" class="op">Hormigas <em>— hay zonas secas dentro del montón</em></th><td data-codigo="FAU" data-valor="F08">□</td></tr>
+        <tr><th scope="row" class="op">Cucarachas <em>— encontraron refugio seco y tibio</em></th><td data-codigo="FAU" data-valor="F09">□</td></tr>
+        <tr><th scope="row" class="op">Hilos o polvo blanco, o manchas verdes, azules o negras <em>— hongos deshaciendo el material seco</em></th><td data-codigo="FAU" data-valor="F10">□</td></tr>
+        <tr><th scope="row" class="op">Huellas, excavaciones o restos movidos de lugar <em>— un animal más grande encontró acceso a la composta</em></th><td data-codigo="FAU" data-valor="F11">□</td></tr>
+        <tr><th scope="row" class="op">Vi algo que <b>no supe identificar</b> <em>— descríbelo abajo; no pasa nada por no saber</em></th><td data-codigo="FAU" data-valor="F12">□</td></tr>
+        <tr><th scope="row" class="op">No vi ninguno de los anteriores</th><td data-codigo="FAU" data-valor="F00">□</td></tr>
+        <tr class="sec"><th colspan="2" scope="colgroup">Textura de la mezcla<small>Cómo se siente al moverla. Va aparte del avance.</small></th></tr>
+        <tr><th scope="row" class="op">Suelta, con huecos de aire</th><td data-codigo="MEZ_TX" data-valor="X1">□</td></tr>
+        <tr><th scope="row" class="op">Apelmazada, pegada como una masa</th><td data-codigo="MEZ_TX" data-valor="X2">□</td></tr>
+        <tr><th scope="row" class="op">Con bloques o pedazos grandes que no se deshacen</th><td data-codigo="MEZ_TX" data-valor="X3">□</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <div class="bloque" style="margin-top:1mm">
+
+  <section aria-labelledby="cierre">
     <h2 id="cierre">Cómo terminó el piloto en esta casa</h2>
-    <p class="nota-seccion">No se espera composta terminada en 28 días: el lote sigue su proceso después del piloto. Lo que se cierra aquí es el registro. <strong>Puedes dejar en blanco cualquier pregunta.</strong></p>
+    <p class="nota-seccion">No se espera composta terminada en 28 días: lo que se cierra es el registro. <strong>Puedes dejar en blanco cualquier pregunta.</strong></p>
+    <div class="dos-dl">
     <dl class="alta">
       <div>
-        <dt>¿Qué tan lleno quedó el contenedor?<small>circula uno</small></dt>
-        <dd><span class="opcion">¼ · ½ · ¾ · casi lleno · lleno</span></dd>
-      </div>
-      <div>
         <dt>¿Hubo semanas en que te faltara material seco?</dt>
-        <dd><span class="opcion">No</span> <span>· Sí, en ______ de las 4</span></dd>
+        <dd><span class="opcion"><span data-codigo="SECO_FALT" data-valor="no">No</span></span> <span>· <span data-codigo="SECO_FALT" data-valor="si">Sí</span>, en <span data-codigo="SECO_FALT_N">____</span> de las 4</span></dd>
       </div>
       <div>
         <dt>Conseguir material seco durante el mes me resultó<small>marca uno</small></dt>
         <dd>
-          <span><span class="casilla">□</span> Fácil</span>
-          <span><span class="casilla">□</span> Con esfuerzo</span>
-          <span><span class="casilla">□</span> Difícil</span>
-          <span><span class="casilla">□</span> Nunca supe dónde conseguirlo</span>
+          <span data-codigo="SECO_DIF" data-valor="facil"><span class="casilla">□</span> Fácil</span>
+          <span data-codigo="SECO_DIF" data-valor="esfuerzo"><span class="casilla">□</span> Con esfuerzo</span>
+          <span data-codigo="SECO_DIF" data-valor="dificil"><span class="casilla">□</span> Difícil</span>
+          <span data-codigo="SECO_DIF" data-valor="nunca_supe"><span class="casilla">□</span> Nunca supe dónde</span>
         </dd>
       </div>
       <div>
         <dt>El tamaño del contenedor me resultó<small>circula uno</small></dt>
-        <dd><span class="opcion">Chico · Adecuado · Grande</span></dd>
+        <dd><span class="opcion"><span data-codigo="CONT_TAM" data-valor="chico">Chico</span> · <span data-codigo="CONT_TAM" data-valor="adecuado">Adecuado</span> · <span data-codigo="CONT_TAM" data-valor="grande">Grande</span></span></dd>
+      </div>
+    </dl>
+    <dl class="alta">
+      <div>
+        <dt>Lo que más limitó el mes en esta casa<small>marca uno; «nada en particular» también es una respuesta</small></dt>
+        <dd>
+          <span data-codigo="CUELLO" data-valor="seco"><span class="casilla">□</span> Conseguir material seco</span>
+          <span data-codigo="CUELLO" data-valor="espacio"><span class="casilla">□</span> Espacio en el contenedor</span>
+          <span data-codigo="CUELLO" data-valor="tiempo"><span class="casilla">□</span> Tiempo</span>
+          <span data-codigo="CUELLO" data-valor="anotar"><span class="casilla">□</span> Llevar el registro</span>
+          <span data-codigo="CUELLO" data-valor="separar"><span class="casilla">□</span> Separar los restos en la cocina</span>
+          <span data-codigo="CUELLO" data-valor="nada"><span class="casilla">□</span> Nada en particular</span>
+          <span data-codigo="CUELLO" data-valor="otro"><span class="casilla">□</span> Otro:</span> <span data-codigo="CUELLO_OTRO">______________</span>
+        </dd>
       </div>
       <div>
         <dt>El mes que viene<small>circula uno</small></dt>
-        <dd><span class="opcion">Sigo igual · Sigo con cambios · Lo dejo por ahora</span></dd>
+        <dd><span class="opcion" style="white-space:normal"><span data-codigo="CONTIN" data-valor="igual">Sigo igual</span> · <span data-codigo="CONTIN" data-valor="con_cambios">Sigo con cambios</span> · <span data-codigo="CONTIN" data-valor="lo_dejo">Lo dejo por ahora</span></span></dd>
       </div>
     </dl>
+    </div>
   </section>
 
   <section aria-labelledby="cierre-abierto">
-    <h2 id="cierre-abierto">Lo que quieras dejar dicho</h2>
-    <p class="nota-seccion">Opcional, y sobre la composta. Lo que escribas aquí es lo que más sirve para cambiar el piloto del mes que viene.</p>
-    <dl class="alta">
-      <div>
-        <dt>Lo que me resultó fácil de sostener</dt>
-        <dd><span class="renglon-ancho" aria-hidden="true"></span></dd>
-      </div>
-      <div>
-        <dt>Lo que me costó más trabajo</dt>
-        <dd><span class="renglon-ancho" aria-hidden="true"></span></dd>
-      </div>
-      <div>
-        <dt>Si volviera a empezar, cambiaría</dt>
-        <dd><span class="renglon-ancho" aria-hidden="true"></span></dd>
-      </div>
-      <div>
-        <dt>Algo que el equipo debería saber y no cabe arriba</dt>
-        <dd><span class="renglon-ancho" aria-hidden="true"></span></dd>
-      </div>
-    </dl>
+    <h2 id="cierre-abierto">Lo que quieras dejar dicho <span style="font-size:7.6pt;font-weight:400;color:#333">— opcional, sobre la composta: es lo que más sirve para cambiar el piloto</span></h2>
+    <div class="abiertas4">
+      <p><b>Lo que me resultó fácil de sostener</b><span class="renglon-ancho" data-codigo="CIE_FACIL" aria-hidden="true"></span></p>
+      <p><b>Lo que me costó más trabajo</b><span class="renglon-ancho" data-codigo="CIE_DIFICIL" aria-hidden="true"></span></p>
+      <p><b>Si volviera a empezar, cambiaría</b><span class="renglon-ancho" data-codigo="CIE_CAMBIO" aria-hidden="true"></span></p>
+      <p><b>Algo que el equipo debería saber</b><span class="renglon-ancho" data-codigo="CIE_OTRO" aria-hidden="true"></span></p>
+    </div>
   </section>
 
   </div>
 
-  <section class="leyenda" aria-labelledby="datos-cierre">
-    <h3 id="datos-cierre">Al cerrar</h3>
-    <p>· <strong>La hoja original se queda contigo.</strong> Al grupo van sólo los números, con la clave <strong>H__</strong>. El resumen final presenta a todas las casas juntas, sin identificar hogares.<br>
-       · El pesaje y la temperatura de esta casa los tiene el equipo en su propia hoja: no hace falta que copies nada de eso aquí.</p>
-  </section>
-
   <footer class="pie">
-    <span>Miltli · HUMAN STEM, A.C. · Piloto doméstico de compostaje aerobio · 2026</span>
-    <span>F-HOG rev.&nbsp;02 · Hoja 4 de 4</span>
+    <span><strong>La hoja original se queda contigo.</strong> El equipo le toma una foto en la visita, sin ubicación. Las mediciones del equipo van en su propia hoja. El resumen final presenta a todas las casas juntas.</span>
+    <span data-codigo="FICHA_REV" data-valor="03">F-HOG rev.&nbsp;03 · Hoja 4 de 4</span>
   </footer>
 </article>
 
 </main>
-
-<script>
-(function () {
-  var cuerpo = document.getElementById('cuerpo-diario');
-  if (!cuerpo) return;
-  for (var i = 1; i <= 28; i++) {
-    var tr = document.createElement('tr');
-    if (i % 7 === 0) tr.className = 'fin-semana';
-    tr.innerHTML =
-      '<th scope="row">' + i + '</th>' +
-      '<td></td>' +
-      '<td></td>' +
-      '<td></td>' +
-      '<td class="notas-col"></td>';
-    cuerpo.appendChild(tr);
-  }
-})();
-</script>
 </body>
 </html>
