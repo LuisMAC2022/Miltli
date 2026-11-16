@@ -102,6 +102,11 @@ Se toma **por referencia**: si v0.3 cambia una de estas reglas, cambia también 
    codigo, valor…` sirve tal cual si `ficha_rev` lleva la serie. **Nada de cafeterías entra a la app
    antes de que exista el código de la migración doméstica**; mientras tanto, papel.
 
+   > **Seguimiento (16-nov-2026).** Ese código ya existe y el acta-02 (CAF-05, CAF-08) abrió la
+   > captura de cafeterías en la app. El CSV largo **no** sirvió tal cual: la clave de la Hoja 3 necesita
+   > la fase y la de la Hoja 4 el número de salida, así que el archivo de cafeterías añade las columnas
+   > `fase` y `sal_n`. Los códigos del §10.3 sólo salen en la exportación interna.
+
 ---
 
 ## 2. Hoja 1 — Antes de empezar

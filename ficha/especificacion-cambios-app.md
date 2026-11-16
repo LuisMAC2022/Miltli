@@ -10,6 +10,13 @@
 > pruebas de prohibiciones del §10. Se adoptó la recomendación de P-24, que el comité todavía puede
 > cambiar. Quedan pendientes 14 de las 27 reglas del §7 y el ajuste fino del CSV ancho (§8).
 
+> **Seguimiento (16-nov-2026, tras el acta-02).** P-24 quedó adoptada. La app evalúa 26 de las 27
+> reglas (la I-27 es de la hoja de concordancia, que no se captura); los códigos y valores de cada
+> regla se leen del §8 del diccionario (`datos.reglas`). El CSV ancho tiene columnas fijas con los
+> nombres de la tabla de correspondencia, y lo que se anota una sola vez sale en un tercer archivo, de
+> una fila por hogar. La captura de cafeterías vive en la misma app como modelo aparte
+> (`docs/datos-caf.js`, `docs/logica-caf.js`), generado del diccionario de cafeterías.
+
 ---
 
 ## 0. Antes de empezar: tres reglas que el encargo da por existentes y no existen

@@ -1,0 +1,618 @@
+{
+ "FICHA_REV": [
+  {
+   "valor": "CAF-01",
+   "etiqueta": ""
+  }
+ ],
+ "DEST_TIPO": [
+  {
+   "valor": "acopio",
+   "etiqueta": "un acopio del programa"
+  },
+  {
+   "valor": "composteras",
+   "etiqueta": "composteras que ya existen"
+  },
+  {
+   "valor": "tercero",
+   "etiqueta": "el servicio de un tercero"
+  }
+ ],
+ "CORR_ACEPTA": [
+  {
+   "valor": "posos",
+   "etiqueta": "posos de café y filtros"
+  },
+  {
+   "valor": "prep",
+   "etiqueta": "restos de preparación, crudos"
+  },
+  {
+   "valor": "plato",
+   "etiqueta": "restos de plato"
+  }
+ ],
+ "PLANB": [
+  {
+   "valor": "basura",
+   "etiqueta": "se va a la basura y se anota como «no llegó»"
+  },
+  {
+   "valor": "respaldo",
+   "etiqueta": "se lleva a un destino de respaldo"
+  },
+  {
+   "valor": "pausa",
+   "etiqueta": "se deja de separar hasta que haya recolección"
+  }
+ ],
+ "REC_ROL": [
+  {
+   "valor": "programa",
+   "etiqueta": ""
+  },
+  {
+   "valor": "tercero",
+   "etiqueta": ""
+  },
+  {
+   "valor": "cafeteria",
+   "etiqueta": "la cafetería lo lleva"
+  }
+ ],
+ "SANIT_QUIEN": [
+  {
+   "valor": "cafeteria",
+   "etiqueta": ""
+  },
+  {
+   "valor": "programa",
+   "etiqueta": ""
+  },
+  {
+   "valor": "ambos",
+   "etiqueta": ""
+  }
+ ],
+ "PRE": [
+  {
+   "valor": "destino",
+   "etiqueta": ""
+  },
+  {
+   "valor": "tmax",
+   "etiqueta": ""
+  },
+  {
+   "valor": "planb",
+   "etiqueta": ""
+  },
+  {
+   "valor": "recoleccion",
+   "etiqueta": ""
+  },
+  {
+   "valor": "contenedores",
+   "etiqueta": ""
+  },
+  {
+   "valor": "acuerdo",
+   "etiqueta": ""
+  },
+  {
+   "valor": "sanitaria",
+   "etiqueta": ""
+  },
+  {
+   "valor": "paro",
+   "etiqueta": ""
+  }
+ ],
+ "UNIDAD": [
+  {
+   "valor": "recipientes",
+   "etiqueta": ""
+  },
+  {
+   "valor": "kg",
+   "etiqueta": "kilos, con báscula propia"
+  }
+ ],
+ "DREV": [
+  {
+   "valor": "lu",
+   "etiqueta": ""
+  },
+  {
+   "valor": "ma",
+   "etiqueta": ""
+  },
+  {
+   "valor": "mi",
+   "etiqueta": ""
+  },
+  {
+   "valor": "ju",
+   "etiqueta": ""
+  },
+  {
+   "valor": "vi",
+   "etiqueta": ""
+  },
+  {
+   "valor": "sa",
+   "etiqueta": ""
+  },
+  {
+   "valor": "do",
+   "etiqueta": ""
+  }
+ ],
+ "SEP_QUIEN": [
+  {
+   "valor": "personal",
+   "etiqueta": ""
+  },
+  {
+   "valor": "clientes",
+   "etiqueta": "en una estación de separación"
+  }
+ ],
+ "ANOTA_ROL": [
+  {
+   "valor": "encargado",
+   "etiqueta": "encargado o enlace"
+  },
+  {
+   "valor": "turno",
+   "etiqueta": "quien cierra el turno"
+  }
+ ],
+ "PERS_CAP": [
+  {
+   "valor": "1_3",
+   "etiqueta": ""
+  },
+  {
+   "valor": "4_8",
+   "etiqueta": ""
+  },
+  {
+   "valor": "9_mas",
+   "etiqueta": ""
+  }
+ ],
+ "DPRE_CAF": [
+  {
+   "valor": "basura",
+   "etiqueta": "basura común"
+  },
+  {
+   "valor": "separada",
+   "etiqueta": "recolección separada de orgánicos"
+  },
+  {
+   "valor": "alguien",
+   "etiqueta": "se los llevaba alguien"
+  },
+  {
+   "valor": "compost",
+   "etiqueta": "ya se compostaban"
+  },
+  {
+   "valor": "animales",
+   "etiqueta": "alimento de animales"
+  },
+  {
+   "valor": "otro",
+   "etiqueta": ""
+  }
+ ],
+ "LLEVA_FUERA": [
+  {
+   "valor": "no",
+   "etiqueta": ""
+  },
+  {
+   "valor": "a_veces",
+   "etiqueta": ""
+  },
+  {
+   "valor": "casi_siempre",
+   "etiqueta": ""
+  }
+ ],
+ "ALM_CAP_ND": [
+  {
+   "valor": "marcada",
+   "etiqueta": "→ ALM_CAP = ND"
+  }
+ ],
+ "ALM_TAPA": [
+  {
+   "valor": "si",
+   "etiqueta": ""
+  },
+  {
+   "valor": "no",
+   "etiqueta": ""
+  }
+ ],
+ "ALM_IE": [
+  {
+   "valor": "interior",
+   "etiqueta": ""
+  },
+  {
+   "valor": "exterior",
+   "etiqueta": ""
+  }
+ ],
+ "ALM_SS": [
+  {
+   "valor": "sol",
+   "etiqueta": ""
+  },
+  {
+   "valor": "sombra",
+   "etiqueta": ""
+  }
+ ],
+ "ALM_FRIO": [
+  {
+   "valor": "refrigerado",
+   "etiqueta": ""
+  },
+  {
+   "valor": "ambiente",
+   "etiqueta": ""
+  }
+ ],
+ "ALM_AREA": [
+  {
+   "valor": "alimentos",
+   "etiqueta": ""
+  },
+  {
+   "valor": "aparte",
+   "etiqueta": ""
+  }
+ ],
+ "ALM_LIMPIA": [
+  {
+   "valor": "cafeteria",
+   "etiqueta": ""
+  },
+  {
+   "valor": "programa",
+   "etiqueta": ""
+  }
+ ],
+ "FASE": [
+  {
+   "valor": "base",
+   "etiqueta": "semana de medición previa: sólo se mide y lo separado sigue su camino de siempre"
+  },
+  {
+   "valor": "piloto",
+   "etiqueta": "lo separado se guarda y se entrega"
+  }
+ ],
+ "CERRADO": [
+  {
+   "valor": "marcada",
+   "etiqueta": ""
+  }
+ ],
+ "SAL_TODO": [
+  {
+   "valor": "si",
+   "etiqueta": ""
+  },
+  {
+   "valor": "no",
+   "etiqueta": "quedó algo guardado"
+  }
+ ],
+ "SAL_ENTREGA_ROL": [
+  {
+   "valor": "encargado",
+   "etiqueta": ""
+  },
+  {
+   "valor": "turno",
+   "etiqueta": ""
+  }
+ ],
+ "SAL_COND": [
+  {
+   "valor": "olor",
+   "etiqueta": "olor fuerte"
+  },
+  {
+   "valor": "moscas",
+   "etiqueta": ""
+  },
+  {
+   "valor": "moho",
+   "etiqueta": ""
+  },
+  {
+   "valor": "escurre",
+   "etiqueta": "líquido al fondo"
+  },
+  {
+   "valor": "impropios",
+   "etiqueta": "algo que no va"
+  },
+  {
+   "valor": "nada",
+   "etiqueta": "nada de esto"
+  }
+ ],
+ "SAL_RECIBE_ROL": [
+  {
+   "valor": "programa",
+   "etiqueta": "logística del programa"
+  },
+  {
+   "valor": "destino",
+   "etiqueta": "quien opera el destino"
+  },
+  {
+   "valor": "tercero",
+   "etiqueta": ""
+  }
+ ],
+ "SAL_PLANB": [
+  {
+   "valor": "marcada",
+   "etiqueta": ""
+  }
+ ],
+ "REG": [
+  {
+   "valor": "REG1",
+   "etiqueta": "anotamos todos los días que abrimos"
+  },
+  {
+   "valor": "REG2",
+   "etiqueta": "nos faltaron algunos"
+  }
+ ],
+ "FUGA_CAF_MOT": [
+  {
+   "valor": "sin_recoleccion",
+   "etiqueta": "no hubo recolección"
+  },
+  {
+   "valor": "vencido",
+   "etiqueta": "se echó a perder o pasó el tiempo máximo"
+  },
+  {
+   "valor": "contaminado",
+   "etiqueta": "venía revuelto con cosas que no van"
+  },
+  {
+   "valor": "sin_espacio",
+   "etiqueta": "los contenedores estaban llenos"
+  },
+  {
+   "valor": "sin_tiempo",
+   "etiqueta": "no dio tiempo de separar"
+  },
+  {
+   "valor": "fuera",
+   "etiqueta": "se lo llevó alguien por fuera del programa"
+  },
+  {
+   "valor": "otro",
+   "etiqueta": "",
+   "exige": "NOTA_S"
+  }
+ ],
+ "PAUSA_MOT": [
+  {
+   "valor": "tmax",
+   "etiqueta": "se cumplió el tiempo máximo sin recolección"
+  },
+  {
+   "valor": "lleno",
+   "etiqueta": "contenedores llenos"
+  },
+  {
+   "valor": "incidente",
+   "etiqueta": "un incidente en el guardado"
+  },
+  {
+   "valor": "indicacion",
+   "etiqueta": "lo indicó el programa o la gerencia"
+  },
+  {
+   "valor": "otro",
+   "etiqueta": "",
+   "exige": "NOTA_S"
+  }
+ ],
+ "ALM_OBS": [
+  {
+   "valor": "olor",
+   "etiqueta": "olor fuerte al abrir"
+  },
+  {
+   "valor": "moscas",
+   "etiqueta": ""
+  },
+  {
+   "valor": "moho",
+   "etiqueta": ""
+  },
+  {
+   "valor": "escurre",
+   "etiqueta": "líquido escurrido"
+  },
+  {
+   "valor": "huellas",
+   "etiqueta": "huellas, excremento o mordidas de un animal"
+  },
+  {
+   "valor": "nada",
+   "etiqueta": "nada de lo anterior"
+  }
+ ],
+ "ACT_CAF": [
+  {
+   "valor": "retiro",
+   "etiqueta": "retiramos material que no iba",
+   "exige": "NOTA_S"
+  },
+  {
+   "valor": "lavado",
+   "etiqueta": "lavamos los contenedores"
+  },
+  {
+   "valor": "capacitacion",
+   "etiqueta": "explicamos la separación a personal nuevo"
+  },
+  {
+   "valor": "cambio",
+   "etiqueta": "cambiamos recipientes o su lugar"
+  },
+  {
+   "valor": "otro",
+   "etiqueta": "",
+   "exige": "NOTA_S"
+  },
+  {
+   "valor": "nada",
+   "etiqueta": "no cambiamos nada"
+  }
+ ],
+ "NOTA_S": [
+  {
+   "valor": "otro",
+   "etiqueta": "opcional salvo por los y por retiro"
+  }
+ ],
+ "ALM_OBS_F": [
+  {
+   "valor": "olor",
+   "etiqueta": ""
+  },
+  {
+   "valor": "moscas",
+   "etiqueta": ""
+  },
+  {
+   "valor": "moho",
+   "etiqueta": ""
+  },
+  {
+   "valor": "escurre",
+   "etiqueta": ""
+  },
+  {
+   "valor": "huellas",
+   "etiqueta": ""
+  },
+  {
+   "valor": "nada",
+   "etiqueta": ""
+  }
+ ],
+ "FIN_GUARD": [
+  {
+   "valor": "nada",
+   "etiqueta": "no hay nada guardado"
+  },
+  {
+   "valor": "recoleccion",
+   "etiqueta": "se va en la siguiente recolección"
+  },
+  {
+   "valor": "planb",
+   "etiqueta": "sigue el plan B"
+  }
+ ],
+ "ALM_TAM": [
+  {
+   "valor": "chico",
+   "etiqueta": ""
+  },
+  {
+   "valor": "adecuado",
+   "etiqueta": ""
+  },
+  {
+   "valor": "grande",
+   "etiqueta": ""
+  }
+ ],
+ "REC_SUF": [
+  {
+   "valor": "poca",
+   "etiqueta": "menos de lo necesario"
+  },
+  {
+   "valor": "adecuada",
+   "etiqueta": "lo necesario"
+  },
+  {
+   "valor": "mucha",
+   "etiqueta": "más de lo necesario"
+  }
+ ],
+ "CUELLO_CAF": [
+  {
+   "valor": "separar",
+   "etiqueta": "separar durante el servicio"
+  },
+  {
+   "valor": "anotar",
+   "etiqueta": "llevar el registro"
+  },
+  {
+   "valor": "espacio",
+   "etiqueta": "espacio para guardar"
+  },
+  {
+   "valor": "recoleccion",
+   "etiqueta": "que la recolección llegara a tiempo"
+  },
+  {
+   "valor": "personal",
+   "etiqueta": "cambios de personal y capacitación"
+  },
+  {
+   "valor": "lavado",
+   "etiqueta": "lavar los contenedores"
+  },
+  {
+   "valor": "tiempo",
+   "etiqueta": ""
+  },
+  {
+   "valor": "nada",
+   "etiqueta": "nada en particular"
+  },
+  {
+   "valor": "otro",
+   "etiqueta": ""
+  }
+ ],
+ "CONTIN": [
+  {
+   "valor": "igual",
+   "etiqueta": ""
+  },
+  {
+   "valor": "con_cambios",
+   "etiqueta": ""
+  },
+  {
+   "valor": "lo_dejo",
+   "etiqueta": ""
+  }
+ ]
+}

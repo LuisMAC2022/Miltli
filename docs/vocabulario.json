@@ -81,6 +81,12 @@
    "etiqueta": ""
   }
  ],
+ "CONT_CAP_ND": [
+  {
+   "valor": "marcada",
+   "etiqueta": ""
+  }
+ ],
  "UBIC_IE": [
   {
    "valor": "interior",

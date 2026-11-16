@@ -1,7 +1,7 @@
 # Miltli
 
-Piloto doméstico de compostaje de HUMAN STEM, A.C.: cinco hogares, 28 días, una ficha en papel y una
-aplicación estática de captura.
+Piloto de compostaje de HUMAN STEM, A.C.: cinco hogares, 28 días, una ficha en papel y una
+aplicación estática de captura; y, en borrador, la ficha y la captura para cafeterías.
 
 ## El piloto y su registro
 
@@ -29,31 +29,45 @@ pruebas de usabilidad (acta-02 §4).
 
 ## La aplicación (`docs/`)
 
-Página estática para GitHub Pages: la **captura del coordinador** (decisión D5 del acta-01). El
-registro es el papel; la app sólo lo transcribe, para los cinco hogares, en un mismo dispositivo.
-Implementa `ficha/especificacion-cambios-app.md`.
+Página estática para GitHub Pages: la **captura del coordinador** (decisión D5 del acta-01, que el
+acta-02 mantiene también para cafeterías). El registro es el papel; la app sólo lo transcribe, en un
+mismo dispositivo. Implementa `ficha/especificacion-cambios-app.md`.
 
-- **Pantallas en el orden del papel:** Hojas 1 a 4 de F-HOG rev. 03, registro técnico del día 1 y del
-  día 28, y verificación de instrumentos. Se construyen desde `docs/datos.js` y
-  `docs/vocabulario.json`, que se **generan del diccionario v0.3** (`npm run datos`); ninguna
-  categoría está escrita a mano en la app.
+- **Dos fichas, dos modelos, una app** (acta-02, CAF-08): **Hogares** (F-HOG rev. 03, cinco hogares
+  `H1`…`H5`) y **Cafeterías** (F-CAF rev. 01, claves `K1`, `K2`… que se agregan en la app). Se elige
+  arriba de la página.
+- **Pantallas en el orden del papel.** Hogares: Hojas 1 a 4, registro técnico del día 1 y del día 28,
+  y verificación de instrumentos. Cafeterías: Hojas 1 a 6, con la Hoja 3 dos veces (la semana de
+  medición previa y los 28 días) y la Hoja 4 con un bloque por salida. Todo se construye desde
+  `docs/datos.js`, `docs/datos-caf.js` y sus vocabularios, que se **generan de los diccionarios**
+  (`npm run datos`); ninguna categoría está escrita a mano en la app.
 - **Sin valores por omisión:** ninguna casilla viene marcada ni ningún número prellenado. Cada campo
   admite sus valores de ausencia (`NR`, `NC`, `ND`, `NA`); al exportar, lo vacío sale con la ausencia
-  que le asigna el diccionario.
-- **Se captura lo que dice el papel.** Las inconsistencias se marcan, no se corrigen: 13 de las 27
-  reglas del diccionario §8 se evalúan en pantalla y viajan en la columna `marcas`.
-- **Exportación:** CSV largo (`id, ficha_rev, hoja, sem, dia, codigo, valor, valor_original, marcas`)
-  y CSV ancho por hogar y semana, con las derivadas marcadas `_der`. `DREV` sólo sale en la
-  exportación interna.
-- **Respaldo JSON** con advertencia, restauración y borrado. Funciona sin conexión después de la
-  primera visita.
-- **No lleva** nombres, correos ni teléfonos, ni las columnas retiradas por privacidad; lo comprueba
-  `tests/app-prohibiciones.test.js`.
+  que le asigna el diccionario. En cafeterías, `0` ≠ vacío ≠ «cerrado», y la corriente que el destino
+  no aceptó sale `NA`.
+- **Se captura lo que dice el papel.** Las inconsistencias se marcan, no se corrigen, y viajan en la
+  columna `marcas`: en hogares, 26 de las 27 reglas del diccionario v0.3 §8 (la I-27 es de la hoja de
+  concordancia, que la app no captura); en cafeterías, las 17 reglas `IC` de su diccionario.
+- **Exportación**, por ficha: CSV largo (una fila por dato), CSV ancho por semana y CSV ancho de una
+  fila por hogar o por cafetería, con las derivadas marcadas `_der`. El largo de cafeterías añade las
+  columnas `fase` y `sal_n`, que son parte de su clave.
+- **Exportación interna:** `DREV` y, en cafeterías, lo que describe la rutina del negocio
+  (`REC_FREC`, `DIAS_OP`, `CERRADO`, `SAL_FECHA`) sólo salen con la casilla de exportación interna.
+- **Respaldo JSON** de las dos fichas en un solo archivo, con advertencia, restauración y borrado.
+  Funciona sin conexión después de la primera visita.
+- **No lleva** nombres, correos ni teléfonos, ni las columnas retiradas por privacidad, ni datos del
+  negocio; lo comprueban `tests/app-prohibiciones.test.js` y `tests/app-caf.test.js`.
 
-Pendiente respecto de la especificación: las 14 reglas de consistencia restantes, y las columnas del
-CSV ancho todavía no siguen una por una la tabla de correspondencia. La ficha de cafeterías no está
-en la app. Si el navegador guarda un registro de la versión anterior, la app ofrece exportarlo como
-serie aparte; no lo convierte.
+Tres interpretaciones que la app tuvo que tomar, porque el diccionario no las fija:
+**I-21** se marca siempre que el hogar arrancó con material previo; **I-22** compara los decimales de
+la temperatura con los de las lecturas de verificación del termómetro; **I-26** marca la fila de
+verificación y la visita de ese mismo día. Además, donde la tabla de correspondencia da el mismo
+encabezado a una opción y a su texto libre (`dpre_otro`), la columna del texto se llama
+`dpre_otro_texto`.
+
+Pendiente: probar la captura con una ficha real llenada y con quien coordina; unificar los dos modelos
+en uno de «fuentes» al congelar las dos fichas (CAF-08). Si el navegador guarda un registro de la
+primera versión de la app, se ofrece exportarlo como serie aparte; no se convierte.
 
 ## Arquitectura y privacidad
 

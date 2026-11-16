@@ -1,59 +1,86 @@
-// Pantallas de la captura del coordinador. Todas se construyen desde datos.js y vocabulario.json:
-// aquí no se escribe a mano ninguna categoría del diccionario. Ningún campo trae valor por omisión;
-// lo guardado se vuelca a los controles por propiedad, después de pintar.
+// Pantallas de la captura del coordinador: hogares (F-HOG) y cafeterías (F-CAF), cada ficha con su
+// modelo (acta-02, CAF-08). Todas se construyen desde los datos y vocabularios generados de los
+// diccionarios: aquí no se escribe a mano ninguna categoría. Ningún campo trae valor por omisión; lo
+// guardado se vuelca a los controles por propiedad, después de pintar.
 (function () {
   "use strict";
 
   const L = window.MiltliLogica;
+  const LC = window.MiltliLogicaCaf;
   const D = window.MiltliDatos;
+  const DC = window.MiltliDatosCaf;
   const $ = (sel, raiz = document) => raiz.querySelector(sel);
   const $$ = (sel, raiz = document) => [...raiz.querySelectorAll(sel)];
   const esc = (t) => String(t).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
   const mayus = (t) => t.charAt(0).toUpperCase() + t.slice(1);
 
-  const VISTAS = [
-    { id: "h1", titulo: "Hoja 1 · Arranque", nota: "Se transcribe una vez, del papel del día 1." },
-    { id: "h2", titulo: "Hoja 2 · Registro diario", nota: "Un renglón por día. Renglón vacío = no anotó (NR); 0 = no agregó nada. Cantidades en botes: 0, 1, ½, 1½. Si el papel trae otra cosa, escríbela tal cual: se guarda como ND con el texto original." },
-    { id: "h3", titulo: "Hoja 3 · Renglón semanal", nota: "Una columna por semana. Columna vacía = NR; casilla vacía dentro de una semana con datos = NC. Se captura lo que dice el papel, aunque sea inconsistente: la app lo marca, no lo corrige." },
-    { id: "h4", titulo: "Hoja 4 · Día 28", nota: "Revisión de estado y cierre. Una sección sin marcas se exporta como ND." },
-    { id: "t1", titulo: "Registro técnico · día 1", nota: "Del registro del equipo. Quién del equipo: una clave (E1, E2…), nunca un nombre." },
-    { id: "t28", titulo: "Registro técnico · día 28", nota: "Del registro del equipo. No se describe el contenido de lo que se pesa." },
-    { id: "ver", titulo: "Verificación de instrumentos", nota: "Una fila por instrumento y por día de medición. Vale para los cinco hogares." },
-    { id: "exportar", titulo: "Exportar y respaldar" }
-  ];
-  const RAIZ_DE = { h1: "alta", h4: "dia28", t1: "tecnico.dia1", t28: "tecnico.cierre" };
+  const VISTAS = {
+    hog: [
+      { id: "h1", corto: "Hoja 1", titulo: "Hoja 1 · Arranque", nota: "Se transcribe una vez, del papel del día 1." },
+      { id: "h2", corto: "Hoja 2", titulo: "Hoja 2 · Registro diario", nota: "Un renglón por día. Renglón vacío = no anotó (NR); 0 = no agregó nada. Cantidades en botes: 0, 1, ½, 1½. Si el papel trae otra cosa, escríbela tal cual: se guarda como ND con el texto original." },
+      { id: "h3", corto: "Hoja 3", titulo: "Hoja 3 · Renglón semanal", nota: "Una columna por semana. Columna vacía = NR; casilla vacía dentro de una semana con datos = NC. Se captura lo que dice el papel, aunque sea inconsistente: la app lo marca, no lo corrige." },
+      { id: "h4", corto: "Hoja 4", titulo: "Hoja 4 · Día 28", nota: "Revisión de estado y cierre. Una sección sin marcas se exporta como ND." },
+      { id: "t1", corto: "Técnico día 1", titulo: "Registro técnico · día 1", nota: "Del registro del equipo. Quién del equipo: una clave (E1, E2…), nunca un nombre." },
+      { id: "t28", corto: "Técnico día 28", titulo: "Registro técnico · día 28", nota: "Del registro del equipo. No se describe el contenido de lo que se pesa." },
+      { id: "ver", corto: "Verificación", titulo: "Verificación de instrumentos", nota: "Una fila por instrumento y por día de medición. Vale para los cinco hogares." }
+    ],
+    caf: [
+      { id: "c1", corto: "Hoja 1", titulo: "Hoja 1 · Antes de empezar", nota: "La llenan el programa y la gerencia antes del día 1. Mientras falte una de las ocho condiciones, no se separa nada. El destino va con su clave, nunca con un nombre ni una dirección." },
+      { id: "c2", corto: "Hoja 2", titulo: "Hoja 2 · Arranque", nota: "Se transcribe una vez, del papel del día 1. La capacidad de cada recipiente la mide el equipo." },
+      { id: "c3b", corto: "Hoja 3 · previa", titulo: "Hoja 3 · Semana de medición previa", nota: "Siete días en que sólo se mide: lo separado sigue su camino de siempre y no hay salidas. Se captura el total del día, no las rayas." },
+      { id: "c3", corto: "Hoja 3 · piloto", titulo: "Hoja 3 · Registro por día", nota: "Un renglón por día. 0 = se abrió y no se separó nada; renglón vacío = no se anotó (NR); «Cerrado» = no hubo operación. Recipientes en enteros y medios; kilos con decimales sólo si la cafetería cuenta en kilos." },
+      { id: "c4", corto: "Hoja 4", titulo: "Hoja 4 · Entregas", nota: "Una salida por cada vez que lo guardado sale de la cafetería. Una salida sin llenar no es un dato. Si quien recibe contó distinto de quien entrega, se capturan los dos números." },
+      { id: "c5", corto: "Hoja 5", titulo: "Hoja 5 · Renglón semanal", nota: "Una columna por semana. Columna vacía = NR; casilla vacía dentro de una semana con datos = NC. Se captura lo que dice el papel: la app lo marca, no lo corrige." },
+      { id: "c6", corto: "Hoja 6", titulo: "Hoja 6 · Cierre", nota: "Se llena sólo el día de cierre." }
+    ]
+  };
+  const EXPORTAR = { id: "exportar", corto: "Exportar", titulo: "Exportar y respaldar" };
+  const FORMULARIOS = { h1: [["h1"], "alta"], h4: [["h4"], "dia28"], t1: [["vis", "t1"], "tecnico.dia1"], t28: [["vis", "t28"], "tecnico.cierre"], c1: [["c1"], "antes"], c2: [["c2"], "arranque"], c6: [["c6"], "cierre"] };
+  const ROTULOS = {
+    hog: { unidad: "Hogar que se transcribe", sin: "Sin avisos en este hogar.", pie: "El número es la regla del diccionario v0.3 §8 y viaja en la columna «marcas» del CSV." },
+    caf: { unidad: "Cafetería que se transcribe", sin: "Sin avisos en esta cafetería.", pie: "El número es la regla del diccionario de cafeterías §8 y viaja en la columna «marcas» del CSV." }
+  };
 
-  let vocabulario = {};
+  const vocabularios = { hog: {}, caf: {} };
   let estado = L.estadoInicial(D);
-  let hogar = D.hogares[0];
+  let estadoCaf = LC.estadoInicial();
+  const unidad = { hog: D.hogares[0], caf: "" };
+  let ficha = "hog";
   let vista = "h1";
 
   // ---------- estado ----------
 
   function cargar() {
     try { estado = L.normalizar(JSON.parse(localStorage.getItem(L.CLAVE)), D); } catch (e) { estado = L.estadoInicial(D); }
+    try { estadoCaf = LC.normalizar(JSON.parse(localStorage.getItem(LC.CLAVE)), DC); } catch (e) { estadoCaf = LC.estadoInicial(); }
   }
 
   function guardar() {
-    try { localStorage.setItem(L.CLAVE, JSON.stringify(estado)); } catch (e) { avisar("No se pudo guardar en este navegador.", true); }
+    try {
+      localStorage.setItem(L.CLAVE, JSON.stringify(estado));
+      localStorage.setItem(LC.CLAVE, JSON.stringify(estadoCaf));
+    } catch (e) { avisar("No se pudo guardar en este navegador.", true); }
   }
+
+  const actual = () => (ficha === "caf" ? estadoCaf.cafeterias[unidad.caf] : estado.hogares[unidad.hog]);
+  const campos = (pantallas) => (ficha === "caf" ? pantallas.flatMap((p) => LC.capturables(DC, p)) : L.capturables(D, pantallas));
 
   function nodo(ruta, crear) {
     const partes = ruta.split(".");
-    let actual = partes[0] === "ver" ? estado.verificacion : estado.hogares[hogar];
+    let o = partes[0] === "ver" ? estado.verificacion : actual();
     const inicio = partes[0] === "ver" ? 1 : 0;
     for (let i = inicio; i < partes.length - 1; i += 1) {
-      if (actual[partes[i]] == null) { if (!crear) return [null, null]; actual[partes[i]] = {}; }
-      actual = actual[partes[i]];
+      if (o[partes[i]] == null) { if (!crear) return [null, null]; o[partes[i]] = {}; }
+      o = o[partes[i]];
     }
-    return [actual, partes[partes.length - 1]];
+    return [o, partes[partes.length - 1]];
   }
   const leer = (ruta) => { const [o, k] = nodo(ruta, false); return o ? o[k] : undefined; };
   const escribir = (ruta, valor) => { const [o, k] = nodo(ruta, true); if (L.vacio(valor)) delete o[k]; else o[k] = valor; };
 
   // ---------- piezas ----------
 
-  const items = (campo) => vocabulario[campo.vocabulario] || [];
+  const items = (campo) => vocabularios[ficha][campo.vocabulario] || [];
   const rotulo = (item) => esc(mayus(item.etiqueta || item.valor.replace(/_/g, " ")));
 
   function selectorAusencia(campo, ruta) {
@@ -67,11 +94,11 @@
 
   function especiales(campo, ruta) {
     if (!campo.especiales) return "";
-    return (vocabulario[campo.especiales] || []).map((item) => `<label class="marca"><input type="checkbox" data-ruta="${ruta}" data-especial="${esc(item.valor)}"> ${esc(mayus(item.valor.replace(/_/g, " ")))}</label>`).join("");
+    return (vocabularios[ficha][campo.especiales] || []).map((item) => `<label class="marca"><input type="checkbox" data-ruta="${ruta}" data-especial="${esc(item.valor)}"> ${esc(mayus(item.valor.replace(/_/g, " ")))}</label>`).join("");
   }
 
   function campoHTML(campo, ruta) {
-    const pista = `<small>${esc(campo.codigo)} · ${esc(campo.quien)}</small>`;
+    const pista = `<small>${esc(campo.codigo)} · ${esc(campo.quien.replace(/\*/g, ""))}</small>`;
     if (L.esMarcable(campo)) {
       return `<fieldset class="pregunta"><legend>${esc(campo.etiqueta)} ${pista}</legend><div class="opciones">${casillas(campo, ruta)}</div>${selectorAusencia(campo, ruta)}</fieldset>`;
     }
@@ -79,31 +106,47 @@
     return `<p class="pregunta"><label for="${id}">${esc(campo.etiqueta)} ${pista}</label><span class="linea"><input type="text" id="${id}" data-ruta="${ruta}" autocomplete="off">${especiales(campo, ruta)}${selectorAusencia(campo, ruta)}</span></p>`;
   }
 
-  const formulario = (campos, raiz) => `<form class="captura" autocomplete="off">${campos.map((c) => campoHTML(c, `${raiz}.${c.codigo}`)).join("")}</form>`;
+  const formulario = (lista, raiz) => `<form class="captura" autocomplete="off">${lista.map((c) => campoHTML(c, `${raiz}.${c.codigo}`)).join("")}</form>`;
 
-  function hojaDiaria() {
-    const campos = L.capturables(D, ["h2"]);
-    const filas = L.DIAS.map((d) => `<tr${d % 7 === 0 ? ' class="fin-semana"' : ""}><th scope="row">${d}</th>${campos.map((c) => `<td><input type="text" data-ruta="diario.${d}.${c.codigo}" aria-label="${esc(c.etiqueta)}, día ${d}" autocomplete="off"></td>`).join("")}</tr>`).join("");
-    return `<div class="tabla-scroll" tabindex="0" role="region" aria-label="Registro diario"><table class="rejilla diaria"><thead><tr><th scope="col">Día</th>${campos.map((c) => `<th scope="col">${esc(c.etiqueta)}</th>`).join("")}</tr></thead><tbody>${filas}</tbody></table></div>`;
+  // En cafeterías, la columna de una corriente que el destino no aceptó va tachada en el papel.
+  const tachada = (campo) => ficha === "caf" && campo.corriente && !LC.aceptada(actual(), campo.corriente);
+  const cabeza = (campo) => `<th scope="col">${esc(campo.etiqueta)}${campo.corriente ? ` · ${esc(campo.corriente)}` : ""}${tachada(campo) ? " <small>(no aceptada)</small>" : ""}</th>`;
+
+  // Rejilla de un renglón por día: una columna por casilla; las de marcar, como casilla de verificación.
+  function hojaDiaria(lista, dias, raiz, nombre) {
+    const celda = (c, d) => (L.esMarcable(c)
+      ? `<td class="centro">${items(c).map((item) => `<input type="checkbox" data-ruta="${raiz}.${d}.${c.codigo}" data-valor="${esc(item.valor)}" aria-label="${esc(c.etiqueta)}, día ${d}">`).join("")}</td>`
+      : `<td><input type="text" data-ruta="${raiz}.${d}.${c.codigo}" aria-label="${esc(c.etiqueta)}${c.corriente ? ` ${esc(c.corriente)}` : ""}, día ${d}" autocomplete="off"></td>`);
+    const filas = dias.map((d) => `<tr${d % 7 === 0 ? ' class="fin-semana"' : ""}><th scope="row">${d}</th>${lista.map((c) => celda(c, d)).join("")}</tr>`).join("");
+    return `<div class="tabla-scroll" tabindex="0" role="region" aria-label="${nombre}"><table class="rejilla diaria"><thead><tr><th scope="col">Día</th>${lista.map(cabeza).join("")}</tr></thead><tbody>${filas}</tbody></table></div>`;
   }
 
-  function hojaSemanal() {
-    const todos = L.capturables(D, ["h3"]);
-    const semanales = todos.filter((c) => c.cuando !== "una vez");
-    const cabeza = `<tr><th scope="col">Casilla</th>${L.SEMANAS.map((s) => `<th scope="col">S${s}</th>`).join("")}</tr>`;
+  // Rejilla de una columna por semana, con el control de transcripción del coordinador al pie.
+  function hojaSemanal(semanales, unicos) {
+    const titulos = `<tr><th scope="col">Casilla</th>${L.SEMANAS.map((s) => `<th scope="col">S${s}</th>`).join("")}</tr>`;
     const filas = semanales.map((c) => {
-      if (!L.esMarcable(c)) return `<tr><th scope="row">${esc(c.etiqueta)}</th>${L.SEMANAS.map((s) => `<td><input type="text" data-ruta="semanal.${s}.${c.codigo}" aria-label="${esc(c.etiqueta)}, semana ${s}" autocomplete="off"></td>`).join("")}</tr>`;
-      const grupo = `<tr class="grupo"><th scope="colgroup" colspan="5">${esc(c.etiqueta)}</th></tr>`;
+      const nombre = `${esc(c.etiqueta)}${c.corriente ? ` · ${esc(c.corriente)}` : ""}${tachada(c) ? " <small>(no aceptada)</small>" : ""}`;
+      if (!L.esMarcable(c)) return `<tr><th scope="row">${nombre}</th>${L.SEMANAS.map((s) => `<td><input type="text" data-ruta="semanal.${s}.${c.codigo}" aria-label="${esc(c.etiqueta)}, semana ${s}" autocomplete="off"></td>`).join("")}</tr>`;
+      const grupo = `<tr class="grupo"><th scope="colgroup" colspan="5">${nombre}</th></tr>`;
       return grupo + items(c).map((item) => `<tr><th scope="row" class="sub">${rotulo(item)}</th>${L.SEMANAS.map((s) => `<td class="centro"><input type="checkbox" data-ruta="semanal.${s}.${c.codigo}" data-valor="${esc(item.valor)}" aria-label="${rotulo(item)}, semana ${s}"></td>`).join("")}</tr>`).join("");
     }).join("");
     const control = ["recibida", "transcrita"].map((b) => `<tr><th scope="row" class="sub">Foto ${b}</th>${L.SEMANAS.map((s) => `<td class="centro"><input type="checkbox" data-ruta="transcripcion.${s}.${b}" data-bandera aria-label="Foto ${b}, semana ${s}"></td>`).join("")}</tr>`).join("");
-    return `<div class="tabla-scroll" tabindex="0" role="region" aria-label="Renglón semanal"><table class="rejilla semanal"><thead>${cabeza}</thead><tbody>${filas}<tr class="grupo"><th scope="colgroup" colspan="5">Control de la transcripción (no se exporta)</th></tr>${control}</tbody></table></div>${formulario(todos.filter((c) => c.cuando === "una vez"), "unico")}`;
+    return `<div class="tabla-scroll" tabindex="0" role="region" aria-label="Renglón semanal"><table class="rejilla semanal"><thead>${titulos}</thead><tbody>${filas}<tr class="grupo"><th scope="colgroup" colspan="5">Control de la transcripción (no se exporta)</th></tr>${control}</tbody></table></div>${unicos.length ? formulario(unicos, "unico") : ""}`;
   }
 
   function hojaVerificacion() {
-    const campos = L.capturables(D, ["ver"]);
-    const filas = estado.verificacion.map((_, i) => `<tr>${campos.map((c) => `<td>${L.esMarcable(c) ? casillas(c, `ver.${i}.${c.codigo}`) : `<input type="text" data-ruta="ver.${i}.${c.codigo}" aria-label="${esc(c.etiqueta)}, fila ${i + 1}" autocomplete="off">`}</td>`).join("")}</tr>`).join("");
-    return `<div class="tabla-scroll" tabindex="0" role="region" aria-label="Verificación de instrumentos"><table class="rejilla"><thead><tr>${campos.map((c) => `<th scope="col">${esc(c.etiqueta)}</th>`).join("")}</tr></thead><tbody>${filas || `<tr><td colspan="${campos.length}" class="vacio">Sin filas todavía.</td></tr>`}</tbody></table></div><p><button type="button" id="ver-agregar" class="secundario">Agregar fila</button></p>`;
+    const lista = campos(["ver"]);
+    const filas = estado.verificacion.map((_, i) => `<tr>${lista.map((c) => `<td>${L.esMarcable(c) ? casillas(c, `ver.${i}.${c.codigo}`) : `<input type="text" data-ruta="ver.${i}.${c.codigo}" aria-label="${esc(c.etiqueta)}, fila ${i + 1}" autocomplete="off">`}</td>`).join("")}</tr>`).join("");
+    return `<div class="tabla-scroll" tabindex="0" role="region" aria-label="Verificación de instrumentos"><table class="rejilla"><thead><tr>${lista.map((c) => `<th scope="col">${esc(c.etiqueta)}</th>`).join("")}</tr></thead><tbody>${filas || `<tr><td colspan="${lista.length}" class="vacio">Sin filas todavía.</td></tr>`}</tbody></table></div><p><button type="button" id="ver-agregar" class="secundario">Agregar fila</button></p>`;
+  }
+
+  // Hoja 4 de cafeterías: una salida por bloque; se abren las que ya tienen datos y la siguiente.
+  function hojaSalidas() {
+    const lista = campos(["c4"]);
+    const salidas = actual().salidas;
+    const llenas = LC.SALIDAS.filter((n) => Object.keys(salidas[n] || {}).length);
+    const siguiente = (llenas.length ? Math.max(...llenas) : 0) + 1;
+    return LC.SALIDAS.map((n) => `<details class="salida"${llenas.includes(n) || n === siguiente ? " open" : ""}><summary>Salida ${n}${llenas.includes(n) ? " · con datos" : ""}</summary>${formulario(lista, `salidas.${n}`)}</details>`).join("");
   }
 
   // ---------- pintar ----------
@@ -124,30 +167,62 @@
     }
   }
 
+  function avisos() {
+    if (!actual()) return [];
+    return ficha === "caf" ? LC.marcas(actual(), DC, vocabularios.caf) : L.marcas(actual(), D, vocabularios.hog, estado.verificacion);
+  }
+
   function pintarAvisos() {
-    const lista = L.marcas(estado.hogares[hogar], D, vocabulario);
+    const lista = avisos();
+    const reglas = (ficha === "caf" ? DC : D).reglas;
+    const donde = (a) => `${a.fase && a.fase !== DC.fases[1] ? ` · semana previa` : ""}${a.sem ? ` · semana ${a.sem}` : ""}${a.dia ? ` · día ${a.dia}` : ""}${a.sal_n ? ` · salida ${a.sal_n}` : ""}`;
     $("#avisos-lista").innerHTML = lista.length
-      ? lista.map((a) => `<li><strong>${a.regla}</strong> · ${a.codigo}${a.sem ? ` · semana ${a.sem}` : ""}${a.dia ? ` · día ${a.dia}` : ""}</li>`).join("")
-      : '<li class="vacio">Sin avisos en este hogar.</li>';
+      ? lista.map((a) => `<li><strong>${a.regla}</strong> <small>${esc((reglas[a.regla] || {}).tipo || "")}</small> · ${a.codigo} · hoja ${a.hoja}${donde(a)}</li>`).join("")
+      : `<li class="vacio">${ROTULOS[ficha].sin}</li>`;
     $("#avisos-cuenta").textContent = String(lista.length);
+    $("#avisos-pie").textContent = `Se marcan, no se corrigen: captura lo que dice el papel. ${ROTULOS[ficha].pie}`;
+  }
+
+  function pintarUnidades() {
+    const lista = ficha === "caf" ? LC.ids(estadoCaf) : D.hogares;
+    if (ficha === "caf" && !lista.includes(unidad.caf)) unidad.caf = lista[0] || "";
+    $("#unidad-rotulo").textContent = ROTULOS[ficha].unidad;
+    $("#unidad").innerHTML = lista.map((id) => `<option>${id}</option>`).join("");
+    $("#unidad").value = unidad[ficha];
+    $("#unidad").disabled = !lista.length;
+    $("#unidad-agregar").hidden = ficha !== "caf";
+  }
+
+  function cuerpo() {
+    if (vista === "ver") return hojaVerificacion();
+    if (!actual()) return `<p class="aviso">Todavía no hay ninguna cafetería en este dispositivo. «Agregar cafetería» crea la siguiente clave (${esc(DC.prefijo)}1, ${esc(DC.prefijo)}2…). Qué negocio es cada clave lo sabe sólo la lista de claves, que vive fuera de esta app.</p>`;
+    if (FORMULARIOS[vista]) return formulario(campos(FORMULARIOS[vista][0]), FORMULARIOS[vista][1]);
+    if (vista === "h2") return hojaDiaria(campos(["h2"]), L.DIAS, "diario", "Registro diario");
+    if (vista === "c3b") return hojaDiaria(campos(["c3"]), LC.DIAS_BASE, "base", "Semana de medición previa");
+    if (vista === "c3") return hojaDiaria(campos(["c3"]), LC.DIAS, "diario", "Registro por día");
+    if (vista === "c4") return hojaSalidas();
+    const semanales = campos([vista]);
+    return hojaSemanal(semanales.filter((c) => c.cuando !== "una vez"), semanales.filter((c) => c.cuando === "una vez"));
   }
 
   function pintar() {
-    const v = VISTAS.find((x) => x.id === vista) || VISTAS[0];
-    vista = v.id;
-    for (const a of $$("#vistas a")) a.toggleAttribute("aria-current", a.hash === `#${vista}`), a.hasAttribute("aria-current") && a.setAttribute("aria-current", "page");
+    const propias = [...VISTAS.hog, ...VISTAS.caf];
+    if (vista !== "exportar") {
+      const v = propias.find((x) => x.id === vista) || VISTAS.hog[0];
+      vista = v.id;
+      ficha = VISTAS.caf.includes(v) ? "caf" : "hog";
+    }
+    const v = vista === "exportar" ? EXPORTAR : propias.find((x) => x.id === vista);
+    $("#vistas").innerHTML = [...VISTAS[ficha], EXPORTAR].map((x) => `<a href="#${x.id}"${x.id === vista ? ' aria-current="page"' : ""}>${esc(x.corto)}</a>`).join("");
+    for (const a of $$("#fichas a")) { if (a.dataset.ficha === ficha) a.setAttribute("aria-current", "true"); else a.removeAttribute("aria-current"); }
     const exportar = vista === "exportar";
     $("#exportar").hidden = !exportar;
     $("#captura").hidden = exportar;
     $("#avisos").hidden = exportar || vista === "ver";
-    $("#hogar-caja").hidden = exportar || vista === "ver";
+    $("#unidad-caja").hidden = exportar || vista === "ver";
     if (exportar) { $("#anterior").hidden = !localStorage.getItem(L.CLAVE_ANTERIOR); return; }
-    let cuerpo;
-    if (vista === "h2") cuerpo = hojaDiaria();
-    else if (vista === "h3") cuerpo = hojaSemanal();
-    else if (vista === "ver") cuerpo = hojaVerificacion();
-    else cuerpo = formulario(L.capturables(D, vista === "t1" || vista === "t28" ? ["vis", vista] : [vista]), RAIZ_DE[vista]);
-    $("#captura").innerHTML = `<h2>${esc(v.titulo)}${vista === "ver" ? "" : ` · <span class="clave">${hogar}</span>`}</h2><p class="entrada">${esc(v.nota)}</p>${cuerpo}`;
+    pintarUnidades();
+    $("#captura").innerHTML = `<h2>${esc(v.titulo)}${vista === "ver" || !actual() ? "" : ` · <span class="clave">${esc(unidad[ficha])}</span>`}</h2><p class="entrada">${esc(v.nota)}</p>${cuerpo()}`;
     hidratar();
     pintarAvisos();
   }
@@ -194,6 +269,7 @@
   }
 
   const hoy = () => new Date().toISOString().slice(0, 10);
+  const CSV = "text/csv;charset=utf-8";
 
   function enlazar() {
     $("#captura").addEventListener("input", (e) => { if (e.target.type === "text") alCambiar(e); });
@@ -205,14 +281,30 @@
       guardar();
       pintar();
     });
-    $("#hogar").addEventListener("change", (e) => { hogar = e.target.value; pintar(); });
+    $("#unidad").addEventListener("change", (e) => { unidad[ficha] = e.target.value; pintar(); });
+    $("#unidad-agregar").addEventListener("click", () => {
+      unidad.caf = LC.agregar(estadoCaf, DC);
+      guardar();
+      pintar();
+      avisar(`Se creó la clave ${unidad.caf}. Anótala en la lista de claves, fuera de esta app.`);
+    });
     window.addEventListener("hashchange", () => { vista = location.hash.slice(1) || "h1"; pintar(); });
 
-    $("#csv-largo").addEventListener("click", () => descargar(`miltli_${hoy()}_largo.csv`, L.csvLargo(estado, D, vocabulario, { interno: $("#interno").checked }), "text/csv;charset=utf-8"));
-    $("#csv-ancho").addEventListener("click", () => descargar(`miltli_${hoy()}_ancho.csv`, L.csvAncho(estado, D, vocabulario), "text/csv;charset=utf-8"));
+    const interno = () => ({ interno: $("#interno").checked });
+    const exportaciones = {
+      "csv-largo": ["largo", () => L.csvLargo(estado, D, vocabularios.hog, interno())],
+      "csv-ancho": ["ancho", () => L.csvAncho(estado, D, vocabularios.hog)],
+      "csv-hogar": ["hogar", () => L.csvHogar(estado, D, vocabularios.hog, interno())],
+      "caf-largo": ["cafeterias_largo", () => LC.csvLargo(estadoCaf, DC, vocabularios.caf, interno())],
+      "caf-ancho": ["cafeterias_ancho", () => LC.csvAncho(estadoCaf, DC, vocabularios.caf, interno())],
+      "caf-unica": ["cafeterias", () => LC.csvCafeteria(estadoCaf, DC, vocabularios.caf, interno())]
+    };
+    for (const [id, [nombre, generar]] of Object.entries(exportaciones)) {
+      $(`#${id}`).addEventListener("click", () => descargar(`miltli_${hoy()}_${nombre}${$("#interno").checked ? "_interno" : ""}.csv`, generar(), CSV));
+    }
     $("#respaldo").addEventListener("click", () => {
-      const texto = "Este archivo contiene la captura de los cinco hogares con su clave. No lleva nombres ni domicilios, pero dentro del grupo es reidentificable. Guárdalo sólo donde vivan los datos del piloto; no lo mandes por chat.";
-      if (window.confirm(texto)) descargar(`miltli_${hoy()}_respaldo.json`, JSON.stringify(estado, null, 1), "application/json");
+      const texto = "Este archivo contiene la captura de los hogares y de las cafeterías con su clave. No lleva nombres ni domicilios, pero dentro del grupo es reidentificable. Guárdalo sólo donde vivan los datos del piloto; no lo mandes por chat.";
+      if (window.confirm(texto)) descargar(`miltli_${hoy()}_respaldo.json`, JSON.stringify({ ...estado, caf: estadoCaf }, null, 1), "application/json");
     });
     $("#restaurar").addEventListener("change", async (e) => {
       const archivo = e.target.files[0];
@@ -220,21 +312,23 @@
       try {
         const candidato = JSON.parse(await archivo.text());
         if (candidato.version !== 2) throw new Error("versión");
-        if (!window.confirm("Restaurar sustituye toda la captura de este dispositivo por la del archivo.")) return;
+        if (!window.confirm("Restaurar sustituye toda la captura de este dispositivo, de hogares y de cafeterías, por la del archivo.")) return;
         estado = L.normalizar(candidato, D);
+        estadoCaf = LC.normalizar(candidato.caf, DC);
         guardar();
         avisar("Respaldo restaurado.");
       } catch (err) { avisar("El archivo no es un respaldo de esta versión de la captura.", true); }
       e.target.value = "";
     });
     $("#borrar").addEventListener("click", () => {
-      if (!window.confirm("Se borra toda la captura de este dispositivo. No se puede deshacer. ¿Ya descargaste el respaldo?")) return;
+      if (!window.confirm("Se borra toda la captura de este dispositivo, de hogares y de cafeterías. No se puede deshacer. ¿Ya descargaste el respaldo?")) return;
       estado = L.estadoInicial(D);
+      estadoCaf = LC.estadoInicial();
       guardar();
       avisar("Captura borrada.");
     });
     $("#anterior-csv").addEventListener("click", () => {
-      try { descargar(`miltli_${hoy()}_serie-anterior.csv`, L.csv(L.serieAnterior(JSON.parse(localStorage.getItem(L.CLAVE_ANTERIOR)))), "text/csv;charset=utf-8"); } catch (err) { avisar("No se pudo leer la serie anterior.", true); }
+      try { descargar(`miltli_${hoy()}_serie-anterior.csv`, L.csv(L.serieAnterior(JSON.parse(localStorage.getItem(L.CLAVE_ANTERIOR)))), CSV); } catch (err) { avisar("No se pudo leer la serie anterior.", true); }
     });
     $("#anterior-borrar").addEventListener("click", () => {
       if (!window.confirm("Se borra del dispositivo el registro de la versión anterior de la app.")) return;
@@ -244,12 +338,11 @@
   }
 
   async function iniciar() {
-    $("#hogar").innerHTML = D.hogares.map((h) => `<option>${h}</option>`).join("");
-    $("#vistas").innerHTML = VISTAS.map((v) => `<a href="#${v.id}">${esc(v.titulo.split(" · ")[0] === "Registro técnico" ? "Técnico " + v.titulo.split(" · ")[1] : v.titulo.split(" · ")[0])}</a>`).join("");
-    $("#version").textContent = `Diccionario ${D.diccionario} · F-HOG rev. ${D.ficha_rev} · reglas evaluadas: ${L.REGLAS_EVALUADAS.join(", ")}`;
-    try { vocabulario = await (await fetch("./vocabulario.json")).json(); } catch (e) { avisar("No se pudo cargar el vocabulario.", true); return; }
+    $("#version").textContent = `F-HOG rev. ${D.ficha_rev}, diccionario ${D.diccionario}, reglas I-1 a I-${L.REGLAS_EVALUADAS.length} · F-CAF ${DC.ficha_rev}, diccionario ${DC.diccionario}, reglas IC-1 a IC-${LC.REGLAS_EVALUADAS.length}`;
+    try {
+      [vocabularios.hog, vocabularios.caf] = await Promise.all(["./vocabulario.json", "./vocabulario-caf.json"].map(async (url) => (await fetch(url)).json()));
+    } catch (e) { avisar("No se pudo cargar el vocabulario.", true); return; }
     cargar();
-    hogar = $("#hogar").value;
     vista = location.hash.slice(1) || "h1";
     enlazar();
     pintar();

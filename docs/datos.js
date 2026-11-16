@@ -238,7 +238,7 @@
      "quien": "hogar",
      "cuando": "día 1",
      "tipo": "bool",
-     "vocabulario": "CONT_CAP",
+     "vocabulario": "CONT_CAP_ND",
      "ausencias": []
     },
     {
@@ -1640,7 +1640,226 @@
      "ausencias": [],
      "obligatorio": true
     }
-   ]
+   ],
+   "reglas": {
+    "I-1": {
+     "tipo": "error",
+     "fichas": [
+      "F00",
+      "F01",
+      "F12"
+     ]
+    },
+    "I-2": {
+     "tipo": "error",
+     "fichas": [
+      "A0",
+      "A1",
+      "A5"
+     ]
+    },
+    "I-3": {
+     "tipo": "error",
+     "fichas": [
+      "SECO_USO",
+      "ninguno"
+     ]
+    },
+    "I-4": {
+     "tipo": "error",
+     "fichas": [
+      "REG1",
+      "REG2"
+     ]
+    },
+    "I-5": {
+     "tipo": "error",
+     "fichas": [
+      "LLEN_S",
+      "LLEN_F",
+      "CUELLO"
+     ]
+    },
+    "I-6": {
+     "tipo": "error",
+     "fichas": [
+      "ORG",
+      "SEC",
+      "FUGA",
+      "D0_BASE"
+     ]
+    },
+    "I-7": {
+     "tipo": "señal",
+     "fichas": [
+      "FG5",
+      "A4",
+      "A5",
+      "SECO_USO",
+      "otro",
+      "NOTA_S"
+     ]
+    },
+    "I-8": {
+     "tipo": "señal",
+     "fichas": [
+      "O5",
+      "F12",
+      "NOTA_E"
+     ]
+    },
+    "I-9": {
+     "tipo": "error",
+     "fichas": [
+      "FUGA_MOT",
+      "FUGA"
+     ]
+    },
+    "I-10": {
+     "tipo": "señal",
+     "fichas": [
+      "FG1",
+      "PARADA_DIA"
+     ]
+    },
+    "I-11": {
+     "tipo": "señal",
+     "fichas": [
+      "ORG",
+      "PARADA_DIA"
+     ]
+    },
+    "I-12": {
+     "tipo": "señal",
+     "fichas": [
+      "PARADA_DIA",
+      "LLEN_S",
+      "1/4",
+      "1/2"
+     ]
+    },
+    "I-13": {
+     "tipo": "señal",
+     "fichas": [
+      "SECO_USO",
+      "ninguno",
+      "SEC"
+     ]
+    },
+    "I-14": {
+     "tipo": "señal",
+     "fichas": [
+      "MASC",
+      "casi_siempre",
+      "FG3",
+      "MASC",
+      "no",
+      "FG3"
+     ]
+    },
+    "I-15": {
+     "tipo": "error",
+     "fichas": [
+      "BOTE_CAP",
+      "BOTE_AGUA",
+      "BOTE_TARA"
+     ]
+    },
+    "I-16": {
+     "tipo": "señal",
+     "fichas": [
+      "DENS_V",
+      "BOTE_CAP"
+     ]
+    },
+    "I-17": {
+     "tipo": "error",
+     "fichas": [
+      "LLEN_REF",
+      "CONT_ALTO"
+     ]
+    },
+    "I-18": {
+     "tipo": "señal",
+     "fichas": [
+      "PESO_NETO",
+      "PESO_NETO",
+      "VOL_OCUP"
+     ]
+    },
+    "I-19": {
+     "tipo": "error",
+     "fichas": [
+      "CONT_TARA_MET",
+      "no_tomada",
+      "PESO_MET",
+      "geometrico"
+     ]
+    },
+    "I-20": {
+     "tipo": "error",
+     "fichas": [
+      "UBIC_TP",
+      "tierra",
+      "PESO_MET",
+      "bascula"
+     ]
+    },
+    "I-21": {
+     "tipo": "señal",
+     "fichas": [
+      "D0_VACIO",
+      "con_material"
+     ]
+    },
+    "I-22": {
+     "tipo": "señal",
+     "fichas": [
+      "TEMP_I",
+      "TEMP_AMB"
+     ]
+    },
+    "I-23": {
+     "tipo": "señal",
+     "fichas": [
+      "VIS_FECHA",
+      "VIS_OK",
+      "si"
+     ]
+    },
+    "I-24": {
+     "tipo": "señal",
+     "fichas": [
+      "RES_GUARDADO",
+      "si",
+      "DENS_V",
+      "DENS_M"
+     ]
+    },
+    "I-25": {
+     "tipo": "error",
+     "fichas": [
+      "SUELO_TIPO",
+      "sin_suelo",
+      "SUELO_*",
+      "MUE_SUELO_*"
+     ]
+    },
+    "I-26": {
+     "tipo": "señal",
+     "fichas": [
+      "VER_OK",
+      "no"
+     ]
+    },
+    "I-27": {
+     "tipo": "error",
+     "fichas": [
+      "CONC_OBS",
+      "CONC_ROL"
+     ]
+    }
+   }
   };
   if (typeof module !== "undefined" && module.exports) module.exports = DATOS;
   else global.MiltliDatos = DATOS;

@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#22241c">
-  <meta name="description" content="Captura del coordinador del piloto doméstico de compostaje Miltli: transcribe la ficha en papel.">
+  <meta name="description" content="Captura del coordinador del piloto de compostaje Miltli, en hogares y cafeterías: transcribe las fichas en papel.">
   <title>Miltli · captura del coordinador</title>
   <link rel="manifest" href="manifest.webmanifest">
   <link rel="stylesheet" href="estilo.css">
@@ -15,22 +15,26 @@
     <h1 class="marca">Miltli <span>Captura del coordinador</span></h1>
     <p class="privacidad">Sin nombres, domicilios ni teléfonos: sólo claves. Los datos viven en este navegador.</p>
   </div>
+  <nav id="fichas" aria-label="Ficha que se transcribe">
+    <a href="#h1" data-ficha="hog">Hogares</a>
+    <a href="#c1" data-ficha="caf">Cafeterías</a>
+  </nav>
   <nav id="vistas" aria-label="Hojas de la ficha"></nav>
 </header>
 
 <main>
   <p id="mensaje" class="mensaje" role="status" aria-live="polite" hidden></p>
 
-  <p id="hogar-caja" class="campo compacto">
-    <label for="hogar">Hogar que se transcribe</label>
-    <select id="hogar"></select>
+  <p id="unidad-caja" class="campo compacto">
+    <label for="unidad" id="unidad-rotulo">Hogar que se transcribe</label>
+    <span class="linea"><select id="unidad"></select> <button type="button" id="unidad-agregar" class="secundario" hidden>Agregar cafetería</button></span>
   </p>
 
   <section id="captura" aria-live="off"></section>
 
   <aside id="avisos" class="aviso" aria-labelledby="avisos-t">
     <h2 id="avisos-t">Avisos de consistencia <output id="avisos-cuenta">0</output></h2>
-    <p class="pie">Se marcan, no se corrigen: captura lo que dice el papel. El número es la regla del diccionario v0.3 §8 y viaja en la columna «marcas» del CSV.</p>
+    <p class="pie" id="avisos-pie"></p>
     <ul id="avisos-lista"></ul>
   </aside>
 
@@ -40,10 +44,19 @@
 
     <h3>CSV para el análisis</h3>
     <p class="entrada">Las casillas vacías salen con su valor de ausencia (NR, NC, ND, NA). Ninguna exportación lleva nombres, correos ni teléfonos.</p>
-    <p class="casilla"><input type="checkbox" id="interno"> <label for="interno">Exportación interna del equipo: incluir el día del renglón semanal (DREV). No sale del equipo.</label></p>
-    <menu class="acciones apilables" aria-label="Exportaciones">
+    <p class="casilla"><input type="checkbox" id="interno"> <label for="interno">Exportación interna del equipo: incluir el día del renglón semanal y, en cafeterías, lo que describe la rutina del negocio (días abiertos, frecuencia de recolección, fechas de salida). No sale del equipo.</label></p>
+    <h4>Hogares</h4>
+    <menu class="acciones apilables" aria-label="Exportaciones de hogares">
       <li><button type="button" id="csv-largo">CSV largo · una fila por dato</button></li>
       <li><button type="button" id="csv-ancho" class="secundario">CSV ancho · hogar y semana</button></li>
+      <li><button type="button" id="csv-hogar" class="secundario">CSV ancho · una fila por hogar</button></li>
+    </menu>
+    <h4>Cafeterías</h4>
+    <p class="entrada">Nada se publica por cafetería sin permiso escrito de la gerencia: lo que sale del grupo va agregado.</p>
+    <menu class="acciones apilables" aria-label="Exportaciones de cafeterías">
+      <li><button type="button" id="caf-largo">CSV largo · una fila por dato</button></li>
+      <li><button type="button" id="caf-ancho" class="secundario">CSV ancho · cafetería y semana</button></li>
+      <li><button type="button" id="caf-unica" class="secundario">CSV ancho · una fila por cafetería</button></li>
     </menu>
 
     <h3>Respaldo</h3>
@@ -69,7 +82,9 @@
 </footer>
 
 <script src="datos.js"></script>
+<script src="datos-caf.js"></script>
 <script src="logica.js"></script>
+<script src="logica-caf.js"></script>
 <script src="app.js"></script>
 </body>
 </html>

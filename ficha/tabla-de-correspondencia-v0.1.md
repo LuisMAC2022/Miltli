@@ -217,6 +217,11 @@ como **serie distinta** y no se concatenan.
 
 ## Qué falta para cerrar esta tabla
 
+- **Encabezados repetidos (hallazgo de la app, 16-nov-2026).** `DPRE` y `SECO_DISP` tienen una opción
+  `otro`, cuya columna multi-hot es `dpre_otro` y `seco_disp_otro`: los mismos encabezados que esta
+  tabla da a los textos `DPRE_OTRO` y `SECO_DISP_OTRO`. La app exporta el texto como
+  `dpre_otro_texto` y `seco_disp_otro_texto`; falta decidirlo aquí.
+
 - Que el comité resuelva las PROPUESTAS que tocan casillas (acta-01 §8): si cambia una casilla,
   cambia su fila.
 - Revisarla una vez contra F-HOG rev. 03 congelada.

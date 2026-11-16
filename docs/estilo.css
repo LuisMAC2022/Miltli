@@ -159,3 +159,10 @@ input:disabled { background: var(--ceniza); }
 .semanal thead th:not(:first-child), .semanal td { width: 6.5rem; }
 #avisos ul { margin: .5rem 0 0; padding-left: 1.1rem; font-family: var(--dato); font-size: .86rem; }
 #avisos output { margin-left: .4rem; padding: .1rem .5rem; background: var(--humus); color: var(--blanco); border-radius: 1rem; font-size: .8rem; }
+
+/* Hogares y cafeterías: selector de ficha y bloques de salida (Hoja 4 de F-CAF). */
+#fichas { gap: .5rem; }
+#fichas a { padding: .25rem .8rem; border: 1px solid currentColor; border-radius: 999px; }
+#fichas a[aria-current] { background: #d9ecb4; border-color: #d9ecb4; color: var(--humus); }
+.salida { margin: .5rem 0; border: 1px solid #c9cdbd; border-radius: .4rem; padding: .2rem .8rem; }
+.salida summary { cursor: pointer; padding: .45rem 0; font-weight: 600; }

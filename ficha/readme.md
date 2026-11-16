@@ -30,7 +30,7 @@ producción de datos deficientes.
 | 4 | Pruebas de usabilidad y concordancia | protocolo v0.2 §7 · `hoja-concordancia.html` | No ejecutadas |
 | 5 | Congelar el instrumento | **F-HOG rev. 03** | **No**: faltan fechas, pruebas de usabilidad y el sello de P-17 (acta-02 §4) |
 | 6 | Tabla de correspondencia | `tabla-de-correspondencia-v0.1.md` | Borrador contra v0.3; se revisa al congelar |
-| 7 | Actualización de la app | `especificacion-cambios-app.md` · `docs/` | **Implementada** como captura del coordinador; adopta P-24 a reserva del comité |
+| 7 | Actualización de la app | `especificacion-cambios-app.md` · `docs/` | **Implementada** para hogares y cafeterías (P-24 adoptada en el acta-02); falta probarla con fichas reales |
 | 8 | Alineación de `README.md` y `planes/` | — | Hecha contra v0.3; se repasa al congelar |
 | 9 | Diseño del mes 2 | `diseno-mes-2-composta-suelo-gei.md` | Borrador |
 | 10 | Ficha de cafeterías | **F-CAF rev. 01** · `diccionario-de-datos-cafeterias-v0.1-borrador.md` | Borrador; decisiones de diseño resueltas en el acta-02 §2; faltan los pendientes de campo (acta-02 §4) |

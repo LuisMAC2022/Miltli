@@ -25,11 +25,11 @@ test("2 · ningún campo de captura trae valor por omisión ni opción preselecc
   }
 });
 
-test("3 · app.js, logica.js e index.html no escriben a mano ninguna categoría del vocabulario", () => {
+test("3 · app.js, logica.js, logica-caf.js e index.html no escriben a mano ninguna categoría del vocabulario", () => {
   const categorias = new Set();
-  for (const lista of Object.values(V)) for (const item of lista) if (/^[A-Z]+\d+$/.test(item.valor)) categorias.add(item.valor);
+  for (const lista of [...Object.values(V), ...Object.values(require("../docs/vocabulario-caf.json"))]) for (const item of lista) if (/^[A-Z]+\d+$/.test(item.valor)) categorias.add(item.valor);
   assert.ok(categorias.size > 20);
-  for (const nombre of ["app.js", "logica.js", "index.html"]) {
+  for (const nombre of ["app.js", "logica.js", "logica-caf.js", "index.html"]) {
     const texto = leer(nombre);
     for (const c of categorias) assert.doesNotMatch(texto, new RegExp(`["'\`>]${c}["'\`<]`), `${c} en ${nombre}`);
   }
@@ -70,9 +70,14 @@ test("6 · los encabezados de los CSV no traen columnas prohibidas", () => {
 
 test("el service worker guarda en caché todos los archivos que la página carga", () => {
   const sw = leer("sw.js");
-  for (const nombre of ["index.html", "estilo.css", "datos.js", "logica.js", "app.js", "vocabulario.json", "manifest.webmanifest"]) {
+  for (const nombre of ["index.html", "estilo.css", "datos.js", "datos-caf.js", "logica.js", "logica-caf.js", "app.js", "vocabulario.json", "vocabulario-caf.json", "manifest.webmanifest"]) {
     assert.ok(sw.includes(`"./${nombre}"`), nombre);
     assert.ok(fs.existsSync(path.join(DOCS, nombre)), nombre);
   }
   assert.doesNotMatch(sw, /miltli-pages-v1/);
+});
+
+test("la página carga cada script que usa, y los datos antes que la lógica", () => {
+  const scripts = [...leer("index.html").matchAll(/<script src="([^"]+)"/g)].map((m) => m[1]);
+  assert.deepEqual(scripts, ["datos.js", "datos-caf.js", "logica.js", "logica-caf.js", "app.js"]);
 });
