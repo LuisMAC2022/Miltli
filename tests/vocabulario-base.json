@@ -1,0 +1,702 @@
+{
+ "FICHA_REV": [
+  {
+   "valor": "02",
+   "etiqueta": ""
+  },
+  {
+   "valor": "03",
+   "etiqueta": ""
+  }
+ ],
+ "DREV": [
+  {
+   "valor": "lu",
+   "etiqueta": ""
+  },
+  {
+   "valor": "ma",
+   "etiqueta": ""
+  },
+  {
+   "valor": "mi",
+   "etiqueta": ""
+  },
+  {
+   "valor": "ju",
+   "etiqueta": ""
+  },
+  {
+   "valor": "vi",
+   "etiqueta": ""
+  },
+  {
+   "valor": "sa",
+   "etiqueta": ""
+  },
+  {
+   "valor": "do",
+   "etiqueta": ""
+  }
+ ],
+ "MASC": [
+  {
+   "valor": "no",
+   "etiqueta": ""
+  },
+  {
+   "valor": "a_veces",
+   "etiqueta": ""
+  },
+  {
+   "valor": "casi_siempre",
+   "etiqueta": ""
+  }
+ ],
+ "DPRE": [
+  {
+   "valor": "basura",
+   "etiqueta": ""
+  },
+  {
+   "valor": "animales",
+   "etiqueta": ""
+  },
+  {
+   "valor": "compost",
+   "etiqueta": ""
+  },
+  {
+   "valor": "otro",
+   "etiqueta": ""
+  }
+ ],
+ "BOTE_SEC_MISMO": [
+  {
+   "valor": "si",
+   "etiqueta": ""
+  },
+  {
+   "valor": "no",
+   "etiqueta": ""
+  }
+ ],
+ "UBIC_IE": [
+  {
+   "valor": "interior",
+   "etiqueta": ""
+  },
+  {
+   "valor": "exterior",
+   "etiqueta": ""
+  }
+ ],
+ "UBIC_SS": [
+  {
+   "valor": "sol",
+   "etiqueta": ""
+  },
+  {
+   "valor": "sombra",
+   "etiqueta": ""
+  }
+ ],
+ "UBIC_TL": [
+  {
+   "valor": "techado",
+   "etiqueta": ""
+  },
+  {
+   "valor": "lluvia",
+   "etiqueta": ""
+  }
+ ],
+ "UBIC_TP": [
+  {
+   "valor": "tierra",
+   "etiqueta": ""
+  },
+  {
+   "valor": "piso",
+   "etiqueta": ""
+  }
+ ],
+ "SECO_DISP": [
+  {
+   "valor": "hojas",
+   "etiqueta": ""
+  },
+  {
+   "valor": "carton",
+   "etiqueta": ""
+  },
+  {
+   "valor": "papel",
+   "etiqueta": ""
+  },
+  {
+   "valor": "aserrin",
+   "etiqueta": ""
+  },
+  {
+   "valor": "otro",
+   "etiqueta": ""
+  }
+ ],
+ "SECO_ACC": [
+  {
+   "valor": "en_casa",
+   "etiqueta": ""
+  },
+  {
+   "valor": "cerca",
+   "etiqueta": ""
+  },
+  {
+   "valor": "salir",
+   "etiqueta": ""
+  },
+  {
+   "valor": "no_se_donde",
+   "etiqueta": ""
+  }
+ ],
+ "D0_VACIO": [
+  {
+   "valor": "vacio",
+   "etiqueta": ""
+  },
+  {
+   "valor": "con_material",
+   "etiqueta": ""
+  }
+ ],
+ "REG": [
+  {
+   "valor": "REG1",
+   "etiqueta": "anoté todos los días"
+  },
+  {
+   "valor": "REG2",
+   "etiqueta": "me faltaron algunos"
+  }
+ ],
+ "FUGA_MOT": [
+  {
+   "valor": "FG1",
+   "etiqueta": "ya no cabía"
+  },
+  {
+   "valor": "FG2",
+   "etiqueta": "no tenía material seco"
+  },
+  {
+   "valor": "FG3",
+   "etiqueta": "se fueron a animales"
+  },
+  {
+   "valor": "FG4",
+   "etiqueta": "se fueron a la basura"
+  },
+  {
+   "valor": "FG5",
+   "etiqueta": "otro",
+   "exige": "NOTA_S"
+  }
+ ],
+ "SECO_USO": [
+  {
+   "valor": "hojas",
+   "etiqueta": ""
+  },
+  {
+   "valor": "carton",
+   "etiqueta": ""
+  },
+  {
+   "valor": "papel",
+   "etiqueta": ""
+  },
+  {
+   "valor": "aserrin",
+   "etiqueta": ""
+  },
+  {
+   "valor": "otro",
+   "etiqueta": "",
+   "exige": "NOTA_S"
+  },
+  {
+   "valor": "ninguno",
+   "etiqueta": ""
+  }
+ ],
+ "LLEN_S": [
+  {
+   "valor": "1/4",
+   "etiqueta": ""
+  },
+  {
+   "valor": "1/2",
+   "etiqueta": ""
+  },
+  {
+   "valor": "3/4",
+   "etiqueta": ""
+  },
+  {
+   "valor": "casi_lleno",
+   "etiqueta": ""
+  }
+ ],
+ "ACT": [
+  {
+   "valor": "A0",
+   "etiqueta": "no cambié nada"
+  },
+  {
+   "valor": "A1",
+   "etiqueta": "removí o mezclé"
+  },
+  {
+   "valor": "A2",
+   "etiqueta": "agregué material seco de más"
+  },
+  {
+   "valor": "A3",
+   "etiqueta": "agregué agua"
+  },
+  {
+   "valor": "A4",
+   "etiqueta": "retiré material que no iba",
+   "exige": "NOTA_S"
+  },
+  {
+   "valor": "A5",
+   "etiqueta": "cambié otra cosa",
+   "exige": "NOTA_S"
+  }
+ ],
+ "NOTA_S": [
+  {
+   "valor": "FG5",
+   "etiqueta": "opcional salvo por , SECO_USO = otro, A4, A5"
+  }
+ ],
+ "PARADA_DIA": [
+  {
+   "valor": "no_paro",
+   "etiqueta": ""
+  }
+ ],
+ "OBS_MISMA": [
+  {
+   "valor": "si",
+   "etiqueta": ""
+  },
+  {
+   "valor": "no",
+   "etiqueta": ""
+  }
+ ],
+ "VAHO": [
+  {
+   "valor": "marcada",
+   "etiqueta": ""
+  }
+ ],
+ "HUM": [
+  {
+   "valor": "H1",
+   "etiqueta": "se desmorona"
+  },
+  {
+   "valor": "H2",
+   "etiqueta": "se apelmaza, no sale agua"
+  },
+  {
+   "valor": "H3",
+   "etiqueta": "una o dos gotas"
+  },
+  {
+   "valor": "H4",
+   "etiqueta": "escurre agua"
+  },
+  {
+   "valor": "H5",
+   "etiqueta": "líquido en el fondo"
+  }
+ ],
+ "OLOR": [
+  {
+   "valor": "O0",
+   "etiqueta": "casi no huele"
+  },
+  {
+   "valor": "O1",
+   "etiqueta": "tierra/bosque"
+  },
+  {
+   "valor": "O2",
+   "etiqueta": "dulce, fruta, vinagre"
+  },
+  {
+   "valor": "O3",
+   "etiqueta": "amoniaco"
+  },
+  {
+   "valor": "O4",
+   "etiqueta": "drenaje, huevo podrido"
+  },
+  {
+   "valor": "O5",
+   "etiqueta": "otro",
+   "exige": "NOTA_E"
+  }
+ ],
+ "FAU": [
+  {
+   "valor": "F01",
+   "etiqueta": "lombrices"
+  },
+  {
+   "valor": "F02",
+   "etiqueta": "cochinillas, milpiés, caracoles, babosas"
+  },
+  {
+   "valor": "F03",
+   "etiqueta": "escarabajos o larvas en C"
+  },
+  {
+   "valor": "F04",
+   "etiqueta": "larvas de mosca soldado"
+  },
+  {
+   "valor": "F05",
+   "etiqueta": "mosquitas de la fruta"
+  },
+  {
+   "valor": "F06",
+   "etiqueta": "mosquitos negros de superficie"
+  },
+  {
+   "valor": "F07",
+   "etiqueta": "moscas grandes o gusanos blancos"
+  },
+  {
+   "valor": "F08",
+   "etiqueta": "hormigas"
+  },
+  {
+   "valor": "F09",
+   "etiqueta": "cucarachas"
+  },
+  {
+   "valor": "F10",
+   "etiqueta": "hongos"
+  },
+  {
+   "valor": "F11",
+   "etiqueta": "huellas o excavaciones"
+  },
+  {
+   "valor": "F12",
+   "etiqueta": "no supe identificar → exige NOTA_E",
+   "exige": "NOTA_E"
+  },
+  {
+   "valor": "F00",
+   "etiqueta": "ninguno de los anteriores"
+  }
+ ],
+ "MEZ_AV": [
+  {
+   "valor": "M1",
+   "etiqueta": "se distinguen casi todos los restos"
+  },
+  {
+   "valor": "M2",
+   "etiqueta": "algunos ya no se reconocen"
+  },
+  {
+   "valor": "M3",
+   "etiqueta": "la mayor parte parece tierra oscura"
+  }
+ ],
+ "MEZ_TX": [
+  {
+   "valor": "X1",
+   "etiqueta": "suelta"
+  },
+  {
+   "valor": "X2",
+   "etiqueta": "apelmazada"
+  },
+  {
+   "valor": "X3",
+   "etiqueta": "con bloques grandes"
+  }
+ ],
+ "NOTA_E": [
+  {
+   "valor": "O5",
+   "etiqueta": "opcional salvo por , F12"
+  }
+ ],
+ "LLEN_F": [
+  {
+   "valor": "1/4",
+   "etiqueta": ""
+  },
+  {
+   "valor": "1/2",
+   "etiqueta": ""
+  },
+  {
+   "valor": "3/4",
+   "etiqueta": ""
+  },
+  {
+   "valor": "casi_lleno",
+   "etiqueta": ""
+  },
+  {
+   "valor": "lleno",
+   "etiqueta": ""
+  }
+ ],
+ "SECO_FALT": [
+  {
+   "valor": "no",
+   "etiqueta": ""
+  },
+  {
+   "valor": "si",
+   "etiqueta": ""
+  }
+ ],
+ "SECO_DIF": [
+  {
+   "valor": "facil",
+   "etiqueta": ""
+  },
+  {
+   "valor": "esfuerzo",
+   "etiqueta": ""
+  },
+  {
+   "valor": "dificil",
+   "etiqueta": ""
+  },
+  {
+   "valor": "nunca_supe",
+   "etiqueta": ""
+  }
+ ],
+ "CONT_TAM": [
+  {
+   "valor": "chico",
+   "etiqueta": ""
+  },
+  {
+   "valor": "adecuado",
+   "etiqueta": ""
+  },
+  {
+   "valor": "grande",
+   "etiqueta": ""
+  }
+ ],
+ "CUELLO": [
+  {
+   "valor": "seco",
+   "etiqueta": "conseguir material seco"
+  },
+  {
+   "valor": "espacio",
+   "etiqueta": "espacio en el contenedor"
+  },
+  {
+   "valor": "tiempo",
+   "etiqueta": ""
+  },
+  {
+   "valor": "anotar",
+   "etiqueta": "llevar el registro"
+  },
+  {
+   "valor": "separar",
+   "etiqueta": "separar los restos en la cocina"
+  },
+  {
+   "valor": "otro",
+   "etiqueta": ""
+  },
+  {
+   "valor": "nada",
+   "etiqueta": "nada en particular"
+  }
+ ],
+ "CONTIN": [
+  {
+   "valor": "igual",
+   "etiqueta": ""
+  },
+  {
+   "valor": "con_cambios",
+   "etiqueta": ""
+  },
+  {
+   "valor": "lo_dejo",
+   "etiqueta": ""
+  }
+ ],
+ "VIS_TIPO": [
+  {
+   "valor": "dia1",
+   "etiqueta": ""
+  },
+  {
+   "valor": "cierre",
+   "etiqueta": ""
+  }
+ ],
+ "VIS_OK": [
+  {
+   "valor": "si",
+   "etiqueta": ""
+  },
+  {
+   "valor": "repuesta",
+   "etiqueta": ""
+  },
+  {
+   "valor": "no_se_pudo",
+   "etiqueta": ""
+  }
+ ],
+ "FOTO_EQ": [
+  {
+   "valor": "si",
+   "etiqueta": ""
+  },
+  {
+   "valor": "no",
+   "etiqueta": ""
+  }
+ ],
+ "CONT_FORMA": [
+  {
+   "valor": "rect",
+   "etiqueta": ""
+  },
+  {
+   "valor": "cil",
+   "etiqueta": ""
+  },
+  {
+   "valor": "cubeta",
+   "etiqueta": ""
+  },
+  {
+   "valor": "otra",
+   "etiqueta": ""
+  }
+ ],
+ "CONT_TARA_MET": [
+  {
+   "valor": "bascula_equipo",
+   "etiqueta": ""
+  },
+  {
+   "valor": "bascula_hogar",
+   "etiqueta": ""
+  },
+  {
+   "valor": "no_tomada",
+   "etiqueta": ""
+  }
+ ],
+ "RES_GUARDADO": [
+  {
+   "valor": "si",
+   "etiqueta": ""
+  },
+  {
+   "valor": "no",
+   "etiqueta": ""
+  },
+  {
+   "valor": "no_hubo",
+   "etiqueta": ""
+  }
+ ],
+ "PESO_MET": [
+  {
+   "valor": "bascula",
+   "etiqueta": ""
+  },
+  {
+   "valor": "geometrico",
+   "etiqueta": ""
+  },
+  {
+   "valor": "ambos",
+   "etiqueta": ""
+  }
+ ],
+ "SUELO_TIPO": [
+  {
+   "valor": "jardin",
+   "etiqueta": ""
+  },
+  {
+   "valor": "macetas",
+   "etiqueta": ""
+  },
+  {
+   "valor": "sin_suelo",
+   "etiqueta": ""
+  }
+ ],
+ "SUELO_CON": [
+  {
+   "valor": "P1",
+   "etiqueta": ""
+  },
+  {
+   "valor": "P2",
+   "etiqueta": ""
+  }
+ ],
+ "SUELO_PROF": [
+  {
+   "valor": "diseno-mes-2-composta-suelo-gei.md",
+   "etiqueta": "cm"
+  }
+ ],
+ "VER_INSTR": [
+  {
+   "valor": "termometro",
+   "etiqueta": ""
+  },
+  {
+   "valor": "bascula_cocina",
+   "etiqueta": ""
+  },
+  {
+   "valor": "bascula_plataforma",
+   "etiqueta": ""
+  }
+ ],
+ "VER_OK": [
+  {
+   "valor": "si",
+   "etiqueta": ""
+  },
+  {
+   "valor": "no",
+   "etiqueta": ""
+  }
+ ]
+}

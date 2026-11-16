@@ -5,6 +5,11 @@
 > `tabla-de-correspondencia-v0.1.md`. Fecha: octubre de 2026 · App de referencia: `docs/app.js`,
 > `docs/index.html`, `docs/sw.js` y `tests/app.test.js` tal como están hoy.
 
+> **Seguimiento (noviembre de 2026).** Esta especificación ya tiene código en `docs/`: `datos.js` y
+> `vocabulario.json` generados del diccionario (`tools/generar-datos.js`), `logica.js`, `app.js` y las
+> pruebas de prohibiciones del §10. Se adoptó la recomendación de P-24, que el comité todavía puede
+> cambiar. Quedan pendientes 14 de las 27 reglas del §7 y el ajuste fino del CSV ancho (§8).
+
 ---
 
 ## 0. Antes de empezar: tres reglas que el encargo da por existentes y no existen

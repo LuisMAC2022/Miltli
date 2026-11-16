@@ -1,5 +1,5 @@
-const CACHE = "miltli-pages-v1";
-const ASSETS = ["./", "./index.html", "./estilo.css", "./app.js", "./manifest.webmanifest"];
+const CACHE = "miltli-pages-v2";
+const ASSETS = ["./", "./index.html", "./estilo.css", "./datos.js", "./logica.js", "./app.js", "./vocabulario.json", "./manifest.webmanifest"];
 
 self.addEventListener("install", (event) => {
   event.waitUntil(caches.open(CACHE).then((cache) => cache.addAll(ASSETS)));

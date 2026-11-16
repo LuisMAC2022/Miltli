@@ -90,7 +90,7 @@ legend { padding: 0 .4rem; color: var(--tenue); font: .72rem/1 var(--dato); lett
 .casilla { display: flex; align-items: center; gap: .55rem; margin: .7rem 0 1rem; }
 .casilla label { display: inline; margin: 0; }
 input, select, textarea, button { font: inherit; }
-input[type="text"], input[type="email"], input[type="number"], input[type="date"], select, textarea {
+input[type="text"], input[type="number"], input[type="date"], select, textarea {
   width: 100%; padding: .58rem .65rem; color: var(--humus); background: var(--blanco); border: 1px solid var(--linea); border-radius: 2px;
 }
 textarea { resize: vertical; }
@@ -132,3 +132,30 @@ button:disabled { cursor: not-allowed; opacity: .5; }
   .detalle-entrega div { grid-template-columns: 1fr; gap: .1rem; }
   .acciones.apilables > * { width: 100%; text-align: center; }
 }
+
+/* ---------- Captura del coordinador (v2) ---------- */
+menu { margin: 0 0 1.2rem; padding: 0; list-style: none; }
+.clave { font-family: var(--dato); }
+.captura { max-width: 60rem; }
+.pregunta { margin: 0 0 .7rem; padding: .7rem .9rem; border: 1px solid var(--linea); background: var(--ficha); }
+p.pregunta label, fieldset.pregunta legend { display: block; margin-bottom: .35rem; padding: 0; color: var(--humus); font: 600 .92rem/1.3 var(--texto); letter-spacing: 0; text-transform: none; }
+fieldset.pregunta legend { float: left; width: 100%; }
+.pregunta small { margin-left: .4rem; color: var(--tenue); font: .7rem/1 var(--dato); font-weight: 400; }
+.linea, .opciones { display: flex; flex-wrap: wrap; align-items: center; gap: .4rem 1.1rem; clear: both; }
+.linea input[type="text"] { flex: 1 1 14rem; max-width: 26rem; }
+.marca { display: inline-flex; align-items: center; gap: .4rem; margin: 0; font: 400 .9rem/1.3 var(--texto); color: var(--humus); }
+.marca input, .centro input { width: 1.15rem; height: 1.15rem; accent-color: var(--verde); }
+select.ausencia { width: auto; margin-top: .5rem; padding: .3rem .4rem; font: .8rem/1 var(--dato); color: var(--tenue); }
+.linea select.ausencia { margin-top: 0; }
+input:disabled { background: var(--ceniza); }
+.rejilla th, .rejilla td { padding: .3rem .45rem; vertical-align: middle; }
+.rejilla input[type="text"] { min-width: 4.5rem; padding: .35rem .45rem; }
+.rejilla tbody th { font-weight: 400; }
+.rejilla th.sub { padding-left: 1.4rem; color: var(--tenue); }
+.rejilla tr.grupo th { background: #eef0e7; font-weight: 600; }
+.rejilla tr.fin-semana th, .rejilla tr.fin-semana td { border-bottom: 3px solid var(--humus); }
+.rejilla .centro { text-align: center; }
+.diaria td:last-child input { min-width: 14rem; }
+.semanal thead th:not(:first-child), .semanal td { width: 6.5rem; }
+#avisos ul { margin: .5rem 0 0; padding-left: 1.1rem; font-family: var(--dato); font-size: .86rem; }
+#avisos output { margin-left: .4rem; padding: .1rem .5rem; background: var(--humus); color: var(--blanco); border-radius: 1rem; font-size: .8rem; }

@@ -1,7 +1,7 @@
 {
-  "name": "Miltli · registro de compostaje",
+  "name": "Miltli · captura del coordinador",
   "short_name": "Miltli",
-  "description": "Registro local y entrega semanal del piloto doméstico de compostaje.",
+  "description": "Captura del coordinador: transcribe la ficha en papel del piloto doméstico de compostaje.",
   "lang": "es-MX",
   "start_url": "./",
   "scope": "./",

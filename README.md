@@ -28,42 +28,38 @@ tomado —empezando por a dónde va lo que se separa y cuánto tiempo puede guar
 
 ## La aplicación (`docs/`)
 
-La versión de `docs/` está preparada para GitHub Pages y sustituye el servidor Python/SQLite por
-almacenamiento local del navegador.
+Página estática para GitHub Pages: la **captura del coordinador** (decisión D5 del acta-01). El
+registro es el papel; la app sólo lo transcribe, para los cinco hogares, en un mismo dispositivo.
+Implementa `ficha/especificacion-cambios-app.md`.
 
-**Hacia dónde va (decisión D5 del acta-01):** la app pasa a ser la **herramienta de captura del
-coordinador**, que transcribe el papel; deja de ser un registro paralelo del hogar. Los cambios están
-especificados —todavía sin código— en `ficha/especificacion-cambios-app.md`, y el puente entre las
-casillas del papel y los campos de la app en `ficha/tabla-de-correspondencia-v0.1.md`.
+- **Pantallas en el orden del papel:** Hojas 1 a 4 de F-HOG rev. 03, registro técnico del día 1 y del
+  día 28, y verificación de instrumentos. Se construyen desde `docs/datos.js` y
+  `docs/vocabulario.json`, que se **generan del diccionario v0.3** (`npm run datos`); ninguna
+  categoría está escrita a mano en la app.
+- **Sin valores por omisión:** ninguna casilla viene marcada ni ningún número prellenado. Cada campo
+  admite sus valores de ausencia (`NR`, `NC`, `ND`, `NA`); al exportar, lo vacío sale con la ausencia
+  que le asigna el diccionario.
+- **Se captura lo que dice el papel.** Las inconsistencias se marcan, no se corrigen: 13 de las 27
+  reglas del diccionario §8 se evalúan en pantalla y viajan en la columna `marcas`.
+- **Exportación:** CSV largo (`id, ficha_rev, hoja, sem, dia, codigo, valor, valor_original, marcas`)
+  y CSV ancho por hogar y semana, con las derivadas marcadas `_der`. `DREV` sólo sale en la
+  exportación interna.
+- **Respaldo JSON** con advertencia, restauración y borrado. Funciona sin conexión después de la
+  primera visita.
+- **No lleva** nombres, correos ni teléfonos, ni las columnas retiradas por privacidad; lo comprueba
+  `tests/app-prohibiciones.test.js`.
 
-> **Advertencia mientras no se implemente la especificación.** La versión publicada todavía exporta
-> la columna `responsable` en cada fila del CSV y captura `tipo_residuo`. Las dos quedaron retiradas
-> por privacidad (D5): **no las uses** al capturar el piloto, y no circules el CSV fuera de la
-> coordinación.
-
-### Funciones de la versión actual
-
-- Configuración de un hogar (H1–H5), fecha de arranque y datos del coordinador.
-- Registro diario de residuos húmedos, material seco, tiempo y observaciones, en litros.
-- Regla 1:2 calculada al capturar la carga.
-- Revisión semanal con categorías que la ficha ya no usa (humedad, olor y «plagas» de opción única).
-- Exportación CSV separada para cada semana.
-- Compartir el CSV con la API nativa del dispositivo cuando está disponible.
-- Descarga del CSV y apertura de un correo dirigido al coordinador como alternativa.
-- Confirmación local de cada entrega semanal.
-- Respaldo y restauración completa en JSON.
-- Caché de la interfaz para uso sin conexión después de la primera visita.
+Pendiente respecto de la especificación: las 14 reglas de consistencia restantes, y las columnas del
+CSV ancho todavía no siguen una por una la tabla de correspondencia. La ficha de cafeterías no está
+en la app. Si el navegador guarda un registro de la versión anterior, la app ofrece exportarlo como
+serie aparte; no lo convierte.
 
 ## Arquitectura y privacidad
 
-GitHub Pages solo publica archivos estáticos. No ejecuta Python ni SQLite y no recibe los datos del
-hogar. Los registros se guardan en `localStorage` del navegador. Borrar los datos del sitio, cambiar
-de navegador o cambiar de dispositivo elimina el acceso a esos registros, por lo que conviene
-descargar respaldos periódicos.
-
-El navegador no puede adjuntar automáticamente un archivo a un correo mediante `mailto:`. La
-aplicación descarga el CSV y abre un borrador; el usuario debe adjuntarlo y enviarlo. En navegadores
-compatibles, «Compartir archivo» entrega el CSV al selector nativo de aplicaciones.
+GitHub Pages sólo publica archivos estáticos y no recibe ningún dato. La captura se guarda en
+`localStorage` del navegador: borrar los datos del sitio, cambiar de navegador o de dispositivo
+elimina el acceso, así que conviene descargar respaldos. En un equipo compartido, quien lo use
+después puede verla.
 
 Reglas que no cambian con ninguna versión: **ningún dato lleva nombre, domicilio, teléfono ni
 correo**; no se registra **qué** se come en la casa; la **lista de claves** (la que une `H__` con un
@@ -83,11 +79,12 @@ Abre `http://localhost:8080`.
 npm test
 ```
 
-Además de la app, `npm test` comprueba que cada casilla de las dos fichas —hogares y cafeterías— tenga
+`npm test` cubre la lógica de la app y sus prohibiciones, y además comprueba que cada casilla de las dos fichas —hogares y cafeterías— tenga
 su código en su diccionario y viceversa (`tests/ficha-cobertura.test.js`).
 
 ## Publicación
 
-Después de fusionar los cambios en `main`, abre **Settings → Pages**, elige **Deploy from a branch**,
-selecciona la rama `main` y la carpeta `/docs`. GitHub Pages publicará la aplicación sin proceso de
-compilación.
+En **Settings → Pages**, elige **Deploy from a branch**, la rama que se vaya a publicar (`main`, una
+vez fusionada esta rama) y la carpeta `/docs`. No hay proceso de compilación. Tras publicar una
+versión nueva hay que subir el nombre de la caché en `docs/sw.js` para que nadie se quede con la
+interfaz anterior.

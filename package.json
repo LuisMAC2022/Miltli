@@ -3,7 +3,8 @@
   "private": true,
   "version": "1.0.0",
   "scripts": {
-    "test": "node --test tests/*.test.js"
+    "test": "node --test tests/*.test.js",
+    "datos": "node tools/generar-datos.js"
   },
   "engines": {
     "node": ">=22"
