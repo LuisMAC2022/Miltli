@@ -501,6 +501,9 @@ rojo del pre-registro (`acta-01:703-706`), es CAF-14.
 
 ## 6. Decisiones abiertas
 
+> **Resueltas (16-nov-2026).** Ver `ficha/acta-02-resolucion-de-bloqueos.md` §2: CAF-01 a CAF-16
+> quedan resueltas; CAF-17 sigue abierta. El texto de abajo se conserva como análisis de partida.
+
 Preguntas que sólo el equipo puede responder. «Inclinación» es de este análisis **[Propuesta]**.
 
 ### CAF-01 · ¿A dónde va lo que se separa? — **bloquea la ficha**

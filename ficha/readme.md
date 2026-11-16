@@ -5,8 +5,8 @@ decisiones y cambios realizados.
 
 Se comenzó con la ficha para desechos de hogares (**F-HOG**), que sigue en revisión. La ficha para
 desechos de cafeterías (**F-CAF rev. 01**) ya existe como **borrador**: se redactó en paralelo, sobre
-lo que el acta-01 dejó firme y sin tocar la ficha doméstica. Todavía supone decisiones que el equipo
-no ha tomado; están en `planes/escalamiento_cafeterias.md` §6 y en el §0 de su diccionario.
+lo que el acta-01 dejó firme y sin tocar la ficha doméstica. Sus decisiones de diseño quedaron resueltas
+en `acta-02-resolucion-de-bloqueos.md`; lo que falta para operarla es trabajo de campo (acta-02 §4).
 
 Esta carpeta unifica el trabajo de las ramas `ficha` —instrumento y revisiones— y `ficha_colaboracion`
 —directrices: diccionario, decisiones arquitectónicas y prompt de protocolo—, que habían avanzado en
@@ -23,17 +23,17 @@ producción de datos deficientes.
 
 | # | Paso | Producto | Estado |
 | --- | --- | --- | --- |
-| 0 | Decisiones del piloto | `acta-01-decisiones-piloto.md` | **D1–D6 firmes**; 23 PROPUESTAS para el comité (§6) |
+| 0 | Decisiones del piloto | `acta-01-decisiones-piloto.md` · `acta-02-resolucion-de-bloqueos.md` | **D1–D6 firmes**; las PROPUESTAS que bloqueaban, resueltas en el acta-02 salvo P-17 |
 | 1 | Semántica | `diccionario-de-datos-v0.3-borrador.md` | Borrador; aplica el acta-01 |
 | 2 | Protocolo de observación | `protocolo-operativo-v0.2-borrador.md` | Borrador; aplica el acta-01 |
 | 3 | Calendario: sesión del día 1 y visita de cierre | protocolo v0.2 §6 | Estructura decidida (D3); **fechas y claves `[por definir]`** |
 | 4 | Pruebas de usabilidad y concordancia | protocolo v0.2 §7 · `hoja-concordancia.html` | No ejecutadas |
-| 5 | Congelar el instrumento | **F-HOG rev. 03** | **No**: faltan las PROPUESTAS que bloquean (acta-01 §8) |
+| 5 | Congelar el instrumento | **F-HOG rev. 03** | **No**: faltan fechas, pruebas de usabilidad y el sello de P-17 (acta-02 §4) |
 | 6 | Tabla de correspondencia | `tabla-de-correspondencia-v0.1.md` | Borrador contra v0.3; se revisa al congelar |
 | 7 | Actualización de la app | `especificacion-cambios-app.md` · `docs/` | **Implementada** como captura del coordinador; adopta P-24 a reserva del comité |
 | 8 | Alineación de `README.md` y `planes/` | — | Hecha contra v0.3; se repasa al congelar |
 | 9 | Diseño del mes 2 | `diseno-mes-2-composta-suelo-gei.md` | Borrador |
-| 10 | Ficha de cafeterías | **F-CAF rev. 01** · `diccionario-de-datos-cafeterias-v0.1-borrador.md` | Borrador; **17 decisiones abiertas** (CAF-01…CAF-17), doce de ellas bloquean el papel |
+| 10 | Ficha de cafeterías | **F-CAF rev. 01** · `diccionario-de-datos-cafeterias-v0.1-borrador.md` | Borrador; decisiones de diseño resueltas en el acta-02 §2; faltan los pendientes de campo (acta-02 §4) |
 
 > **Corrección (acta-01, RE-10).** El paso 5 decía antes que el instrumento se congelaría como una
 > cuarta revisión del papel. El papel tiene su propia serie: lo que se congela es **F-HOG rev. 03**, y
@@ -98,6 +98,9 @@ producción de datos deficientes.
 - `acta-01-decisiones-piloto.md` — **decisiones del 1-oct-2026** (D1–D6, aclaraciones, encargos y los
   hallazgos de la revisión externa RE-01…RE-14), cada una con regla anterior, decisión, consecuencias,
   archivos, estado y procedencia; las PROPUESTAS para el comité; y las discrepancias detectadas.
+- `acta-02-resolucion-de-bloqueos.md` — **resoluciones del 16-nov-2026**: las nueve PROPUESTAS que
+  bloqueaban F-HOG (salvo P-17), CAF-01 a CAF-16, lo que eso desbloquea y lo que sigue pendiente
+  porque es trabajo de campo.
 - `diseno-mes-2-composta-suelo-gei.md` — lo que el mes 1 debe dejar medido para el mes 2: calidad de
   composta, calidad de suelo, estimación de GEI evitados y la tabla de decisiones del Piloto 2
   (pre-registrada: en `preregistro/` sólo está su sello).
@@ -120,8 +123,8 @@ producción de datos deficientes.
 ## Cuatro advertencias
 
 1. **Nada está congelado.** D1–D6 son firmes, pero la ficha F-HOG rev. 03 imprime las recomendaciones de
-   varias PROPUESTAS (canal de entrega, ventana de la visita, `ACT` semanal…) que el comité todavía
-   debe decidir. La lista de lo que bloquea está en el acta-01 §8.
+   varias PROPUESTAS (canal de entrega, ventana de la visita, `ACT` semanal…) que el acta-02 resolvió y el comité
+   puede reabrir. Lo que falta para congelar está en el acta-02 §4.
 2. **La privacidad es parte del contrato, no un apéndice.** Las restricciones están en el protocolo v0.2
    §4 y en el diccionario v0.3 §10. Nunca entran a este repositorio: nombres, domicilios, teléfonos ni
    correos; el tipo o la composición del residuo; ninguna asociación hogar ↔ municipio; ni la **lista

@@ -22,9 +22,10 @@ La ficha para desechos de cafeterías, **F-CAF rev. 01** (`ficha/miltli-ficha-ca
 borrador de seis hojas con su propio diccionario
 (`ficha/diccionario-de-datos-cafeterias-v0.1-borrador.md`). Mide lo que se **separa** por corriente y
 por día de operación, lo que **sale** hacia el destino y lo que no llegó; no pide ventas, clientes,
-menú ni nombres. **No se puede operar todavía:** supone diecisiete decisiones que el equipo no ha
-tomado —empezando por a dónde va lo que se separa y cuánto tiempo puede guardarse—, listadas en
-`planes/escalamiento_cafeterias.md` §6.
+menú ni nombres. **No se puede operar todavía:** sus decisiones de diseño están resueltas en
+`ficha/acta-02-resolucion-de-bloqueos.md`, pero cada cafetería debe fijar antes su destino, su tiempo
+máximo de guardado y su verificación sanitaria, y faltan la guía de separación, el protocolo y las
+pruebas de usabilidad (acta-02 §4).
 
 ## La aplicación (`docs/`)
 

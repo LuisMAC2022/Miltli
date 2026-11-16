@@ -34,6 +34,9 @@
 
 ## 0. Supuestos de trabajo — lo que esta ficha da por decidido sin que lo esté
 
+> **Adoptados (16-nov-2026).** El `acta-02-resolucion-de-bloqueos.md` §2 convierte estos supuestos en
+> decisiones; el comité puede reabrirlas. La tabla se conserva como estaba.
+
 | Pregunta | Lo que supone F-CAF rev. 01 | Dónde se ve | Si el equipo decide otra cosa |
 | --- | --- | --- | --- |
 | **CAF-01** Destino | El destino está **fuera** de la cafetería y la ficha registra cuál de tres tipos es (`DEST_TIPO`). **La composta dentro de la cafetería no está cubierta por esta revisión** | Hoja 1, condición 1; Hoja 4 | Con composta en sitio hace falta una hoja de composta (día 0, material seco, estado), que reutilizaría los códigos de v0.3 §2.3, §4 y §5.1; la Hoja 4 dejaría de aplicar |

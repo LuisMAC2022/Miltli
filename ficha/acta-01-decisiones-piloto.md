@@ -760,6 +760,9 @@ Decidida.
 
 ## 6. PROPUESTAS abiertas — decide el comité
 
+> **Resueltas (16-nov-2026).** Ver `acta-02-resolucion-de-bloqueos.md`: las que bloqueaban quedan resueltas con su
+> recomendación, salvo P-17. El comité puede reabrirlas. La tabla se conserva como estaba.
+
 | ID | Tema | Recomendación | Alternativas | Bloquea congelar |
 | --- | --- | --- | --- | --- |
 | P-01 | Ventana de la visita de cierre | Días 26–28 (−2 / +0); reposición 29–30 con nota | ±2 simétrico; ±3 | **Sí** (calendario) |
