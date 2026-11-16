@@ -6,6 +6,15 @@
 > La ficha doméstica **F-HOG rev. 03 está en revisión y sin congelar** (`ficha/readme.md:29`;
 > acta-01:823-831): lo que aquí se apoya en ella es provisional y la matriz (§4) lo marca.
 
+> **Seguimiento (noviembre de 2026).** El esqueleto del §7 se redactó como **F-CAF rev. 01**
+> (`ficha/miltli-ficha-cafeterias.html`), con su diccionario
+> (`ficha/diccionario-de-datos-cafeterias-v0.1-borrador.md`). Se siguió la opción (b) de CAF-16:
+> en paralelo, sobre lo firme y sin tocar la ficha doméstica. **Las preguntas CAF-01…CAF-17 siguen
+> abiertas:** el §0 de ese diccionario dice qué supuso el borrador en cada una. Del §8, el hallazgo 4
+> queda atendido para la ficha nueva (la prueba de privacidad ya la lee, y «corriente» se distingue a
+> propósito de «tipo de residuo»); los demás siguen como estaban. Este análisis no se modificó en nada
+> más.
+
 ## Cómo leer este documento
 
 | Marca | Qué es |

@@ -16,6 +16,16 @@ aplicación estática de captura.
   `ficha/acta-01-decisiones-piloto.md`. El plan del mes está en `planes/plan_trabajo.md`.
 - Índice de la carpeta y estado de cada paso: `ficha/readme.md`.
 
+## Cafeterías (borrador)
+
+La ficha para desechos de cafeterías, **F-CAF rev. 01** (`ficha/miltli-ficha-cafeterias.html`), es un
+borrador de seis hojas con su propio diccionario
+(`ficha/diccionario-de-datos-cafeterias-v0.1-borrador.md`). Mide lo que se **separa** por corriente y
+por día de operación, lo que **sale** hacia el destino y lo que no llegó; no pide ventas, clientes,
+menú ni nombres. **No se puede operar todavía:** supone diecisiete decisiones que el equipo no ha
+tomado —empezando por a dónde va lo que se separa y cuánto tiempo puede guardarse—, listadas en
+`planes/escalamiento_cafeterias.md` §6.
+
 ## La aplicación (`docs/`)
 
 La versión de `docs/` está preparada para GitHub Pages y sustituye el servidor Python/SQLite por
@@ -73,8 +83,8 @@ Abre `http://localhost:8080`.
 npm test
 ```
 
-Además de la app, `npm test` comprueba que cada casilla de la ficha tenga su código en el diccionario
-y viceversa (`tests/ficha-cobertura.test.js`).
+Además de la app, `npm test` comprueba que cada casilla de las dos fichas —hogares y cafeterías— tenga
+su código en su diccionario y viceversa (`tests/ficha-cobertura.test.js`).
 
 ## Publicación
 

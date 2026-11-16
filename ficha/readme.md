@@ -1,10 +1,12 @@
-# Ficha del piloto doméstico
+# Fichas del piloto: hogares y cafeterías
 
-En esta carpeta se encontrará la ficha para los hogares: los borradores, sus revisiones y las razones
-de las decisiones y cambios realizados.
+En esta carpeta están las fichas de registro, sus borradores, sus revisiones y las razones de las
+decisiones y cambios realizados.
 
-Se comenzó trabajando con la ficha para desechos de hogares. Una vez sea satisfactoria se procederá a
-crear la ficha para desechos de cafeterías.
+Se comenzó con la ficha para desechos de hogares (**F-HOG**), que sigue en revisión. La ficha para
+desechos de cafeterías (**F-CAF rev. 01**) ya existe como **borrador**: se redactó en paralelo, sobre
+lo que el acta-01 dejó firme y sin tocar la ficha doméstica. Todavía supone decisiones que el equipo
+no ha tomado; están en `planes/escalamiento_cafeterias.md` §6 y en el §0 de su diccionario.
 
 Esta carpeta unifica el trabajo de las ramas `ficha` —instrumento y revisiones— y `ficha_colaboracion`
 —directrices: diccionario, decisiones arquitectónicas y prompt de protocolo—, que habían avanzado en
@@ -31,6 +33,7 @@ producción de datos deficientes.
 | 7 | Actualización de la app | `especificacion-cambios-app.md` | Especificada, **sin código** |
 | 8 | Alineación de `README.md` y `planes/` | — | Hecha contra v0.3; se repasa al congelar |
 | 9 | Diseño del mes 2 | `diseno-mes-2-composta-suelo-gei.md` | Borrador |
+| 10 | Ficha de cafeterías | **F-CAF rev. 01** · `diccionario-de-datos-cafeterias-v0.1-borrador.md` | Borrador; **17 decisiones abiertas** (CAF-01…CAF-17), doce de ellas bloquean el papel |
 
 > **Corrección (acta-01, RE-10).** El paso 5 decía antes que el instrumento se congelaría como una
 > cuarta revisión del papel. El papel tiene su propia serie: lo que se congela es **F-HOG rev. 03**, y
@@ -57,6 +60,21 @@ producción de datos deficientes.
   llenado, muestras), con la verificación de instrumentos.
 - `plantilla-bitacora-programa.md` — plantilla de la **bitácora del programa** (lo que hace el
   programa, no el hogar). En el repositorio vive sólo la plantilla.
+
+### Cafeterías
+
+- `miltli-ficha-cafeterias.html` — **F-CAF rev. 01** (borrador, serie propia del papel). Seis hojas
+  tamaño carta: **antes de empezar** (las ocho condiciones de arranque: destino, tiempo máximo de
+  guardado, plan B, recolección, contenedores, acuerdo, verificación sanitaria y condición de paro),
+  **arranque** (día 1), **registro por día** (rayas al vaciar y un total al cerrar, por corriente),
+  **entregas** (cada salida de lo guardado, marcada por quien entrega y quien recibe), **renglón
+  semanal** (S1–S4) y **cierre**. Cada casilla lleva `data-codigo`, como en F-HOG.
+- `diccionario-de-datos-cafeterias-v0.1-borrador.md` — su contrato de datos: 86 códigos, 17 de ellos
+  compartidos con el diccionario v0.3 y el resto nuevos. Empieza por los **supuestos de trabajo** que
+  la ficha tomó en cada decisión abierta y lo que cambia si el equipo decide otra cosa; termina con
+  los instrumentos que todavía no existen (guía de separación, registro técnico, protocolo).
+- `../planes/escalamiento_cafeterias.md` — el análisis de partida: qué se reutiliza del piloto
+  doméstico, las brechas y las preguntas CAF-01…CAF-17.
 
 ### El contrato de datos
 
@@ -99,7 +117,7 @@ producción de datos deficientes.
   `Miltli_Prompt_Protocolo_Operativo_v0.1.docx` — las directrices originales de `ficha_colaboracion`.
 - `anexos-v0.1/` — transcripción en texto plano de esos tres `.docx`. Si difieren, manda el `.docx`.
 
-## Tres advertencias
+## Cuatro advertencias
 
 1. **Nada está congelado.** D1–D6 son firmes, pero la ficha F-HOG rev. 03 imprime las recomendaciones de
    varias PROPUESTAS (canal de entrega, ventana de la visita, `ACT` semanal…) que el comité todavía
@@ -111,3 +129,7 @@ producción de datos deficientes.
 3. **Tres de los cinco hogares son de personas del equipo.** Se analizan como estrato propio fuera del
    repositorio y no cuentan como observadores ingenuos en la concordancia. Este repositorio nunca dice
    cuáles son.
+4. **La ficha de cafeterías no se puede operar todavía.** F-CAF rev. 01 existe para que el equipo
+   discuta sobre un papel concreto, no para llevarlo a un negocio: no hay destino decidido, ni tiempo
+   máximo de guardado, ni guía de separación, ni verificación sanitaria. Su propia Hoja 1 lo impide:
+   mientras falte una condición, no se separa nada.

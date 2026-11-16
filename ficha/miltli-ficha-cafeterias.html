@@ -1,0 +1,1282 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Miltli — Ficha de registro del piloto de separación en cafeterías (F-CAF rev. 01)</title>
+<!--
+  F-CAF rev. 01 — BORRADOR. Serie propia del papel de cafeterías (acta-01, RE-10). Cada casilla lleva
+  data-codigo (y data-valor donde aplica) con el código de
+  ficha/diccionario-de-datos-cafeterias-v0.1-borrador.md. Los atributos no se imprimen; sirven para que
+  la captura no dependa de la posición y para que tests/ficha-cobertura.test.js compruebe la cobertura
+  casilla ↔ código (RE-14). data-dia = día (Hoja 3), data-sal = salida (Hoja 4), data-sem = semana
+  (Hoja 5), data-copia = copia de consulta que no se captura.
+  Supone decisiones que el equipo no ha tomado (CAF-01…CAF-17 de planes/escalamiento_cafeterias.md);
+  cada supuesto está en el §0 del diccionario de cafeterías.
+-->
+<style>
+  :root {
+    --linea: #303030;
+    --suave: #777;
+    --tenue: #f1f1f1;
+  }
+
+  @page {
+    size: Letter portrait;
+    margin: 12mm 12mm 10mm;
+  }
+
+  * { box-sizing: border-box; }
+
+  html, body {
+    margin: 0;
+    padding: 0;
+    font-family: "Helvetica Neue", Arial, sans-serif;
+    color: #111;
+    background: #d9d9d9;
+  }
+
+  body {
+    font-size: 9pt;
+    line-height: 1.18;
+  }
+
+  /* ---------- Cabecera del documento: sólo en pantalla ---------- */
+
+  .documento {
+    width: 215.9mm;
+    max-width: calc(100% - 8mm);
+    margin: 8mm auto 0;
+    padding: 4mm 6mm;
+    background: #fff;
+    border: 1px solid var(--linea);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 6mm;
+  }
+
+  .documento h1 {
+    margin: 0 0 1mm;
+    font-size: 13pt;
+    line-height: 1.1;
+  }
+
+  .documento p { font-size: 9pt; line-height: 1.3; color: #333; }
+
+  .documento button {
+    appearance: none;
+    flex: none;
+    border: 1px solid var(--linea);
+    background: #fff;
+    color: #111;
+    font: 600 10pt "Helvetica Neue", Arial, sans-serif;
+    padding: 9px 13px;
+    border-radius: 4px;
+    cursor: pointer;
+    box-shadow: 0 1px 4px rgba(0,0,0,.18);
+  }
+
+  main {
+    width: 100%;
+    padding: 8mm 0 12mm;
+  }
+
+  .hoja {
+    width: 215.9mm;
+    min-height: 279.4mm;
+    margin: 0 auto 12mm;
+    padding: 12mm 12mm 10mm;
+    background: #fff;
+    box-shadow: 0 2mm 7mm rgba(0,0,0,.16);
+    page-break-after: always;
+    break-after: page;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .hoja:last-child {
+    page-break-after: auto;
+    break-after: auto;
+  }
+
+  .principal {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 8mm;
+    border-bottom: 1.2pt solid var(--linea);
+    padding-bottom: 1.5mm;
+    margin-bottom: 1.5mm;
+  }
+
+  .principal h2 {
+    margin: 0;
+    font-size: 17pt;
+    line-height: 1.05;
+    font-weight: 700;
+    letter-spacing: -.01em;
+  }
+
+  .principal h2 small {
+    display: block;
+    margin-top: 1.4mm;
+    font-size: 8.5pt;
+    line-height: 1.15;
+    font-weight: 500;
+    color: #333;
+    letter-spacing: 0;
+  }
+
+  .clave {
+    margin: 0;
+    min-width: 34mm;
+    text-align: center;
+    line-height: 1.18;
+    font-size: 8.5pt;
+  }
+
+  .clave b {
+    display: block;
+    margin: .6mm 0;
+    font-size: 15pt;
+    letter-spacing: .06em;
+  }
+
+  .clave > span:first-of-type { display: block; font-size: 7.5pt; color: #444; }
+  .clave .copia { white-space: nowrap; }
+
+  h3 {
+    margin: 0 0 .9mm;
+    font-size: 11.5pt;
+    line-height: 1.1;
+  }
+
+  h4 {
+    margin: 0 0 1mm;
+    font-size: 9.2pt;
+    line-height: 1.1;
+  }
+
+  p { margin: 0; }
+
+  section + section { margin-top: 1.8mm; }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+    font-size: 8.2pt;
+  }
+
+  caption {
+    caption-side: top;
+    text-align: left;
+    padding: 0 0 1.2mm;
+    font-size: 8.4pt;
+    line-height: 1.15;
+    color: #222;
+  }
+
+  th, td {
+    border: .65pt solid var(--linea);
+    vertical-align: middle;
+    padding: .8mm 1mm;
+  }
+
+  thead th {
+    background: var(--tenue);
+    font-weight: 700;
+    text-align: center;
+    line-height: 1.02;
+    font-size: 8pt;
+    padding: .6mm .6mm;
+  }
+
+  thead th small {
+    display: block;
+    margin-top: .3mm;
+    font-size: 7pt;
+    line-height: 1.02;
+    font-weight: 500;
+    color: #333;
+  }
+
+  tbody th {
+    text-align: center;
+    font-weight: 700;
+  }
+
+  .notas-col { text-align: left; }
+
+  td.m { text-align: center; font-size: 10.5pt; line-height: 1; }
+
+  /* ---------- Bandas de instrucciones ---------- */
+
+  .leyenda {
+    border: .75pt solid var(--linea);
+    padding: 1.2mm 1.9mm;
+    font-size: 7.7pt;
+    line-height: 1.14;
+  }
+
+  .leyenda.regla {
+    border-width: 1.2pt;
+    font-size: 8.1pt;
+    padding: 1.4mm 2.4mm;
+    margin: 0 0 1.6mm;
+  }
+
+  .dos-columnas {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0 4mm;
+  }
+
+  .nota-seccion {
+    margin: 0 0 1.1mm;
+    font-size: 7.8pt;
+    line-height: 1.14;
+    color: #333;
+  }
+
+  .casilla { font-size: 11pt; line-height: 1; }
+
+  .opcion {
+    font-size: 9.2pt;
+    letter-spacing: .04em;
+  }
+
+  .opcion.par {
+    border: .5pt solid var(--suave);
+    border-radius: 1mm;
+    padding: .3mm 1.4mm;
+  }
+
+  /* ---------- Hoja 1: condiciones de arranque ---------- */
+
+  .condiciones { font-size: 8.4pt; }
+  .condiciones col.num { width: 7mm; }
+  .condiciones col.lista { width: 15mm; }
+  .condiciones td { padding: 1.15mm 1.8mm; line-height: 1.27; vertical-align: top; }
+  .condiciones td small { display: block; margin-top: .7mm; font-size: 7.4pt; line-height: 1.12; color: #444; }
+  .condiciones td.m { vertical-align: middle; font-size: 15pt; }
+  .condiciones tbody th { vertical-align: top; padding-top: 1.25mm; font-size: 9.5pt; }
+  .condiciones .elige { display: flex; flex-wrap: wrap; gap: .5mm 4mm; margin-top: .8mm; }
+
+  .lista-fecha { margin: 1.4mm 0 0; font-size: 8.4pt; text-align: right; }
+
+  .partes ul { margin: 0; padding: 0 0 0 3.6mm; }
+  .partes li { margin: 0 0 .5mm; }
+  .partes h4, .partes h3.menor { font-size: 8.8pt; margin-bottom: .7mm; }
+
+  /* ---------- Listas de definición (arranque y cierre) ---------- */
+
+  .alta {
+    margin: 0;
+    border-top: .65pt solid var(--linea);
+    font-size: 8pt;
+    line-height: 1.12;
+  }
+
+  .alta > div {
+    display: grid;
+    grid-template-columns: 42% 58%;
+    border-bottom: .65pt solid var(--linea);
+  }
+
+  .alta dt,
+  .alta dd {
+    margin: 0;
+    padding: .7mm 1.4mm;
+  }
+
+  .alta dt {
+    font-weight: 650;
+    border-right: .65pt solid var(--linea);
+  }
+
+  .alta dt small,
+  .alta dd small {
+    display: block;
+    margin-top: .3mm;
+    font-size: 7.2pt;
+    line-height: 1.06;
+    font-weight: 500;
+    color: #444;
+  }
+
+  .alta dd {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: .5mm 2.4mm;
+    min-height: 5mm;
+  }
+
+  .dos-dl {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0 4mm;
+    align-items: start;
+  }
+
+  .medidas { font-size: 8pt; margin-top: 1.2mm; }
+  .medidas col.cap { width: 34mm; }
+  .medidas col.corr { width: 52mm; }
+  .medidas tbody th { text-align: left; font-weight: 650; }
+  .medidas td { height: 5.6mm; }
+
+  .bloque {
+    border-left: 1.4pt solid var(--linea);
+    padding-left: 2.2mm;
+  }
+
+  .orden { margin: 0 0 1.4mm; }
+  .orden h3 { margin: 0 0 .7mm; font-size: 8.8pt; }
+  .orden ol {
+    margin: 0;
+    padding: 0 0 0 4mm;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: auto auto;
+    grid-auto-flow: column;
+    gap: .6mm 7mm;
+  }
+  .orden li { padding-left: .6mm; }
+
+  .equipo { margin: 1.4mm 0 0; border-width: 1.2pt; }
+  .equipo h4 { margin: 0 0 .6mm; font-size: 8.6pt; }
+
+  /* ---------- Fases ---------- */
+
+  .fase {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 4mm;
+    border: 1.4pt solid var(--linea);
+    background: var(--tenue);
+    padding: .7mm 2mm;
+    margin: 0 0 1.2mm;
+    font-size: 7.8pt;
+    font-weight: 650;
+    line-height: 1.1;
+  }
+
+  .fase strong { font-size: 11pt; white-space: nowrap; }
+  .fase span { text-align: right; }
+
+  .fase.cierre {
+    background: #fff;
+    border-style: double;
+    border-width: 3.2pt;
+  }
+
+  /* ---------- Hoja 3: registro por día ---------- */
+
+  .regla .doble {
+    display: grid;
+    grid-template-columns: 1fr 1.35fr;
+    gap: 0 5mm;
+  }
+
+  .regla .doble h3 { margin: 0 0 .6mm; font-size: 8.4pt; }
+  .regla .doble ol { margin: 0; padding: 0 0 0 4.2mm; }
+  .regla .doble ul { margin: 0; padding: 0; list-style: none; }
+  .regla .doble ul li::before { content: "\00b7 "; color: var(--suave); }
+
+  .cual-fase { margin: 0 0 1.4mm; font-size: 8pt; line-height: 1.2; }
+
+  .diario col.dia { width: 7.5mm; }
+  .diario col.fecha { width: 14mm; }
+  .diario col.cerrado { width: 13.5mm; }
+  .diario col.rayas { width: 24mm; }
+  .diario col.total { width: 11.5mm; }
+
+  .diario tbody td,
+  .diario tbody th { height: 5.7mm; padding-top: .3mm; padding-bottom: .3mm; }
+
+  .diario tbody tr.fin-semana td,
+  .diario tbody tr.fin-semana th { border-bottom: 1.6pt solid var(--linea); }
+
+  .diario td.rayas { background: repeating-linear-gradient(90deg, transparent 0 4.7mm, #e4e4e4 4.7mm 4.8mm); -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+
+  /* ---------- Hoja 4: entregas ---------- */
+
+  .entregas { font-size: 7.4pt; }
+  .entregas thead th { font-size: 7pt; padding: .7mm .4mm; }
+  .entregas thead th small { font-size: 6.3pt; }
+  .entregas thead th.c { font-size: 6.5pt; padding-left: .2mm; padding-right: .2mm; }
+  .entregas thead tr.grupos th { font-size: 7.6pt; padding: .9mm .6mm; border-bottom-width: 1.2pt; }
+  .entregas col.n { width: 5.5mm; }
+  .entregas col.fecha { width: 13mm; }
+  .entregas col.corr { width: 10.5mm; }
+  .entregas col.todo { width: 12mm; }
+  .entregas col.da { width: 18mm; }
+  .entregas col.cond { width: 9.5mm; }
+  .entregas col.rol { width: 22.5mm; }
+  .entregas col.cont { width: 11mm; }
+  .entregas col.kg { width: 11mm; }
+  .entregas col.planb { width: auto; }
+  .entregas tbody td, .entregas tbody th { height: 10.2mm; }
+  .entregas td.circ { text-align: center; font-size: 7pt; white-space: nowrap; padding: 0 .2mm; }
+  .entregas .borde { border-left-width: 1.4pt; }
+
+  /* ---------- Hoja 5: renglón semanal ---------- */
+
+  .rejilla {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0 5mm;
+    align-items: start;
+  }
+
+  .semanal { font-size: 7.9pt; }
+  .semanal col.sem { width: 6.4mm; }
+  .semanal thead th { font-size: 7.6pt; }
+
+  .semanal tbody th.op,
+  .unica tbody th.op {
+    text-align: left;
+    font-weight: 400;
+    line-height: 1.06;
+    padding: .55mm 1.2mm;
+  }
+
+  .semanal tbody th.op em,
+  .unica tbody th.op em {
+    font-style: normal;
+    color: #555;
+    font-size: 7.1pt;
+  }
+
+  .semanal tbody th.op b { font-weight: 650; }
+
+  .semanal td,
+  .unica td {
+    text-align: center;
+    font-size: 10.5pt;
+    line-height: 1;
+    height: 4.9mm;
+  }
+
+  .semanal td.escribe { font-size: 8pt; height: 6.2mm; }
+
+  .unica { font-size: 8pt; }
+  .unica col.marca { width: 7mm; }
+  .unica td { height: 5.4mm; }
+
+  tr.sec th {
+    background: var(--tenue);
+    text-align: left;
+    font-weight: 700;
+    font-size: 8.1pt;
+    line-height: 1.1;
+    padding: .8mm 1.2mm;
+    border-top: 1.2pt solid var(--linea);
+  }
+
+  tr.sec th small {
+    display: block;
+    margin-top: .3mm;
+    font-size: 7.1pt;
+    line-height: 1.07;
+    font-weight: 500;
+    color: #333;
+  }
+
+  tr.subsec th {
+    text-align: left;
+    font-weight: 700;
+    font-size: 7.6pt;
+    padding: .5mm 1.2mm;
+    border-top: 1.6pt solid var(--linea);
+  }
+
+  tr.subsec th small { font-weight: 500; color: #444; }
+
+  .parada {
+    margin-top: 2.2mm;
+    border: 1pt solid var(--linea);
+    padding: 1.3mm 2mm;
+    font-size: 8.2pt;
+    line-height: 1.22;
+  }
+
+  .parada small {
+    display: block;
+    margin-top: .4mm;
+    font-size: 7.3pt;
+    color: #444;
+  }
+
+  .libre { margin-top: 2.2mm; }
+  .libre h3 { font-size: 9.5pt; }
+  .libre h3 span, .abiertas h3 span { font-weight: 400; color: #444; font-size: 7.8pt; }
+
+  .libre .renglones {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.2mm 5mm;
+    margin-top: 1mm;
+  }
+
+  .libre .renglon {
+    display: grid;
+    grid-template-columns: 18mm 1fr;
+    align-items: end;
+    font-size: 8pt;
+  }
+
+  .libre .renglon span:last-child {
+    border-bottom: .65pt solid var(--linea);
+    min-height: 10.5mm;
+  }
+
+  /* ---------- Hoja 6: cierre ---------- */
+
+  .renglon-ancho { display: block; width: 100%; }
+
+  .renglon-ancho span {
+    display: block;
+    height: 8.4mm;
+    border-bottom: .65pt solid var(--linea);
+  }
+
+  .abiertas4 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2.4mm 5mm;
+    font-size: 8.2pt;
+  }
+
+  .abiertas4 b { font-weight: 650; }
+
+  .cierre-rev {
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+    gap: 0 5mm;
+    align-items: start;
+  }
+
+  /* ---------- Pie ---------- */
+
+  .pie {
+    margin-top: auto;
+    padding-top: 1.8mm;
+    border-top: .65pt solid var(--linea);
+    display: flex;
+    justify-content: space-between;
+    gap: 8mm;
+    align-items: flex-end;
+    font-size: 7.5pt;
+    line-height: 1.15;
+    color: #333;
+  }
+
+  .pie span:last-child {
+    white-space: nowrap;
+    font-weight: 650;
+  }
+
+  @media print {
+    html, body { background: #fff; }
+    .documento { display: none !important; }
+    main { padding: 0; }
+
+    .hoja {
+      width: auto;
+      min-height: 255mm;
+      margin: 0;
+      padding: 0;
+      box-shadow: none;
+    }
+  }
+</style>
+</head>
+<body>
+<header class="documento">
+  <div>
+    <h1>Miltli — Ficha de cafeterías, F-CAF rev. 01</h1>
+    <p><strong>Borrador sin congelar.</strong> Seis hojas tamaño carta. Supone decisiones que el equipo todavía no toma (destino, tiempo máximo de guardado, corrientes…): están listadas en el diccionario de cafeterías, §0.</p>
+  </div>
+  <button type="button" onclick="window.print()">Imprimir ficha</button>
+</header>
+
+<main>
+
+<!-- ============================ HOJA 1 ============================ -->
+<article class="hoja" aria-labelledby="t-antes">
+  <header class="principal">
+    <h2 id="t-antes">
+      Antes de empezar · Miltli
+      <small>Piloto de separación de orgánicos en cafeterías · HUMAN STEM, A.C.<br>Esta hoja la llenan <strong>el programa y la gerencia, antes del día 1</strong>. Mientras falte una sola de las ocho condiciones, <strong>todavía no se separa nada</strong>.</small>
+    </h2>
+    <p class="clave">
+      Cafetería
+      <b data-codigo="ID">K___</b>
+      <span>la asigna el programa</span>
+    </p>
+  </header>
+
+  <section class="leyenda orden" aria-labelledby="orden-t">
+    <h3 id="orden-t">El orden del piloto, de principio a fin</h3>
+    <ol>
+      <li><strong>Antes del día 1 · condiciones.</strong> El programa y la gerencia llenan esta <strong>Hoja 1</strong>.</li>
+      <li><strong>Día 1 · arranque.</strong> El equipo mide recipientes y contenedores. Se llena la <strong>Hoja 2</strong>.</li>
+      <li><strong>Cada día que se abre · registro.</strong> Rayas al vaciar y un total al cerrar, en la <strong>Hoja 3</strong>.</li>
+      <li><strong>Cada entrega · un renglón.</strong> Lo marcan quien entrega y quien recibe, en la <strong>Hoja 4</strong>.</li>
+      <li><strong>Cada semana · un renglón.</strong> Unos dos minutos, en la <strong>Hoja 5</strong>.</li>
+      <li><strong>Día de cierre · visita.</strong> Revisamos el guardado juntos y se llena la <strong>Hoja 6</strong>.</li>
+    </ol>
+  </section>
+
+  <p class="nota-seccion">Separar sin tener a dónde llevarlo es guardar residuos en un lugar donde se preparan alimentos. Por eso el destino, el tiempo máximo de guardado y el plan B se escriben <strong>antes</strong> de pedirle a nadie que separe. Marca «lista» sólo cuando la condición esté cumplida y por escrito.</p>
+
+  <section aria-labelledby="condiciones-t">
+    <h3 id="condiciones-t">Las ocho condiciones de arranque</h3>
+    <table class="condiciones" aria-labelledby="condiciones-t">
+      <colgroup><col class="num"><col><col class="lista"></colgroup>
+      <thead>
+        <tr><th scope="col">N.º</th><th scope="col" class="notas-col">Condición</th><th scope="col">Lista</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th scope="row">1</th>
+          <td><strong>Destino.</strong> Lo que se separa va a <em>(marca uno)</em>:
+            <span class="elige"><span data-codigo="DEST_TIPO" data-valor="acopio"><span class="casilla">□</span> Un acopio del programa</span> <span data-codigo="DEST_TIPO" data-valor="composteras"><span class="casilla">□</span> Composteras que ya existen</span> <span data-codigo="DEST_TIPO" data-valor="tercero"><span class="casilla">□</span> El servicio de un tercero</span></span>
+            <span class="elige"><span>Clave del destino: <span data-codigo="DEST_ID">__________</span></span> <span>El destino aceptó por escrito estas corrientes <em>(marca todas)</em>:</span></span>
+            <span class="elige"><span data-codigo="CORR_ACEPTA" data-valor="posos"><span class="casilla">□</span> Posos de café y filtros</span> <span data-codigo="CORR_ACEPTA" data-valor="prep"><span class="casilla">□</span> Restos de preparación, crudos</span> <span data-codigo="CORR_ACEPTA" data-valor="plato"><span class="casilla">□</span> Restos de plato</span></span>
+            <small>La clave del destino la asigna el programa; nunca es un nombre ni una dirección. Qué entra en cada corriente lo decide quien opera el método, no esta ficha.</small></td>
+          <td class="m" data-codigo="PRE" data-valor="destino">□</td>
+        </tr>
+        <tr>
+          <th scope="row">2</th>
+          <td><strong>Tiempo máximo de guardado.</strong> Lo separado no pasa más de <span data-codigo="ALM_TMAX">______</span> días guardado en la cafetería.
+            <small>Lo fija quien opera el método, junto con la verificación sanitaria de la condición 7; no la frecuencia de recolección que resulte cómoda.</small></td>
+          <td class="m" data-codigo="PRE" data-valor="tmax">□</td>
+        </tr>
+        <tr>
+          <th scope="row">3</th>
+          <td><strong>Plan B, por escrito.</strong> Si se cumple el tiempo máximo y no hubo recolección <em>(marca uno)</em>:
+            <span class="elige"><span data-codigo="PLANB" data-valor="basura"><span class="casilla">□</span> Se va a la basura y se anota como «no llegó»</span> <span data-codigo="PLANB" data-valor="respaldo"><span class="casilla">□</span> Se lleva a un destino de respaldo</span> <span data-codigo="PLANB" data-valor="pausa"><span class="casilla">□</span> Se deja de separar hasta que haya recolección</span></span>
+            <small>Lo decide la coordinación del programa, no quien tiene el residuo en la mano, y se anota en la bitácora el mismo día.</small></td>
+          <td class="m" data-codigo="PRE" data-valor="planb">□</td>
+        </tr>
+        <tr>
+          <th scope="row">4</th>
+          <td><strong>Recolección.</strong> Cada <span data-codigo="REC_FREC">______</span> días, a cargo de <em>(marca uno)</em>:
+            <span class="elige"><span data-codigo="REC_ROL" data-valor="programa"><span class="casilla">□</span> El programa</span> <span data-codigo="REC_ROL" data-valor="tercero"><span class="casilla">□</span> Un tercero</span> <span data-codigo="REC_ROL" data-valor="cafeteria"><span class="casilla">□</span> La cafetería lo lleva</span></span>
+            <small>El número de días tiene que ser menor o igual al tiempo máximo de la condición 2.</small></td>
+          <td class="m" data-codigo="PRE" data-valor="recoleccion">□</td>
+        </tr>
+        <tr>
+          <th scope="row">5</th>
+          <td><strong>Contenedores de guardado.</strong> Hay contenedores con tapa suficientes para los días entre una recolección y la siguiente, y está acordado quién los lava.
+            <small>Se describen el día 1, en la Hoja 2.</small></td>
+          <td class="m" data-codigo="PRE" data-valor="contenedores">□</td>
+        </tr>
+        <tr>
+          <th scope="row">6</th>
+          <td><strong>Acuerdo de participación.</strong> La gerencia firmó la carta con lo que hace cada parte.
+            <small>La carta lleva nombres: se guarda con la lista de claves, nunca con los datos.</small></td>
+          <td class="m" data-codigo="PRE" data-valor="acuerdo">□</td>
+        </tr>
+        <tr>
+          <th scope="row">7</th>
+          <td><strong>Verificación sanitaria.</strong> Se revisó que guardar orgánicos de esta forma es compatible con las obligaciones sanitarias del establecimiento y con las reglas del inmueble. La revisó <em>(marca uno)</em>:
+            <span class="elige"><span data-codigo="SANIT_QUIEN" data-valor="cafeteria"><span class="casilla">□</span> La cafetería</span> <span data-codigo="SANIT_QUIEN" data-valor="programa"><span class="casilla">□</span> El programa</span> <span data-codigo="SANIT_QUIEN" data-valor="ambos"><span class="casilla">□</span> Los dos</span></span></td>
+          <td class="m" data-codigo="PRE" data-valor="sanitaria">□</td>
+        </tr>
+        <tr>
+          <th scope="row">8</th>
+          <td><strong>Condición de paro.</strong> Está escrito qué incidente detiene la separación y a quién se le avisa —un rol, no un nombre—.</td>
+          <td class="m" data-codigo="PRE" data-valor="paro">□</td>
+        </tr>
+      </tbody>
+    </table>
+    <p class="lista-fecha">Las ocho quedaron listas el <span data-codigo="PRE_FECHA">____ / ____ / 2026</span></p>
+  </section>
+
+  <section class="leyenda partes" aria-labelledby="partes-t">
+    <h3 id="partes-t">Lo que hace cada parte</h3>
+    <div class="dos-columnas">
+      <div>
+        <h4>La cafetería</h4>
+        <ul>
+          <li>Separa durante el servicio, cada corriente en su recipiente.</li>
+          <li>Vacía, tapa y anota: Hojas 3 y 5.</li>
+          <li>Guarda lo separado según estas reglas y avisa el mismo día si algo se sale de ellas.</li>
+          <li>Marca cada entrega junto con quien recibe: Hoja 4.</li>
+        </ul>
+      </div>
+      <div>
+        <h4>El programa</h4>
+        <ul>
+          <li>Recoge con la frecuencia acordada, y su cumplimiento también se mide.</li>
+          <li>Da los contenedores y la capacitación en cada turno; la repite para personal nuevo.</li>
+          <li>Decide y aplica el plan B.</li>
+          <li>Mide con su equipo el día 1 y el día de cierre, y lleva la bitácora.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="leyenda partes" aria-label="Límites del acuerdo">
+    <div class="dos-columnas">
+      <div>
+        <h3 class="menor">Lo que no se le pide a la cafetería</h3>
+        <p>Ventas, tickets ni número de clientes · compras ni proveedores · menú ni platillos · horarios de turno · nombres del personal o de la gerencia: en toda la ficha sólo hay roles.</p>
+      </div>
+      <div>
+        <h3 class="menor">Cómo se sale</h3>
+        <p>La cafetería puede salir cuando quiera, sin dar motivo. Lo que esté guardado ese día se entrega en la siguiente recolección o sigue el plan B.</p>
+      </div>
+    </div>
+  </section>
+
+  <footer class="pie">
+    <span>Miltli · HUMAN STEM, A.C. · Piloto de separación de orgánicos en cafeterías · 2026 · borrador</span>
+    <span data-codigo="FICHA_REV" data-valor="CAF-01">F-CAF rev.&nbsp;01 · Hoja 1 de 6</span>
+  </footer>
+</article>
+
+<!-- ============================ HOJA 2 ============================ -->
+<article class="hoja" aria-labelledby="t-arranque">
+  <header class="principal">
+    <h2 id="t-arranque">
+      Arranque · Miltli
+      <small>Piloto de separación de orgánicos en cafeterías · 28 días · HUMAN STEM, A.C.<br>Esta hoja se llena <strong>el día 1 y no se vuelve a tocar</strong>. El cierre va aparte, en la Hoja 6.</small>
+    </h2>
+    <p class="clave">
+      Cafetería
+      <b data-codigo="ID">K___</b>
+      <span>la asigna el programa</span>
+      Inicio: <span data-codigo="FINI">____ / ____ / 2026</span>
+    </p>
+  </header>
+
+  <p class="fase"><strong>Parte A · sólo el día 1</strong> <span>Una sola vez, en el arranque. Nada de esta hoja se vuelve a llenar después.</span></p>
+
+  <div class="bloque">
+
+  <section aria-labelledby="medida">
+    <h3 id="medida">La medida de esta cafetería</h3>
+    <p class="nota-seccion">Aquí todo se cuenta en <strong>recipientes</strong>: el recipiente chico de cada corriente, el que se vacía al contenedor de guardado. El equipo mide una vez cuántos litros le caben a cada uno. Se llena <strong>hasta el borde, sin apretar, sin acomodar y sin sacudir</strong>. Si la cafetería ya pesa sus residuos con una báscula que tiene para eso, se anota en kilos.</p>
+    <dl class="alta">
+      <div>
+        <dt>Aquí se cuenta en<small>marca uno; el mismo durante todo el piloto</small></dt>
+        <dd><span data-codigo="UNIDAD" data-valor="recipientes"><span class="casilla">□</span> Recipientes</span> <span data-codigo="UNIDAD" data-valor="kg"><span class="casilla">□</span> Kilos, con báscula propia</span></dd>
+      </div>
+    </dl>
+    <table class="medidas" aria-label="Recipiente de medida de cada corriente">
+      <colgroup><col class="corr"><col><col class="cap"></colgroup>
+      <thead>
+        <tr><th scope="col" class="notas-col">Corriente</th><th scope="col" class="notas-col">Recipiente de medida <small>descríbelo: cajón de posos, cubeta, bote…</small></th><th scope="col">Capacidad, en litros <small>la mide el equipo</small></th></tr>
+      </thead>
+      <tbody>
+        <tr><th scope="row">Posos de café y filtros</th><td data-codigo="MED_POSOS_DESC"></td><td data-codigo="MED_POSOS_CAP"></td></tr>
+        <tr><th scope="row">Restos de preparación, crudos</th><td data-codigo="MED_PREP_DESC"></td><td data-codigo="MED_PREP_CAP"></td></tr>
+        <tr><th scope="row">Restos de plato</th><td data-codigo="MED_PLATO_DESC"></td><td data-codigo="MED_PLATO_CAP"></td></tr>
+      </tbody>
+    </table>
+
+    <section class="leyenda equipo" aria-labelledby="equipo-t">
+      <h4 id="equipo-t">Lo que mide el equipo, no la cafetería</h4>
+      <p>· <strong>El día 1</strong>, el equipo mide cada recipiente pesándolo lleno de agua, y mide los contenedores de guardado.<br>
+         · <strong>El día de cierre</strong>, en una visita, el equipo pesa un recipiente lleno de cada corriente —sin anotar de qué está hecho—, revisa el guardado junto con ustedes y toma una foto del interior de un contenedor.<br>
+         · <strong>Les pedimos una sola cosa:</strong> ese día, no vacíen el último recipiente lleno de cada corriente hasta que llegue el equipo. No hace falta báscula; el equipo apunta todo en su hoja, con la clave <strong>K__</strong> y sin nombres.</p>
+    </section>
+  </section>
+
+  <section aria-labelledby="alta-caf">
+    <h3 id="alta-caf">Cómo es esta cafetería y su manejo de residuos</h3>
+    <p class="nota-seccion"><strong>Pueden dejar en blanco cualquier pregunta que no quieran responder;</strong> la ficha sirve igual.</p>
+    <dl class="alta">
+      <div>
+        <dt>Día del renglón semanal<small>circula uno</small></dt>
+        <dd><span class="opcion"><span data-codigo="DREV" data-valor="lu">Lu</span>&nbsp; <span data-codigo="DREV" data-valor="ma">Ma</span>&nbsp; <span data-codigo="DREV" data-valor="mi">Mi</span>&nbsp; <span data-codigo="DREV" data-valor="ju">Ju</span>&nbsp; <span data-codigo="DREV" data-valor="vi">Vi</span>&nbsp; <span data-codigo="DREV" data-valor="sa">Sá</span>&nbsp; <span data-codigo="DREV" data-valor="do">Do</span></span></dd>
+      </div>
+      <div>
+        <dt>Quién separa<small>marca todos</small></dt>
+        <dd><span data-codigo="SEP_QUIEN" data-valor="personal"><span class="casilla">□</span> El personal</span> <span data-codigo="SEP_QUIEN" data-valor="clientes"><span class="casilla">□</span> Los clientes, en una estación de separación</span></dd>
+      </div>
+      <div>
+        <dt>Quién cierra el día en la Hoja 3<small>un rol, no un nombre</small></dt>
+        <dd><span data-codigo="ANOTA_ROL" data-valor="encargado"><span class="casilla">□</span> Encargado o enlace</span> <span data-codigo="ANOTA_ROL" data-valor="turno"><span class="casilla">□</span> Quien cierra el turno</span></dd>
+      </div>
+      <div>
+        <dt>Personas que separan y hay que capacitar<small>sólo un rango; no anotamos nombres ni turnos</small></dt>
+        <dd><span class="opcion"><span data-codigo="PERS_CAP" data-valor="1_3">1 a 3</span> · <span data-codigo="PERS_CAP" data-valor="4_8">4 a 8</span> · <span data-codigo="PERS_CAP" data-valor="9_mas">9 o más</span></span></dd>
+      </div>
+      <div>
+        <dt>Antes de este piloto, ¿qué camino seguían estos residuos?<small>marca todos los que apliquen: pueden ser varios a la vez</small></dt>
+        <dd>
+          <span data-codigo="DPRE_CAF" data-valor="basura"><span class="casilla">□</span> Basura común</span>
+          <span data-codigo="DPRE_CAF" data-valor="separada"><span class="casilla">□</span> Recolección separada de orgánicos</span>
+          <span data-codigo="DPRE_CAF" data-valor="alguien"><span class="casilla">□</span> Se los llevaba alguien</span>
+          <span data-codigo="DPRE_CAF" data-valor="compost"><span class="casilla">□</span> Ya se compostaban</span>
+          <span data-codigo="DPRE_CAF" data-valor="animales"><span class="casilla">□</span> Alimento de animales</span>
+          <span data-codigo="DPRE_CAF" data-valor="otro"><span class="casilla">□</span> Otro:</span> <span data-codigo="DPRE_CAF_OTRO">__________</span>
+        </dd>
+      </div>
+      <div>
+        <dt>Durante el piloto, alguien se lleva parte de estos residuos por fuera del programa<small>esos residuos no llegan al destino, por eso se pregunta</small></dt>
+        <dd><span class="opcion"><span data-codigo="LLEVA_FUERA" data-valor="no">No</span> · <span data-codigo="LLEVA_FUERA" data-valor="a_veces">A veces</span> · <span data-codigo="LLEVA_FUERA" data-valor="casi_siempre">Casi siempre</span></span></dd>
+      </div>
+    </dl>
+  </section>
+
+  <section aria-labelledby="guardado">
+    <h3 id="guardado">Dónde se guarda lo separado</h3>
+    <dl class="alta">
+      <div>
+        <dt>Contenedores de guardado<small>los que esperan la recolección</small></dt>
+        <dd>Cuántos: <span data-codigo="ALM_N">_____</span> &nbsp; Capacidad de cada uno: <span data-codigo="ALM_CAP">_____</span> L &nbsp; <span data-codigo="ALM_CAP_ND" data-valor="marcada"><span class="casilla">□</span> no la sé</span> &nbsp; <span>Todos con tapa: <span class="opcion"><span data-codigo="ALM_TAPA" data-valor="si">Sí</span> · <span data-codigo="ALM_TAPA" data-valor="no">No</span></span></span></dd>
+      </div>
+      <div>
+        <dt>Dónde están<small>circula una de cada par</small></dt>
+        <dd><span class="opcion par"><span data-codigo="ALM_IE" data-valor="interior">Interior</span> · <span data-codigo="ALM_IE" data-valor="exterior">Exterior</span></span><span class="opcion par"><span data-codigo="ALM_SS" data-valor="sol">Sol</span> · <span data-codigo="ALM_SS" data-valor="sombra">Sombra</span></span><span class="opcion par"><span data-codigo="ALM_FRIO" data-valor="refrigerado">Refrigerado</span> · <span data-codigo="ALM_FRIO" data-valor="ambiente">Sin refrigerar</span></span><span class="opcion par"><span data-codigo="ALM_AREA" data-valor="alimentos">En el área de alimentos</span> · <span data-codigo="ALM_AREA" data-valor="aparte">En un área aparte</span></span></dd>
+      </div>
+      <div>
+        <dt>Quién lava los contenedores<small>un rol</small></dt>
+        <dd><span data-codigo="ALM_LIMPIA" data-valor="cafeteria"><span class="casilla">□</span> La cafetería</span> <span data-codigo="ALM_LIMPIA" data-valor="programa"><span class="casilla">□</span> El programa</span></dd>
+      </div>
+    </dl>
+  </section>
+
+  </div>
+
+  <section class="leyenda" aria-labelledby="datos">
+    <h3 id="datos" style="font-size:9.5pt">Cómo se cuidan los datos de la cafetería y de su personal</h3>
+    <div class="dos-columnas">
+      <p>· Esta ficha no lleva el nombre del negocio, su dirección ni su teléfono: sólo la clave <strong>K__</strong>. La lista que conecta cada clave con un negocio la guarda sólo la persona coordinadora, fuera del chat y fuera de la nube.<br>
+         · No se anotan nombres del personal ni de la gerencia: sólo roles. No se pregunta por ventas, clientes, compras, proveedores, menú ni horarios.<br>
+         · <strong>Pueden dejar en blanco cualquier pregunta.</strong> De cada corriente se anota <em>cuánto</em>, nunca qué alimentos lleva.</p>
+      <p>· Cada semana se manda una foto de las Hojas 3, 4 y 5 <strong>sólo a la persona coordinadora</strong>, por mensaje privado y con la ubicación del teléfono desactivada; nunca a un chat de grupo. Si se fotografía un contenedor, sólo su interior: sin logotipos, fachada, clientes ni personal.<br>
+         · Con pocas cafeterías, cualquier número publicado puede señalar a un negocio: nada se publica por cafetería sin permiso escrito de la gerencia. La hoja original se queda aquí.</p>
+    </div>
+  </section>
+
+  <footer class="pie">
+    <span>Miltli · HUMAN STEM, A.C. · Piloto de separación de orgánicos en cafeterías · 2026 · borrador</span>
+    <span data-codigo="FICHA_REV" data-valor="CAF-01">F-CAF rev.&nbsp;01 · Hoja 2 de 6</span>
+  </footer>
+</article>
+
+<!-- ============================ HOJA 3 ============================ -->
+<article class="hoja" aria-labelledby="t-diario">
+  <header class="principal">
+    <h2 id="t-diario">
+      Registro por día · Miltli
+      <small>Un renglón por día. <strong>Rayas al vaciar, un total al cerrar.</strong> Durante el servicio no se anota nada.</small>
+    </h2>
+    <p class="clave">
+      Cafetería
+      <b data-codigo="ID">K___</b>
+      <span>la asigna el programa</span>
+    </p>
+  </header>
+
+  <section class="leyenda regla" aria-label="Cómo se llena esta hoja">
+    <div class="doble">
+      <div>
+        <h3>El orden de cada vaciado</h3>
+        <ol>
+          <li>Durante el servicio sólo se <strong>separa</strong>: cada corriente a su recipiente.</li>
+          <li>Al llenarse el recipiente, o al cerrar el turno, <strong>retira</strong> lo que no va.</li>
+          <li><strong>Vacía</strong> al contenedor de guardado y <strong>tápalo</strong>.</li>
+          <li>Pon <strong>una raya</strong> en la columna de esa corriente.</li>
+          <li>Al cerrar el día, quien cierra <strong>cuenta las rayas</strong> y escribe el total.</li>
+        </ol>
+      </div>
+      <div>
+        <h3>Cómo se cuenta</h3>
+        <ul>
+          <li>Una raya = un recipiente lleno <strong>hasta el borde, sin apretar</strong>.</li>
+          <li>Al cerrar, el último recipiente cuenta <strong>½</strong> si va más o menos a la mitad y <strong>1</strong> si va casi lleno; si apenas tiene algo, no se cuenta. Totales sólo en <strong>enteros y medios</strong>.</li>
+          <li><strong>0</strong> = abrimos y no se separó nada de esa corriente. <strong>Renglón vacío</strong> = no se anotó. <strong>Cerrado</strong> = ese día no se abrió. No son lo mismo.</li>
+          <li>Si aquí se cuenta en kilos, en «total» van los kilos del día y no hacen falta rayas.</li>
+          <li>Se anota <strong>cuánto</strong> de cada corriente; nunca qué alimentos lleva.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <p class="cual-fase"><strong>Esta hoja es de</strong> <em>(lo marca el equipo)</em>: &nbsp; <span data-codigo="FASE" data-valor="base"><span class="casilla">□</span> la <strong>semana de medición previa</strong> —días 1 a 7: sólo se mide, y lo separado sigue su camino de siempre—</span> &nbsp; <span data-codigo="FASE" data-valor="piloto"><span class="casilla">□</span> el <strong>piloto</strong> —días 1 a 28: lo separado se guarda y se entrega—</span></p>
+
+  <table class="diario" aria-label="Registro por día, 28 días">
+    <colgroup>
+      <col class="dia">
+      <col class="fecha">
+      <col class="cerrado">
+      <col class="rayas"><col class="total">
+      <col class="rayas"><col class="total">
+      <col class="rayas"><col class="total">
+      <col>
+    </colgroup>
+    <thead>
+      <tr>
+        <th scope="col" rowspan="2">Día</th>
+        <th scope="col" rowspan="2">Fecha<small>día / mes</small></th>
+        <th scope="col" rowspan="2">Cerrado<small>no se abrió</small></th>
+        <th scope="colgroup" colspan="2">Posos de café y filtros<small>recipiente de <span data-codigo="MED_POSOS_CAP" data-copia="si">____</span> L</small></th>
+        <th scope="colgroup" colspan="2">Restos de preparación, crudos<small>recipiente de <span data-codigo="MED_PREP_CAP" data-copia="si">____</span> L</small></th>
+        <th scope="colgroup" colspan="2">Restos de plato<small>recipiente de <span data-codigo="MED_PLATO_CAP" data-copia="si">____</span> L</small></th>
+        <th scope="col" rowspan="2" class="notas-col">¿Algo que contar de hoy? <small>Opcional, sobre la separación y el guardado. Ej.: «se llenó antes de la recolección», «llegó personal nuevo».</small></th>
+      </tr>
+      <tr>
+        <th scope="col">rayas</th><th scope="col">total</th>
+        <th scope="col">rayas</th><th scope="col">total</th>
+        <th scope="col">rayas</th><th scope="col">total</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><th scope="row" data-codigo="DIA" data-valor="1">1</th><td data-codigo="FECHA" data-dia="1"></td><td class="m" data-codigo="CERRADO" data-valor="marcada" data-dia="1">□</td><td class="rayas"></td><td data-codigo="SEP_POSOS" data-dia="1"></td><td class="rayas"></td><td data-codigo="SEP_PREP" data-dia="1"></td><td class="rayas"></td><td data-codigo="SEP_PLATO" data-dia="1"></td><td class="notas-col" data-codigo="NOTA_D" data-dia="1"></td></tr>
+      <tr><th scope="row" data-codigo="DIA" data-valor="2">2</th><td data-codigo="FECHA" data-dia="2"></td><td class="m" data-codigo="CERRADO" data-valor="marcada" data-dia="2">□</td><td class="rayas"></td><td data-codigo="SEP_POSOS" data-dia="2"></td><td class="rayas"></td><td data-codigo="SEP_PREP" data-dia="2"></td><td class="rayas"></td><td data-codigo="SEP_PLATO" data-dia="2"></td><td class="notas-col" data-codigo="NOTA_D" data-dia="2"></td></tr>
+      <tr><th scope="row" data-codigo="DIA" data-valor="3">3</th><td data-codigo="FECHA" data-dia="3"></td><td class="m" data-codigo="CERRADO" data-valor="marcada" data-dia="3">□</td><td class="rayas"></td><td data-codigo="SEP_POSOS" data-dia="3"></td><td class="rayas"></td><td data-codigo="SEP_PREP" data-dia="3"></td><td class="rayas"></td><td data-codigo="SEP_PLATO" data-dia="3"></td><td class="notas-col" data-codigo="NOTA_D" data-dia="3"></td></tr>
+      <tr><th scope="row" data-codigo="DIA" data-valor="4">4</th><td data-codigo="FECHA" data-dia="4"></td><td class="m" data-codigo="CERRADO" data-valor="marcada" data-dia="4">□</td><td class="rayas"></td><td data-codigo="SEP_POSOS" data-dia="4"></td><td class="rayas"></td><td data-codigo="SEP_PREP" data-dia="4"></td><td class="rayas"></td><td data-codigo="SEP_PLATO" data-dia="4"></td><td class="notas-col" data-codigo="NOTA_D" data-dia="4"></td></tr>
+      <tr><th scope="row" data-codigo="DIA" data-valor="5">5</th><td data-codigo="FECHA" data-dia="5"></td><td class="m" data-codigo="CERRADO" data-valor="marcada" data-dia="5">□</td><td class="rayas"></td><td data-codigo="SEP_POSOS" data-dia="5"></td><td class="rayas"></td><td data-codigo="SEP_PREP" data-dia="5"></td><td class="rayas"></td><td data-codigo="SEP_PLATO" data-dia="5"></td><td class="notas-col" data-codigo="NOTA_D" data-dia="5"></td></tr>
+      <tr><th scope="row" data-codigo="DIA" data-valor="6">6</th><td data-codigo="FECHA" data-dia="6"></td><td class="m" data-codigo="CERRADO" data-valor="marcada" data-dia="6">□</td><td class="rayas"></td><td data-codigo="SEP_POSOS" data-dia="6"></td><td class="rayas"></td><td data-codigo="SEP_PREP" data-dia="6"></td><td class="rayas"></td><td data-codigo="SEP_PLATO" data-dia="6"></td><td class="notas-col" data-codigo="NOTA_D" data-dia="6"></td></tr>
+      <tr class="fin-semana"><th scope="row" data-codigo="DIA" data-valor="7">7</th><td data-codigo="FECHA" data-dia="7"></td><td class="m" data-codigo="CERRADO" data-valor="marcada" data-dia="7">□</td><td class="rayas"></td><td data-codigo="SEP_POSOS" data-dia="7"></td><td class="rayas"></td><td data-codigo="SEP_PREP" data-dia="7"></td><td class="rayas"></td><td data-codigo="SEP_PLATO" data-dia="7"></td><td class="notas-col" data-codigo="NOTA_D" data-dia="7"></td></tr>
+      <tr><th scope="row" data-codigo="DIA" data-valor="8">8</th><td data-codigo="FECHA" data-dia="8"></td><td class="m" data-codigo="CERRADO" data-valor="marcada" data-dia="8">□</td><td class="rayas"></td><td data-codigo="SEP_POSOS" data-dia="8"></td><td class="rayas"></td><td data-codigo="SEP_PREP" data-dia="8"></td><td class="rayas"></td><td data-codigo="SEP_PLATO" data-dia="8"></td><td class="notas-col" data-codigo="NOTA_D" data-dia="8"></td></tr>
+      <tr><th scope="row" data-codigo="DIA" data-valor="9">9</th><td data-codigo="FECHA" data-dia="9"></td><td class="m" data-codigo="CERRADO" data-valor="marcada" data-dia="9">□</td><td class="rayas"></td><td data-codigo="SEP_POSOS" data-dia="9"></td><td class="rayas"></td><td data-codigo="SEP_PREP" data-dia="9"></td><td class="rayas"></td><td data-codigo="SEP_PLATO" data-dia="9"></td><td class="notas-col" data-codigo="NOTA_D" data-dia="9"></td></tr>
+      <tr><th scope="row" data-codigo="DIA" data-valor="10">10</th><td data-codigo="FECHA" data-dia="10"></td><td class="m" data-codigo="CERRADO" data-valor="marcada" data-dia="10">□</td><td class="rayas"></td><td data-codigo="SEP_POSOS" data-dia="10"></td><td class="rayas"></td><td data-codigo="SEP_PREP" data-dia="10"></td><td class="rayas"></td><td data-codigo="SEP_PLATO" data-dia="10"></td><td class="notas-col" data-codigo="NOTA_D" data-dia="10"></td></tr>
+      <tr><th scope="row" data-codigo="DIA" data-valor="11">11</th><td data-codigo="FECHA" data-dia="11"></td><td class="m" data-codigo="CERRADO" data-valor="marcada" data-dia="11">□</td><td class="rayas"></td><td data-codigo="SEP_POSOS" data-dia="11"></td><td class="rayas"></td><td data-codigo="SEP_PREP" data-dia="11"></td><td class="rayas"></td><td data-codigo="SEP_PLATO" data-dia="11"></td><td class="notas-col" data-codigo="NOTA_D" data-dia="11"></td></tr>
+      <tr><th scope="row" data-codigo="DIA" data-valor="12">12</th><td data-codigo="FECHA" data-dia="12"></td><td class="m" data-codigo="CERRADO" data-valor="marcada" data-dia="12">□</td><td class="rayas"></td><td data-codigo="SEP_POSOS" data-dia="12"></td><td class="rayas"></td><td data-codigo="SEP_PREP" data-dia="12"></td><td class="rayas"></td><td data-codigo="SEP_PLATO" data-dia="12"></td><td class="notas-col" data-codigo="NOTA_D" data-dia="12"></td></tr>
+      <tr><th scope="row" data-codigo="DIA" data-valor="13">13</th><td data-codigo="FECHA" data-dia="13"></td><td class="m" data-codigo="CERRADO" data-valor="marcada" data-dia="13">□</td><td class="rayas"></td><td data-codigo="SEP_POSOS" data-dia="13"></td><td class="rayas"></td><td data-codigo="SEP_PREP" data-dia="13"></td><td class="rayas"></td><td data-codigo="SEP_PLATO" data-dia="13"></td><td class="notas-col" data-codigo="NOTA_D" data-dia="13"></td></tr>
+      <tr class="fin-semana"><th scope="row" data-codigo="DIA" data-valor="14">14</th><td data-codigo="FECHA" data-dia="14"></td><td class="m" data-codigo="CERRADO" data-valor="marcada" data-dia="14">□</td><td class="rayas"></td><td data-codigo="SEP_POSOS" data-dia="14"></td><td class="rayas"></td><td data-codigo="SEP_PREP" data-dia="14"></td><td class="rayas"></td><td data-codigo="SEP_PLATO" data-dia="14"></td><td class="notas-col" data-codigo="NOTA_D" data-dia="14"></td></tr>
+      <tr><th scope="row" data-codigo="DIA" data-valor="15">15</th><td data-codigo="FECHA" data-dia="15"></td><td class="m" data-codigo="CERRADO" data-valor="marcada" data-dia="15">□</td><td class="rayas"></td><td data-codigo="SEP_POSOS" data-dia="15"></td><td class="rayas"></td><td data-codigo="SEP_PREP" data-dia="15"></td><td class="rayas"></td><td data-codigo="SEP_PLATO" data-dia="15"></td><td class="notas-col" data-codigo="NOTA_D" data-dia="15"></td></tr>
+      <tr><th scope="row" data-codigo="DIA" data-valor="16">16</th><td data-codigo="FECHA" data-dia="16"></td><td class="m" data-codigo="CERRADO" data-valor="marcada" data-dia="16">□</td><td class="rayas"></td><td data-codigo="SEP_POSOS" data-dia="16"></td><td class="rayas"></td><td data-codigo="SEP_PREP" data-dia="16"></td><td class="rayas"></td><td data-codigo="SEP_PLATO" data-dia="16"></td><td class="notas-col" data-codigo="NOTA_D" data-dia="16"></td></tr>
+      <tr><th scope="row" data-codigo="DIA" data-valor="17">17</th><td data-codigo="FECHA" data-dia="17"></td><td class="m" data-codigo="CERRADO" data-valor="marcada" data-dia="17">□</td><td class="rayas"></td><td data-codigo="SEP_POSOS" data-dia="17"></td><td class="rayas"></td><td data-codigo="SEP_PREP" data-dia="17"></td><td class="rayas"></td><td data-codigo="SEP_PLATO" data-dia="17"></td><td class="notas-col" data-codigo="NOTA_D" data-dia="17"></td></tr>
+      <tr><th scope="row" data-codigo="DIA" data-valor="18">18</th><td data-codigo="FECHA" data-dia="18"></td><td class="m" data-codigo="CERRADO" data-valor="marcada" data-dia="18">□</td><td class="rayas"></td><td data-codigo="SEP_POSOS" data-dia="18"></td><td class="rayas"></td><td data-codigo="SEP_PREP" data-dia="18"></td><td class="rayas"></td><td data-codigo="SEP_PLATO" data-dia="18"></td><td class="notas-col" data-codigo="NOTA_D" data-dia="18"></td></tr>
+      <tr><th scope="row" data-codigo="DIA" data-valor="19">19</th><td data-codigo="FECHA" data-dia="19"></td><td class="m" data-codigo="CERRADO" data-valor="marcada" data-dia="19">□</td><td class="rayas"></td><td data-codigo="SEP_POSOS" data-dia="19"></td><td class="rayas"></td><td data-codigo="SEP_PREP" data-dia="19"></td><td class="rayas"></td><td data-codigo="SEP_PLATO" data-dia="19"></td><td class="notas-col" data-codigo="NOTA_D" data-dia="19"></td></tr>
+      <tr><th scope="row" data-codigo="DIA" data-valor="20">20</th><td data-codigo="FECHA" data-dia="20"></td><td class="m" data-codigo="CERRADO" data-valor="marcada" data-dia="20">□</td><td class="rayas"></td><td data-codigo="SEP_POSOS" data-dia="20"></td><td class="rayas"></td><td data-codigo="SEP_PREP" data-dia="20"></td><td class="rayas"></td><td data-codigo="SEP_PLATO" data-dia="20"></td><td class="notas-col" data-codigo="NOTA_D" data-dia="20"></td></tr>
+      <tr class="fin-semana"><th scope="row" data-codigo="DIA" data-valor="21">21</th><td data-codigo="FECHA" data-dia="21"></td><td class="m" data-codigo="CERRADO" data-valor="marcada" data-dia="21">□</td><td class="rayas"></td><td data-codigo="SEP_POSOS" data-dia="21"></td><td class="rayas"></td><td data-codigo="SEP_PREP" data-dia="21"></td><td class="rayas"></td><td data-codigo="SEP_PLATO" data-dia="21"></td><td class="notas-col" data-codigo="NOTA_D" data-dia="21"></td></tr>
+      <tr><th scope="row" data-codigo="DIA" data-valor="22">22</th><td data-codigo="FECHA" data-dia="22"></td><td class="m" data-codigo="CERRADO" data-valor="marcada" data-dia="22">□</td><td class="rayas"></td><td data-codigo="SEP_POSOS" data-dia="22"></td><td class="rayas"></td><td data-codigo="SEP_PREP" data-dia="22"></td><td class="rayas"></td><td data-codigo="SEP_PLATO" data-dia="22"></td><td class="notas-col" data-codigo="NOTA_D" data-dia="22"></td></tr>
+      <tr><th scope="row" data-codigo="DIA" data-valor="23">23</th><td data-codigo="FECHA" data-dia="23"></td><td class="m" data-codigo="CERRADO" data-valor="marcada" data-dia="23">□</td><td class="rayas"></td><td data-codigo="SEP_POSOS" data-dia="23"></td><td class="rayas"></td><td data-codigo="SEP_PREP" data-dia="23"></td><td class="rayas"></td><td data-codigo="SEP_PLATO" data-dia="23"></td><td class="notas-col" data-codigo="NOTA_D" data-dia="23"></td></tr>
+      <tr><th scope="row" data-codigo="DIA" data-valor="24">24</th><td data-codigo="FECHA" data-dia="24"></td><td class="m" data-codigo="CERRADO" data-valor="marcada" data-dia="24">□</td><td class="rayas"></td><td data-codigo="SEP_POSOS" data-dia="24"></td><td class="rayas"></td><td data-codigo="SEP_PREP" data-dia="24"></td><td class="rayas"></td><td data-codigo="SEP_PLATO" data-dia="24"></td><td class="notas-col" data-codigo="NOTA_D" data-dia="24"></td></tr>
+      <tr><th scope="row" data-codigo="DIA" data-valor="25">25</th><td data-codigo="FECHA" data-dia="25"></td><td class="m" data-codigo="CERRADO" data-valor="marcada" data-dia="25">□</td><td class="rayas"></td><td data-codigo="SEP_POSOS" data-dia="25"></td><td class="rayas"></td><td data-codigo="SEP_PREP" data-dia="25"></td><td class="rayas"></td><td data-codigo="SEP_PLATO" data-dia="25"></td><td class="notas-col" data-codigo="NOTA_D" data-dia="25"></td></tr>
+      <tr><th scope="row" data-codigo="DIA" data-valor="26">26</th><td data-codigo="FECHA" data-dia="26"></td><td class="m" data-codigo="CERRADO" data-valor="marcada" data-dia="26">□</td><td class="rayas"></td><td data-codigo="SEP_POSOS" data-dia="26"></td><td class="rayas"></td><td data-codigo="SEP_PREP" data-dia="26"></td><td class="rayas"></td><td data-codigo="SEP_PLATO" data-dia="26"></td><td class="notas-col" data-codigo="NOTA_D" data-dia="26"></td></tr>
+      <tr><th scope="row" data-codigo="DIA" data-valor="27">27</th><td data-codigo="FECHA" data-dia="27"></td><td class="m" data-codigo="CERRADO" data-valor="marcada" data-dia="27">□</td><td class="rayas"></td><td data-codigo="SEP_POSOS" data-dia="27"></td><td class="rayas"></td><td data-codigo="SEP_PREP" data-dia="27"></td><td class="rayas"></td><td data-codigo="SEP_PLATO" data-dia="27"></td><td class="notas-col" data-codigo="NOTA_D" data-dia="27"></td></tr>
+      <tr class="fin-semana"><th scope="row" data-codigo="DIA" data-valor="28">28</th><td data-codigo="FECHA" data-dia="28"></td><td class="m" data-codigo="CERRADO" data-valor="marcada" data-dia="28">□</td><td class="rayas"></td><td data-codigo="SEP_POSOS" data-dia="28"></td><td class="rayas"></td><td data-codigo="SEP_PREP" data-dia="28"></td><td class="rayas"></td><td data-codigo="SEP_PLATO" data-dia="28"></td><td class="notas-col" data-codigo="NOTA_D" data-dia="28"></td></tr>
+    </tbody>
+  </table>
+
+  <footer class="pie">
+    <span>Las líneas más gruesas cierran cada semana: ese día toca el renglón de la Hoja 5. Tacha las columnas de las corrientes que aquí no se separan. En las notas, nada de nombres ni de ventas.</span>
+    <span data-codigo="FICHA_REV" data-valor="CAF-01">F-CAF rev.&nbsp;01 · Hoja 3 de 6</span>
+  </footer>
+</article>
+
+<!-- ============================ HOJA 4 ============================ -->
+<article class="hoja" aria-labelledby="t-entregas">
+  <header class="principal">
+    <h2 id="t-entregas">
+      Entregas · Miltli
+      <small>Un renglón cada vez que lo guardado <strong>sale de la cafetería</strong>. Lo llenan juntos quien entrega y quien recibe, en ese momento. Sin nombres ni firmas: sólo roles.</small>
+    </h2>
+    <p class="clave">
+      Cafetería
+      <b data-codigo="ID">K___</b>
+      <span>la asigna el programa</span>
+      Guardado máximo:<br><span data-codigo="ALM_TMAX" data-copia="si">____</span> días
+    </p>
+  </header>
+
+  <p class="nota-seccion" style="margin-bottom:1.6mm">Sirve para dos cosas: saber cuánto tiempo estuvo guardado cada lote, y ver si lo que salió de aquí es lo que llegó al destino. Si el conteo de quien recibe no coincide con el de quien entrega, <strong>no se corrige ninguno de los dos</strong>: se dejan como están.</p>
+
+  <table class="entregas" aria-label="Entregas y recolecciones">
+    <colgroup>
+      <col class="n"><col class="fecha">
+      <col class="corr"><col class="corr"><col class="corr">
+      <col class="todo"><col class="da">
+      <col class="cond"><col class="cond"><col class="cond"><col class="cond"><col class="cond"><col class="cond">
+      <col class="rol"><col class="cont"><col class="kg"><col class="planb">
+    </colgroup>
+    <thead>
+      <tr class="grupos">
+        <th scope="colgroup" colspan="7">Sale de la cafetería</th>
+        <th scope="colgroup" colspan="6" class="borde">Lo que se ve al abrir <small>lo marcan los dos; marca todo lo que aplique</small></th>
+        <th scope="colgroup" colspan="4" class="borde">Quien recibe</th>
+      </tr>
+      <tr>
+        <th scope="col">N.º</th>
+        <th scope="col">Fecha<small>día / mes</small></th>
+        <th scope="col">Posos<small>conte&shy;nedores</small></th>
+        <th scope="col">Prep.<small>conte&shy;nedores</small></th>
+        <th scope="col">Plato<small>conte&shy;nedores</small></th>
+        <th scope="col">¿Se llevó todo?</th>
+        <th scope="col">Entrega<small>rol; circula</small></th>
+        <th scope="col" class="c borde">Olor<small>fuerte</small></th>
+        <th scope="col" class="c">Moscas</th>
+        <th scope="col" class="c">Moho</th>
+        <th scope="col" class="c">Líquido<small>al fondo</small></th>
+        <th scope="col" class="c">Algo<small>que no va</small></th>
+        <th scope="col" class="c">Nada<small>de esto</small></th>
+        <th scope="col" class="borde">Recibe<small>rol; circula</small></th>
+        <th scope="col">Contó<small>conte&shy;nedores</small></th>
+        <th scope="col">Pesó<small>kg, si pesa</small></th>
+        <th scope="col">Plan B</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><th scope="row" data-codigo="SAL_N" data-valor="1">1</th><td data-codigo="SAL_FECHA" data-sal="1"></td><td data-codigo="SAL_POSOS" data-sal="1"></td><td data-codigo="SAL_PREP" data-sal="1"></td><td data-codigo="SAL_PLATO" data-sal="1"></td><td class="circ"><span data-codigo="SAL_TODO" data-valor="si" data-sal="1">Sí</span> · <span data-codigo="SAL_TODO" data-valor="no" data-sal="1">No</span></td><td class="circ"><span data-codigo="SAL_ENTREGA_ROL" data-valor="encargado" data-sal="1">Enc.</span> · <span data-codigo="SAL_ENTREGA_ROL" data-valor="turno" data-sal="1">Turno</span></td><td class="m borde" data-codigo="SAL_COND" data-valor="olor" data-sal="1">□</td><td class="m" data-codigo="SAL_COND" data-valor="moscas" data-sal="1">□</td><td class="m" data-codigo="SAL_COND" data-valor="moho" data-sal="1">□</td><td class="m" data-codigo="SAL_COND" data-valor="escurre" data-sal="1">□</td><td class="m" data-codigo="SAL_COND" data-valor="impropios" data-sal="1">□</td><td class="m" data-codigo="SAL_COND" data-valor="nada" data-sal="1">□</td><td class="circ borde"><span data-codigo="SAL_RECIBE_ROL" data-valor="programa" data-sal="1">Prog.</span> · <span data-codigo="SAL_RECIBE_ROL" data-valor="destino" data-sal="1">Dest.</span> · <span data-codigo="SAL_RECIBE_ROL" data-valor="tercero" data-sal="1">3.º</span></td><td data-codigo="SAL_RECIBE_CONT" data-sal="1"></td><td data-codigo="SAL_RECIBE_KG" data-sal="1"></td><td class="m" data-codigo="SAL_PLANB" data-valor="marcada" data-sal="1">□</td></tr>
+      <tr><th scope="row" data-codigo="SAL_N" data-valor="2">2</th><td data-codigo="SAL_FECHA" data-sal="2"></td><td data-codigo="SAL_POSOS" data-sal="2"></td><td data-codigo="SAL_PREP" data-sal="2"></td><td data-codigo="SAL_PLATO" data-sal="2"></td><td class="circ"><span data-codigo="SAL_TODO" data-valor="si" data-sal="2">Sí</span> · <span data-codigo="SAL_TODO" data-valor="no" data-sal="2">No</span></td><td class="circ"><span data-codigo="SAL_ENTREGA_ROL" data-valor="encargado" data-sal="2">Enc.</span> · <span data-codigo="SAL_ENTREGA_ROL" data-valor="turno" data-sal="2">Turno</span></td><td class="m borde" data-codigo="SAL_COND" data-valor="olor" data-sal="2">□</td><td class="m" data-codigo="SAL_COND" data-valor="moscas" data-sal="2">□</td><td class="m" data-codigo="SAL_COND" data-valor="moho" data-sal="2">□</td><td class="m" data-codigo="SAL_COND" data-valor="escurre" data-sal="2">□</td><td class="m" data-codigo="SAL_COND" data-valor="impropios" data-sal="2">□</td><td class="m" data-codigo="SAL_COND" data-valor="nada" data-sal="2">□</td><td class="circ borde"><span data-codigo="SAL_RECIBE_ROL" data-valor="programa" data-sal="2">Prog.</span> · <span data-codigo="SAL_RECIBE_ROL" data-valor="destino" data-sal="2">Dest.</span> · <span data-codigo="SAL_RECIBE_ROL" data-valor="tercero" data-sal="2">3.º</span></td><td data-codigo="SAL_RECIBE_CONT" data-sal="2"></td><td data-codigo="SAL_RECIBE_KG" data-sal="2"></td><td class="m" data-codigo="SAL_PLANB" data-valor="marcada" data-sal="2">□</td></tr>
+      <tr><th scope="row" data-codigo="SAL_N" data-valor="3">3</th><td data-codigo="SAL_FECHA" data-sal="3"></td><td data-codigo="SAL_POSOS" data-sal="3"></td><td data-codigo="SAL_PREP" data-sal="3"></td><td data-codigo="SAL_PLATO" data-sal="3"></td><td class="circ"><span data-codigo="SAL_TODO" data-valor="si" data-sal="3">Sí</span> · <span data-codigo="SAL_TODO" data-valor="no" data-sal="3">No</span></td><td class="circ"><span data-codigo="SAL_ENTREGA_ROL" data-valor="encargado" data-sal="3">Enc.</span> · <span data-codigo="SAL_ENTREGA_ROL" data-valor="turno" data-sal="3">Turno</span></td><td class="m borde" data-codigo="SAL_COND" data-valor="olor" data-sal="3">□</td><td class="m" data-codigo="SAL_COND" data-valor="moscas" data-sal="3">□</td><td class="m" data-codigo="SAL_COND" data-valor="moho" data-sal="3">□</td><td class="m" data-codigo="SAL_COND" data-valor="escurre" data-sal="3">□</td><td class="m" data-codigo="SAL_COND" data-valor="impropios" data-sal="3">□</td><td class="m" data-codigo="SAL_COND" data-valor="nada" data-sal="3">□</td><td class="circ borde"><span data-codigo="SAL_RECIBE_ROL" data-valor="programa" data-sal="3">Prog.</span> · <span data-codigo="SAL_RECIBE_ROL" data-valor="destino" data-sal="3">Dest.</span> · <span data-codigo="SAL_RECIBE_ROL" data-valor="tercero" data-sal="3">3.º</span></td><td data-codigo="SAL_RECIBE_CONT" data-sal="3"></td><td data-codigo="SAL_RECIBE_KG" data-sal="3"></td><td class="m" data-codigo="SAL_PLANB" data-valor="marcada" data-sal="3">□</td></tr>
+      <tr><th scope="row" data-codigo="SAL_N" data-valor="4">4</th><td data-codigo="SAL_FECHA" data-sal="4"></td><td data-codigo="SAL_POSOS" data-sal="4"></td><td data-codigo="SAL_PREP" data-sal="4"></td><td data-codigo="SAL_PLATO" data-sal="4"></td><td class="circ"><span data-codigo="SAL_TODO" data-valor="si" data-sal="4">Sí</span> · <span data-codigo="SAL_TODO" data-valor="no" data-sal="4">No</span></td><td class="circ"><span data-codigo="SAL_ENTREGA_ROL" data-valor="encargado" data-sal="4">Enc.</span> · <span data-codigo="SAL_ENTREGA_ROL" data-valor="turno" data-sal="4">Turno</span></td><td class="m borde" data-codigo="SAL_COND" data-valor="olor" data-sal="4">□</td><td class="m" data-codigo="SAL_COND" data-valor="moscas" data-sal="4">□</td><td class="m" data-codigo="SAL_COND" data-valor="moho" data-sal="4">□</td><td class="m" data-codigo="SAL_COND" data-valor="escurre" data-sal="4">□</td><td class="m" data-codigo="SAL_COND" data-valor="impropios" data-sal="4">□</td><td class="m" data-codigo="SAL_COND" data-valor="nada" data-sal="4">□</td><td class="circ borde"><span data-codigo="SAL_RECIBE_ROL" data-valor="programa" data-sal="4">Prog.</span> · <span data-codigo="SAL_RECIBE_ROL" data-valor="destino" data-sal="4">Dest.</span> · <span data-codigo="SAL_RECIBE_ROL" data-valor="tercero" data-sal="4">3.º</span></td><td data-codigo="SAL_RECIBE_CONT" data-sal="4"></td><td data-codigo="SAL_RECIBE_KG" data-sal="4"></td><td class="m" data-codigo="SAL_PLANB" data-valor="marcada" data-sal="4">□</td></tr>
+      <tr><th scope="row" data-codigo="SAL_N" data-valor="5">5</th><td data-codigo="SAL_FECHA" data-sal="5"></td><td data-codigo="SAL_POSOS" data-sal="5"></td><td data-codigo="SAL_PREP" data-sal="5"></td><td data-codigo="SAL_PLATO" data-sal="5"></td><td class="circ"><span data-codigo="SAL_TODO" data-valor="si" data-sal="5">Sí</span> · <span data-codigo="SAL_TODO" data-valor="no" data-sal="5">No</span></td><td class="circ"><span data-codigo="SAL_ENTREGA_ROL" data-valor="encargado" data-sal="5">Enc.</span> · <span data-codigo="SAL_ENTREGA_ROL" data-valor="turno" data-sal="5">Turno</span></td><td class="m borde" data-codigo="SAL_COND" data-valor="olor" data-sal="5">□</td><td class="m" data-codigo="SAL_COND" data-valor="moscas" data-sal="5">□</td><td class="m" data-codigo="SAL_COND" data-valor="moho" data-sal="5">□</td><td class="m" data-codigo="SAL_COND" data-valor="escurre" data-sal="5">□</td><td class="m" data-codigo="SAL_COND" data-valor="impropios" data-sal="5">□</td><td class="m" data-codigo="SAL_COND" data-valor="nada" data-sal="5">□</td><td class="circ borde"><span data-codigo="SAL_RECIBE_ROL" data-valor="programa" data-sal="5">Prog.</span> · <span data-codigo="SAL_RECIBE_ROL" data-valor="destino" data-sal="5">Dest.</span> · <span data-codigo="SAL_RECIBE_ROL" data-valor="tercero" data-sal="5">3.º</span></td><td data-codigo="SAL_RECIBE_CONT" data-sal="5"></td><td data-codigo="SAL_RECIBE_KG" data-sal="5"></td><td class="m" data-codigo="SAL_PLANB" data-valor="marcada" data-sal="5">□</td></tr>
+      <tr><th scope="row" data-codigo="SAL_N" data-valor="6">6</th><td data-codigo="SAL_FECHA" data-sal="6"></td><td data-codigo="SAL_POSOS" data-sal="6"></td><td data-codigo="SAL_PREP" data-sal="6"></td><td data-codigo="SAL_PLATO" data-sal="6"></td><td class="circ"><span data-codigo="SAL_TODO" data-valor="si" data-sal="6">Sí</span> · <span data-codigo="SAL_TODO" data-valor="no" data-sal="6">No</span></td><td class="circ"><span data-codigo="SAL_ENTREGA_ROL" data-valor="encargado" data-sal="6">Enc.</span> · <span data-codigo="SAL_ENTREGA_ROL" data-valor="turno" data-sal="6">Turno</span></td><td class="m borde" data-codigo="SAL_COND" data-valor="olor" data-sal="6">□</td><td class="m" data-codigo="SAL_COND" data-valor="moscas" data-sal="6">□</td><td class="m" data-codigo="SAL_COND" data-valor="moho" data-sal="6">□</td><td class="m" data-codigo="SAL_COND" data-valor="escurre" data-sal="6">□</td><td class="m" data-codigo="SAL_COND" data-valor="impropios" data-sal="6">□</td><td class="m" data-codigo="SAL_COND" data-valor="nada" data-sal="6">□</td><td class="circ borde"><span data-codigo="SAL_RECIBE_ROL" data-valor="programa" data-sal="6">Prog.</span> · <span data-codigo="SAL_RECIBE_ROL" data-valor="destino" data-sal="6">Dest.</span> · <span data-codigo="SAL_RECIBE_ROL" data-valor="tercero" data-sal="6">3.º</span></td><td data-codigo="SAL_RECIBE_CONT" data-sal="6"></td><td data-codigo="SAL_RECIBE_KG" data-sal="6"></td><td class="m" data-codigo="SAL_PLANB" data-valor="marcada" data-sal="6">□</td></tr>
+      <tr><th scope="row" data-codigo="SAL_N" data-valor="7">7</th><td data-codigo="SAL_FECHA" data-sal="7"></td><td data-codigo="SAL_POSOS" data-sal="7"></td><td data-codigo="SAL_PREP" data-sal="7"></td><td data-codigo="SAL_PLATO" data-sal="7"></td><td class="circ"><span data-codigo="SAL_TODO" data-valor="si" data-sal="7">Sí</span> · <span data-codigo="SAL_TODO" data-valor="no" data-sal="7">No</span></td><td class="circ"><span data-codigo="SAL_ENTREGA_ROL" data-valor="encargado" data-sal="7">Enc.</span> · <span data-codigo="SAL_ENTREGA_ROL" data-valor="turno" data-sal="7">Turno</span></td><td class="m borde" data-codigo="SAL_COND" data-valor="olor" data-sal="7">□</td><td class="m" data-codigo="SAL_COND" data-valor="moscas" data-sal="7">□</td><td class="m" data-codigo="SAL_COND" data-valor="moho" data-sal="7">□</td><td class="m" data-codigo="SAL_COND" data-valor="escurre" data-sal="7">□</td><td class="m" data-codigo="SAL_COND" data-valor="impropios" data-sal="7">□</td><td class="m" data-codigo="SAL_COND" data-valor="nada" data-sal="7">□</td><td class="circ borde"><span data-codigo="SAL_RECIBE_ROL" data-valor="programa" data-sal="7">Prog.</span> · <span data-codigo="SAL_RECIBE_ROL" data-valor="destino" data-sal="7">Dest.</span> · <span data-codigo="SAL_RECIBE_ROL" data-valor="tercero" data-sal="7">3.º</span></td><td data-codigo="SAL_RECIBE_CONT" data-sal="7"></td><td data-codigo="SAL_RECIBE_KG" data-sal="7"></td><td class="m" data-codigo="SAL_PLANB" data-valor="marcada" data-sal="7">□</td></tr>
+      <tr><th scope="row" data-codigo="SAL_N" data-valor="8">8</th><td data-codigo="SAL_FECHA" data-sal="8"></td><td data-codigo="SAL_POSOS" data-sal="8"></td><td data-codigo="SAL_PREP" data-sal="8"></td><td data-codigo="SAL_PLATO" data-sal="8"></td><td class="circ"><span data-codigo="SAL_TODO" data-valor="si" data-sal="8">Sí</span> · <span data-codigo="SAL_TODO" data-valor="no" data-sal="8">No</span></td><td class="circ"><span data-codigo="SAL_ENTREGA_ROL" data-valor="encargado" data-sal="8">Enc.</span> · <span data-codigo="SAL_ENTREGA_ROL" data-valor="turno" data-sal="8">Turno</span></td><td class="m borde" data-codigo="SAL_COND" data-valor="olor" data-sal="8">□</td><td class="m" data-codigo="SAL_COND" data-valor="moscas" data-sal="8">□</td><td class="m" data-codigo="SAL_COND" data-valor="moho" data-sal="8">□</td><td class="m" data-codigo="SAL_COND" data-valor="escurre" data-sal="8">□</td><td class="m" data-codigo="SAL_COND" data-valor="impropios" data-sal="8">□</td><td class="m" data-codigo="SAL_COND" data-valor="nada" data-sal="8">□</td><td class="circ borde"><span data-codigo="SAL_RECIBE_ROL" data-valor="programa" data-sal="8">Prog.</span> · <span data-codigo="SAL_RECIBE_ROL" data-valor="destino" data-sal="8">Dest.</span> · <span data-codigo="SAL_RECIBE_ROL" data-valor="tercero" data-sal="8">3.º</span></td><td data-codigo="SAL_RECIBE_CONT" data-sal="8"></td><td data-codigo="SAL_RECIBE_KG" data-sal="8"></td><td class="m" data-codigo="SAL_PLANB" data-valor="marcada" data-sal="8">□</td></tr>
+      <tr><th scope="row" data-codigo="SAL_N" data-valor="9">9</th><td data-codigo="SAL_FECHA" data-sal="9"></td><td data-codigo="SAL_POSOS" data-sal="9"></td><td data-codigo="SAL_PREP" data-sal="9"></td><td data-codigo="SAL_PLATO" data-sal="9"></td><td class="circ"><span data-codigo="SAL_TODO" data-valor="si" data-sal="9">Sí</span> · <span data-codigo="SAL_TODO" data-valor="no" data-sal="9">No</span></td><td class="circ"><span data-codigo="SAL_ENTREGA_ROL" data-valor="encargado" data-sal="9">Enc.</span> · <span data-codigo="SAL_ENTREGA_ROL" data-valor="turno" data-sal="9">Turno</span></td><td class="m borde" data-codigo="SAL_COND" data-valor="olor" data-sal="9">□</td><td class="m" data-codigo="SAL_COND" data-valor="moscas" data-sal="9">□</td><td class="m" data-codigo="SAL_COND" data-valor="moho" data-sal="9">□</td><td class="m" data-codigo="SAL_COND" data-valor="escurre" data-sal="9">□</td><td class="m" data-codigo="SAL_COND" data-valor="impropios" data-sal="9">□</td><td class="m" data-codigo="SAL_COND" data-valor="nada" data-sal="9">□</td><td class="circ borde"><span data-codigo="SAL_RECIBE_ROL" data-valor="programa" data-sal="9">Prog.</span> · <span data-codigo="SAL_RECIBE_ROL" data-valor="destino" data-sal="9">Dest.</span> · <span data-codigo="SAL_RECIBE_ROL" data-valor="tercero" data-sal="9">3.º</span></td><td data-codigo="SAL_RECIBE_CONT" data-sal="9"></td><td data-codigo="SAL_RECIBE_KG" data-sal="9"></td><td class="m" data-codigo="SAL_PLANB" data-valor="marcada" data-sal="9">□</td></tr>
+      <tr><th scope="row" data-codigo="SAL_N" data-valor="10">10</th><td data-codigo="SAL_FECHA" data-sal="10"></td><td data-codigo="SAL_POSOS" data-sal="10"></td><td data-codigo="SAL_PREP" data-sal="10"></td><td data-codigo="SAL_PLATO" data-sal="10"></td><td class="circ"><span data-codigo="SAL_TODO" data-valor="si" data-sal="10">Sí</span> · <span data-codigo="SAL_TODO" data-valor="no" data-sal="10">No</span></td><td class="circ"><span data-codigo="SAL_ENTREGA_ROL" data-valor="encargado" data-sal="10">Enc.</span> · <span data-codigo="SAL_ENTREGA_ROL" data-valor="turno" data-sal="10">Turno</span></td><td class="m borde" data-codigo="SAL_COND" data-valor="olor" data-sal="10">□</td><td class="m" data-codigo="SAL_COND" data-valor="moscas" data-sal="10">□</td><td class="m" data-codigo="SAL_COND" data-valor="moho" data-sal="10">□</td><td class="m" data-codigo="SAL_COND" data-valor="escurre" data-sal="10">□</td><td class="m" data-codigo="SAL_COND" data-valor="impropios" data-sal="10">□</td><td class="m" data-codigo="SAL_COND" data-valor="nada" data-sal="10">□</td><td class="circ borde"><span data-codigo="SAL_RECIBE_ROL" data-valor="programa" data-sal="10">Prog.</span> · <span data-codigo="SAL_RECIBE_ROL" data-valor="destino" data-sal="10">Dest.</span> · <span data-codigo="SAL_RECIBE_ROL" data-valor="tercero" data-sal="10">3.º</span></td><td data-codigo="SAL_RECIBE_CONT" data-sal="10"></td><td data-codigo="SAL_RECIBE_KG" data-sal="10"></td><td class="m" data-codigo="SAL_PLANB" data-valor="marcada" data-sal="10">□</td></tr>
+      <tr><th scope="row" data-codigo="SAL_N" data-valor="11">11</th><td data-codigo="SAL_FECHA" data-sal="11"></td><td data-codigo="SAL_POSOS" data-sal="11"></td><td data-codigo="SAL_PREP" data-sal="11"></td><td data-codigo="SAL_PLATO" data-sal="11"></td><td class="circ"><span data-codigo="SAL_TODO" data-valor="si" data-sal="11">Sí</span> · <span data-codigo="SAL_TODO" data-valor="no" data-sal="11">No</span></td><td class="circ"><span data-codigo="SAL_ENTREGA_ROL" data-valor="encargado" data-sal="11">Enc.</span> · <span data-codigo="SAL_ENTREGA_ROL" data-valor="turno" data-sal="11">Turno</span></td><td class="m borde" data-codigo="SAL_COND" data-valor="olor" data-sal="11">□</td><td class="m" data-codigo="SAL_COND" data-valor="moscas" data-sal="11">□</td><td class="m" data-codigo="SAL_COND" data-valor="moho" data-sal="11">□</td><td class="m" data-codigo="SAL_COND" data-valor="escurre" data-sal="11">□</td><td class="m" data-codigo="SAL_COND" data-valor="impropios" data-sal="11">□</td><td class="m" data-codigo="SAL_COND" data-valor="nada" data-sal="11">□</td><td class="circ borde"><span data-codigo="SAL_RECIBE_ROL" data-valor="programa" data-sal="11">Prog.</span> · <span data-codigo="SAL_RECIBE_ROL" data-valor="destino" data-sal="11">Dest.</span> · <span data-codigo="SAL_RECIBE_ROL" data-valor="tercero" data-sal="11">3.º</span></td><td data-codigo="SAL_RECIBE_CONT" data-sal="11"></td><td data-codigo="SAL_RECIBE_KG" data-sal="11"></td><td class="m" data-codigo="SAL_PLANB" data-valor="marcada" data-sal="11">□</td></tr>
+      <tr><th scope="row" data-codigo="SAL_N" data-valor="12">12</th><td data-codigo="SAL_FECHA" data-sal="12"></td><td data-codigo="SAL_POSOS" data-sal="12"></td><td data-codigo="SAL_PREP" data-sal="12"></td><td data-codigo="SAL_PLATO" data-sal="12"></td><td class="circ"><span data-codigo="SAL_TODO" data-valor="si" data-sal="12">Sí</span> · <span data-codigo="SAL_TODO" data-valor="no" data-sal="12">No</span></td><td class="circ"><span data-codigo="SAL_ENTREGA_ROL" data-valor="encargado" data-sal="12">Enc.</span> · <span data-codigo="SAL_ENTREGA_ROL" data-valor="turno" data-sal="12">Turno</span></td><td class="m borde" data-codigo="SAL_COND" data-valor="olor" data-sal="12">□</td><td class="m" data-codigo="SAL_COND" data-valor="moscas" data-sal="12">□</td><td class="m" data-codigo="SAL_COND" data-valor="moho" data-sal="12">□</td><td class="m" data-codigo="SAL_COND" data-valor="escurre" data-sal="12">□</td><td class="m" data-codigo="SAL_COND" data-valor="impropios" data-sal="12">□</td><td class="m" data-codigo="SAL_COND" data-valor="nada" data-sal="12">□</td><td class="circ borde"><span data-codigo="SAL_RECIBE_ROL" data-valor="programa" data-sal="12">Prog.</span> · <span data-codigo="SAL_RECIBE_ROL" data-valor="destino" data-sal="12">Dest.</span> · <span data-codigo="SAL_RECIBE_ROL" data-valor="tercero" data-sal="12">3.º</span></td><td data-codigo="SAL_RECIBE_CONT" data-sal="12"></td><td data-codigo="SAL_RECIBE_KG" data-sal="12"></td><td class="m" data-codigo="SAL_PLANB" data-valor="marcada" data-sal="12">□</td></tr>
+      <tr><th scope="row" data-codigo="SAL_N" data-valor="13">13</th><td data-codigo="SAL_FECHA" data-sal="13"></td><td data-codigo="SAL_POSOS" data-sal="13"></td><td data-codigo="SAL_PREP" data-sal="13"></td><td data-codigo="SAL_PLATO" data-sal="13"></td><td class="circ"><span data-codigo="SAL_TODO" data-valor="si" data-sal="13">Sí</span> · <span data-codigo="SAL_TODO" data-valor="no" data-sal="13">No</span></td><td class="circ"><span data-codigo="SAL_ENTREGA_ROL" data-valor="encargado" data-sal="13">Enc.</span> · <span data-codigo="SAL_ENTREGA_ROL" data-valor="turno" data-sal="13">Turno</span></td><td class="m borde" data-codigo="SAL_COND" data-valor="olor" data-sal="13">□</td><td class="m" data-codigo="SAL_COND" data-valor="moscas" data-sal="13">□</td><td class="m" data-codigo="SAL_COND" data-valor="moho" data-sal="13">□</td><td class="m" data-codigo="SAL_COND" data-valor="escurre" data-sal="13">□</td><td class="m" data-codigo="SAL_COND" data-valor="impropios" data-sal="13">□</td><td class="m" data-codigo="SAL_COND" data-valor="nada" data-sal="13">□</td><td class="circ borde"><span data-codigo="SAL_RECIBE_ROL" data-valor="programa" data-sal="13">Prog.</span> · <span data-codigo="SAL_RECIBE_ROL" data-valor="destino" data-sal="13">Dest.</span> · <span data-codigo="SAL_RECIBE_ROL" data-valor="tercero" data-sal="13">3.º</span></td><td data-codigo="SAL_RECIBE_CONT" data-sal="13"></td><td data-codigo="SAL_RECIBE_KG" data-sal="13"></td><td class="m" data-codigo="SAL_PLANB" data-valor="marcada" data-sal="13">□</td></tr>
+      <tr><th scope="row" data-codigo="SAL_N" data-valor="14">14</th><td data-codigo="SAL_FECHA" data-sal="14"></td><td data-codigo="SAL_POSOS" data-sal="14"></td><td data-codigo="SAL_PREP" data-sal="14"></td><td data-codigo="SAL_PLATO" data-sal="14"></td><td class="circ"><span data-codigo="SAL_TODO" data-valor="si" data-sal="14">Sí</span> · <span data-codigo="SAL_TODO" data-valor="no" data-sal="14">No</span></td><td class="circ"><span data-codigo="SAL_ENTREGA_ROL" data-valor="encargado" data-sal="14">Enc.</span> · <span data-codigo="SAL_ENTREGA_ROL" data-valor="turno" data-sal="14">Turno</span></td><td class="m borde" data-codigo="SAL_COND" data-valor="olor" data-sal="14">□</td><td class="m" data-codigo="SAL_COND" data-valor="moscas" data-sal="14">□</td><td class="m" data-codigo="SAL_COND" data-valor="moho" data-sal="14">□</td><td class="m" data-codigo="SAL_COND" data-valor="escurre" data-sal="14">□</td><td class="m" data-codigo="SAL_COND" data-valor="impropios" data-sal="14">□</td><td class="m" data-codigo="SAL_COND" data-valor="nada" data-sal="14">□</td><td class="circ borde"><span data-codigo="SAL_RECIBE_ROL" data-valor="programa" data-sal="14">Prog.</span> · <span data-codigo="SAL_RECIBE_ROL" data-valor="destino" data-sal="14">Dest.</span> · <span data-codigo="SAL_RECIBE_ROL" data-valor="tercero" data-sal="14">3.º</span></td><td data-codigo="SAL_RECIBE_CONT" data-sal="14"></td><td data-codigo="SAL_RECIBE_KG" data-sal="14"></td><td class="m" data-codigo="SAL_PLANB" data-valor="marcada" data-sal="14">□</td></tr>
+      <tr><th scope="row" data-codigo="SAL_N" data-valor="15">15</th><td data-codigo="SAL_FECHA" data-sal="15"></td><td data-codigo="SAL_POSOS" data-sal="15"></td><td data-codigo="SAL_PREP" data-sal="15"></td><td data-codigo="SAL_PLATO" data-sal="15"></td><td class="circ"><span data-codigo="SAL_TODO" data-valor="si" data-sal="15">Sí</span> · <span data-codigo="SAL_TODO" data-valor="no" data-sal="15">No</span></td><td class="circ"><span data-codigo="SAL_ENTREGA_ROL" data-valor="encargado" data-sal="15">Enc.</span> · <span data-codigo="SAL_ENTREGA_ROL" data-valor="turno" data-sal="15">Turno</span></td><td class="m borde" data-codigo="SAL_COND" data-valor="olor" data-sal="15">□</td><td class="m" data-codigo="SAL_COND" data-valor="moscas" data-sal="15">□</td><td class="m" data-codigo="SAL_COND" data-valor="moho" data-sal="15">□</td><td class="m" data-codigo="SAL_COND" data-valor="escurre" data-sal="15">□</td><td class="m" data-codigo="SAL_COND" data-valor="impropios" data-sal="15">□</td><td class="m" data-codigo="SAL_COND" data-valor="nada" data-sal="15">□</td><td class="circ borde"><span data-codigo="SAL_RECIBE_ROL" data-valor="programa" data-sal="15">Prog.</span> · <span data-codigo="SAL_RECIBE_ROL" data-valor="destino" data-sal="15">Dest.</span> · <span data-codigo="SAL_RECIBE_ROL" data-valor="tercero" data-sal="15">3.º</span></td><td data-codigo="SAL_RECIBE_CONT" data-sal="15"></td><td data-codigo="SAL_RECIBE_KG" data-sal="15"></td><td class="m" data-codigo="SAL_PLANB" data-valor="marcada" data-sal="15">□</td></tr>
+      <tr><th scope="row" data-codigo="SAL_N" data-valor="16">16</th><td data-codigo="SAL_FECHA" data-sal="16"></td><td data-codigo="SAL_POSOS" data-sal="16"></td><td data-codigo="SAL_PREP" data-sal="16"></td><td data-codigo="SAL_PLATO" data-sal="16"></td><td class="circ"><span data-codigo="SAL_TODO" data-valor="si" data-sal="16">Sí</span> · <span data-codigo="SAL_TODO" data-valor="no" data-sal="16">No</span></td><td class="circ"><span data-codigo="SAL_ENTREGA_ROL" data-valor="encargado" data-sal="16">Enc.</span> · <span data-codigo="SAL_ENTREGA_ROL" data-valor="turno" data-sal="16">Turno</span></td><td class="m borde" data-codigo="SAL_COND" data-valor="olor" data-sal="16">□</td><td class="m" data-codigo="SAL_COND" data-valor="moscas" data-sal="16">□</td><td class="m" data-codigo="SAL_COND" data-valor="moho" data-sal="16">□</td><td class="m" data-codigo="SAL_COND" data-valor="escurre" data-sal="16">□</td><td class="m" data-codigo="SAL_COND" data-valor="impropios" data-sal="16">□</td><td class="m" data-codigo="SAL_COND" data-valor="nada" data-sal="16">□</td><td class="circ borde"><span data-codigo="SAL_RECIBE_ROL" data-valor="programa" data-sal="16">Prog.</span> · <span data-codigo="SAL_RECIBE_ROL" data-valor="destino" data-sal="16">Dest.</span> · <span data-codigo="SAL_RECIBE_ROL" data-valor="tercero" data-sal="16">3.º</span></td><td data-codigo="SAL_RECIBE_CONT" data-sal="16"></td><td data-codigo="SAL_RECIBE_KG" data-sal="16"></td><td class="m" data-codigo="SAL_PLANB" data-valor="marcada" data-sal="16">□</td></tr>
+    </tbody>
+  </table>
+
+  <section class="leyenda" style="margin-top:2mm" aria-label="Cómo se llena esta hoja">
+    <div class="dos-columnas">
+      <p>· <strong>Contenedores:</strong> los de guardado que salen, en enteros y medios, por corriente.<br>
+         · <strong>Entrega:</strong> <strong>Enc.</strong> encargado o enlace · <strong>Turno</strong> personal de turno.<br>
+         · <strong>Recibe:</strong> <strong>Prog.</strong> logística del programa · <strong>Dest.</strong> quien opera el destino · <strong>3.º</strong> servicio de un tercero.</p>
+      <p>· <strong>¿Se llevó todo?</strong> «No» si quedó algo guardado para la siguiente vez.<br>
+         · <strong>Plan B:</strong> se marca si esa salida no fue una recolección normal, sino la aplicación del plan B de la Hoja 1. Si fue a la basura, además se anota en la Hoja 5 como «no llegó».<br>
+         · <strong>Líquido al fondo:</strong> hay líquido escurrido en el contenedor o en el piso. <strong>Algo que no va:</strong> se ve material que no es de ninguna corriente aceptada.</p>
+    </div>
+  </section>
+
+  <footer class="pie">
+    <span>Si se acaban los renglones, se sigue en otra Hoja 4 igual. Foto de esta hoja a la persona coordinadora, junto con las Hojas 3 y 5.</span>
+    <span data-codigo="FICHA_REV" data-valor="CAF-01">F-CAF rev.&nbsp;01 · Hoja 4 de 6</span>
+  </footer>
+</article>
+
+<!-- ============================ HOJA 5 ============================ -->
+<article class="hoja" aria-labelledby="t-semanal">
+  <header class="principal">
+    <h2 id="t-semanal">
+      Renglón semanal · Miltli
+      <small>Una vez por semana, el día acordado. <strong>Unos dos minutos.</strong> Cuenta cómo fue la semana: lo que no llegó al destino, el guardado y el trabajo.</small>
+    </h2>
+    <p class="clave">
+      Cafetería
+      <b data-codigo="ID">K___</b>
+      <span>la asigna el programa</span>
+    </p>
+  </header>
+
+  <p class="nota-seccion" style="margin-bottom:1.6mm">
+    Escribe o marca en la columna de la semana. Si una casilla no aplica o no la quieren contestar, se deja en blanco. Ninguna respuesta es buena ni mala: lo que buscamos es saber cómo se vive la rutina en cada cafetería, y también si el programa cumplió su parte.
+  </p>
+
+  <div class="rejilla">
+    <table class="semanal" aria-label="Renglón semanal, primera parte">
+      <colgroup>
+        <col>
+        <col class="sem"><col class="sem"><col class="sem"><col class="sem">
+      </colgroup>
+      <thead>
+        <tr>
+          <th scope="col" class="notas-col">&nbsp;</th>
+          <th scope="col" data-codigo="SEM" data-valor="1">S1</th><th scope="col" data-codigo="SEM" data-valor="2">S2</th><th scope="col" data-codigo="SEM" data-valor="3">S3</th><th scope="col" data-codigo="SEM" data-valor="4">S4</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="sec"><th colspan="5" scope="colgroup">La semana<small>escribe el dato en la casilla</small></th></tr>
+        <tr><th scope="row" class="op">Fecha de este renglón <em>día / mes</em></th><td class="escribe" data-codigo="SFECHA" data-sem="1"></td><td class="escribe" data-codigo="SFECHA" data-sem="2"></td><td class="escribe" data-codigo="SFECHA" data-sem="3"></td><td class="escribe" data-codigo="SFECHA" data-sem="4"></td></tr>
+        <tr><th scope="row" class="op">Días que abrimos esta semana</th><td class="escribe" data-codigo="DIAS_OP" data-sem="1"></td><td class="escribe" data-codigo="DIAS_OP" data-sem="2"></td><td class="escribe" data-codigo="DIAS_OP" data-sem="3"></td><td class="escribe" data-codigo="DIAS_OP" data-sem="4"></td></tr>
+        <tr><th scope="row" class="op">Minutos de todo el personal en la semana <em>— separar, vaciar, anotar y lavar contenedores</em></th><td class="escribe" data-codigo="MIN_CAF" data-sem="1"></td><td class="escribe" data-codigo="MIN_CAF" data-sem="2"></td><td class="escribe" data-codigo="MIN_CAF" data-sem="3"></td><td class="escribe" data-codigo="MIN_CAF" data-sem="4"></td></tr>
+        <tr class="sec"><th colspan="5" scope="colgroup">Cómo anotamos esta semana · marca sólo una<small>Sirve para saber si un renglón vacío de la Hoja 3 fue un día sin anotar. No es una calificación.</small></th></tr>
+        <tr><th scope="row" class="op">Anotamos <b>todos</b> los días que abrimos</th><td data-codigo="REG" data-valor="REG1" data-sem="1">□</td><td data-codigo="REG" data-valor="REG1" data-sem="2">□</td><td data-codigo="REG" data-valor="REG1" data-sem="3">□</td><td data-codigo="REG" data-valor="REG1" data-sem="4">□</td></tr>
+        <tr><th scope="row" class="op">Nos faltaron algunos días</th><td data-codigo="REG" data-valor="REG2" data-sem="1">□</td><td data-codigo="REG" data-valor="REG2" data-sem="2">□</td><td data-codigo="REG" data-valor="REG2" data-sem="3">□</td><td data-codigo="REG" data-valor="REG2" data-sem="4">□</td></tr>
+        <tr class="sec"><th colspan="5" scope="colgroup">Lo que no llegó al destino<small>Lo que se separó, o se pudo separar, y esta semana terminó en otro lado. Lo que sigue guardado para la próxima recolección no cuenta: sí va a llegar. En recipientes o en kilos, como en la Hoja 3. <strong>Escribe 0 si todo llegó.</strong></small></th></tr>
+        <tr><th scope="row" class="op">Posos de café y filtros</th><td class="escribe" data-codigo="FUGA_POSOS" data-sem="1"></td><td class="escribe" data-codigo="FUGA_POSOS" data-sem="2"></td><td class="escribe" data-codigo="FUGA_POSOS" data-sem="3"></td><td class="escribe" data-codigo="FUGA_POSOS" data-sem="4"></td></tr>
+        <tr><th scope="row" class="op">Restos de preparación, crudos</th><td class="escribe" data-codigo="FUGA_PREP" data-sem="1"></td><td class="escribe" data-codigo="FUGA_PREP" data-sem="2"></td><td class="escribe" data-codigo="FUGA_PREP" data-sem="3"></td><td class="escribe" data-codigo="FUGA_PREP" data-sem="4"></td></tr>
+        <tr><th scope="row" class="op">Restos de plato</th><td class="escribe" data-codigo="FUGA_PLATO" data-sem="1"></td><td class="escribe" data-codigo="FUGA_PLATO" data-sem="2"></td><td class="escribe" data-codigo="FUGA_PLATO" data-sem="3"></td><td class="escribe" data-codigo="FUGA_PLATO" data-sem="4"></td></tr>
+        <tr class="subsec"><th colspan="5" scope="colgroup">Si algo no llegó, ¿por qué? <small>marca todas las que apliquen</small></th></tr>
+        <tr><th scope="row" class="op">No hubo recolección</th><td data-codigo="FUGA_CAF_MOT" data-valor="sin_recoleccion" data-sem="1">□</td><td data-codigo="FUGA_CAF_MOT" data-valor="sin_recoleccion" data-sem="2">□</td><td data-codigo="FUGA_CAF_MOT" data-valor="sin_recoleccion" data-sem="3">□</td><td data-codigo="FUGA_CAF_MOT" data-valor="sin_recoleccion" data-sem="4">□</td></tr>
+        <tr><th scope="row" class="op">Se echó a perder, o pasó el tiempo máximo</th><td data-codigo="FUGA_CAF_MOT" data-valor="vencido" data-sem="1">□</td><td data-codigo="FUGA_CAF_MOT" data-valor="vencido" data-sem="2">□</td><td data-codigo="FUGA_CAF_MOT" data-valor="vencido" data-sem="3">□</td><td data-codigo="FUGA_CAF_MOT" data-valor="vencido" data-sem="4">□</td></tr>
+        <tr><th scope="row" class="op">Venía revuelto con cosas que no van</th><td data-codigo="FUGA_CAF_MOT" data-valor="contaminado" data-sem="1">□</td><td data-codigo="FUGA_CAF_MOT" data-valor="contaminado" data-sem="2">□</td><td data-codigo="FUGA_CAF_MOT" data-valor="contaminado" data-sem="3">□</td><td data-codigo="FUGA_CAF_MOT" data-valor="contaminado" data-sem="4">□</td></tr>
+        <tr><th scope="row" class="op">Los contenedores estaban llenos</th><td data-codigo="FUGA_CAF_MOT" data-valor="sin_espacio" data-sem="1">□</td><td data-codigo="FUGA_CAF_MOT" data-valor="sin_espacio" data-sem="2">□</td><td data-codigo="FUGA_CAF_MOT" data-valor="sin_espacio" data-sem="3">□</td><td data-codigo="FUGA_CAF_MOT" data-valor="sin_espacio" data-sem="4">□</td></tr>
+        <tr><th scope="row" class="op">No dio tiempo de separar</th><td data-codigo="FUGA_CAF_MOT" data-valor="sin_tiempo" data-sem="1">□</td><td data-codigo="FUGA_CAF_MOT" data-valor="sin_tiempo" data-sem="2">□</td><td data-codigo="FUGA_CAF_MOT" data-valor="sin_tiempo" data-sem="3">□</td><td data-codigo="FUGA_CAF_MOT" data-valor="sin_tiempo" data-sem="4">□</td></tr>
+        <tr><th scope="row" class="op">Se lo llevó alguien por fuera del programa</th><td data-codigo="FUGA_CAF_MOT" data-valor="fuera" data-sem="1">□</td><td data-codigo="FUGA_CAF_MOT" data-valor="fuera" data-sem="2">□</td><td data-codigo="FUGA_CAF_MOT" data-valor="fuera" data-sem="3">□</td><td data-codigo="FUGA_CAF_MOT" data-valor="fuera" data-sem="4">□</td></tr>
+        <tr><th scope="row" class="op">Otro motivo <em>— escríbelo abajo</em></th><td data-codigo="FUGA_CAF_MOT" data-valor="otro" data-sem="1">□</td><td data-codigo="FUGA_CAF_MOT" data-valor="otro" data-sem="2">□</td><td data-codigo="FUGA_CAF_MOT" data-valor="otro" data-sem="3">□</td><td data-codigo="FUGA_CAF_MOT" data-valor="otro" data-sem="4">□</td></tr>
+        <tr class="sec"><th colspan="5" scope="colgroup">El guardado hoy<small>escribe el dato en la casilla</small></th></tr>
+        <tr><th scope="row" class="op">Contenedores de guardado llenos en este momento <em>enteros y medios</em></th><td class="escribe" data-codigo="ALM_LLENOS" data-sem="1"></td><td class="escribe" data-codigo="ALM_LLENOS" data-sem="2"></td><td class="escribe" data-codigo="ALM_LLENOS" data-sem="3"></td><td class="escribe" data-codigo="ALM_LLENOS" data-sem="4"></td></tr>
+        <tr><th scope="row" class="op">Días desde la última recolección</th><td class="escribe" data-codigo="ALM_DIAS" data-sem="1"></td><td class="escribe" data-codigo="ALM_DIAS" data-sem="2"></td><td class="escribe" data-codigo="ALM_DIAS" data-sem="3"></td><td class="escribe" data-codigo="ALM_DIAS" data-sem="4"></td></tr>
+        <tr><th scope="row" class="op">Recolecciones acordadas que no llegaron <em>— escribe 0 si llegaron todas</em></th><td class="escribe" data-codigo="REC_FALTO" data-sem="1"></td><td class="escribe" data-codigo="REC_FALTO" data-sem="2"></td><td class="escribe" data-codigo="REC_FALTO" data-sem="3"></td><td class="escribe" data-codigo="REC_FALTO" data-sem="4"></td></tr>
+      </tbody>
+    </table>
+
+    <table class="semanal" aria-label="Renglón semanal, segunda parte">
+      <colgroup>
+        <col>
+        <col class="sem"><col class="sem"><col class="sem"><col class="sem">
+      </colgroup>
+      <thead>
+        <tr>
+          <th scope="col" class="notas-col">&nbsp;</th>
+          <th scope="col" data-codigo="SEM" data-valor="1">S1</th><th scope="col" data-codigo="SEM" data-valor="2">S2</th><th scope="col" data-codigo="SEM" data-valor="3">S3</th><th scope="col" data-codigo="SEM" data-valor="4">S4</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="sec"><th colspan="5" scope="colgroup">Días sin separar<small>Días en que se abrió y aun así no se separó.</small></th></tr>
+        <tr><th scope="row" class="op">Días que abrimos y no se separó <em>— escribe 0 si ninguno</em></th><td class="escribe" data-codigo="PAUSA_DIAS" data-sem="1"></td><td class="escribe" data-codigo="PAUSA_DIAS" data-sem="2"></td><td class="escribe" data-codigo="PAUSA_DIAS" data-sem="3"></td><td class="escribe" data-codigo="PAUSA_DIAS" data-sem="4"></td></tr>
+        <tr class="subsec"><th colspan="5" scope="colgroup">Si los hubo, ¿por qué? <small>marca todas las que apliquen</small></th></tr>
+        <tr><th scope="row" class="op">Se cumplió el tiempo máximo sin recolección</th><td data-codigo="PAUSA_MOT" data-valor="tmax" data-sem="1">□</td><td data-codigo="PAUSA_MOT" data-valor="tmax" data-sem="2">□</td><td data-codigo="PAUSA_MOT" data-valor="tmax" data-sem="3">□</td><td data-codigo="PAUSA_MOT" data-valor="tmax" data-sem="4">□</td></tr>
+        <tr><th scope="row" class="op">Los contenedores estaban llenos</th><td data-codigo="PAUSA_MOT" data-valor="lleno" data-sem="1">□</td><td data-codigo="PAUSA_MOT" data-valor="lleno" data-sem="2">□</td><td data-codigo="PAUSA_MOT" data-valor="lleno" data-sem="3">□</td><td data-codigo="PAUSA_MOT" data-valor="lleno" data-sem="4">□</td></tr>
+        <tr><th scope="row" class="op">Hubo un incidente en el guardado</th><td data-codigo="PAUSA_MOT" data-valor="incidente" data-sem="1">□</td><td data-codigo="PAUSA_MOT" data-valor="incidente" data-sem="2">□</td><td data-codigo="PAUSA_MOT" data-valor="incidente" data-sem="3">□</td><td data-codigo="PAUSA_MOT" data-valor="incidente" data-sem="4">□</td></tr>
+        <tr><th scope="row" class="op">Lo indicó el programa o la gerencia</th><td data-codigo="PAUSA_MOT" data-valor="indicacion" data-sem="1">□</td><td data-codigo="PAUSA_MOT" data-valor="indicacion" data-sem="2">□</td><td data-codigo="PAUSA_MOT" data-valor="indicacion" data-sem="3">□</td><td data-codigo="PAUSA_MOT" data-valor="indicacion" data-sem="4">□</td></tr>
+        <tr><th scope="row" class="op">Otro motivo <em>— escríbelo abajo</em></th><td data-codigo="PAUSA_MOT" data-valor="otro" data-sem="1">□</td><td data-codigo="PAUSA_MOT" data-valor="otro" data-sem="2">□</td><td data-codigo="PAUSA_MOT" data-valor="otro" data-sem="3">□</td><td data-codigo="PAUSA_MOT" data-valor="otro" data-sem="4">□</td></tr>
+        <tr class="sec"><th colspan="5" scope="colgroup">Al abrir los contenedores esta semana vimos · marca todo<small>Describe lo que hay en el guardado; no califica a nadie.</small></th></tr>
+        <tr><th scope="row" class="op">Olor fuerte al abrir</th><td data-codigo="ALM_OBS" data-valor="olor" data-sem="1">□</td><td data-codigo="ALM_OBS" data-valor="olor" data-sem="2">□</td><td data-codigo="ALM_OBS" data-valor="olor" data-sem="3">□</td><td data-codigo="ALM_OBS" data-valor="olor" data-sem="4">□</td></tr>
+        <tr><th scope="row" class="op">Moscas o mosquitas</th><td data-codigo="ALM_OBS" data-valor="moscas" data-sem="1">□</td><td data-codigo="ALM_OBS" data-valor="moscas" data-sem="2">□</td><td data-codigo="ALM_OBS" data-valor="moscas" data-sem="3">□</td><td data-codigo="ALM_OBS" data-valor="moscas" data-sem="4">□</td></tr>
+        <tr><th scope="row" class="op">Moho: pelusa blanca, verde o negra</th><td data-codigo="ALM_OBS" data-valor="moho" data-sem="1">□</td><td data-codigo="ALM_OBS" data-valor="moho" data-sem="2">□</td><td data-codigo="ALM_OBS" data-valor="moho" data-sem="3">□</td><td data-codigo="ALM_OBS" data-valor="moho" data-sem="4">□</td></tr>
+        <tr><th scope="row" class="op">Líquido escurrido en el fondo o en el piso</th><td data-codigo="ALM_OBS" data-valor="escurre" data-sem="1">□</td><td data-codigo="ALM_OBS" data-valor="escurre" data-sem="2">□</td><td data-codigo="ALM_OBS" data-valor="escurre" data-sem="3">□</td><td data-codigo="ALM_OBS" data-valor="escurre" data-sem="4">□</td></tr>
+        <tr><th scope="row" class="op">Huellas, excremento o mordidas de un animal</th><td data-codigo="ALM_OBS" data-valor="huellas" data-sem="1">□</td><td data-codigo="ALM_OBS" data-valor="huellas" data-sem="2">□</td><td data-codigo="ALM_OBS" data-valor="huellas" data-sem="3">□</td><td data-codigo="ALM_OBS" data-valor="huellas" data-sem="4">□</td></tr>
+        <tr><th scope="row" class="op">Nada de lo anterior</th><td data-codigo="ALM_OBS" data-valor="nada" data-sem="1">□</td><td data-codigo="ALM_OBS" data-valor="nada" data-sem="2">□</td><td data-codigo="ALM_OBS" data-valor="nada" data-sem="3">□</td><td data-codigo="ALM_OBS" data-valor="nada" data-sem="4">□</td></tr>
+        <tr class="sec"><th colspan="5" scope="colgroup">Qué hicimos esta semana · marca todo<small>Sirve para entender cómo fue la rutina, así que vale la pena marcarlo aunque parezca poca cosa.</small></th></tr>
+        <tr><th scope="row" class="op">Retiramos material que no iba <em>— escribe abajo qué era</em></th><td data-codigo="ACT_CAF" data-valor="retiro" data-sem="1">□</td><td data-codigo="ACT_CAF" data-valor="retiro" data-sem="2">□</td><td data-codigo="ACT_CAF" data-valor="retiro" data-sem="3">□</td><td data-codigo="ACT_CAF" data-valor="retiro" data-sem="4">□</td></tr>
+        <tr><th scope="row" class="op">Lavamos los contenedores de guardado</th><td data-codigo="ACT_CAF" data-valor="lavado" data-sem="1">□</td><td data-codigo="ACT_CAF" data-valor="lavado" data-sem="2">□</td><td data-codigo="ACT_CAF" data-valor="lavado" data-sem="3">□</td><td data-codigo="ACT_CAF" data-valor="lavado" data-sem="4">□</td></tr>
+        <tr><th scope="row" class="op">Explicamos la separación a personal nuevo</th><td data-codigo="ACT_CAF" data-valor="capacitacion" data-sem="1">□</td><td data-codigo="ACT_CAF" data-valor="capacitacion" data-sem="2">□</td><td data-codigo="ACT_CAF" data-valor="capacitacion" data-sem="3">□</td><td data-codigo="ACT_CAF" data-valor="capacitacion" data-sem="4">□</td></tr>
+        <tr><th scope="row" class="op">Cambiamos recipientes o su lugar</th><td data-codigo="ACT_CAF" data-valor="cambio" data-sem="1">□</td><td data-codigo="ACT_CAF" data-valor="cambio" data-sem="2">□</td><td data-codigo="ACT_CAF" data-valor="cambio" data-sem="3">□</td><td data-codigo="ACT_CAF" data-valor="cambio" data-sem="4">□</td></tr>
+        <tr><th scope="row" class="op">Otra cosa <em>— escríbelo abajo</em></th><td data-codigo="ACT_CAF" data-valor="otro" data-sem="1">□</td><td data-codigo="ACT_CAF" data-valor="otro" data-sem="2">□</td><td data-codigo="ACT_CAF" data-valor="otro" data-sem="3">□</td><td data-codigo="ACT_CAF" data-valor="otro" data-sem="4">□</td></tr>
+        <tr><th scope="row" class="op">No cambiamos nada</th><td data-codigo="ACT_CAF" data-valor="nada" data-sem="1">□</td><td data-codigo="ACT_CAF" data-valor="nada" data-sem="2">□</td><td data-codigo="ACT_CAF" data-valor="nada" data-sem="3">□</td><td data-codigo="ACT_CAF" data-valor="nada" data-sem="4">□</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p class="parada">
+    <strong>Regla de parada.</strong> Si lo guardado llega al tiempo máximo —<span data-codigo="ALM_TMAX" data-copia="si">____</span> días— y no ha habido recolección, <strong>avisen ese mismo día a la coordinación</strong>. El plan B lo decide el programa, no quien tiene el residuo en la mano.
+    <small>Si alguien se lo lleva por su cuenta, se anota arriba como «por fuera del programa». No pasa nada por anotarlo: es justo lo que el programa necesita saber.</small>
+  </p>
+
+  <section class="libre" aria-labelledby="libre-t">
+    <h3 id="libre-t">Lo que quieran contar de cada semana <span>— opcional, sobre la separación y el guardado</span></h3>
+    <div class="renglones">
+      <p class="renglon"><span>Semana 1</span><span data-codigo="NOTA_S" data-sem="1" aria-hidden="true"></span></p>
+      <p class="renglon"><span>Semana 2</span><span data-codigo="NOTA_S" data-sem="2" aria-hidden="true"></span></p>
+      <p class="renglon"><span>Semana 3</span><span data-codigo="NOTA_S" data-sem="3" aria-hidden="true"></span></p>
+      <p class="renglon"><span>Semana 4</span><span data-codigo="NOTA_S" data-sem="4" aria-hidden="true"></span></p>
+    </div>
+  </section>
+
+  <footer class="pie">
+    <span>Si una semana no alcanzaron, dejen la columna vacía y sigan. Al terminar el renglón, una foto de las Hojas 3, 4 y 5 a la persona coordinadora.</span>
+    <span data-codigo="FICHA_REV" data-valor="CAF-01">F-CAF rev.&nbsp;01 · Hoja 5 de 6</span>
+  </footer>
+</article>
+
+<!-- ============================ HOJA 6 ============================ -->
+<article class="hoja" aria-labelledby="t-cierre">
+  <header class="principal">
+    <h2 id="t-cierre">
+      Cierre · Miltli
+      <small>Piloto de separación de orgánicos en cafeterías · HUMAN STEM, A.C.</small>
+    </h2>
+    <p class="clave">
+      Cafetería
+      <b data-codigo="ID">K___</b>
+      <span>la asigna el programa</span>
+      Fecha: <span data-codigo="FCIE">____ / ____</span>
+    </p>
+  </header>
+
+  <p class="fase cierre"><strong>Parte B · sólo el día de cierre</strong> <span>Durante y después de la visita del equipo. Antes de ese día, esta hoja se queda en blanco.</span></p>
+
+  <section aria-labelledby="revision">
+    <h3 id="revision">Revisión del guardado, junto con el equipo</h3>
+    <p class="nota-seccion">Juntos: abrir cada contenedor de guardado, mirar y oler una sola vez. Se marca lo que hay; ninguna casilla es buena ni mala. Mientras tanto, el equipo pesa un recipiente lleno de cada corriente, sin anotar de qué está hecho.</p>
+    <div class="cierre-rev">
+      <table class="unica" aria-label="Lo que se ve al abrir los contenedores el día de cierre">
+        <colgroup><col><col class="marca"></colgroup>
+        <tbody>
+        <tr class="sec"><th colspan="2" scope="colgroup">Al abrir los contenedores vimos · marca todo</th></tr>
+        <tr><th scope="row" class="op">Olor fuerte al abrir</th><td data-codigo="ALM_OBS_F" data-valor="olor">□</td></tr>
+        <tr><th scope="row" class="op">Moscas o mosquitas</th><td data-codigo="ALM_OBS_F" data-valor="moscas">□</td></tr>
+        <tr><th scope="row" class="op">Moho: pelusa blanca, verde o negra</th><td data-codigo="ALM_OBS_F" data-valor="moho">□</td></tr>
+        <tr><th scope="row" class="op">Líquido escurrido en el fondo o en el piso</th><td data-codigo="ALM_OBS_F" data-valor="escurre">□</td></tr>
+        <tr><th scope="row" class="op">Huellas, excremento o mordidas de un animal</th><td data-codigo="ALM_OBS_F" data-valor="huellas">□</td></tr>
+        <tr><th scope="row" class="op">Nada de lo anterior</th><td data-codigo="ALM_OBS_F" data-valor="nada">□</td></tr>
+        </tbody>
+      </table>
+      <dl class="alta">
+        <div>
+          <dt>Contenedores de guardado llenos en este momento<small>enteros y medios</small></dt>
+          <dd><span data-codigo="ALM_LLENOS_F">________</span></dd>
+        </div>
+        <div>
+          <dt>Lo que está guardado hoy<small>marca uno</small></dt>
+          <dd>
+            <span data-codigo="FIN_GUARD" data-valor="nada"><span class="casilla">□</span> No hay nada guardado</span>
+            <span data-codigo="FIN_GUARD" data-valor="recoleccion"><span class="casilla">□</span> Se va en la siguiente recolección</span>
+            <span data-codigo="FIN_GUARD" data-valor="planb"><span class="casilla">□</span> Sigue el plan B</span>
+          </dd>
+        </div>
+      </dl>
+    </div>
+  </section>
+
+  <div class="bloque" style="margin-top:2.4mm">
+
+  <section aria-labelledby="cierre">
+    <h3 id="cierre">Cómo terminó el piloto en esta cafetería</h3>
+    <p class="nota-seccion">No se evalúa a la cafetería: lo que se cierra es el registro, y con él se dimensionan el guardado y la recolección del siguiente ciclo. <strong>Pueden dejar en blanco cualquier pregunta.</strong></p>
+    <dl class="alta">
+      <div>
+        <dt>El espacio de guardado nos resultó<small>circula uno</small></dt>
+        <dd><span class="opcion"><span data-codigo="ALM_TAM" data-valor="chico">Chico</span> · <span data-codigo="ALM_TAM" data-valor="adecuado">Adecuado</span> · <span data-codigo="ALM_TAM" data-valor="grande">Grande</span></span></dd>
+      </div>
+      <div>
+        <dt>La recolección pasó<small>circula uno</small></dt>
+        <dd><span class="opcion"><span data-codigo="REC_SUF" data-valor="poca">Menos de lo necesario</span> · <span data-codigo="REC_SUF" data-valor="adecuada">Lo necesario</span> · <span data-codigo="REC_SUF" data-valor="mucha">Más de lo necesario</span></span></dd>
+      </div>
+      <div>
+        <dt>Lo que más limitó el mes en esta cafetería<small>marca uno; «nada en particular» también es una respuesta</small></dt>
+        <dd>
+          <span data-codigo="CUELLO_CAF" data-valor="separar"><span class="casilla">□</span> Separar durante el servicio</span>
+          <span data-codigo="CUELLO_CAF" data-valor="anotar"><span class="casilla">□</span> Llevar el registro</span>
+          <span data-codigo="CUELLO_CAF" data-valor="espacio"><span class="casilla">□</span> Espacio para guardar</span>
+          <span data-codigo="CUELLO_CAF" data-valor="recoleccion"><span class="casilla">□</span> Que la recolección llegara a tiempo</span>
+          <span data-codigo="CUELLO_CAF" data-valor="personal"><span class="casilla">□</span> Cambios de personal y capacitación</span>
+          <span data-codigo="CUELLO_CAF" data-valor="lavado"><span class="casilla">□</span> Lavar los contenedores</span>
+          <span data-codigo="CUELLO_CAF" data-valor="tiempo"><span class="casilla">□</span> Tiempo</span>
+          <span data-codigo="CUELLO_CAF" data-valor="nada"><span class="casilla">□</span> Nada en particular</span>
+          <span data-codigo="CUELLO_CAF" data-valor="otro"><span class="casilla">□</span> Otro:</span> <span data-codigo="CUELLO_CAF_OTRO">______________</span>
+        </dd>
+      </div>
+      <div>
+        <dt>El mes que viene<small>circula uno</small></dt>
+        <dd><span class="opcion"><span data-codigo="CONTIN" data-valor="igual">Seguimos igual</span> · <span data-codigo="CONTIN" data-valor="con_cambios">Seguimos con cambios</span> · <span data-codigo="CONTIN" data-valor="lo_dejo">Lo dejamos por ahora</span></span></dd>
+      </div>
+    </dl>
+  </section>
+
+  <section class="abiertas" aria-labelledby="cierre-abierto">
+    <h3 id="cierre-abierto">Lo que quieran dejar dicho <span>— opcional, sobre la separación, el guardado y la recolección: es lo que más sirve para cambiar el piloto</span></h3>
+    <div class="abiertas4">
+      <p><b>Lo que nos resultó fácil de sostener</b><span class="renglon-ancho" data-codigo="CIE_FACIL" aria-hidden="true"><span></span><span></span><span></span><span></span></span></p>
+      <p><b>Lo que nos costó más trabajo</b><span class="renglon-ancho" data-codigo="CIE_DIFICIL" aria-hidden="true"><span></span><span></span><span></span><span></span></span></p>
+      <p><b>Si volviéramos a empezar, cambiaríamos</b><span class="renglon-ancho" data-codigo="CIE_CAMBIO" aria-hidden="true"><span></span><span></span><span></span><span></span></span></p>
+      <p><b>Algo que el programa debería saber</b><span class="renglon-ancho" data-codigo="CIE_OTRO" aria-hidden="true"><span></span><span></span><span></span><span></span></span></p>
+    </div>
+  </section>
+
+  </div>
+
+  <footer class="pie">
+    <span><strong>La hoja original se queda en la cafetería.</strong> El equipo le toma una foto en la visita, sin ubicación. Las mediciones del equipo van en su propia hoja. Nada se publica por cafetería sin permiso escrito de la gerencia.</span>
+    <span data-codigo="FICHA_REV" data-valor="CAF-01">F-CAF rev.&nbsp;01 · Hoja 6 de 6</span>
+  </footer>
+</article>
+
+</main>
+</body>
+</html>
